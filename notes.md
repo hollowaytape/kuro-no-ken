@@ -10,16 +10,15 @@ Very messy in there
 Disassembling BOD.COM and seeing what it's doing might be one way to tackle that. It's a tiny file for the most part
 
 
-# Compression
+Compression
 RAM ~0x268b0
 \common.bca[00]d\shinobu.bca[00]d\shinobu.smi[00]d\kies.smi[00]d\item.smi[00]d\unity.sml[00]99cmn.scn
-
 System disk ~0xb07c0
 \common[FE FA].bca[00][0C]shinobu[4e][61][06]smi[21][7f][06]kies[05][84][3c]item[05][cb][d4]un[0c]y[05]99[3f][d7]cm[47][73]
 
 [fafe] = 1111 1010 1111 1110
-         1111 1  010                                            1111111  0
-         .bca 0 [0c] (copies 2 bytes from d bytes ago)          shinobu  END
+         1111 1  010                                           1111111  0
+         .bca 0 [0c](copies 2 bytes from d bytes ago)          shinobu  END
 
 [0c] is a pointer that reads 2 bytes. Look back (0c+1) bytes in the buffer, and copy 2 of them.
 	The 2 bytes thing comes from the flag. 010 = 2...?
@@ -28,7 +27,7 @@ System disk ~0xb07c0
          011000010100 111 0
          [06]         smi END
 
-[06] looks 14 back, copies 15 bytes.
+         [06] looks 14 back, copies 15 bytes.
 
 [7f21] = 0111 1111 0010 0001
          011
@@ -46,21 +45,15 @@ It's checking multiple bits in the flag to determine what to do with a pointer..
 
 That [4e][61][06] probably codes for "Look ~13 back, copy 14 bytes (.bca[00]d\shinobu.)
 [21][7f][06] = .smi[00]d\ = "Look 11 back, copy 7 bytes"
-
 1111111 ? 11111 ? 11111110
-
 Pretty weird, stuff tends to get interrupted with 2-byte things then resume normally. Maybe the flags are 2 bytes this time?
 There's another section where [FF][FF]09 9f 09 ae 09 d\kies.bca[00] appears. FF FF = 16 1's, so 16 raw bytes
-
 [FF][5F] = 1111 1111 0101 1111
 [0a]bd_flagh.dat[00]
 I dunno!!
 Maybe flip it around? 0101 1111 1111 1111 1111
-
-
 stosb = store AL at address ES:DI. Store 6b at 16d8:9dd.
 AL comes from mov al, [bx]. [bx] is the contents of DS:BX, which appears to be the compressed disk segment. Cool!
-
 mov dl, 10
 mov bp, [bx]    <- loads a two-byte flag? bp is now 5fff
 add bx, +02
@@ -68,12 +61,12 @@ cmp bx, 2000
 jb 0bcb
 call 0f2e
 jmp 0bcb
-
-
+;
+;
 0bcb:
 add bp, bp
 jnb 0bed
-
+;
 0bed:
 dec dx
 jz 0d8e
@@ -114,7 +107,7 @@ cmp bx, 2000
 jz 0bbc
 inc ax            ; now it's 0d
 mov si, di        ; Here we go, it's about to look at the previously written stuff
-sub si, ax        ; Go back ax (0d) amount
+sub si, ax        ; Go back ax (0d) amount  ("copy 2 bytes from d bytes ago")
 movsb es:
 movsb es:
 jmp 0bc8
@@ -138,5 +131,151 @@ BD_FLAGH.DAT - 5b 00
 _MG_SR.BCA - 01 20 06   f3 0f
 ...
 SHINOBU.BCA - 01 81 7c   d4 e7
-
 I guess that is probably not just an offset...
+
+# BOD.COM
+* File is loaded at 0x79f0. And at least the beginning of it at 0x5328 too. (That might just be a dos thing)
+* オープニングから is loaded at 0x216f1. Appears to be a list, each entry having e1 preprended to them
+   * (This word is mostly also in A.FA1 at 0xb3758.)
+   * [FF FE]オープニングから 82 f2 bf 17 96 60...
+
+* Disassembly
+193h is the dx location where the "Memory insufficient" string is claimed to be. It's at 0x93
+What string is at 1c7?
+   * One of those "1b[>5h1b[>1h1b*$*" type strings.
+
+
+
+* When it reads the a.fa1 filename:
+   * Checks if the second char in the string is ':' (to see if it's a drive letter or not)
+   * Checks if it's a "/" or below (punctuation chars)
+   * Checks if it's a "\", then returns and switches the two bytes and runs this again (to check the second byte)
+   * "." is indeed below "/", so do something special to it
+
+
+
+* More debugging
+lodsb: load byte at DS:SI into AL. 16d8:a971 loads 83, it's not 0
+(Oh wait, that's just the text display routine. Let's set a breakpoint for the compressed data instead)
+
+
+It's at 0xa9c6
+
+bx value when it reads fe ff: 1e86.
+   The location in the comp'd file is 0xb3756. (b18d0 is where bx would be 0)
+
+Reading the flag:
+mov bp, [bx]
+add bx, +02   ; Increment the compressed-data cursor to start reading real data
+cmp bx, 2000  ; Something about the compressed data being split into 2000-chunks
+jb 0bcb
+->
+add bp, bp    ; fffe -> fffc
+jnb 0bed (not taken)
+mov al, [bx]
+inc bx
+cmp bx, 2000
+jz 0bb7 (not taken)
+stosb
+jmp 0bc8
+->
+"Load and store literals"
+07bf:0bc8 dec dx
+jz 0b7c (not taken)
+add bp, bp    ; fffc -> fff8
+jnb 0bed (not taken)
+mov al, [bx]  ; 49 (second byte of text)
+cmp bx, 2000
+jz 0bb7 (not taken)
+stosb
+jmp 0bc8 ("Load and store literals")
+
+Loops the "load and store literals" until either:
+   1. EDX == 0 (after 16 bytes are written?)
+   2. Leftmost bit of BP (the flag) is 0
+   3. BX == 2000 (get next chunk?)
+
+0bed "Just hit a 0 in the flag":
+dec dx  ; 1 -> 0
+jz 0b8e
+->
+mov dl, 10
+mov bp, [bx]
+add bx, +02
+cmp bx, 2000
+jb 0bf0
+call 0f2e
+jmp 0bf0
+
+...Where does the decompression code come from? Is it in BOD.COM?
+
+
+# Disk Structure
+* System Disk.hdm
+A.FA1 is at 0x2c00, estends until 0x108ddf
+Weird stuff from 0x108de0 onwards
+System text starting around 0x109a50
+
+
+# A.FA1 again
+* "FilenameExta:" (RAM 0x7c40) is a field where the filename and ext get filled in.
+   * They are filled in a LODSB, etc, STOSB loop.
+      lodsb: load  DS:SI into AL
+      stosb: store AL in ES:DI
+      * Loading from 078f:191 into 07bf:5d
+         * Hey, that's the BOD.COM segment
+      *  Next string: 16d8:9eb "bd_flagh.dat", floating in the middle with some other files
+      * Another: 16d8:fbb1 "d\gaiji.bin"
+   * The actual file it gets loaded from is named at 7ca3. (A.FA1, B.FA1, etc)
+   * Anything interesting about 0x7c09-onward?
+      * 02OLB00ASCN, in its table, has values 01 e0 04 00 00 9f 08 00 00 after it.
+      * DS01A.AS2 has                         00 de 61 00 00 de 61 00 00 
+         * the de 61's go in slots 7c0c and 7c10.
+
+* Dialogue
+* なにこれ！？
+* File seems to begin at 2aa80 in RAM
+   * A mention of d\ds_01a, d\ds_01b, etc before the dialogue begins
+   * Loading stuff into 2aa80: seems to be following the decomp routine. 
+      * It's getting decomped from 0x8b40. The matching string is in B.FA1, at 0xfb0fe
+         * The file is 02OLB01A.SCN
+         * And yes, the file is marked as coming from B.FA1
+         * Any interesting bytes in that header thing?
+            * 3d d8 26 83 10 00 00 44 09 00 00 00 00 00 00 fe b0 0f 00 b4 08 00 00 01 03 00 00...
+               * Right there, "fe b0 0f" = fb0fe offset in B.FA1.
+                  * bx gets moved into the first 2 bytes [0028], then dx gets moved into the next ones [002a]
+
+         * Its entry in the table:
+            * 01 44 09 00 00 83 10 00 00 6c 0e 00 00
+               * Well, the 44 09 is there at least.
+         * Wild guess: the first byte is which file. 00 = A.FA1, 01 = B.FA1, etc
+
+* How can we go from a table entry's value to the location of that compressed file in the FA1 archive?
+
+O20LB01.SCN offset: 0f a5 84
+   * Initial EAX: ed (number of entires in table)
+   * Initial EBX: c  (that's where the first table entry is)
+   * Initial EDX: 0
+O20LB01A.SCN offset:0f b0 fe
+   * Both of those files "end" with a FF byte... that's not much of a hint to the file structure
+
+02OLB01A.SCN 01 44 09 00 00 83 10 00 00
+                            ^[001c-d]
+
+And yes, it's loading from the table itself.
+[0028-a]: 84 a5 0f 00
+Need to figure out how bx and dx get calculated.
+add bx, [si+0c]  ; 94c2 + 011f = 95e1   ; +0c is the word (bytes 2-3) of the data section
+adc dx, [si+0e]  ; 0b + 0 = 0           ; +0e is the word (bytes 4-5) of the data section
+
+It does this process a LOT. Adds c/e values to bx/dx, increments di by 0x14 (looks at a new entry in the table), decrements ax, checks if ax is zero yet.
+   So! the initial value of EAX probably comes from part of the table header, at 0xab48
+      FA1[00][78 48 10 00][18 01]
+                           ^ Number of entries in the table
+             [d8 ea 10 00][ed 00][01 80]
+ac, c0, d4, e8, fc... adding 0x14 each time
+   It's not just until it gets to 0. The 02OLB01A quits when EAX == 51.
+      02OLB01A happens to be the ed - 51 = 9cth entry in the table.
+
+
+02OLB01B.SCN 01 86 08 00 00 6c 0e 00 00
