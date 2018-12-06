@@ -54,6 +54,7 @@ I dunno!!
 Maybe flip it around? 0101 1111 1111 1111 1111
 stosb = store AL at address ES:DI. Store 6b at 16d8:9dd.
 AL comes from mov al, [bx]. [bx] is the contents of DS:BX, which appears to be the compressed disk segment. Cool!
+
 mov dl, 10
 mov bp, [bx]    <- loads a two-byte flag? bp is now 5fff
 add bx, +02
@@ -267,6 +268,7 @@ And yes, it's loading from the table itself.
 Need to figure out how bx and dx get calculated.
 add bx, [si+0c]  ; 94c2 + 011f = 95e1   ; +0c is the word (bytes 2-3) of the data section
 adc dx, [si+0e]  ; 0b + 0 = 0           ; +0e is the word (bytes 4-5) of the data section
+   DX gets incremented whenever BX has overflowed in the previous instruction. (when is there )
 
 It does this process a LOT. Adds c/e values to bx/dx, increments di by 0x14 (looks at a new entry in the table), decrements ax, checks if ax is zero yet.
    So! the initial value of EAX probably comes from part of the table header, at 0xab48
@@ -279,3 +281,30 @@ ac, c0, d4, e8, fc... adding 0x14 each time
 
 
 02OLB01B.SCN 01 86 08 00 00 6c 0e 00 00
+
+
+118 file = A.FA1?
+
+So, the first thing on the breakpoint is that it is looking for the 02OLB01.SCN file in the 118 file. It looks at every entry in the table (until EAX == 0), and the final EDX-EBX value is 0x104878.
+   * 104878 is the end of the A.FA1 file's data - as in, right before a big blank spot and a large pattern-like thing at the end.
+   * So, it's looking for 02OLB01 and it's not found in this file. Then it loads B.FA1 and looks for it there
+   * Another part of this process:
+      push si
+      mov di, 53
+      mov cx, b
+      repe cmpsb
+      pop si
+      jz 0afe   ; (clc, ret), which leaves successfully
+      * This checks to see if the filename being searched for is the one in the table, probably
+
+The table still has 0x118 entries in it when switching over to 0xed. It probably just doesn't overwrite the leftovers, since it won't be searching them anyway
+
+The file table appears to just be a not'd version of the big pattern table at the end of the FA1. Binary one's complement
+
+## FA1 header
+00-02: "FA1"
+03: 00
+04-06: Offset of the end of the compressed data
+07: 00
+08-09: Number of entries in the file table
+0a-0b: 00 80?
