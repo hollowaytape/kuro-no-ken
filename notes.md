@@ -34,6 +34,9 @@ System disk ~0xb07c0
          [06] (copies 3 bytes from E bytes ago)
 
 
+[5fff] = 0101 1111 1111 1111
+
+
 It's checking multiple bits in the flag to determine what to do with a pointer... There's a branch for every bit.
 	Some kind of Huffman coding tree here?
 	This seems like something to tackle with IDA. So many jumps...
@@ -216,6 +219,7 @@ jmp 0bf0
 A.FA1 is at 0x2c00, estends until 0x108ddf
 Weird stuff from 0x108de0 onwards
 System text starting around 0x109a50
+* Probably not useful, since this will have a lot of DOS stuff in it
 
 
 # A.FA1 again
@@ -250,6 +254,9 @@ System text starting around 0x109a50
             * 01 44 09 00 00 83 10 00 00 6c 0e 00 00
                * Well, the 44 09 is there at least.
          * Wild guess: the first byte is which file. 00 = A.FA1, 01 = B.FA1, etc
+            * Incorrect
+
+* Decomping from 8b40 -> 2aa80
 
 * How can we go from a table entry's value to the location of that compressed file in the FA1 archive?
 
@@ -308,3 +315,6 @@ The file table appears to just be a not'd version of the big pattern table at th
 07: 00
 08-09: Number of entries in the file table
 0a-0b: 00 80?
+
+# BOD.COM again
+* After loading files, it jumps to 0x7bf:0f50. This is 0f50 in A.FA1 (FAD.BIN).

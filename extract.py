@@ -2,117 +2,147 @@
     Dump the files from the FA1 filesystem of BOD.
 """
 
-class BODFile:
-    def __init__(self, source, name, location, length):
-        self.source = source
-        self.name = name
-        self.location = location
-        self.length = length
+from rominfo import BODFile, ARCHIVES, FILES
 
-    def get_filestring(self):
-        with open(self.source, 'rb') as f:
-            f.seek(self.location)
-            contents = f.read(self.length)
-        return contents
+def invert(bs):
+    result = b''
+    for b in bs:
+        result += (b ^ 0xFF).to_bytes(1, 'little')
+    return result
 
-    def __repr__(self):
-        return "%s (%s, %s)" % (self.name, self.source, hex(self.location))
 
-if __name__ == "__main__":
-    files_to_extract = []
-    archives = ['A.FA1', 'B.FA1', 'C.FA1']
-    for archive in archives:
-        with open(archive, 'rb') as f:
-            header = f.read(0xa)
-            print(header)
-            entries = int.from_bytes(header[0x8:0xa], 'little')
+def unpack(archive):
+    #print(archive)
+    with open(b'original/%s' % archive, 'rb') as f:
+        header = f.read(0xa)
+        entries = int.from_bytes(header[0x8:0xa], 'little')
+        compressed_end = int.from_bytes(header[0x4:0x7], 'little')
 
-            compressed_end = int.from_bytes(header[0x4:0x7], 'little')
-            print(hex(compressed_end))
-
-            cursor = compressed_end
-            f.seek(compressed_end)
+        # Look for the table, it's after a bunch of 00 bytes
+        cursor = compressed_end
+        f.seek(compressed_end)
+        buf = f.read(1)
+        #print(buf, buf == b'\x00')
+        while buf == b'\x00':
             buf = f.read(1)
-            print(buf, buf == b'\x00')
-            while buf == b'\x00':
-                buf = f.read(1)
-                cursor += 1
-                print(hex(cursor))
-            f.seek(cursor)
+            cursor += 1
+            #print(hex(cursor))
+        f.seek(cursor)
 
+        # Invert the table
+        table = b''
+        buf = b''
+        while True:
+            buf = f.read(0xc)
+            if len(buf) == 0:
+                break
+            for b in buf:
+                #print(b)
+                #print(b ^ 0xFF)
+                table += (b ^ 0xFF).to_bytes(1, 'little')
+            #table += ~buf
 
-            #f.seek(0x10ec00)   # TODO: There's robably a programmatic way to get this
-            table = b''
-            buf = b''
-            while True:
-                buf = f.read(0xc)
-                if len(buf) == 0:
-                    break
-                for b in buf:
-                    #print(b)
-                    #print(b ^ 0xFF)
-                    table += (b ^ 0xFF).to_bytes(1, 'little')
-                #table += ~buf
+        #print(table)
 
-            print(table)
+        offset = 0xc
+        while table:
+            name = table[:8]
+            ext = table[8:11]
+            data = table[11:20]
+            table = table[20:]
 
-            offset = 0xc
-            while table:
-                name = table[:8]
-                ext = table[8:11]
-                data = table[11:20]
-                table = table[20:]
+            is_compressed = data[0] == 1
 
-                which_length = data[0]
-                if which_length == 0:
-                    file_length = (int(data[7]) << 16) + (int(data[6]) << 8) + int(data[5])
-                else:
-                    file_length = (int(data[3]) << 16) + (int(data[2]) << 8) + int(data[1])
-                if offset & 0x1 == 1:
-                    offset += 1
+            decompressed_length = (int(data[7]) << 16) + (int(data[6]) << 8) + int(data[5])
+            compressed_length = (int(data[3]) << 16) + (int(data[2]) << 8) + int(data[1])
 
-                filename = name.rstrip(b' ') + b'.' + ext
+            # adc bx, +0 (carry the one)
+            if offset & 0x1 == 1:
+                offset += 1
 
-                this_file = BODFile("B.FA1", filename, offset, file_length)
-                files_to_extract.append(this_file)
+            filename = name.rstrip(b' ') + b'.' + ext
 
-                #print(name, ext, " ".join([hex(b)[2:].zfill(2) for b in data]), "at", hex(offset), "length is", hex(file_length))
-                print(this_file)
-                offset += file_length
+            this_file = BODFile(archive, filename, offset, compressed_length, decompressed_length)
+            files_to_extract.append(this_file)
+
+            print(name, ext, " ".join([hex(b)[2:].zfill(2) for b in data]), "at", hex(offset), "length is", hex(compressed_length))
+            #print(this_file)
+            offset += compressed_length
 
     for f in files_to_extract:
         filestring = f.get_filestring()
         with open(b'original/%b' % f.name, 'wb+') as g:
             g.write(filestring)
 
-            # Correct until we hit something with a 01 in the first slot.
-            # ADON.BCA 01 82 0d 00 00 a9 15 00 00
-            # Location is 0x1ed2. Expected length is 15a9, so next one should have offset (2)347b
-                # But the resulting value is 2c54.
-                    # This means it's adding the first value instead.
-            # Now it went 1ed2, 2c54, 327a, c4a4. The program predicted 3279, c4a2.
-                # I'll add a +1 to it now
+
+def repack(archive):
+    with open(b'patched/%b' % archive, 'wb+') as f:
+        archive_files = []
+        compressed_files_end = 0xc
+
+        # Collect info on which files are in this, and how long they are
+        for bodfile in FILES:
+            if bodfile.source == archive:
+                #print(bodfile)
+                archive_files.append(bodfile)
+                compressed_files_end += bodfile.compressed_length
+                #print(hex(compressed_files_end))
+                #print(hex(bodfile.location + bodfile.compressed_length))
+                assert compressed_files_end == bodfile.location + bodfile.compressed_length
+
+                # Pad so each file begins at a word boundary
+                if compressed_files_end & 0x1 == 1:
+                    compressed_files_end += 1
+
+        # Write FA1 header
+        f.write(b'FA1')
+        f.write(b'\x00')
+        f.write(compressed_files_end.to_bytes(3, 'little'))
+        f.write(b'\x00')
+        f.write(len(archive_files).to_bytes(2, 'little'))
+        f.write(ARCHIVES.index(archive).to_bytes(1, 'little'))
+        f.write(b'\x80')
+
+        # Write file contents
+        cursor = 0xc
+        for bodfile in archive_files:
+            f.write(bodfile.get_filestring())
+            cursor += len(bodfile.get_filestring())
+            if cursor & 1 == 1:
+                f.write(b'\x00')
+                cursor += 1
+
+        # what do 10ec00, 104c00, 109800, 10d800, 115c00 have in common?
+            # Multiples of 0x400
+        # Pad so the table begins at the next multiple of 0x400
+        while cursor % 0x400 != 0:
+            f.write(b'\x00')
+            cursor += 1
+        print(hex(cursor))
+
+        # Write file table to a normal string first
+        table = b''
+        for bodfile in archive_files:
+            table += bodfile.name_no_ext + (8 - len(bodfile.name_no_ext)) * b' '
+            table += bodfile.ext
+            if bodfile.is_compressed:
+                table += b'\x01'
+            else:
+                table += b'\x00'
+            table += bodfile.compressed_length.to_bytes(4, 'little')
+            table += bodfile.decompressed_length.to_bytes(4, 'little')
 
 
-        # This is for dumping it from the RAM itself, using memory_ed.bin.
-        # Less useful than dumping it from the .FA1 archives
-        """
-        f.seek(0xab4c)
-        num = 0
-        offset = 0xc
-        while True:
-            name = f.read(8)
-            ext = f.read(3)
-            data = f.read(9)
+        print(table)
 
-            file_length = (int(data[7]) << 16) + (int(data[6]) << 8) + int(data[5])
+        # Invert the table and write it
+        table = invert(table)
+        f.write(table)
 
-            print(num, name, ext, " ".join([hex(b)[2:].zfill(2) for b in data]))
-            print(hex(file_length))
-            num += 1
-            if b'WYARM' in name:
-                break
-    print(num, hex(num))
-    """
 
-    # 10ec00, 104c00
+if __name__ == "__main__":
+    files_to_extract = []
+    #for archive in ARCHIVES:
+    #    unpack(archive)
+    #unpack(b'A.FA1')
+    repack(b'B.FA1')
