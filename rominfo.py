@@ -10,21 +10,28 @@ class BODFile:
         self.compressed_length = compressed_length
         self.decompressed_length = decompressed_length
 
-        self.name_no_ext = name.split(b'.')[0]
-        self.ext = name.split(b'.')[1]
+        self.name_no_ext, self.ext = name.split(b'/')[-1].split(b'.')
 
-        self.is_compressed = self.compressed_length != self.decompressed_length
+        self.original_filestring = self.get_filestring(b'original')
 
-    def get_filestring(self):
-        with open(b'original/%s' % self.source, 'rb') as f:
+    def get_filestring(self, path=b'original'):
+        #print(b'%s/%s' % (path, self.source))
+        with open(b'%s/%s' % (path, self.source), 'rb') as f:
             #print("Reading at", hex(self.location))
             f.seek(self.location)
             contents = f.read(self.compressed_length)
+        #print(contents)
         return contents
+
+    def is_compressed(self):
+        return self.compressed_length != self.decompressed_length
 
     def __repr__(self):
         return "BODFile(%s, %s, %s, %s, %s)," % (self.source, self.name, hex(self.location),
                                                  hex(self.compressed_length), hex(self.decompressed_length))
+
+SRC_DISK = 'original/Blade of Darkness (Kuro no Ken).hdi'
+DEST_DISK = 'patched/Blade of Darkness (Kuro no Ken).hdi'
 
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 

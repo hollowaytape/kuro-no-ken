@@ -1,8 +1,13 @@
 """
     Dump the files from the FA1 filesystem of BOD.
 """
-
+import os
 from rominfo import BODFile, ARCHIVES, FILES
+
+
+def getSize(filename):
+    st = os.stat(filename)
+    return st.st_size
 
 def invert(bs):
     result = b''
@@ -76,23 +81,36 @@ def unpack(archive):
 
 
 def repack(archive):
-    with open(b'patched/%b' % archive, 'wb+') as f:
+    print(archive)
+    just_archive = bytes(archive.split('\\')[-1], 'ascii')
+    print(just_archive)
+    with open(archive, 'wb+') as f:
         archive_files = []
         compressed_files_end = 0xc
 
         # Collect info on which files are in this, and how long they are
         for bodfile in FILES:
-            if bodfile.source == archive:
-                #print(bodfile)
-                archive_files.append(bodfile)
+            if bodfile.source == just_archive:
+                print(bodfile)
+
+                with open(b'patched/%s' % bodfile.name, 'rb') as g:
+                    buf = g.read()
+                    #assert len(buf) == bodfile.compressed_length
+                    if len(buf) != bodfile.compressed_length:
+                        print('this file was changed')
+                    bodfile.compressed_length = len(buf)
+
                 compressed_files_end += bodfile.compressed_length
                 #print(hex(compressed_files_end))
                 #print(hex(bodfile.location + bodfile.compressed_length))
-                assert compressed_files_end == bodfile.location + bodfile.compressed_length
+                print(bodfile)
+                archive_files.append(bodfile)
+                #assert compressed_files_end == bodfile.location + bodfile.compressed_length
 
                 # Pad so each file begins at a word boundary
                 if compressed_files_end & 0x1 == 1:
                     compressed_files_end += 1
+
 
         # Write FA1 header
         f.write(b'FA1')
@@ -100,14 +118,23 @@ def repack(archive):
         f.write(compressed_files_end.to_bytes(3, 'little'))
         f.write(b'\x00')
         f.write(len(archive_files).to_bytes(2, 'little'))
-        f.write(ARCHIVES.index(archive).to_bytes(1, 'little'))
+        f.write(ARCHIVES.index(bytes(just_archive)).to_bytes(1, 'little'))
         f.write(b'\x80')
 
         # Write file contents
         cursor = 0xc
         for bodfile in archive_files:
-            f.write(bodfile.get_filestring())
-            cursor += len(bodfile.get_filestring())
+            print(bodfile)
+            #f.write(bodfile.get_filestring(b'patched'))
+            #cursor += len(bodfile.get_filestring(b'patched'))
+            with open(b'patched/%s' % bodfile.name, 'rb') as g:
+                buf = g.read()
+                #print(buf)
+                f.write(buf)
+                cursor += len(buf)
+            #cursor += getSize(b'patched/%s' % bodfile.name)
+
+            print(hex(cursor))
             if cursor & 1 == 1:
                 f.write(b'\x00')
                 cursor += 1
@@ -118,14 +145,15 @@ def repack(archive):
         while cursor % 0x400 != 0:
             f.write(b'\x00')
             cursor += 1
-        print(hex(cursor))
+        #print(hex(cursor))
 
         # Write file table to a normal string first
         table = b''
         for bodfile in archive_files:
+            print(bodfile, bodfile.is_compressed())
             table += bodfile.name_no_ext + (8 - len(bodfile.name_no_ext)) * b' '
             table += bodfile.ext
-            if bodfile.is_compressed:
+            if bodfile.is_compressed():
                 table += b'\x01'
             else:
                 table += b'\x00'
@@ -133,7 +161,7 @@ def repack(archive):
             table += bodfile.decompressed_length.to_bytes(4, 'little')
 
 
-        print(table)
+        #print(table)
 
         # Invert the table and write it
         table = invert(table)
@@ -145,4 +173,4 @@ if __name__ == "__main__":
     #for archive in ARCHIVES:
     #    unpack(archive)
     #unpack(b'A.FA1')
-    repack(b'B.FA1')
+    repack('patched\\B.FA1')
