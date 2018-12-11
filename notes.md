@@ -318,3 +318,11 @@ The file table appears to just be a not'd version of the big pattern table at th
 
 # BOD.COM again
 * After loading files, it jumps to 0x7bf:0f50. This is 0f50 in A.FA1 (FAD.BIN).
+
+
+# Important segments
+* 2aa8: First dialogue
+* 216f: Options menu
+* 07c4: Which file is loaded
+
+* BD.BIN - the file with the options in it. It is very big

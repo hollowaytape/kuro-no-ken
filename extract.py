@@ -81,9 +81,9 @@ def unpack(archive):
 
 
 def repack(archive):
-    print(archive)
+    #print(archive)
     just_archive = bytes(archive.split('\\')[-1], 'ascii')
-    print(just_archive)
+    #print(just_archive)
     with open(archive, 'wb+') as f:
         archive_files = []
         compressed_files_end = 0xc
@@ -97,13 +97,13 @@ def repack(archive):
                     buf = g.read()
                     #assert len(buf) == bodfile.compressed_length
                     if len(buf) != bodfile.compressed_length:
-                        print('this file was changed')
+                        print('this file was changed, its length is now', hex(len(buf)))
                     bodfile.compressed_length = len(buf)
 
                 compressed_files_end += bodfile.compressed_length
                 #print(hex(compressed_files_end))
                 #print(hex(bodfile.location + bodfile.compressed_length))
-                print(bodfile)
+                #print(bodfile)
                 archive_files.append(bodfile)
                 #assert compressed_files_end == bodfile.location + bodfile.compressed_length
 
@@ -124,7 +124,7 @@ def repack(archive):
         # Write file contents
         cursor = 0xc
         for bodfile in archive_files:
-            print(bodfile)
+            #print(bodfile)
             #f.write(bodfile.get_filestring(b'patched'))
             #cursor += len(bodfile.get_filestring(b'patched'))
             with open(b'patched/%s' % bodfile.name, 'rb') as g:
@@ -134,7 +134,7 @@ def repack(archive):
                 cursor += len(buf)
             #cursor += getSize(b'patched/%s' % bodfile.name)
 
-            print(hex(cursor))
+            #print(hex(cursor))
             if cursor & 1 == 1:
                 f.write(b'\x00')
                 cursor += 1
@@ -150,7 +150,7 @@ def repack(archive):
         # Write file table to a normal string first
         table = b''
         for bodfile in archive_files:
-            print(bodfile, bodfile.is_compressed())
+            #print(bodfile, bodfile.is_compressed())
             table += bodfile.name_no_ext + (8 - len(bodfile.name_no_ext)) * b' '
             table += bodfile.ext
             if bodfile.is_compressed():

@@ -471,11 +471,11 @@ FILES = [
     BODFile(b'B.FA1', b'YSK1.MPC', 0xeef04, 0x58a2, 0x9da8),
     BODFile(b'B.FA1', b'YSK2.MPC', 0xf47a6, 0x53a7, 0x9f38),
     BODFile(b'B.FA1', b'02OLB.SCN', 0xf9b4e, 0x555, 0x9c8),
-    BODFile(b'B.FA1', b'02OLB00A.SCN', 0xfa0a4, 0x4e0, 0x89f),
+    BODFile(b'B.FA1', b'02OLB00A.SCN', 0xfa0a4, 0x4e0, 0x89f),  # dumped
     BODFile(b'B.FA1', b'02OLB01.SCN', 0xfa584, 0xb7a, 0x1653),
-    BODFile(b'B.FA1', b'02OLB01A.SCN', 0xfb0fe, 0x944, 0x1083),
-    BODFile(b'B.FA1', b'02OLB01B.SCN', 0xfba42, 0x886, 0xe6c),
-    BODFile(b'B.FA1', b'02OLB02.SCN', 0xfc2c8, 0x57e, 0x869),
+    BODFile(b'B.FA1', b'02OLB01A.SCN', 0xfb0fe, 0x944, 0x1083), # dumped
+    BODFile(b'B.FA1', b'02OLB01B.SCN', 0xfba42, 0x886, 0xe6c),  # dumped
+    BODFile(b'B.FA1', b'02OLB02.SCN', 0xfc2c8, 0x57e, 0x869),   # dumped, but has duplicates at the end?
     BODFile(b'B.FA1', b'02OLB02A.SCN', 0xfc846, 0x9a0, 0x1131),
     BODFile(b'B.FA1', b'02OLB03.SCN', 0xfd1e6, 0x6c1, 0xa4e),
     BODFile(b'B.FA1', b'02OLB03A.SCN', 0xfd8a8, 0xa16, 0x1263),
