@@ -1,0 +1,10 @@
+[ff ff] 89 26 87 00 1e 33 c0 8e d8 b8 11 7f 87 06 40 01
+[7f fd] 1   1  1  1  1  1  010     1  1  1  1  1  1  1
+	    2e a3 78 00 8c c8 [09]     42 01 1f a3 7e 00 e8
+	                       87 06
+
+For a flag: read little-endian, then read bits right-to-left.
+7f fd = fd7f = 1111 1110 1011 1111
+
+010 [09] = copy 2 bytes from 9 bytes ago
+010 [0a] = copy 2 bytes from a bytes ago
