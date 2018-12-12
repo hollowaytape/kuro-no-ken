@@ -91,13 +91,13 @@ def repack(archive):
         # Collect info on which files are in this, and how long they are
         for bodfile in FILES:
             if bodfile.source == just_archive:
-                print(bodfile)
+                #print(bodfile)
 
                 with open(b'patched/%s' % bodfile.name, 'rb') as g:
                     buf = g.read()
                     #assert len(buf) == bodfile.compressed_length
                     if len(buf) != bodfile.compressed_length:
-                        print('this file was changed, its length is now', hex(len(buf)))
+                        print('%s was changed, its length is now %s' % (bodfile.name, hex(len(buf))))
                     bodfile.compressed_length = len(buf)
 
                 compressed_files_end += bodfile.compressed_length
@@ -173,4 +173,5 @@ if __name__ == "__main__":
     #for archive in ARCHIVES:
     #    unpack(archive)
     #unpack(b'A.FA1')
+    repack('patched\\A.FA1')
     repack('patched\\B.FA1')

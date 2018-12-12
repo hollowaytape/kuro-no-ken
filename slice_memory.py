@@ -1,8 +1,8 @@
-start = 0x16d80
-stop = start + 0xfd70
+start = 0x26d80
+stop = start + 0x147d
 
 source = 'memory.bin'
-name = 'BD.BIN'
+name = '00IPL.SCN'
 
 with open(source, 'rb') as f:
     f.seek(start)

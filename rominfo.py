@@ -30,10 +30,40 @@ class BODFile:
         return "BODFile(%s, %s, %s, %s, %s)," % (self.source, self.name, hex(self.location),
                                                  hex(self.compressed_length), hex(self.decompressed_length))
 
+ORIGINAL_ROM_DIR = 'original'
 SRC_DISK = 'original/Blade of Darkness (Kuro no Ken).hdi'
 DEST_DISK = 'patched/Blade of Darkness (Kuro no Ken).hdi'
+DUMP_XLS_PATH = 'KuroNoKen_dump.xlsx'
 
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
+
+FILES_TO_DUMP = [
+    'BD.BIN', 
+    #'02OLB00A.SCN', 
+    #'02OLB01A.SCN', 
+    #'02OLB01B.SCN', 
+    #'ITEM.SMI',
+    #'00IPL.SCN',
+]
+
+FILE_BLOCKS = {
+    'BD.BIN': [
+        (0x9e01, 0x9e0d),
+        (0x9e33, 0x9e64),
+        (0x9ed5, 0x9ee2),
+        (0x9f2e, 0x9f3b),
+        (0x9f6b, 0x9f80),
+        (0xb1e0, 0xb1f8),
+        (0xba4a, 0xbb23),
+        (0xbb2d, 0xbba0),
+        (0xbbbe, 0xbc3e),
+        (0xd240, 0xd28f),
+        (0xe6f0, 0xe797),
+    ],
+    'ITEM.SMI': [
+        (0x2bfc, 0x4092),
+    ]
+}
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -305,7 +335,7 @@ FILES = [
     BODFile(b'A.FA1', b'DOLUID.SMI', 0xff986, 0x2fa, 0x756),
     BODFile(b'A.FA1', b'GOBLIN2.SMI', 0xffc80, 0xe9, 0x255),
     BODFile(b'A.FA1', b'HARPY.SMI', 0xffd6a, 0x116, 0x241),
-    BODFile(b'A.FA1', b'ITEM.SMI', 0xffe80, 0x1858, 0x4092),
+    BODFile(b'A.FA1', b'ITEM.SMI', 0xffe80, 0x1858, 0x4092), # 2e8a0-32932, dumped
     BODFile(b'A.FA1', b'KIES.SMI', 0x1016d8, 0x645, 0xe3a),
     BODFile(b'A.FA1', b'SHINOBU.SMI', 0x101d1e, 0x7dd, 0x12e9),
     BODFile(b'A.FA1', b'SKELET1.SMI', 0x1024fc, 0x10d, 0x270),
@@ -1257,3 +1287,8 @@ FILES = [
     BODFile(b'E.FA1', b'WIZARD4.SMI', 0x1154d2, 0x4bd, 0xcd4),
     BODFile(b'E.FA1', b'WYVERN.SMI', 0x115990, 0x13a, 0x2bf),
 ]
+
+for bodfile in FILES:
+    if bodfile.name.endswith(b'SCN'):
+        #print(str(bodfile.name))
+        FILE_BLOCKS[bodfile.name.decode('ascii')] = [(0, bodfile.decompressed_length)]

@@ -321,8 +321,15 @@ The file table appears to just be a not'd version of the big pattern table at th
 
 
 # Important segments
-* 2aa8: First dialogue
+* 2aa8: First dialogue (02OLB00A.SCN)
 * 216f: Options menu
-* 07c4: Which file is loaded
+   * 16d8: BD.BIN
+* 07c4: Filename of file getting loaded
+* 08b4: Where the compressed file is loaded
 
-* BD.BIN - the file with the options in it. It is very big
+* BD.BIN - the file with the options in it. It is very big (0xfd70 long).
+   * Begins at 16d80? So, ranges from 16d80-26af0
+   * This might be a good file to look at decompression for - it starts with a bunch of FF FF flags, and it is probably the first file decompressed... maybe?
+   * Crashes on the Status screen when the decompressed file is reinserted with no changes.
+      * Let's see if I can re-dump it when it's fresh as possible.
+      * Yep, it works now. Gotta be careful with that
