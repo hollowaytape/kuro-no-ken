@@ -1,12 +1,12 @@
 """
-    Generic dumper of Shift-JIS text into an excel spreadsheet.
-    Meant for quick estimations of how much text is in a game.
+    Dumps text from decompressed files in Kuro no Ken.
 """
-
+import datetime
 import sys
 import os
 import xlsxwriter
-from rominfo import FILE_BLOCKS, FILES_TO_DUMP, ORIGINAL_ROM_DIR
+from shutil import copyfile
+from rominfo import FILE_BLOCKS, FILES_TO_DUMP, ORIGINAL_ROM_DIR, DUMP_XLS_PATH
 
 COMPILER_MESSAGES = [b'Turbo', b'Borland', b'C++', b'Library', b'Copyright']
 
@@ -79,10 +79,22 @@ def dump(files):
                     # First byte of SJIS text. Read the next one, too
                     try:
                         if 0x80 <= contents[cursor] <= 0x9f or 0xe0 <= contents[cursor] <= 0xef:
-                            #print(bytes(contents[cursor]))
-                            sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
-                            cursor += 1
-                            sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
+
+                            # Weird KNK halfwidth kana
+                            if contents[cursor] == 0x85:
+                                cursor += 1
+                                buf = contents[cursor]
+                                # Digits
+                                if 0x50 <= buf <= 0x58:
+                                    sjis_buffer += (contents[cursor] - 0x1f).to_bytes(1, byteorder='little')
+                                # Halfwidth kana
+                                else:
+                                    sjis_buffer += (contents[cursor] + 2).to_bytes(1, byteorder='little')
+                                #sjis_buffer += (contents[cursor] + 2).to_bytes(1, byteorder='little')
+                            else:
+                                sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
+                                cursor += 1
+                                sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
 
                         # Halfwidth katakana
                         elif 0xa1 <= contents[cursor] <= 0xdf:
@@ -153,11 +165,12 @@ def dump(files):
     workbook.close()
 
 if __name__ == '__main__':
-    #if len(sys.argv) < 2:
-    #    print("Usage: python dumper.py folderwithgamefilesinit")
-    #    sys.exit(1)
-    #'patched' = sys.argv[1]
-    workbook = xlsxwriter.Workbook("KuroNoKen" + '_dump.xlsx')
+    #backup_filename = DUMP_XLS_PATH.replace('.xlsx', '_backup_%s.xlsx' % datetime.datetime.now().strftime('%d/%m/%y_%H:%M'))
+    backup_filename = DUMP_XLS_PATH.replace('.xlsx', '_backup.xlsx')
+    print(DUMP_XLS_PATH)
+    print(backup_filename)
+    copyfile(DUMP_XLS_PATH, backup_filename)
+    workbook = xlsxwriter.Workbook(DUMP_XLS_PATH)
     header = workbook.add_format({'bold': True, 'align': 'center', 'bottom': True, 'bg_color': 'gray'})
     #FILES = [f for f in os.listdir('patched') if os.path.isfile(os.path.join('patched', f))]
     #FILES = ['IDS.decompressed', 'IS2.decompressed']

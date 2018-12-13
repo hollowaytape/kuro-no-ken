@@ -1,10 +1,57 @@
 [ff ff] 89 26 87 00 1e 33 c0 8e d8 b8 11 7f 87 06 40 01
+
 [7f fd] 1   1  1  1  1  1  010     1  1  1  1  1  1  1
-	    2e a3 78 00 8c c8 [09]     42 01 1f a3 7e 00 e8
-	                       87 06
+        2e a3 78 00 8c c8 [09]     42 01 1f a3 7e 00 e8
+                           87 06
+[ff ff] cf f8 e8 66 00 e9 71 e7 80 26 d2 08 bf eb 05 80
 
-For a flag: read little-endian, then read bits right-to-left.
-7f fd = fd7f = 1111 1110 1011 1111
+[32 a9] 1   010    1  001          0011  0010
+        0e [06]    40 [02]          02  [08]          
+            d2 08      80 0e d2 08       80 26 d2 08
 
+
+a932
+5264 (consumed 1)
+writes 0e
+9320 (consumed 010)
+writes d2 08
+2640 (consumed 1)
+writes 40
+3200 (consumed 001)
+writes 80 0e d2 08
+2000 (consumed 0011)
+writes 02
+
+[cb 7f] 0  1  1  1  1  1  1  1   1100 1011
+        fb c7 06 d8 06 00 00 8b [21]      e8  
+                                 26 87 00
+
+Copy 3 bytes from 44 bytes before this position.
+
+[ff af] 1  010    1  1  1  1  1  1  1  1  1  1  1  1
+        85 [02]   16 18 a2 4e 09 e8 f9 2e f6 06 d4 08
+            00 e8
+
+[91 ff] 1  1  1  1  1  1  1  1  1   0010001
+        01 75 03 e8 c2 2e e8 eb 34 [06]                    
+                                    f6 06 d4 08 01 75
+
+Copy 6 bytes from d bytes ago.
+
+[bc fe] 1  1  1  1  1  1   10     1  1  1  1  00
+        06 e8 dd 2d e8 f6 [02]    06 2e eb d8
+                           2d e8
+
+[51 cd] 
+        [36]      [36]           a3 [6c]    [02]      [eb]        [a5] [34] 0e 17 bc 
+         13 33 c0 8e d8 b8 00 00     40 01   b8 00 00  a3 42 01 1f
+
+[08 cb] e8 ff ff
+
+For a flag: read little-endian, then read bits in normal order.
+
+010 [02] = copy 2 bytes from 2 bytes ago
 010 [09] = copy 2 bytes from 9 bytes ago
 010 [0a] = copy 2 bytes from a bytes ago
+011 [09] = 00 00 (Dunno what this does)
+

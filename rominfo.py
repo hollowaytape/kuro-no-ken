@@ -34,17 +34,26 @@ ORIGINAL_ROM_DIR = 'original'
 SRC_DISK = 'original/Blade of Darkness (Kuro no Ken).hdi'
 DEST_DISK = 'patched/Blade of Darkness (Kuro no Ken).hdi'
 DUMP_XLS_PATH = 'KuroNoKen_dump.xlsx'
+POINTER_XLS_PATH = 'KuroNoKen_pointer_dump.xlsx'
 
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
 FILES_TO_DUMP = [
     'BD.BIN', 
-    #'02OLB00A.SCN', 
-    #'02OLB01A.SCN', 
-    #'02OLB01B.SCN', 
-    #'ITEM.SMI',
-    #'00IPL.SCN',
+  #  '02OLB00A.SCN', 
+  #  '02OLB01A.SCN', 
+  #  '02OLB01B.SCN', 
+  #  'ITEM.SMI',
+  #  '00IPL.SCN',
 ]
+
+FILES_WITH_POINTERS = [
+    'BD.BIN',
+]
+
+POINTER_CONSTANT = {
+    'BD.BIN': 0,
+}
 
 FILE_BLOCKS = {
     'BD.BIN': [
@@ -55,9 +64,9 @@ FILE_BLOCKS = {
         (0x9f6b, 0x9f80),
         (0xb1e0, 0xb1f8),
         (0xba4a, 0xbb23),
-        (0xbb2d, 0xbba0),
-        (0xbbbe, 0xbc3e),
+        (0xbb2d, 0xbc3e),
         (0xd240, 0xd28f),
+        (0xd8bc, 0xd8f9),
         (0xe6f0, 0xe797),
     ],
     'ITEM.SMI': [
@@ -1287,6 +1296,12 @@ FILES = [
     BODFile(b'E.FA1', b'WIZARD4.SMI', 0x1154d2, 0x4bd, 0xcd4),
     BODFile(b'E.FA1', b'WYVERN.SMI', 0x115990, 0x13a, 0x2bf),
 ]
+
+POINTERS_TO_REASSIGN = {
+    'BD.BIN': [
+            (0xd8db, 0xd8bc),   # Attack
+        ]
+}
 
 for bodfile in FILES:
     if bodfile.name.endswith(b'SCN'):

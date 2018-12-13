@@ -1,13 +1,14 @@
-Could be, yeah. The FA1 files appear to be a bunch of different files packed into a larger file in general
-The structure appears to be some stuff in the first x1000 bytes, then the file system starts at around x7d8c, then there's what looks like a table at the end of the FA1 itself
-It's a ridiculously held together set of files
-Like, there's no space buffer between each of them, it's all just read in the table I think
-One file ends, another immediately starts in the next byte
-If you open them in madedit and search for .bca (one of the file types) you'll see the name of the file and then the content, and before that filename there's no space, just more other file
-It is probably compressed (LZSS is an okay guess) as well, which makes it look even weirder
-BCA files appear to be the script though
-Very messy in there
-Disassembling BOD.COM and seeing what it's doing might be one way to tackle that. It's a tiny file for the most part
+kuoushi:
+   Could be, yeah. The FA1 files appear to be a bunch of different files packed into a larger file in general
+   The structure appears to be some stuff in the first x1000 bytes, then the file system starts at around x7d8c, then there's what looks like a table at the end of the FA1 itself
+   It's a ridiculously held together set of files
+   Like, there's no space buffer between each of them, it's all just read in the table I think
+   One file ends, another immediately starts in the next byte
+   If you open them in madedit and search for .bca (one of the file types) you'll see the name of the file and then the content, and before that filename there's no space, just more other file
+   It is probably compressed (LZSS is an okay guess) as well, which makes it look even weirder
+   BCA files appear to be the script though
+   Very messy in there
+   Disassembling BOD.COM and seeing what it's doing might be one way to tackle that. It's a tiny file for the most part
 
 
 Compression
@@ -333,3 +334,10 @@ The file table appears to just be a not'd version of the big pattern table at th
    * Crashes on the Status screen when the decompressed file is reinserted with no changes.
       * Let's see if I can re-dump it when it's fresh as possible.
       * Yep, it works now. Gotta be careful with that
+
+# Pointers
+* Pointer to 0xbb44 ("   シノブ・リュード") is 0xbb44
+   * 00 74 03 be 44 bb 83 06 92 a5 14
+   *          be 2d bb 80
+   *          be 8f bb
+   * Yep, it's just the offset with a prefix of 'be'. Pointer constant is 0. (The file is less than 0xffff)
