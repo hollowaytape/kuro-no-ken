@@ -36,19 +36,26 @@ DEST_DISK = 'patched/Blade of Darkness (Kuro no Ken).hdi'
 DUMP_XLS_PATH = 'KuroNoKen_dump.xlsx'
 POINTER_XLS_PATH = 'KuroNoKen_pointer_dump.xlsx'
 
+LINE_MAX_LENGTH = 48
+
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
 FILES_TO_DUMP = [
     'BD.BIN', 
     '02OLB00A.SCN', 
-  #  '02OLB01A.SCN', 
+    '02OLB01A.SCN', 
   #  '02OLB01B.SCN', 
-  #  'ITEM.SMI',
   #  '00IPL.SCN',
+    'ITEM.SMI',
+    'KIES.SMI',
+    'SHINOBU.SMI',
 ]
 
 FILES_WITH_POINTERS = [
     'BD.BIN',
+    'ITEM.SMI',
+    'KIES.SMI',
+    'SHINOBU.SMI',
 ]
 
 POINTER_CONSTANT = {
@@ -72,13 +79,22 @@ FILE_BLOCKS = {
     'ITEM.SMI': [
         (0x2bfc, 0x4092),
     ],
-    #'02OLB00A.SCN': [
-    #    (0x40, 0x663),
-    #    (0x6bc, 0x6dc),
-    #]
+    '02OLB00A.SCN': [
+        (0x40, 0x660),
+        (0x6bc, 0x6dc),
+    ],
+    '02OLB01A.SCN': [
+        (0x0, 0x107d)
+    ],
+    'KIES.SMI': [
+        (0xdde, 0xe2b)
+    ],
+    'SHINOBU.SMI': [
+        (0x10cb, 0x12e9)
+    ],
 }
 
-REAL_FILE_BLOCKS = FILE_BLOCKS
+LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '02OLB00A.SCN']
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -351,8 +367,8 @@ FILES = [
     BODFile(b'A.FA1', b'GOBLIN2.SMI', 0xffc80, 0xe9, 0x255),
     BODFile(b'A.FA1', b'HARPY.SMI', 0xffd6a, 0x116, 0x241),
     BODFile(b'A.FA1', b'ITEM.SMI', 0xffe80, 0x1858, 0x4092), # 2e8a0-32932, dumped
-    BODFile(b'A.FA1', b'KIES.SMI', 0x1016d8, 0x645, 0xe3a),
-    BODFile(b'A.FA1', b'SHINOBU.SMI', 0x101d1e, 0x7dd, 0x12e9),
+    BODFile(b'A.FA1', b'KIES.SMI', 0x1016d8, 0x645, 0xe3a), # dumped
+    BODFile(b'A.FA1', b'SHINOBU.SMI', 0x101d1e, 0x7dd, 0x12e9), # 34850-ish
     BODFile(b'A.FA1', b'SKELET1.SMI', 0x1024fc, 0x10d, 0x270),
     BODFile(b'A.FA1', b'SLIME1.SMI', 0x10260a, 0x224, 0x69a),
     BODFile(b'A.FA1', b'SLIME2.SMI', 0x10282e, 0x24e, 0x6e8),
@@ -1309,8 +1325,12 @@ POINTERS_TO_REASSIGN = {
         ]
 }
 
+# Put some default values in there
 for bodfile in FILES:
+    safe_name = bodfile.name.decode('ascii')
     if bodfile.name.endswith(b'SCN'):
         #print(str(bodfile.name))
-        #if bodfile.name.decode('ascii') not in FILE_BLOCKS:
-        FILE_BLOCKS[bodfile.name.decode('ascii')] = [(0, bodfile.decompressed_length)]
+        if safe_name not in FILE_BLOCKS:
+            FILE_BLOCKS[safe_name] = [(0, bodfile.decompressed_length)]
+    if safe_name not in POINTER_CONSTANT:
+        POINTER_CONSTANT[safe_name] = 0

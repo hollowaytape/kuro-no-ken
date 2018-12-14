@@ -371,3 +371,7 @@ The 40 before that:
    third is 01: Instant load instead of fade in
 
 3b 01 ee 44 4f 01 ac 44: control code to scroll the image to the left
+
+# Why do I have to reinsert, extract, reinsert again?
+* Reinsert doesn't appear to change A.FA1 or B.FA1...
+   * Whoops, it was reinserting the pre-repacked version of the file, and rewriting the pre-repacked version. Fixed

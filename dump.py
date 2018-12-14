@@ -38,12 +38,15 @@ def dump(files):
         worksheet.set_column('F:F', 60)
 
         row = 1
-        if filename.endswith('BIN'):
+        if filename in FILE_BLOCKS:
             blocks = FILE_BLOCKS[filename]
-            ASCII_MODE = 2
         else:
             # The whole file is a block
             blocks = [(0, 0xfffff)]
+
+        if filename.endswith('BIN'):
+            ASCII_MODE = 2
+        else:
             ASCII_MODE = 0
 
 

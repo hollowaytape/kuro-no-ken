@@ -1,8 +1,8 @@
-start = 0x0b70
-stop = 0x0fd3
+start = 0x33780
+stop = start + 0x12e9
 
 source = 'memory.bin'
-name = 'decomp.bin'
+name = 'SHINOBU.SMI'
 
 with open(source, 'rb') as f:
     f.seek(start)

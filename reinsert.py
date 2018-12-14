@@ -6,7 +6,7 @@ import os
 from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
-from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_DUMP, FILES_WITH_POINTERS, FILE_BLOCKS, REAL_FILE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
+from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_DUMP, FILES_WITH_POINTERS, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
 from extract import repack
 
 FILES_TO_REINSERT = FILES_TO_DUMP
@@ -26,7 +26,7 @@ if __name__ == '__main__':
         patched_path = os.path.join('patched', filename)
         copyfile(original_path, patched_path)
         gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
-        #print(gf.pointers)
+        print(gf.pointers)
 
         """
         if filename in POINTERS_TO_REASSIGN:
@@ -53,9 +53,11 @@ if __name__ == '__main__':
             previous_text_offset = block.start
             diff = 0
             #print(repr(block.blockstring))
-            for t in Dump.get_translations(block):
+            for t in Dump.get_translations(block, include_blank=True):
                 # TODO: Add support for halfwidth kana.
                     # Prepend 85, add 1f if it's a num, sub 2 if it's a char
+                if t.en_bytestring == b'':
+                    t.en_bytestring = t.jp_bytestring
                 if t.en_bytestring != t.jp_bytestring:
                     print(t)
                     loc_in_block = t.location - block.start + diff
@@ -77,22 +79,27 @@ if __name__ == '__main__':
 
                     block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
 
-                    if filename in FILES_WITH_POINTERS:
-                        gf.edit_pointers_in_range((previous_text_offset, t.location), diff)
+                if gf.pointers:
+                    gf.edit_pointers_in_range((previous_text_offset, t.location), diff)
 
-                    previous_text_offset = t.location
+                previous_text_offset = t.location
 
-                    this_diff = len(t.en_bytestring) - len(t.jp_bytestring)
-                    diff += this_diff
+                this_diff = len(t.en_bytestring) - len(t.jp_bytestring)
+                diff += this_diff
 
             block_diff = len(block.blockstring) - len(block.original_blockstring)
-            
+
             # Ignore size differences in .SCN files
-            if filename in REAL_FILE_BLOCKS:
-                print(filename, "is in real file blocks")
+            if filename in LENGTH_SENSITIVE_BLOCKS:
+                print(filename, "is length sensitive")
                 if block_diff < 0:
-                    print("block_diff is", block_diff)
-                    block.blockstring += (-1)*block_diff*b'\x00'
+                    print("block_diff of", block, "is", block_diff)
+                    if filename.endswith('SCN'):
+                        PADDING_CHARACTER = b' '
+                    else:
+                        PADDING_CHARACTER = b'\x00'
+
+                    block.blockstring += (-1)*block_diff*PADDING_CHARACTER
                 block_diff = len(block.blockstring) - len(block.original_blockstring)
                 assert block_diff == 0, block_diff
 
@@ -102,7 +109,6 @@ if __name__ == '__main__':
 
     for filename in ARCHIVES_TO_REINSERT:
         gamefile_path = os.path.join('patched', filename)
-        gf = Gamefile(gamefile_path, disk=OriginalBOD, dest_disk=TargetBOD)
 
         for bodfile in FILES:
             if bodfile.name == b'02OLB00A.SCN':
@@ -110,5 +116,6 @@ if __name__ == '__main__':
 
 
         repack(gamefile_path)
-        #print(gamefile_path)
+        # Gotta repack it first, then initialize the gamefile
+        gf = Gamefile(gamefile_path, disk=OriginalBOD, dest_disk=TargetBOD)
         gf.write(path_in_disk='B-DRKNS')

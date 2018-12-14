@@ -81,6 +81,7 @@ def unpack(archive):
 
 
 def repack(archive):
+    print("Calling repack on", archive)
     #print(archive)
     just_archive = bytes(archive.split('\\')[-1], 'ascii')
     #print(just_archive)
