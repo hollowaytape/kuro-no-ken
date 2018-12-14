@@ -24,7 +24,7 @@ class BODFile:
         return contents
 
     def is_compressed(self):
-        return self.compressed_length != self.decompressed_length
+        return self.compressed_length < self.decompressed_length
 
     def __repr__(self):
         return "BODFile(%s, %s, %s, %s, %s)," % (self.source, self.name, hex(self.location),
@@ -40,7 +40,7 @@ ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
 FILES_TO_DUMP = [
     'BD.BIN', 
-  #  '02OLB00A.SCN', 
+    '02OLB00A.SCN', 
   #  '02OLB01A.SCN', 
   #  '02OLB01B.SCN', 
   #  'ITEM.SMI',
@@ -71,8 +71,14 @@ FILE_BLOCKS = {
     ],
     'ITEM.SMI': [
         (0x2bfc, 0x4092),
-    ]
+    ],
+    #'02OLB00A.SCN': [
+    #    (0x40, 0x663),
+    #    (0x6bc, 0x6dc),
+    #]
 }
+
+REAL_FILE_BLOCKS = FILE_BLOCKS
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -1306,4 +1312,5 @@ POINTERS_TO_REASSIGN = {
 for bodfile in FILES:
     if bodfile.name.endswith(b'SCN'):
         #print(str(bodfile.name))
+        #if bodfile.name.decode('ascii') not in FILE_BLOCKS:
         FILE_BLOCKS[bodfile.name.decode('ascii')] = [(0, bodfile.decompressed_length)]

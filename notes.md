@@ -341,3 +341,33 @@ The file table appears to just be a not'd version of the big pattern table at th
    *          be 2d bb 80
    *          be 8f bb
    * Yep, it's just the offset with a prefix of 'be'. Pointer constant is 0. (The file is less than 0xffff)
+
+# .SCN
+* Can't alter the length or the gam crashes?
+   * Can't even expand it with 00s. Haven't ruled out a flaw in the filesystem reinserter though.
+      * Fixed it, now I can expand it with 00s. Still probably shouldn't interfere with the code blocks though.
+      * It doesn't seem to like where I ended the blocks. Maybe space them with 20's instead?
+51 00 9c 34
+   51 01: Fades from weird lighter palette instead of black
+52 00 01 00
+53 49 03 4c 03
+62 43 03 46 03
+61 00 03 00 01
+
+The 02 before \i0Shinobu:
+   00: Loads image, then crashes
+   01: " "
+   03: Writes the first Ennis line instead
+   ff: " "
+
+The 40 before that:
+   41: Upper window instead of lower, very glitchy
+00 53 04 before that:
+   51: Fucked up palette, whole image instead of bars
+   52: Loads the whole image instead of the black bars
+   50: " "
+
+00 52 00 before that:
+   third is 01: Instant load instead of fade in
+
+3b 01 ee 44 4f 01 ac 44: control code to scroll the image to the left

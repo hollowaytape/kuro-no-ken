@@ -6,7 +6,7 @@ import os
 from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
-from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_DUMP, FILES_WITH_POINTERS, FILE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
+from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_DUMP, FILES_WITH_POINTERS, FILE_BLOCKS, REAL_FILE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
 from extract import repack
 
 FILES_TO_REINSERT = FILES_TO_DUMP
@@ -88,8 +88,10 @@ if __name__ == '__main__':
             block_diff = len(block.blockstring) - len(block.original_blockstring)
             
             # Ignore size differences in .SCN files
-            if not filename.endswith('.SCN'):
+            if filename in REAL_FILE_BLOCKS:
+                print(filename, "is in real file blocks")
                 if block_diff < 0:
+                    print("block_diff is", block_diff)
                     block.blockstring += (-1)*block_diff*b'\x00'
                 block_diff = len(block.blockstring) - len(block.original_blockstring)
                 assert block_diff == 0, block_diff
