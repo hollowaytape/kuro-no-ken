@@ -54,11 +54,26 @@ if __name__ == '__main__':
             diff = 0
             #print(repr(block.blockstring))
             for t in Dump.get_translations(block, include_blank=True):
-                # TODO: Add support for halfwidth kana.
-                    # Prepend 85, add 1f if it's a num, sub 2 if it's a char
                 if t.en_bytestring == b'':
                     t.en_bytestring = t.jp_bytestring
                 if t.en_bytestring != t.jp_bytestring:
+                    # TODO: Add support for halfwidth kana.
+                        # Prepend 85, add 1f if it's a num, sub 2 if it's a char
+                    if 0xb0 <= t.jp_bytestring[0] <= 0xdf:
+                        print("This is a halfwidth kana string")
+                        new_bytestring = b''
+                        for b in t.jp_bytestring:
+                            if 0xb0 <= b <= 0xdf:
+                                new_bytestring += b'\x85' + (b - 2).to_bytes(1, 'little')
+                            elif b == 0x20:
+                                new_bytestring += b'\x20'
+                            else:
+                                new_bytestring += b'\x85' + (b + 0x1f).to_bytes(1, 'little')
+                        print(t.jp_bytestring)
+                        print(new_bytestring)
+                        t.jp_bytestring = new_bytestring
+
+
                     print(t)
                     loc_in_block = t.location - block.start + diff
 
