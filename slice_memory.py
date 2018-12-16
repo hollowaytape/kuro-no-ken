@@ -1,14 +1,25 @@
-start = 0x33780
-stop = start + 0x12e9
+"""
+    Dumps a file from a memory dump with the given name and start location.
+"""
 
-source = 'memory.bin'
-name = 'SHINOBU.SMI'
+from rominfo import FILES
 
-with open(source, 'rb') as f:
-    f.seek(start)
-    with open('original/decompressed/%s' % name, 'wb+') as g:
-        g.write(f.read(stop - start))
+source = '../romtools/np2debug/memory.bin'
 
-# 5380-6280:
-# also 0x8b40 to 0x95e2
-# also 0x26d1c - 0x27faa
+if __name__ == "__main__":
+    # Change these
+    name = b'02OLB01B.SCN'
+    start = 0x2aa80
+
+    for bodfile in FILES:
+        if bodfile.name == name:
+            print(bodfile.name)
+            file_length = bodfile.decompressed_length
+
+    stop = start + file_length
+
+    with open(source, 'rb') as f:
+        f.seek(start)
+        with open('original/decompressed/%s' % name, 'wb+') as g:
+            g.write(f.read(stop - start))
+

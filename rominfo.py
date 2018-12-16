@@ -2,6 +2,9 @@
     Things related to the disk layout/structure of Kuro no Ken.
 """
 
+from romtools.disk import Disk, Gamefile
+from romtools.dump import DumpExcel, PointerExcel
+
 class BODFile:
     def __init__(self, source, name, location, compressed_length, decompressed_length):
         self.source = source
@@ -42,10 +45,14 @@ ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
 FILES_TO_DUMP = [
     'BD.BIN', 
-    '02OLB00A.SCN', 
-    '02OLB01A.SCN', 
-  #  '02OLB01B.SCN', 
-  #  '00IPL.SCN',
+    '00IPL.SCN',
+    #'01FLD.SCN',
+    '02OLB01.SCN',
+    '02OLB00A.SCN',
+    '02OLB01A.SCN',
+    '02OLB01B.SCN',
+    '03YSK.SCN',
+    '03YSK01A.SCN',
     'ITEM.SMI',
     'KIES.SMI',
     'SHINOBU.SMI',
@@ -63,26 +70,25 @@ POINTER_CONSTANT = {
 }
 
 FILE_BLOCKS = {
-    'BD.BIN': [
-        (0x9e01, 0x9e0d),
-        (0x9e33, 0x9e64),
-        (0x9ed5, 0x9ee2),
-        (0x9f2e, 0x9f3b),
-        (0x9f6b, 0x9f80),
-        (0xb1e0, 0xb1f8),
-        (0xba4a, 0xbb23),
-        (0xbb2d, 0xbc3e),
-        (0xd240, 0xd28f),
-        (0xd8bc, 0xd8f9),
-        (0xe6f0, 0xe797),
-    ],
-    'ITEM.SMI': [
-        (0x2bfc, 0x4092),
-    ],
-    '02OLB00A.SCN': [
-        (0x40, 0x660),
-        (0x6bc, 0x6dc),
-    ],
+    #'BD.BIN': [
+    #    (0x9e01, 0x9e0d),
+    #    (0x9e33, 0x9e64),
+    #    (0x9ed5, 0x9ee2),
+    #    (0x9f2e, 0x9f3b),
+    #    (0x9f6b, 0x9f80),
+    #    (0xb1e0, 0xb1f8),
+    #    (0xba4a, 0xbc3e),
+    #    (0xd240, 0xd28f),
+    #    (0xd8bc, 0xd8f9),
+    #    (0xe6f0, 0xe797),
+    #],
+    #'ITEM.SMI': [
+    #    (0x2bfc, 0x4092),
+    #],
+    #'02OLB00A.SCN': [
+    #    (0x40, 0x660),
+    #    (0x6bc, 0x6dc),
+    #],
     '02OLB01A.SCN': [
         (0x0, 0x107d)
     ],
@@ -1319,6 +1325,7 @@ FILES = [
     BODFile(b'E.FA1', b'WYVERN.SMI', 0x115990, 0x13a, 0x2bf),
 ]
 
+# TODO: These don't get used in resinert.py yet
 POINTERS_TO_REASSIGN = {
     'BD.BIN': [
             (0xd8db, 0xd8bc),   # Attack
@@ -1328,9 +1335,39 @@ POINTERS_TO_REASSIGN = {
 # Put some default values in there
 for bodfile in FILES:
     safe_name = bodfile.name.decode('ascii')
-    if bodfile.name.endswith(b'SCN'):
-        #print(str(bodfile.name))
-        if safe_name not in FILE_BLOCKS:
-            FILE_BLOCKS[safe_name] = [(0, bodfile.decompressed_length)]
+    #if bodfile.name.endswith(b'SCN'):
+    #    #print(str(bodfile.name))
+    #    if safe_name not in FILE_BLOCKS:
+    #        FILE_BLOCKS[safe_name] = [(0, bodfile.decompressed_length)]
     if safe_name not in POINTER_CONSTANT:
         POINTER_CONSTANT[safe_name] = 0
+
+# Auto-generate file blocks when they are not manually defined
+Dump = DumpExcel(DUMP_XLS_PATH)
+PtrDump = PointerExcel(POINTER_XLS_PATH)
+OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
+TargetBOD = Disk(DEST_DISK)
+for file in FILES_TO_DUMP:
+    #print(file)
+    if file not in FILE_BLOCKS:
+        #print(file, "not in FILE_BLOCKS")
+        gf = Gamefile('original/decompressed/%s' % file, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
+
+        blocks = []
+        start = None
+        last_string_end = None
+        for t in Dump.get_translations(file, include_blank=True):
+
+            if not start:
+                start = t.location
+            else:
+                distance = t.location - last_string_end
+                # Just seems like a good number
+                if distance > 17:
+                    blocks.append((start, last_string_end))
+                    #print(hex(start), hex(last_string_end))
+                    start = t.location
+            last_string_end = t.location + len(t.jp_bytestring)
+        blocks.append((start, last_string_end))
+        #print(hex(start), hex(last_string_end))
+        FILE_BLOCKS[file] = blocks

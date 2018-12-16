@@ -372,6 +372,10 @@ The 40 before that:
 
 3b 01 ee 44 4f 01 ac 44: control code to scroll the image to the left
 
+* I dumped the plain 03YSK.SCN file, it appears to have references to various things in the sub-files (03YSK01b, 03ysk65, etc.). This probably has useful clues to what's going wrong when code offsets change.
+
 # Why do I have to reinsert, extract, reinsert again?
 * Reinsert doesn't appear to change A.FA1 or B.FA1...
    * Whoops, it was reinserting the pre-repacked version of the file, and rewriting the pre-repacked version. Fixed
+
+KIES.SMI = 32940-3377a

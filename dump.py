@@ -15,7 +15,7 @@ ASCII_MODE = 2
 # 1: punctuation and c format strings only (not implemented)
 # 2: All ascii
 
-THRESHOLD = 2
+THRESHOLD = 4
 
 
 def dump(files):
