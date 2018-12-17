@@ -27,7 +27,10 @@ class BODFile:
         return contents
 
     def is_compressed(self):
-        return self.compressed_length < self.decompressed_length
+        if self.name.decode('ascii') in FILES_TO_REINSERT:
+            return False
+        else:
+            return self.compressed_length < self.decompressed_length
 
     def __repr__(self):
         return "BODFile(%s, %s, %s, %s, %s)," % (self.source, self.name, hex(self.location),
@@ -57,6 +60,8 @@ FILES_TO_DUMP = [
     'KIES.SMI',
     'SHINOBU.SMI',
 ]
+
+FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
 
 FILES_WITH_POINTERS = [
     'BD.BIN',
@@ -1365,9 +1370,7 @@ for file in FILES_TO_DUMP:
                 # Just seems like a good number
                 if distance > 17:
                     blocks.append((start, last_string_end))
-                    #print(hex(start), hex(last_string_end))
                     start = t.location
             last_string_end = t.location + len(t.jp_bytestring)
         blocks.append((start, last_string_end))
-        #print(hex(start), hex(last_string_end))
         FILE_BLOCKS[file] = blocks

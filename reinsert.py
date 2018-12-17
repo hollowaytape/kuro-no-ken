@@ -6,10 +6,9 @@ import os
 from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
-from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_DUMP, FILES_WITH_POINTERS, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
+from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
 from extract import repack
 
-FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
 ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
