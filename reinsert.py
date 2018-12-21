@@ -25,26 +25,29 @@ if __name__ == '__main__':
         patched_path = os.path.join('patched', filename)
         copyfile(original_path, patched_path)
         gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
-        print(gf.pointers)
+        for p in gf.pointers:
+            print(hex(p))
 
-        """
+
         if filename in POINTERS_TO_REASSIGN:
             print("Time to reassign some pointers")
             reassignments = POINTERS_TO_REASSIGN[filename]
             for src, dest in reassignments:
                 print("Reassigning", hex(src), hex(dest))
-                if src not in gf.pointers or dest not in gf.pointers:
+                if src not in gf.pointers:
                     print("Skipping this one: %s, %s" % (hex(src), hex(dest)))
                     continue
-                assert src in gf.pointers
-                assert dest in gf.pointers
+                if dest not in gf.pointers:
+                    print("No pointer for that dest. We'll just move the src pointer to the dest")
+                    gf.pointers[dest] = []
+                #assert src in gf.pointers
+                #assert dest in gf.pointers
                 diff = dest - src
                 assert dest == src + diff
                 for p in gf.pointers[src]:
                     p.edit(diff)
                 gf.pointers[dest] += gf.pointers[src]
                 gf.pointers.pop(src)
-        """
 
         for block in FILE_BLOCKS[filename]:
             block = Block(gf, block)
@@ -55,6 +58,9 @@ if __name__ == '__main__':
             for t in Dump.get_translations(block, include_blank=True):
                 if t.en_bytestring == b'':
                     t.en_bytestring = t.jp_bytestring
+                elif t.en_bytestring == b'[BLANK]':
+                    t.en_bytestring = b''
+
                 if t.en_bytestring != t.jp_bytestring:
                     # TODO: Add support for halfwidth kana.
                         # Prepend 85, add 1f if it's a num, sub 2 if it's a char
@@ -68,12 +74,12 @@ if __name__ == '__main__':
                                 new_bytestring += b'\x20'
                             else:
                                 new_bytestring += b'\x85' + (b + 0x1f).to_bytes(1, 'little')
-                        print(t.jp_bytestring)
-                        print(new_bytestring)
+                        #print(t.jp_bytestring)
+                        #print(new_bytestring)
                         t.jp_bytestring = new_bytestring
 
 
-                    print(t)
+                    #print(t)
                     loc_in_block = t.location - block.start + diff
 
                     #print(t.jp_bytestring)

@@ -61,7 +61,7 @@ FILES_TO_DUMP = [
     'SHINOBU.SMI',
 ]
 
-FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
+FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '03YSK.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
 
 FILES_WITH_POINTERS = [
     'BD.BIN',
@@ -75,18 +75,18 @@ POINTER_CONSTANT = {
 }
 
 FILE_BLOCKS = {
-    #'BD.BIN': [
-    #    (0x9e01, 0x9e0d),
-    #    (0x9e33, 0x9e64),
-    #    (0x9ed5, 0x9ee2),
-    #    (0x9f2e, 0x9f3b),
-    #    (0x9f6b, 0x9f80),
-    #    (0xb1e0, 0xb1f8),
-    #    (0xba4a, 0xbc3e),
-    #    (0xd240, 0xd28f),
-    #    (0xd8bc, 0xd8f9),
-    #    (0xe6f0, 0xe797),
-    #],
+    'BD.BIN': [
+        (0x9e01, 0x9e0d),
+        (0x9e33, 0x9e64),
+        (0x9ed5, 0x9ee2),
+        (0x9f2e, 0x9f3b),
+        (0x9f6b, 0x9f80),
+        (0xb1e0, 0xb1f8),
+        (0xba4a, 0xbc3e),
+        (0xd240, 0xd28f),
+        (0xd8bc, 0xd8f9),
+        (0xe6f0, 0xe797),
+    ],
     #'ITEM.SMI': [
     #    (0x2bfc, 0x4092),
     #],
@@ -103,9 +103,13 @@ FILE_BLOCKS = {
     'SHINOBU.SMI': [
         (0x10cb, 0x12e9)
     ],
+    '02OLB01A.SCN': [
+        (0x00, 0x442),
+        (0x442, 0x107c),
+    ]
 }
 
-LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '02OLB00A.SCN']
+LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN']
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -882,6 +886,7 @@ FILES = [
     BODFile(b'C.FA1', b'YUMIHEI.SMI', 0x108dae, 0xd3, 0x201),
     BODFile(b'C.FA1', b'ZEFYU2.SMI', 0x108e82, 0x4af, 0xb85),
     BODFile(b'C.FA1', b'ZOMBIE1.SMI', 0x109332, 0x209, 0x4c2),
+
     BODFile(b'D.FA1', b'BAC_05.AS2', 0xc, 0x2882, 0x2882),
     BODFile(b'D.FA1', b'CHRO_M5.AS2', 0x288e, 0x89e, 0x89e),
     BODFile(b'D.FA1', b'DS_09.AS2', 0x312c, 0x47b0, 0x47b0),
@@ -1114,6 +1119,7 @@ FILES = [
     BODFile(b'D.FA1', b'ZEFYU3.SMI', 0x10ce8c, 0x4a8, 0xb85),
     BODFile(b'D.FA1', b'ZOMBIE1.SMI', 0x10d334, 0x209, 0x4c2),
     BODFile(b'D.FA1', b'ZOMBIE2.SMI', 0x10d53e, 0x206, 0x4c2),
+
     BODFile(b'E.FA1', b'BAC_12.AS2', 0xc, 0x1e3c, 0x1e3c),
     BODFile(b'E.FA1', b'BAC_13.AS2', 0x1e48, 0x4112, 0x4112),
     BODFile(b'E.FA1', b'BAC_14.AS2', 0x5f5a, 0x2bf4, 0x2bf4),
@@ -1333,7 +1339,12 @@ FILES = [
 # TODO: These don't get used in resinert.py yet
 POINTERS_TO_REASSIGN = {
     'BD.BIN': [
-            (0xd8db, 0xd8bc),   # Attack
+            (0xd8bc, 0xd8db),   # Attack,
+            (0xd8c1, 0xd8e0),   # Tech
+            (0xd8c6, 0xd8e5),   # Defend
+            (0xd8cb, 0xd8ea),   # Item
+            (0xd8d0, 0xd8ef),   # Equip
+            (0xd8d5, 0xd8f4),   # Run
         ]
 }
 
