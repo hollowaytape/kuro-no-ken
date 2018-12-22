@@ -25,9 +25,6 @@ if __name__ == '__main__':
         patched_path = os.path.join('patched', filename)
         copyfile(original_path, patched_path)
         gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
-        for p in gf.pointers:
-            print(hex(p))
-
 
         if filename in POINTERS_TO_REASSIGN:
             print("Time to reassign some pointers")
@@ -55,7 +52,13 @@ if __name__ == '__main__':
             previous_text_offset = block.start
             diff = 0
             #print(repr(block.blockstring))
-            for t in Dump.get_translations(block, include_blank=True):
+            if filename.endswith('SCN'):
+                print(filename)
+                translations = Dump.get_translations(block, include_blank=True, sheet_name="SCNs")
+                print(translations)
+            else:
+                translations = Dump.get_translations(block, include_blank=True)
+            for t in translations:
                 if t.en_bytestring == b'':
                     t.en_bytestring = t.jp_bytestring
                 elif t.en_bytestring == b'[BLANK]':

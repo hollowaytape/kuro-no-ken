@@ -8,7 +8,7 @@ source = '../romtools/np2debug/memory.bin'
 
 if __name__ == "__main__":
     # Change these
-    name = b'06BLK03O.SCN'
+    name = b'31END.SCN'
     start = 0x26d00
 
     for bodfile in FILES:
