@@ -2,6 +2,7 @@
     Things related to the disk layout/structure of Kuro no Ken.
 """
 
+import os
 from romtools.disk import Disk, Gamefile
 from romtools.dump import DumpExcel, PointerExcel
 
@@ -46,22 +47,35 @@ LINE_MAX_LENGTH = 48
 
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
+"""
 FILES_TO_DUMP = [
     'BD.BIN', 
-    '00IPL.SCN',
-    #'01FLD.SCN',
-    '02OLB01.SCN',
-    '02OLB00A.SCN',
-    '02OLB01A.SCN',
-    '02OLB01B.SCN',
-    '03YSK.SCN',
-    '03YSK01A.SCN',
     'ITEM.SMI',
-    'KIES.SMI',
     'SHINOBU.SMI',
-]
+    'KIES.SMI',
+    '00IPL.SCN',
+    '01FLD.SCN',
+    '02OLB.SCN', '02OLB00A.SCN', '02OLB01.SCN', '02OLB01A.SCN', '02OLB01B.SCN',
+    '02OLB02.SCN', '02OLB02A.SCN', '02OLB03.SCN', '02OLB3A.SCN', '02OLB04.SCN', '02OLB05.SCN', '02OLB06.SCN',
 
-FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '03YSK.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
+    '03YSK.SCN', '03YSK00.SCN', '03YSK01A.SCN', '03YSK01B.SCN', '03YSK01C.SCN', '03YSK65.SCN', 
+    '03YSK69.SCN', '03YSK690.SCN', '03YSK69A.SCN', '03YSK69B.SCN', '03YSK69C.SCN', 
+    
+    
+    '05SKS.SCN', '05SKS01.SCN', '05SKS02.SCN', '05SKS03.SCN', '05SKS04.SCN', '05SKS05.SCN', '05SKS06.SCN', '05SKS07.SCN', '05SKS08.SCN',
+    '06BLK.SCN', '06BLK00A.SCN', '06BLK00B.SCN', '06BLK01.SCN', '06BLK01A.SCN', '06BLK01B.SCN', '06BLK01C.SCN', '06BLK01D.SCN',
+    '06BLK02.SCN', '06BLK02A.SCN', '06BLK02B.SCN', '06BLK02C.SCN', '06BLK02D.SCN', '06BLK02E.SCN', '06BLK02I.SCN', '06BLK02O.SCN',
+    '06BLK03.SCN', '06BLK03A.SCN', '06BLK03I.SCN', '06BLK03O.SCN',
+    '99CMN.SCN',
+]
+"""
+# Definitely too many files, with unintuitive names, to do this manually.
+
+FILES_TO_DUMP = os.listdir('original/decompressed')
+
+
+FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
+# TODO: I'll want to just make this the listdir as well at some point...
 
 FILES_WITH_POINTERS = [
     'BD.BIN',
@@ -75,18 +89,18 @@ POINTER_CONSTANT = {
 }
 
 FILE_BLOCKS = {
-    'BD.BIN': [
-        (0x9e01, 0x9e0d),
-        (0x9e33, 0x9e64),
-        (0x9ed5, 0x9ee2),
-        (0x9f2e, 0x9f3b),
-        (0x9f6b, 0x9f80),
-        (0xb1e0, 0xb1f8),
-        (0xba4a, 0xbc3e),
-        (0xd240, 0xd28f),
-        (0xd8bc, 0xd8f9),
-        (0xe6f0, 0xe797),
-    ],
+    #'BD.BIN': [
+    #    (0x9e01, 0x9e0d),
+    #    (0x9e33, 0x9e64),
+    #    (0x9ed5, 0x9ee2),
+    #    (0x9f2e, 0x9f3b),
+    #    (0x9f6b, 0x9f80),
+    #    (0xb1e0, 0xb1f8),
+    #    (0xba4a, 0xbc3e),
+    #    (0xd240, 0xd28f),
+    #    (0xd8bc, 0xd8f9),
+    #    (0xe6f0, 0xe797),
+    #],
     #'ITEM.SMI': [
     #    (0x2bfc, 0x4092),
     #],
@@ -374,16 +388,16 @@ FILES = [
     BODFile(b'A.FA1', b'MK40.PAI', 0xfd54e, 0x13c, 0x202),
     BODFile(b'A.FA1', b'MK99.PAI', 0xfd68a, 0x96, 0xba),
     BODFile(b'A.FA1', b'EK.PIP', 0xfd720, 0x80c, 0x10e5),
-    BODFile(b'A.FA1', b'00IPL.SCN', 0xfdf2c, 0xaa2, 0x147d),
-    BODFile(b'A.FA1', b'01FLD.SCN', 0xfe9ce, 0x674, 0x11b8),
-    BODFile(b'A.FA1', b'99CMN.SCN', 0xff042, 0x830, 0xcc1),
+    BODFile(b'A.FA1', b'00IPL.SCN', 0xfdf2c, 0xaa2, 0x147d),  #
+    BODFile(b'A.FA1', b'01FLD.SCN', 0xfe9ce, 0x674, 0x11b8),  #
+    BODFile(b'A.FA1', b'99CMN.SCN', 0xff042, 0x830, 0xcc1),  #
     BODFile(b'A.FA1', b'BAT.SMI', 0xff872, 0x114, 0x265),
     BODFile(b'A.FA1', b'DOLUID.SMI', 0xff986, 0x2fa, 0x756),
     BODFile(b'A.FA1', b'GOBLIN2.SMI', 0xffc80, 0xe9, 0x255),
     BODFile(b'A.FA1', b'HARPY.SMI', 0xffd6a, 0x116, 0x241),
-    BODFile(b'A.FA1', b'ITEM.SMI', 0xffe80, 0x1858, 0x4092), # 2e8a0-32932, dumped
-    BODFile(b'A.FA1', b'KIES.SMI', 0x1016d8, 0x645, 0xe3a), # dumped
-    BODFile(b'A.FA1', b'SHINOBU.SMI', 0x101d1e, 0x7dd, 0x12e9), # 34850-ish
+    BODFile(b'A.FA1', b'ITEM.SMI', 0xffe80, 0x1858, 0x4092),  # 2e8a0-32932, dumped
+    BODFile(b'A.FA1', b'KIES.SMI', 0x1016d8, 0x645, 0xe3a),  # dumped
+    BODFile(b'A.FA1', b'SHINOBU.SMI', 0x101d1e, 0x7dd, 0x12e9),  # 34850-ish
     BODFile(b'A.FA1', b'SKELET1.SMI', 0x1024fc, 0x10d, 0x270),
     BODFile(b'A.FA1', b'SLIME1.SMI', 0x10260a, 0x224, 0x69a),
     BODFile(b'A.FA1', b'SLIME2.SMI', 0x10282e, 0x24e, 0x6e8),
@@ -546,58 +560,58 @@ FILES = [
     BODFile(b'B.FA1', b'TOU6.MPC', 0xeb2c0, 0x3c44, 0x7f30),
     BODFile(b'B.FA1', b'YSK1.MPC', 0xeef04, 0x58a2, 0x9da8),
     BODFile(b'B.FA1', b'YSK2.MPC', 0xf47a6, 0x53a7, 0x9f38),
-    BODFile(b'B.FA1', b'02OLB.SCN', 0xf9b4e, 0x555, 0x9c8),
+    BODFile(b'B.FA1', b'02OLB.SCN', 0xf9b4e, 0x555, 0x9c8),  #
     BODFile(b'B.FA1', b'02OLB00A.SCN', 0xfa0a4, 0x4e0, 0x89f),  # dumped
-    BODFile(b'B.FA1', b'02OLB01.SCN', 0xfa584, 0xb7a, 0x1653),
-    BODFile(b'B.FA1', b'02OLB01A.SCN', 0xfb0fe, 0x944, 0x1083), # dumped
+    BODFile(b'B.FA1', b'02OLB01.SCN', 0xfa584, 0xb7a, 0x1653),  #
+    BODFile(b'B.FA1', b'02OLB01A.SCN', 0xfb0fe, 0x944, 0x1083),  # dumped
     BODFile(b'B.FA1', b'02OLB01B.SCN', 0xfba42, 0x886, 0xe6c),  # dumped
-    BODFile(b'B.FA1', b'02OLB02.SCN', 0xfc2c8, 0x57e, 0x869),   # dumped, but has duplicates at the end?
-    BODFile(b'B.FA1', b'02OLB02A.SCN', 0xfc846, 0x9a0, 0x1131),
-    BODFile(b'B.FA1', b'02OLB03.SCN', 0xfd1e6, 0x6c1, 0xa4e),
-    BODFile(b'B.FA1', b'02OLB03A.SCN', 0xfd8a8, 0xa16, 0x1263),
-    BODFile(b'B.FA1', b'02OLB04.SCN', 0xfe2be, 0x3c2, 0x5cf),
-    BODFile(b'B.FA1', b'02OLB05.SCN', 0xfe680, 0x3ba, 0x5b9),
-    BODFile(b'B.FA1', b'02OLB06.SCN', 0xfea3a, 0x310, 0x4c1),
-    BODFile(b'B.FA1', b'03YSK.SCN', 0xfed4a, 0x709, 0xcf4),
-    BODFile(b'B.FA1', b'03YSK00.SCN', 0xff454, 0xaa, 0xf8),
-    BODFile(b'B.FA1', b'03YSK01A.SCN', 0xff4fe, 0xb83, 0x145e),
-    BODFile(b'B.FA1', b'03YSK01B.SCN', 0x100082, 0x9db, 0x1091),
-    BODFile(b'B.FA1', b'03YSK01C.SCN', 0x100a5e, 0x172, 0x204),
-    BODFile(b'B.FA1', b'03YSK65.SCN', 0x100bd0, 0xf1, 0x12c),
-    BODFile(b'B.FA1', b'03YSK69.SCN', 0x100cc2, 0xcc9, 0x169c),
-    BODFile(b'B.FA1', b'03YSK690.SCN', 0x10198c, 0x1fc, 0x31f),
-    BODFile(b'B.FA1', b'03YSK69A.SCN', 0x101b88, 0x856, 0xe45),
-    BODFile(b'B.FA1', b'03YSK69B.SCN', 0x1023de, 0x52b, 0x839),
-    BODFile(b'B.FA1', b'03YSK69C.SCN', 0x10290a, 0x416, 0x69e),
-    BODFile(b'B.FA1', b'03YSK69D.SCN', 0x102d20, 0x673, 0xbb3),
-    BODFile(b'B.FA1', b'03YSK70.SCN', 0x103394, 0x74b, 0xc2f),
-    BODFile(b'B.FA1', b'04OLD.SCN', 0x103ae0, 0x1d0, 0x2e1),
-    BODFile(b'B.FA1', b'04OLD01A.SCN', 0x103cb0, 0x71b, 0xb13),
-    BODFile(b'B.FA1', b'04OLD01B.SCN', 0x1043cc, 0x1ea, 0x259),
-    BODFile(b'B.FA1', b'04OLD01C.SCN', 0x1045b6, 0x206, 0x289),
-    BODFile(b'B.FA1', b'04OLD01D.SCN', 0x1047bc, 0x10f, 0x142),
-    BODFile(b'B.FA1', b'10TNI.SCN', 0x1048cc, 0x317, 0x547),
-    BODFile(b'B.FA1', b'10TNI01.SCN', 0x104be4, 0x1dc, 0x29e),
-    BODFile(b'B.FA1', b'10TNI01A.SCN', 0x104dc0, 0x1cf, 0x2fc),
-    BODFile(b'B.FA1', b'10TNI02.SCN', 0x104f90, 0x285, 0x3b8),
-    BODFile(b'B.FA1', b'10TNI02A.SCN', 0x105216, 0xff, 0x154),
-    BODFile(b'B.FA1', b'10TNI03.SCN', 0x105316, 0x280, 0x3ac),
-    BODFile(b'B.FA1', b'10TNI03A.SCN', 0x105596, 0x5a5, 0xb03),
-    BODFile(b'B.FA1', b'10TNI04.SCN', 0x105b3c, 0x1d2, 0x258),
-    BODFile(b'B.FA1', b'10TNI04A.SCN', 0x105d0e, 0x3f8, 0x627),
-    BODFile(b'B.FA1', b'10TNII00.SCN', 0x106106, 0x247, 0x405),
-    BODFile(b'B.FA1', b'10TNII01.SCN', 0x10634e, 0x395, 0x64f),
-    BODFile(b'B.FA1', b'10TNII02.SCN', 0x1066e4, 0x217, 0x395),
-    BODFile(b'B.FA1', b'11STG.SCN', 0x1068fc, 0x220, 0x361),
-    BODFile(b'B.FA1', b'11STG01.SCN', 0x106b1c, 0x2af, 0x3cc),
-    BODFile(b'B.FA1', b'12MRS.SCN', 0x106dcc, 0x5e1, 0x91f),
-    BODFile(b'B.FA1', b'13SLP.SCN', 0x1073ae, 0x597, 0x96c),
-    BODFile(b'B.FA1', b'25TOU.SCN', 0x107946, 0x1b27, 0x2d7c),
-    BODFile(b'B.FA1', b'25TOU00A.SCN', 0x10946e, 0x3cf, 0x797),
-    BODFile(b'B.FA1', b'25TOU00B.SCN', 0x10983e, 0x723, 0xcc1),
-    BODFile(b'B.FA1', b'25TOU00C.SCN', 0x109f62, 0x75b, 0xe87),
-    BODFile(b'B.FA1', b'25TOU00D.SCN', 0x10a6be, 0x79f, 0xf50),
-    BODFile(b'B.FA1', b'25TOU00E.SCN', 0x10ae5e, 0x41c, 0x7fa),
+    BODFile(b'B.FA1', b'02OLB02.SCN', 0xfc2c8, 0x57e, 0x869),   # 
+    BODFile(b'B.FA1', b'02OLB02A.SCN', 0xfc846, 0x9a0, 0x1131),  #
+    BODFile(b'B.FA1', b'02OLB03.SCN', 0xfd1e6, 0x6c1, 0xa4e),  #
+    BODFile(b'B.FA1', b'02OLB03A.SCN', 0xfd8a8, 0xa16, 0x1263),  #
+    BODFile(b'B.FA1', b'02OLB04.SCN', 0xfe2be, 0x3c2, 0x5cf),  #
+    BODFile(b'B.FA1', b'02OLB05.SCN', 0xfe680, 0x3ba, 0x5b9),  #
+    BODFile(b'B.FA1', b'02OLB06.SCN', 0xfea3a, 0x310, 0x4c1),  #
+    BODFile(b'B.FA1', b'03YSK.SCN', 0xfed4a, 0x709, 0xcf4),  #
+    BODFile(b'B.FA1', b'03YSK00.SCN', 0xff454, 0xaa, 0xf8),  #
+    BODFile(b'B.FA1', b'03YSK01A.SCN', 0xff4fe, 0xb83, 0x145e),  #
+    BODFile(b'B.FA1', b'03YSK01B.SCN', 0x100082, 0x9db, 0x1091),  #
+    BODFile(b'B.FA1', b'03YSK01C.SCN', 0x100a5e, 0x172, 0x204),  #
+    BODFile(b'B.FA1', b'03YSK65.SCN', 0x100bd0, 0xf1, 0x12c),  #
+    BODFile(b'B.FA1', b'03YSK69.SCN', 0x100cc2, 0xcc9, 0x169c),  #
+    BODFile(b'B.FA1', b'03YSK690.SCN', 0x10198c, 0x1fc, 0x31f),  #
+    BODFile(b'B.FA1', b'03YSK69A.SCN', 0x101b88, 0x856, 0xe45),  #
+    BODFile(b'B.FA1', b'03YSK69B.SCN', 0x1023de, 0x52b, 0x839),  #
+    BODFile(b'B.FA1', b'03YSK69C.SCN', 0x10290a, 0x416, 0x69e),  #
+    BODFile(b'B.FA1', b'03YSK69D.SCN', 0x102d20, 0x673, 0xbb3),  #
+    BODFile(b'B.FA1', b'03YSK70.SCN', 0x103394, 0x74b, 0xc2f),  #
+    BODFile(b'B.FA1', b'04OLD.SCN', 0x103ae0, 0x1d0, 0x2e1),  #
+    BODFile(b'B.FA1', b'04OLD01A.SCN', 0x103cb0, 0x71b, 0xb13),  #
+    BODFile(b'B.FA1', b'04OLD01B.SCN', 0x1043cc, 0x1ea, 0x259),  #
+    BODFile(b'B.FA1', b'04OLD01C.SCN', 0x1045b6, 0x206, 0x289),  #
+    BODFile(b'B.FA1', b'04OLD01D.SCN', 0x1047bc, 0x10f, 0x142),  #
+    BODFile(b'B.FA1', b'10TNI.SCN', 0x1048cc, 0x317, 0x547),  #
+    BODFile(b'B.FA1', b'10TNI01.SCN', 0x104be4, 0x1dc, 0x29e),  #
+    BODFile(b'B.FA1', b'10TNI01A.SCN', 0x104dc0, 0x1cf, 0x2fc),  #
+    BODFile(b'B.FA1', b'10TNI02.SCN', 0x104f90, 0x285, 0x3b8),  #
+    BODFile(b'B.FA1', b'10TNI02A.SCN', 0x105216, 0xff, 0x154),  #
+    BODFile(b'B.FA1', b'10TNI03.SCN', 0x105316, 0x280, 0x3ac),  #
+    BODFile(b'B.FA1', b'10TNI03A.SCN', 0x105596, 0x5a5, 0xb03),  #
+    BODFile(b'B.FA1', b'10TNI04.SCN', 0x105b3c, 0x1d2, 0x258),  #
+    BODFile(b'B.FA1', b'10TNI04A.SCN', 0x105d0e, 0x3f8, 0x627),  #
+    BODFile(b'B.FA1', b'10TNII00.SCN', 0x106106, 0x247, 0x405),  #
+    BODFile(b'B.FA1', b'10TNII01.SCN', 0x10634e, 0x395, 0x64f),  #
+    BODFile(b'B.FA1', b'10TNII02.SCN', 0x1066e4, 0x217, 0x395),  #
+    BODFile(b'B.FA1', b'11STG.SCN', 0x1068fc, 0x220, 0x361),  #
+    BODFile(b'B.FA1', b'11STG01.SCN', 0x106b1c, 0x2af, 0x3cc),  #
+    BODFile(b'B.FA1', b'12MRS.SCN', 0x106dcc, 0x5e1, 0x91f),  #
+    BODFile(b'B.FA1', b'13SLP.SCN', 0x1073ae, 0x597, 0x96c),  #
+    BODFile(b'B.FA1', b'25TOU.SCN', 0x107946, 0x1b27, 0x2d7c),  #
+    BODFile(b'B.FA1', b'25TOU00A.SCN', 0x10946e, 0x3cf, 0x797),  #
+    BODFile(b'B.FA1', b'25TOU00B.SCN', 0x10983e, 0x723, 0xcc1),  #
+    BODFile(b'B.FA1', b'25TOU00C.SCN', 0x109f62, 0x75b, 0xe87),  #
+    BODFile(b'B.FA1', b'25TOU00D.SCN', 0x10a6be, 0x79f, 0xf50),  #
+    BODFile(b'B.FA1', b'25TOU00E.SCN', 0x10ae5e, 0x41c, 0x7fa),  #
     BODFile(b'B.FA1', b'ADON.SMI', 0x10b27a, 0x137, 0x2bf),
     BODFile(b'B.FA1', b'CAPTAIN2.SMI', 0x10b3b2, 0x2a4, 0x5d9),
     BODFile(b'B.FA1', b'DANGO1_G.SMI', 0x10b656, 0x118, 0x273),
@@ -769,35 +783,35 @@ FILES = [
     BODFile(b'C.FA1', b'HIK.MPC', 0xd55e4, 0x3dc8, 0x91a0),
     BODFile(b'C.FA1', b'SKS1.MPC', 0xd93ac, 0x5d90, 0x9c90),
     BODFile(b'C.FA1', b'SKS2.MPC', 0xdf13c, 0x4a3b, 0x8818),
-    BODFile(b'C.FA1', b'05SKS.SCN', 0xe3b78, 0x1fe, 0x30e),
-    BODFile(b'C.FA1', b'05SKS01.SCN', 0xe3d76, 0x3c2, 0x5d1),
-    BODFile(b'C.FA1', b'05SKS02.SCN', 0xe4138, 0x65d, 0xa76),
-    BODFile(b'C.FA1', b'05SKS03.SCN', 0xe4796, 0x5b5, 0x944),
-    BODFile(b'C.FA1', b'05SKS04.SCN', 0xe4d4c, 0x95b, 0x1119),
-    BODFile(b'C.FA1', b'05SKS05.SCN', 0xe56a8, 0x2b8, 0x432),
-    BODFile(b'C.FA1', b'05SKS06.SCN', 0xe5960, 0x5c8, 0x8f1),
-    BODFile(b'C.FA1', b'05SKS07.SCN', 0xe5f28, 0x428, 0x668),
-    BODFile(b'C.FA1', b'05SKS08.SCN', 0xe6350, 0x5f4, 0x947),
-    BODFile(b'C.FA1', b'06BLK.SCN', 0xe6944, 0xa5c, 0x141b),
-    BODFile(b'C.FA1', b'06BLK00A.SCN', 0xe73a0, 0x96d, 0x10ce),
-    BODFile(b'C.FA1', b'06BLK00B.SCN', 0xe7d0e, 0x3ba, 0x5f4),
-    BODFile(b'C.FA1', b'06BLK01.SCN', 0xe80c8, 0xa1c, 0x10cf),
-    BODFile(b'C.FA1', b'06BLK01A.SCN', 0xe8ae4, 0x22f, 0x393),
-    BODFile(b'C.FA1', b'06BLK01B.SCN', 0xe8d14, 0x8d2, 0xf93),
-    BODFile(b'C.FA1', b'06BLK01C.SCN', 0xe95e6, 0xa31, 0x1335),
-    BODFile(b'C.FA1', b'06BLK01D.SCN', 0xea018, 0x831, 0xdd9),
-    BODFile(b'C.FA1', b'06BLK02.SCN', 0xea84a, 0xa98, 0x13b5),
-    BODFile(b'C.FA1', b'06BLK02A.SCN', 0xeb2e2, 0x374, 0x577),
-    BODFile(b'C.FA1', b'06BLK02B.SCN', 0xeb656, 0x372, 0x5f8),
-    BODFile(b'C.FA1', b'06BLK02C.SCN', 0xeb9c8, 0x89a, 0xf2c),
-    BODFile(b'C.FA1', b'06BLK02D.SCN', 0xec262, 0x638, 0xb34),
-    BODFile(b'C.FA1', b'06BLK02E.SCN', 0xec89a, 0x4e8, 0x906),
-    BODFile(b'C.FA1', b'06BLK02I.SCN', 0xecd82, 0x8ef, 0x1003),
-    BODFile(b'C.FA1', b'06BLK02O.SCN', 0xed672, 0x2bd, 0x463),
-    BODFile(b'C.FA1', b'06BLK03.SCN', 0xed930, 0x608, 0x992),
-    BODFile(b'C.FA1', b'06BLK03A.SCN', 0xedf38, 0x444, 0x818),
-    BODFile(b'C.FA1', b'06BLK03I.SCN', 0xee37c, 0x7bb, 0xd6c),
-    BODFile(b'C.FA1', b'06BLK03O.SCN', 0xeeb38, 0x369, 0x599),
+    BODFile(b'C.FA1', b'05SKS.SCN', 0xe3b78, 0x1fe, 0x30e),  #
+    BODFile(b'C.FA1', b'05SKS01.SCN', 0xe3d76, 0x3c2, 0x5d1),  #
+    BODFile(b'C.FA1', b'05SKS02.SCN', 0xe4138, 0x65d, 0xa76),  #
+    BODFile(b'C.FA1', b'05SKS03.SCN', 0xe4796, 0x5b5, 0x944),  #
+    BODFile(b'C.FA1', b'05SKS04.SCN', 0xe4d4c, 0x95b, 0x1119),  #
+    BODFile(b'C.FA1', b'05SKS05.SCN', 0xe56a8, 0x2b8, 0x432),  #
+    BODFile(b'C.FA1', b'05SKS06.SCN', 0xe5960, 0x5c8, 0x8f1),  #
+    BODFile(b'C.FA1', b'05SKS07.SCN', 0xe5f28, 0x428, 0x668),  #
+    BODFile(b'C.FA1', b'05SKS08.SCN', 0xe6350, 0x5f4, 0x947),  #
+    BODFile(b'C.FA1', b'06BLK.SCN', 0xe6944, 0xa5c, 0x141b),  #
+    BODFile(b'C.FA1', b'06BLK00A.SCN', 0xe73a0, 0x96d, 0x10ce),  #
+    BODFile(b'C.FA1', b'06BLK00B.SCN', 0xe7d0e, 0x3ba, 0x5f4),  #
+    BODFile(b'C.FA1', b'06BLK01.SCN', 0xe80c8, 0xa1c, 0x10cf),  #
+    BODFile(b'C.FA1', b'06BLK01A.SCN', 0xe8ae4, 0x22f, 0x393), #
+    BODFile(b'C.FA1', b'06BLK01B.SCN', 0xe8d14, 0x8d2, 0xf93),  #
+    BODFile(b'C.FA1', b'06BLK01C.SCN', 0xe95e6, 0xa31, 0x1335),  #
+    BODFile(b'C.FA1', b'06BLK01D.SCN', 0xea018, 0x831, 0xdd9),  #
+    BODFile(b'C.FA1', b'06BLK02.SCN', 0xea84a, 0xa98, 0x13b5),  #
+    BODFile(b'C.FA1', b'06BLK02A.SCN', 0xeb2e2, 0x374, 0x577),  #
+    BODFile(b'C.FA1', b'06BLK02B.SCN', 0xeb656, 0x372, 0x5f8),  #
+    BODFile(b'C.FA1', b'06BLK02C.SCN', 0xeb9c8, 0x89a, 0xf2c),  #
+    BODFile(b'C.FA1', b'06BLK02D.SCN', 0xec262, 0x638, 0xb34),  #
+    BODFile(b'C.FA1', b'06BLK02E.SCN', 0xec89a, 0x4e8, 0x906),  #
+    BODFile(b'C.FA1', b'06BLK02I.SCN', 0xecd82, 0x8ef, 0x1003),  #
+    BODFile(b'C.FA1', b'06BLK02O.SCN', 0xed672, 0x2bd, 0x463),  #
+    BODFile(b'C.FA1', b'06BLK03.SCN', 0xed930, 0x608, 0x992),  #
+    BODFile(b'C.FA1', b'06BLK03A.SCN', 0xedf38, 0x444, 0x818),  #
+    BODFile(b'C.FA1', b'06BLK03I.SCN', 0xee37c, 0x7bb, 0xd6c),  #
+    BODFile(b'C.FA1', b'06BLK03O.SCN', 0xeeb38, 0x369, 0x599),  #
     BODFile(b'C.FA1', b'06BLK04.SCN', 0xeeea2, 0x96d, 0x10c6),
     BODFile(b'C.FA1', b'06BLK04A.SCN', 0xef810, 0x63e, 0xbfa),
     BODFile(b'C.FA1', b'06BLK04B.SCN', 0xefe4e, 0x467, 0x74e),
@@ -1358,6 +1372,8 @@ for bodfile in FILES:
     if safe_name not in POINTER_CONSTANT:
         POINTER_CONSTANT[safe_name] = 0
 
+# TODO: Reeenable at a later date
+"""
 # Auto-generate file blocks when they are not manually defined
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
@@ -1385,3 +1401,4 @@ for file in FILES_TO_DUMP:
             last_string_end = t.location + len(t.jp_bytestring)
         blocks.append((start, last_string_end))
         FILE_BLOCKS[file] = blocks
+"""

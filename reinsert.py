@@ -7,7 +7,7 @@ from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
 from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
-from extract import repack
+from fa1 import repack
 
 ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
 Dump = DumpExcel(DUMP_XLS_PATH)

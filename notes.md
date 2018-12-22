@@ -379,3 +379,6 @@ The 40 before that:
    * Whoops, it was reinserting the pre-repacked version of the file, and rewriting the pre-repacked version. Fixed
 
 KIES.SMI = 32940-3377a
+
+# Good dumping strategy
+* Open save state #8, replace 03YSK with the desired filename, and dump from 0x26d00 with slice_memory.py.

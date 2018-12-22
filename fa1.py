@@ -4,7 +4,6 @@
 import os
 from rominfo import BODFile, ARCHIVES, FILES
 
-
 def getSize(filename):
     st = os.stat(filename)
     return st.st_size

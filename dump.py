@@ -85,14 +85,20 @@ def dump(files):
 
                             # Weird KNK halfwidth kana
                             if contents[cursor] == 0x85:
+                                print("It's kana")
                                 cursor += 1
                                 buf = contents[cursor]
                                 # Digits
+                                print(sjis_buffer)
                                 if 0x50 <= buf <= 0x58:
                                     sjis_buffer += (contents[cursor] - 0x1f).to_bytes(1, byteorder='little')
                                 # Halfwidth kana
                                 else:
-                                    sjis_buffer += (contents[cursor] + 2).to_bytes(1, byteorder='little')
+                                    try:
+                                        sjis_buffer += (contents[cursor] + 2).to_bytes(1, byteorder='little')
+                                    except OverflowError:
+                                        print("Integer overflow, the halfwidth kana is probably garbage")
+                                        sjis_buffer += (contents[cursor]).to_bytes(1, byteorder='little')
                                 #sjis_buffer += (contents[cursor] + 2).to_bytes(1, byteorder='little')
                             else:
                                 sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
