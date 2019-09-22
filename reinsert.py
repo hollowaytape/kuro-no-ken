@@ -6,7 +6,8 @@ import os
 from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
-from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
+from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
+from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
 from fa1 import repack
 
 ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
@@ -65,7 +66,6 @@ if __name__ == '__main__':
                     t.en_bytestring = b''
 
                 if t.en_bytestring != t.jp_bytestring:
-                    # TODO: Add support for halfwidth kana.
                         # Prepend 85, add 1f if it's a num, sub 2 if it's a char
                     if 0xb0 <= t.jp_bytestring[0] <= 0xdf:
                         print("This is a halfwidth kana string")
@@ -80,6 +80,12 @@ if __name__ == '__main__':
                         #print(t.jp_bytestring)
                         #print(new_bytestring)
                         t.jp_bytestring = new_bytestring
+
+                    # Auto-indent lines that begin with a quote in SCN files
+                    #if t.en_bytestring:
+                    #    if t.en_bytestring.startswith(b'"') and filename.endswith('SCN'):
+                    #        print(t.en_bytestring[0], t.en_bytestring[0] == 0x20)
+                    #        t.en_bytestring = b' ' + t.en_bytestring
 
 
                     #print(t)
@@ -103,6 +109,7 @@ if __name__ == '__main__':
                     block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
 
                 if gf.pointers:
+                    print("Editing some pointers")
                     gf.edit_pointers_in_range((previous_text_offset, t.location), diff)
 
                 previous_text_offset = t.location

@@ -372,6 +372,70 @@ The 40 before that:
 
 3b 01 ee 44 4f 01 ac 44: control code to scroll the image to the left
 
+* Series of offsets(?) at the beginning of 020LB01A.SCN:
+09 54 3d
+09 9e 3d
+09 14 3e
+09 44 3e
+09 68 3e
+09 bf 3f
+09 e7 3f
+09 15 40
+09 4b 40 <- this is the "where's my sword?" Ennis dialogue thing
+09 21 43
+09 aa 43
+09 ce 43
+09 3c 44
+09 90 44
+09 f4 44
+09 56 45
+09 94 45
+09 c9 45
+09 09 46
+09 61 46
+09 a5 46
+09 31 47
+09 60 48
+09 26 49
+09 58 49
+09 91 4c
+09 df 4c
+09 2f 4d
+
+04 30 40
+02 5c 69
+
+Text is between 5c-1080
+
+When talking to Ennis and starting the dialog at 35c, the first breakpoint hit is 358 (0c 30 40 02).
+   * lodsb es: (ES:SI (26d8:404b)
+      * 404b is one of the values in that table. 404b - 358 = 3cf3. (some constant?)
+      * Is there always a consistent number of bytes between the first control code and the first thing of dialgoue?
+         * 404b points to 358, or 4 before 35c
+         * 4321 points to 62e, or 4 before 632
+      * Let's try another file - 02OLB01B.
+         * "gurururu" is at 0x1a0ish
+         * Breakpoint triggers at 0x19a (8 before the dialogue in the dump)
+            * ES:SI: 26d8:3e44
+         * Oops, This is a different "woof". And it's in the same file (01A).
+         * Breakpoint is at 0x144, text begins at 0x14c (diff is 8)
+         * Pointer constant would be: 3e44 - 144 = 3d00
+            * Why are these different?? Let's check the other one again
+            * Actually 404b points to 34b, which is a full 17 before the text begins.
+            * 404b - 34b = 3d00
+               * That's better.
+      * Northern gate (「北の門を出ると湿原に行けるんだが、) text:
+         * 432a points to  0x62a, or 8 before text at 0x632
+         * PC would be: 432a - 62a = 3d00
+
+* Why is there a crash when reading Ennis's final line of dialogue?
+   * In original, it ends with 5c 66 00 09 27 43 b4 00 23 34 04 0c 30 0c 64 00 a9 42 1d 64 00
+   * In patched, it ends with: 5c 66 00 09 27 43 b4 00 23 34 04 0c 30 0c 64 00 a9 42 1d 64 00
+   * No difference.
+   * There are also no pointers that would point in that range...
+   * Maybe it's an even-odd thing?
+
+
 * I dumped the plain 03YSK.SCN file, it appears to have references to various things in the sub-files (03YSK01b, 03ysk65, etc.). This probably has useful clues to what's going wrong when code offsets change.
 
 # Why do I have to reinsert, extract, reinsert again?

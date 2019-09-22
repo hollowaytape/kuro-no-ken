@@ -75,7 +75,7 @@ FILES_TO_DUMP = [
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
 
-FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
+FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
 # TODO: I'll want to just make this the listdir as well at some point...
 
 FILES_WITH_POINTERS = [
@@ -83,10 +83,14 @@ FILES_WITH_POINTERS = [
     'ITEM.SMI',
     'KIES.SMI',
     'SHINOBU.SMI',
+    '02OLB01A.SCN',
+    '02OLB01B.SCN',
 ]
 
 POINTER_CONSTANT = {
     'BD.BIN': 0,
+    '02OLB01A.SCN': -0x3d00,
+    '02OLB01B.SCN': -0x3d00,   # Just a guess
 }
 
 FILE_BLOCKS = {
@@ -102,29 +106,15 @@ FILE_BLOCKS = {
         (0xd8bc, 0xd8f9),
         (0xe6f0, 0xe797),
     ],
-    #'ITEM.SMI': [
-    #    (0x2bfc, 0x4092),
-    #],
-    #'02OLB00A.SCN': [
-    #    (0x40, 0x660),
-    #    (0x6bc, 0x6dc),
-    #],
-    '02OLB01A.SCN': [
-        (0x0, 0x107d)
-    ],
     'KIES.SMI': [
         (0xdde, 0xe2b)
     ],
     'SHINOBU.SMI': [
         (0x10cb, 0x12e9)
     ],
-    '02OLB01A.SCN': [
-        (0x00, 0x442),
-        (0x442, 0x107c),
-    ]
 }
 
-LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN']
+LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '02OLB00A.SCN']
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -1397,10 +1387,11 @@ for file in FILES_TO_DUMP:
                 start = t.location
             else:
                 distance = t.location - last_string_end
-                # Just seems like a good number
-                if distance > 17:
+                # 17 seemed good, but I'm finding dialogue with lots of control codes now. Let's try 32 (0x20)
+                if distance > 0x20:
                     blocks.append((start, last_string_end))
                     start = t.location
             last_string_end = t.location + len(t.jp_bytestring)
         blocks.append((start, last_string_end))
         FILE_BLOCKS[file] = blocks
+        print(file, blocks)
