@@ -14,7 +14,10 @@ from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS
 
 pointer_regex = r'\\xbe\\x([0-f][0-f])\\x([0-f][0-f])'
 bd_pointer_regex = r'\\x08\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
-scn_pointer_regex = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
+#scn_pointer_regex = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_0 = r'\\x00\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_1 = r'\\x01\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_9 = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex = r'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 
 def capture_pointers_from_function(regex, hx): 
@@ -63,7 +66,8 @@ for gamefile in FILES_WITH_POINTERS:
         elif gamefile.endswith('.BIN'):
             relevant_regexes = [pointer_regex, bd_pointer_regex]
         elif gamefile.endswith('.SCN'):
-            relevant_regexes = [scn_pointer_regex,]
+            relevant_regexes = [scn_inner_pointer_regex_0, 
+                               scn_inner_pointer_regex_1, scn_inner_pointer_regex_9]
         else:
             relevant_regexes = [pointer_regex,]
 
@@ -79,25 +83,26 @@ for gamefile in FILES_WITH_POINTERS:
                     pointer_location = p.start()//4 + 1
                 elif relevant_regex == item_pointer_regex:
                     pointer_location = p.start()//4 + 7
-                elif relevant_regex == scn_pointer_regex:
+                else:
                     pointer_location = p.start()//4 + 1
 
                 pointer_location = '0x%05x' % pointer_location
+                #print("looking at ", pointer_location)
                 try:
                     text_location = int(location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant), 16)
                 except ValueError:
-                    print("Bad value")
+                    #print("Bad value")
                     continue
-                print(pointer_location, hex(text_location))
+                #print(pointer_location, hex(text_location))
 
                 if all([not t[0] <= text_location<= t[1] for t in target_areas]):
                     print("It's not in any of the blocks, so skipping it")
                     continue
                 #print("It was in a block")
 
-                if gamefile.endswith('.SCN') and any([t[0] <= int(pointer_location, 16) <= t[1] for t in target_areas]):
-                    print("That pointer is probably just a text control code, skipping it")
-                    continue
+                #if gamefile.endswith('.SCN') and any([t[0] <= int(pointer_location, 16) <= t[1] for t in target_areas]):
+                #    print("That pointer is probably just a text control code, skipping it")
+                #    continue
 
                 all_locations = [int(pointer_location, 16),]
 

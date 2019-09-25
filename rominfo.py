@@ -71,12 +71,11 @@ FILES_TO_DUMP = [
     '99CMN.SCN',
 ]
 """
-# Definitely too many files, with unintuitive names, to do this manually.
+# Definitely too many files, with incredibly annoying names, to do this manually.
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
 
 FILES_TO_REINSERT = ['BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
-# TODO: I'll want to just make this the listdir as well at some point...
 
 FILES_WITH_POINTERS = [
     'BD.BIN',
@@ -84,7 +83,7 @@ FILES_WITH_POINTERS = [
     'KIES.SMI',
     'SHINOBU.SMI',
     '02OLB01A.SCN',
-    '02OLB01B.SCN',
+    #'02OLB01B.SCN',
 ]
 
 POINTER_CONSTANT = {

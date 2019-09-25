@@ -27,6 +27,10 @@ if __name__ == '__main__':
         copyfile(original_path, patched_path)
         gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
 
+        # TEMP: Let's see if we can get the pointers to be aware of block structure this way
+        blocks = [Block(gf, (start, stop)) for start, stop in FILE_BLOCKS[filename]]
+        gf.blocks = blocks
+
         if filename in POINTERS_TO_REASSIGN:
             print("Time to reassign some pointers")
             reassignments = POINTERS_TO_REASSIGN[filename]
@@ -47,16 +51,15 @@ if __name__ == '__main__':
                 gf.pointers[dest] += gf.pointers[src]
                 gf.pointers.pop(src)
 
-        for block in FILE_BLOCKS[filename]:
-            block = Block(gf, block)
+        for block in gf.blocks:
             print(block)
             previous_text_offset = block.start
             diff = 0
             #print(repr(block.blockstring))
             if filename.endswith('SCN'):
-                print(filename)
+                #print(filename)
                 translations = Dump.get_translations(block, include_blank=True, sheet_name="SCNs")
-                print(translations)
+                #print(translations)
             else:
                 translations = Dump.get_translations(block, include_blank=True)
             for t in translations:
@@ -66,6 +69,7 @@ if __name__ == '__main__':
                     t.en_bytestring = b''
 
                 if t.en_bytestring != t.jp_bytestring:
+                    print(t.en_bytestring)
                         # Prepend 85, add 1f if it's a num, sub 2 if it's a char
                     if 0xb0 <= t.jp_bytestring[0] <= 0xdf:
                         print("This is a halfwidth kana string")
@@ -109,7 +113,6 @@ if __name__ == '__main__':
                     block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
 
                 if gf.pointers:
-                    print("Editing some pointers")
                     gf.edit_pointers_in_range((previous_text_offset, t.location), diff)
 
                 previous_text_offset = t.location

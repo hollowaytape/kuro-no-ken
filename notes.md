@@ -434,13 +434,19 @@ When talking to Ennis and starting the dialog at 35c, the first breakpoint hit i
    * No difference.
    * There are also no pointers that would point in that range...
    * Maybe it's an even-odd thing?
+      * Not length of the string - I can make the previous one shorter and this one longer. So something to do with the ending position?
+      * The last thing read from the last good string: 00 09 27
+      * THe first thing read from the next string, which crashes: 43 b4 00
+      * It reads 27 43 as a word. Let's see what it does with it
+         * Reads 4327, puts SI into AX, then returns. (SI is equal to AX)
 
+         * Is 27 43 a meaningful pointer to somewhere? 4327 - 3d00 = 627. That is slightly before "the north gate" thing
+            * Maybe it's some kind of variable-setting code?
+            * What is 3015? 3015 - 3d00 = ... no
+            * What is the pointer to read the "b4" location (4c3)? 4c3 + 3d00 = 41c3
+               * "01 c3 41 1d" right before this dialogue begins.
+               * So, 09 pointers and 01 pointers both need to be looked for in the text blocks.
 
-* I dumped the plain 03YSK.SCN file, it appears to have references to various things in the sub-files (03YSK01b, 03ysk65, etc.). This probably has useful clues to what's going wrong when code offsets change.
-
-# Why do I have to reinsert, extract, reinsert again?
-* Reinsert doesn't appear to change A.FA1 or B.FA1...
-   * Whoops, it was reinserting the pre-repacked version of the file, and rewriting the pre-repacked version. Fixed
 
 KIES.SMI = 32940-3377a
 
