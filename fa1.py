@@ -17,7 +17,7 @@ def invert(bs):
 
 def unpack(archive):
     #print(archive)
-    with open(b'original/%s' % archive, 'rb') as f:
+    with open(b'patched/%s' % archive, 'rb') as f:
         header = f.read(0xa)
         entries = int.from_bytes(header[0x8:0xa], 'little')
         compressed_end = int.from_bytes(header[0x4:0x7], 'little')
@@ -75,7 +75,7 @@ def unpack(archive):
 
     for f in files_to_extract:
         filestring = f.get_filestring()
-        with open(b'original/%b' % f.name, 'wb+') as g:
+        with open(b'patched/%b' % f.name, 'wb+') as g:
             g.write(filestring)
 
 
@@ -172,6 +172,6 @@ if __name__ == "__main__":
     files_to_extract = []
     #for archive in ARCHIVES:
     #    unpack(archive)
-    #unpack(b'A.FA1')
-    repack('patched\\A.FA1')
-    repack('patched\\B.FA1')
+    unpack(b'A.FA1')
+    #repack('patched\\A.FA1')
+    #repack('patched\\B.FA1')

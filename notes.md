@@ -452,3 +452,21 @@ KIES.SMI = 32940-3377a
 
 # Good dumping strategy
 * Open save state #8, replace 03YSK with the desired filename, and dump from 0x26d00 with slice_memory.py.
+
+
+## Cheat Saves
+* Stats in 2nd file:
+   * HP: 93 / 192
+   * MP: 225 / 225
+   * 42 gold
+   * Level: 1
+   * EXP: 39
+   * Next: 50
+   * Attack: 27 + 40
+   * Defense: 20 + 12
+   * MA: 24 + 24
+   * MD: 20 + 1
+   * Acc: 15
+   * Eva: 50 + 2
+   * Speed: 5
+   * Jutsu: Bird's Blade

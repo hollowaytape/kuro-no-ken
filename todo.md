@@ -14,4 +14,7 @@
 * No attempt at typesetting yet, what are the length limits?
 
 ## Images
-* Haven't looked yet.
+* What file is the logo image?
+	* Something that gets loaded between 27252 and 27264...
+		* 40 02 5c 66 20 5c 66 00 3e 43 00 01 00 46 00 01 00 01
+			* Changing the last few to 01 01 01 01 makes nothing render.
