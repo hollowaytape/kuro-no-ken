@@ -16,5 +16,16 @@
 ## Images
 * What file is the logo image?
 	* Something that gets loaded between 27252 and 27264...
-		* 40 02 5c 66 20 5c 66 00 3e 43 00 01 00 46 00 01 00 01
-			* Changing the last few to 01 01 01 01 makes nothing render.
+		* 43 00 01 00 46 00 01 00 01
+			* 01 01 01 01: Nothing renders, but no crash
+			* 01 00 01 00: Crash
+			* 00 02 00 02: Freeze
+			* 00 00 00 01: Nothing renders, but no crash
+			* 00 01 00 00: Crash
+			* This is split into:
+				* 43
+				* 00
+				* 01 00
+				* 46 00
+				* 01 00
+				* 01 00

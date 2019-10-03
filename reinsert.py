@@ -8,6 +8,7 @@ from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
 from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
 from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
+from cheats import BYTE_EDITS
 from fa1 import repack
 
 ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
@@ -22,14 +23,24 @@ if __name__ == '__main__':
     TargetBOD = Disk(DEST_DISK)
 
     for filename in FILES_TO_REINSERT:
-        original_path = os.path.join('original', 'decompressed', filename)
-        patched_path = os.path.join('patched', filename)
-        copyfile(original_path, patched_path)
+        try:
+            original_path = os.path.join('original', 'decompressed', filename)
+            patched_path = os.path.join('patched', filename)
+            copyfile(original_path, patched_path)
+
+        except FileNotFoundError:
+            original_path = os.path.join('original', filename)
+            patched_path = os.path.join('patched', filename)
+            copyfile(original_path, patched_path)
+
         gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
 
         # TEMP: Let's see if we can get the pointers to be aware of block structure this way
-        blocks = [Block(gf, (start, stop)) for start, stop in FILE_BLOCKS[filename]]
-        gf.blocks = blocks
+        if filename in FILE_BLOCKS:
+            blocks = [Block(gf, (start, stop)) for start, stop in FILE_BLOCKS[filename]]
+            gf.blocks = blocks
+        else:
+            gf.blocks = []
 
         if filename in POINTERS_TO_REASSIGN:
             print("Time to reassign some pointers")
@@ -50,6 +61,11 @@ if __name__ == '__main__':
                     p.edit(diff)
                 gf.pointers[dest] += gf.pointers[src]
                 gf.pointers.pop(src)
+
+        if filename in BYTE_EDITS:
+            print(BYTE_EDITS[filename])
+            for (loc, value) in BYTE_EDITS[filename]:
+                gf.edit(loc, value)
 
         for block in gf.blocks:
             print(block)
@@ -143,12 +159,8 @@ if __name__ == '__main__':
     for filename in ARCHIVES_TO_REINSERT:
         gamefile_path = os.path.join('patched', filename)
 
-        for bodfile in FILES:
-            if bodfile.name == b'02OLB00A.SCN':
-                print(bodfile)
-
-
         repack(gamefile_path)
         # Gotta repack it first, then initialize the gamefile
         gf = Gamefile(gamefile_path, disk=OriginalBOD, dest_disk=TargetBOD)
+
         gf.write(path_in_disk='B-DRKNS')
