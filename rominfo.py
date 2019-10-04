@@ -1350,6 +1350,9 @@ POINTERS_TO_REASSIGN = {
             (0xd8cb, 0xd8ea),   # Item
             (0xd8d0, 0xd8ef),   # Equip
             (0xd8d5, 0xd8f4),   # Run
+            (0xbad2, 0xba9e),   # Save
+            (0xbaba, 0xba9e),   # Save
+            (0xbad9, 0xbac1),   # Load
         ]
 }
 
