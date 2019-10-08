@@ -1,6 +1,6 @@
 ## Reinserter
 * A handful of odd pointer issues in the menus. Save is "e", "        Silk Scarf" (with no description), etc
-
+	* Item names are fixed. Should investigate system text next
 ## Dump
 * What are the control codes?
 	* \i0

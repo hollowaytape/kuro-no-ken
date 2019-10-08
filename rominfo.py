@@ -1356,6 +1356,10 @@ POINTERS_TO_REASSIGN = {
         ]
 }
 
+POINTERS_TO_SKIP = [
+    ('ITEM.SMI', 0x2c00),
+]
+
 # Put some default values in there
 for bodfile in FILES:
     safe_name = bodfile.name.decode('ascii')
