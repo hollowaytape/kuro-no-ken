@@ -456,17 +456,20 @@ KIES.SMI = 32940-3377a
 
 ## Cheat Saves
 * Stats in 2nd file:
-   * HP: 93 / 192
-   * MP: 225 / 225
-   * 42 gold
+   * HP: 93 / 192  ( 5d / c0)
+      * set to ff ff ff ff: Yep, 65535 HP as expected
+   * MP: 225 / 225  ( e1 / e1)
+   * 42 gold          ( 2a 00)
    * Level: 1
    * EXP: 39
    * Next: 50
    * Attack: 27 + 40
    * Defense: 20 + 12
+      * These have 2 bytes for base, 2 bytes for net.
    * MA: 24 + 24
    * MD: 20 + 1
    * Acc: 15
    * Eva: 50 + 2
    * Speed: 5
    * Jutsu: Bird's Blade
+* Save files are BD_FLAG2.DAT, etc. There are 8 of them (0-7)
