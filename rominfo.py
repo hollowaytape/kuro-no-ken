@@ -77,7 +77,7 @@ FILES_TO_DUMP = os.listdir('original/decompressed')
 
 FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', '00IPL.SCN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
                      'SHINOBU.SMI', 'ITEM.SMI']
-#FILES_TO_REINSERT = ['02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 'SHINOBU.SMI', 'ITEM.SMI']
+#FILES_TO_REINSERT = ['02OLB01A.SCN',]
 
 FILES_WITH_POINTERS = [
     'BD.BIN',
@@ -85,6 +85,7 @@ FILES_WITH_POINTERS = [
     'KIES.SMI',
     'SHINOBU.SMI',
     #'00IPL.SCN',
+    '02OLB00A.SCN',
     '02OLB01A.SCN',
     '02OLB01B.SCN',
 ]
@@ -92,6 +93,7 @@ FILES_WITH_POINTERS = [
 POINTER_CONSTANT = {
     'BD.BIN': 0,
     #'00IPL.SCN': 0,
+    '02OLB00A.SCN': -0x3d00,
     '02OLB01A.SCN': -0x3d00,
     '02OLB01B.SCN': -0x3d00,   # Just a guess
 }
@@ -119,6 +121,10 @@ FILE_BLOCKS = {
     '00IPL.SCN': [
         (0x00, 0xb24)
     ],
+    #'02OLB00A.SCN': [
+    #    #(0x3d, 0x6db)
+    #    (0x00, 0x89e)
+    #]
 }
 
 LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN']
@@ -1364,6 +1370,9 @@ POINTERS_TO_REASSIGN = {
 
 POINTERS_TO_SKIP = [
     ('ITEM.SMI', 0x2c00),
+    ('02OLB00A.SCN', 0x33b),
+    ('02OLB01A.SCN', 0x33b),
+    ('02OLB01B.SCN', 0x33b),
 ]
 
 # Put some default values in there

@@ -150,7 +150,7 @@ if __name__ == '__main__':
 
                     block.blockstring += (-1)*block_diff*PADDING_CHARACTER
                 block_diff = len(block.blockstring) - len(block.original_blockstring)
-                assert block_diff == 0, block_diff
+                assert block_diff == 0, (block_diff, block)
 
             block.incorporate()
 
