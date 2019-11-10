@@ -74,9 +74,14 @@ FILES_TO_DUMP = [
 # Definitely too many files, with incredibly annoying names, to do this manually.
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
+FILES_TO_REINSERT = ['BD_FLAG0.DAT', 'BD.BIN', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',
+                     '02OLB01A.SCN']
 
-FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', '00IPL.SCN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
-                     'SHINOBU.SMI', 'ITEM.SMI']
+#FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',]
+ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
+
+#FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', '00IPL.SCN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
+#                     'SHINOBU.SMI', 'ITEM.SMI']
 #FILES_TO_REINSERT = ['02OLB01A.SCN',]
 
 FILES_WITH_POINTERS = [
@@ -1370,6 +1375,7 @@ POINTERS_TO_REASSIGN = {
 
 POINTERS_TO_SKIP = [
     ('ITEM.SMI', 0x2c00),
+    ('02OLB00A.SCN', 0x150),  # Causes soft lock after some line in the intro
     ('02OLB00A.SCN', 0x33b),
     ('02OLB01A.SCN', 0x33b),
     ('02OLB01B.SCN', 0x33b),
@@ -1385,6 +1391,10 @@ for bodfile in FILES:
     if safe_name not in POINTER_CONSTANT:
         POINTER_CONSTANT[safe_name] = 0
 
+CONTROL_CODES = {
+    b'[BLANK]': b'',
+    b'[SPLIT]': b'\\f\x00;@\x02',
+}
 
 # Auto-generate file blocks when they are not manually defined
 Dump = DumpExcel(DUMP_XLS_PATH)
@@ -1417,4 +1427,4 @@ for file in FILES_TO_DUMP:
             last_string_end = t.location + len(t.jp_bytestring)
         blocks.append((start, last_string_end))
         FILE_BLOCKS[file] = blocks
-        print(file, blocks)
+        #print(file, blocks)

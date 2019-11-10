@@ -6,12 +6,12 @@ import os
 from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
-from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
-from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN
+from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, ARCHIVES_TO_REINSERT
+from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
+from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN, CONTROL_CODES
 from cheats import BYTE_EDITS
 from fa1 import repack
 
-ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
 
@@ -22,7 +22,18 @@ if __name__ == '__main__':
     OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
     TargetBOD = Disk(DEST_DISK)
 
+    # Because the archives get re-inserted with all files, need to copy all the original files into the
+    # patched directory to ensure a fresh start.
+    for f in FILES:
+        if f.source.decode("ASCII") in ARCHIVES_TO_REINSERT:
+            filename = f.name.decode("ASCII")
+            
+            original_path = os.path.join('original', filename)
+            patched_path = os.path.join('patched', filename)
+            copyfile(original_path, patched_path)
+
     for filename in FILES_TO_REINSERT:
+        print(filename)
         try:
             original_path = os.path.join('original', 'decompressed', filename)
             patched_path = os.path.join('patched', filename)
@@ -81,8 +92,10 @@ if __name__ == '__main__':
             for t in translations:
                 if t.en_bytestring == b'':
                     t.en_bytestring = t.jp_bytestring
-                elif t.en_bytestring == b'[BLANK]':
-                    t.en_bytestring = b''
+                    
+                for cc in CONTROL_CODES:
+                    if cc in t.en_bytestring:
+                        t.en_bytestring = t.en_bytestring.replace(cc, CONTROL_CODES[cc])
 
                 if t.en_bytestring != t.jp_bytestring:
                     print(t.en_bytestring)
@@ -122,8 +135,8 @@ if __name__ == '__main__':
                             break
                         index += len(t.jp_bytestring) # +2 because len('ll') == 2
 
-                    #if j > 1:
-                    #    print("%s multiples of this string found" % j)
+                    if j > 1:
+                        print("%s multiples of this string found" % j)
                     assert loc_in_block == i, (hex(loc_in_block), hex(i))
 
                     block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
