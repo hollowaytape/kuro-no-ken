@@ -75,7 +75,7 @@ FILES_TO_DUMP = [
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
 FILES_TO_REINSERT = ['BD_FLAG0.DAT', 'BD.BIN', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',
-                     '02OLB01A.SCN']
+                     '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', '02OLB03.SCN', '02OLB03A.SCN',]
 
 #FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',]
 ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
@@ -90,9 +90,11 @@ FILES_WITH_POINTERS = [
     'KIES.SMI',
     'SHINOBU.SMI',
     #'00IPL.SCN',
-    '02OLB00A.SCN',
+    #'02OLB00A.SCN',
     '02OLB01A.SCN',
     '02OLB01B.SCN',
+    '02OLB02A.SCN',
+    '02OLB03A.SCN',
 ]
 
 POINTER_CONSTANT = {
@@ -101,6 +103,8 @@ POINTER_CONSTANT = {
     '02OLB00A.SCN': -0x3d00,
     '02OLB01A.SCN': -0x3d00,
     '02OLB01B.SCN': -0x3d00,   # Just a guess
+    '02OLB02A.SCN': -0x3d00,   # Just a guess
+    '02OLB03A.SCN': -0x3d00,   # Just a guess
 }
 
 FILE_BLOCKS = {
@@ -129,6 +133,12 @@ FILE_BLOCKS = {
     #'02OLB00A.SCN': [
     #    #(0x3d, 0x6db)
     #    (0x00, 0x89e)
+    #]
+    # Well, these are definitely incorrect now
+    #'02OLB01.SCN': [
+    #    (0xf5, 0x11b),
+    #    (0x4af, 0x11eb),
+    #    (0x142b, 0x1652),
     #]
 }
 
@@ -571,29 +581,29 @@ FILES = [
     BODFile(b'B.FA1', b'YSK2.MPC', 0xf47a6, 0x53a7, 0x9f38),
     BODFile(b'B.FA1', b'02OLB.SCN', 0xf9b4e, 0x555, 0x9c8),  #
     BODFile(b'B.FA1', b'02OLB00A.SCN', 0xfa0a4, 0x4e0, 0x89f),  # dumped
-    BODFile(b'B.FA1', b'02OLB01.SCN', 0xfa584, 0xb7a, 0x1653),  #
+    BODFile(b'B.FA1', b'02OLB01.SCN', 0xfa584, 0xb7a, 0x1653),  # redumped
     BODFile(b'B.FA1', b'02OLB01A.SCN', 0xfb0fe, 0x944, 0x1083),  # dumped
     BODFile(b'B.FA1', b'02OLB01B.SCN', 0xfba42, 0x886, 0xe6c),  # dumped
-    BODFile(b'B.FA1', b'02OLB02.SCN', 0xfc2c8, 0x57e, 0x869),   # 
+    BODFile(b'B.FA1', b'02OLB02.SCN', 0xfc2c8, 0x57e, 0x869),   # redumped
     BODFile(b'B.FA1', b'02OLB02A.SCN', 0xfc846, 0x9a0, 0x1131),  #
-    BODFile(b'B.FA1', b'02OLB03.SCN', 0xfd1e6, 0x6c1, 0xa4e),  #
+    BODFile(b'B.FA1', b'02OLB03.SCN', 0xfd1e6, 0x6c1, 0xa4e),  # redumped
     BODFile(b'B.FA1', b'02OLB03A.SCN', 0xfd8a8, 0xa16, 0x1263),  #
-    BODFile(b'B.FA1', b'02OLB04.SCN', 0xfe2be, 0x3c2, 0x5cf),  #
-    BODFile(b'B.FA1', b'02OLB05.SCN', 0xfe680, 0x3ba, 0x5b9),  #
-    BODFile(b'B.FA1', b'02OLB06.SCN', 0xfea3a, 0x310, 0x4c1),  #
+    BODFile(b'B.FA1', b'02OLB04.SCN', 0xfe2be, 0x3c2, 0x5cf),  # redumped
+    BODFile(b'B.FA1', b'02OLB05.SCN', 0xfe680, 0x3ba, 0x5b9),  # redumped
+    BODFile(b'B.FA1', b'02OLB06.SCN', 0xfea3a, 0x310, 0x4c1),  # redumped
     BODFile(b'B.FA1', b'03YSK.SCN', 0xfed4a, 0x709, 0xcf4),  #
-    BODFile(b'B.FA1', b'03YSK00.SCN', 0xff454, 0xaa, 0xf8),  #
+    BODFile(b'B.FA1', b'03YSK00.SCN', 0xff454, 0xaa, 0xf8),  # R
     BODFile(b'B.FA1', b'03YSK01A.SCN', 0xff4fe, 0xb83, 0x145e),  #
     BODFile(b'B.FA1', b'03YSK01B.SCN', 0x100082, 0x9db, 0x1091),  #
     BODFile(b'B.FA1', b'03YSK01C.SCN', 0x100a5e, 0x172, 0x204),  #
-    BODFile(b'B.FA1', b'03YSK65.SCN', 0x100bd0, 0xf1, 0x12c),  #
-    BODFile(b'B.FA1', b'03YSK69.SCN', 0x100cc2, 0xcc9, 0x169c),  #
+    BODFile(b'B.FA1', b'03YSK65.SCN', 0x100bd0, 0xf1, 0x12c),  # Redumped
+    BODFile(b'B.FA1', b'03YSK69.SCN', 0x100cc2, 0xcc9, 0x169c),  # R
     BODFile(b'B.FA1', b'03YSK690.SCN', 0x10198c, 0x1fc, 0x31f),  #
     BODFile(b'B.FA1', b'03YSK69A.SCN', 0x101b88, 0x856, 0xe45),  #
     BODFile(b'B.FA1', b'03YSK69B.SCN', 0x1023de, 0x52b, 0x839),  #
     BODFile(b'B.FA1', b'03YSK69C.SCN', 0x10290a, 0x416, 0x69e),  #
     BODFile(b'B.FA1', b'03YSK69D.SCN', 0x102d20, 0x673, 0xbb3),  #
-    BODFile(b'B.FA1', b'03YSK70.SCN', 0x103394, 0x74b, 0xc2f),  #
+    BODFile(b'B.FA1', b'03YSK70.SCN', 0x103394, 0x74b, 0xc2f),  # R
     BODFile(b'B.FA1', b'04OLD.SCN', 0x103ae0, 0x1d0, 0x2e1),  #
     BODFile(b'B.FA1', b'04OLD01A.SCN', 0x103cb0, 0x71b, 0xb13),  #
     BODFile(b'B.FA1', b'04OLD01B.SCN', 0x1043cc, 0x1ea, 0x259),  #
@@ -793,14 +803,14 @@ FILES = [
     BODFile(b'C.FA1', b'SKS1.MPC', 0xd93ac, 0x5d90, 0x9c90),
     BODFile(b'C.FA1', b'SKS2.MPC', 0xdf13c, 0x4a3b, 0x8818),
     BODFile(b'C.FA1', b'05SKS.SCN', 0xe3b78, 0x1fe, 0x30e),  #
-    BODFile(b'C.FA1', b'05SKS01.SCN', 0xe3d76, 0x3c2, 0x5d1),  #
-    BODFile(b'C.FA1', b'05SKS02.SCN', 0xe4138, 0x65d, 0xa76),  #
-    BODFile(b'C.FA1', b'05SKS03.SCN', 0xe4796, 0x5b5, 0x944),  #
-    BODFile(b'C.FA1', b'05SKS04.SCN', 0xe4d4c, 0x95b, 0x1119),  #
-    BODFile(b'C.FA1', b'05SKS05.SCN', 0xe56a8, 0x2b8, 0x432),  #
-    BODFile(b'C.FA1', b'05SKS06.SCN', 0xe5960, 0x5c8, 0x8f1),  #
-    BODFile(b'C.FA1', b'05SKS07.SCN', 0xe5f28, 0x428, 0x668),  #
-    BODFile(b'C.FA1', b'05SKS08.SCN', 0xe6350, 0x5f4, 0x947),  #
+    BODFile(b'C.FA1', b'05SKS01.SCN', 0xe3d76, 0x3c2, 0x5d1),  # R
+    BODFile(b'C.FA1', b'05SKS02.SCN', 0xe4138, 0x65d, 0xa76),  # R
+    BODFile(b'C.FA1', b'05SKS03.SCN', 0xe4796, 0x5b5, 0x944),  # R
+    BODFile(b'C.FA1', b'05SKS04.SCN', 0xe4d4c, 0x95b, 0x1119),  # R
+    BODFile(b'C.FA1', b'05SKS05.SCN', 0xe56a8, 0x2b8, 0x432),  # R
+    BODFile(b'C.FA1', b'05SKS06.SCN', 0xe5960, 0x5c8, 0x8f1),  # R
+    BODFile(b'C.FA1', b'05SKS07.SCN', 0xe5f28, 0x428, 0x668),  # R
+    BODFile(b'C.FA1', b'05SKS08.SCN', 0xe6350, 0x5f4, 0x947),  # R
     BODFile(b'C.FA1', b'06BLK.SCN', 0xe6944, 0xa5c, 0x141b),  #
     BODFile(b'C.FA1', b'06BLK00A.SCN', 0xe73a0, 0x96d, 0x10ce),  #
     BODFile(b'C.FA1', b'06BLK00B.SCN', 0xe7d0e, 0x3ba, 0x5f4),  #
@@ -1397,12 +1407,15 @@ CONTROL_CODES = {
 }
 
 # Auto-generate file blocks when they are not manually defined
+"""
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
 OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
 TargetBOD = Disk(DEST_DISK)
 for file in FILES_TO_DUMP:
     #print(file)
+    if file.endswith("DAT"):
+        continue
     if file not in FILE_BLOCKS and file in FILES_TO_REINSERT:
         print(file, "not in FILE_BLOCKS")
         gf = Gamefile('original/decompressed/%s' % file, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
@@ -1428,3 +1441,4 @@ for file in FILES_TO_DUMP:
         blocks.append((start, last_string_end))
         FILE_BLOCKS[file] = blocks
         #print(file, blocks)
+"""

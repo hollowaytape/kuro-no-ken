@@ -1,7 +1,14 @@
 ## Reinserter
+* Crash when changing length of first Shinobu/Innes conversation, still.
+	* This file has a bunch of code at the end responsible for scrolling the images. 
+	* 0x653	0x673
+	* 0x676	0x87b
+
 * A handful of odd pointer issues in the menus. Save is "e", "        Silk Scarf" (with no description), etc
 	* Item names are fixed. Should investigate system text next
 ## Dump
+* Need to re-dump a bunch of files, they were extracted from the wrong location
+	* Really difficult to dump 02OLB01.SCN - wonder what is in there, or what's going wrong
 * What are the control codes?
 	* \i0
 	* \i2

@@ -327,6 +327,7 @@ The file table appears to just be a not'd version of the big pattern table at th
    * 16d8: BD.BIN
 * 07c4: Filename of file getting loaded
 * 08b4: Where the compressed file is loaded
+* 2858: Where the decompressed file appears
 
 * BD.BIN - the file with the options in it. It is very big (0xfd70 long).
    * Begins at 16d80? So, ranges from 16d80-26af0

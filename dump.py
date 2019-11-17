@@ -17,6 +17,8 @@ ASCII_MODE = 2
 
 THRESHOLD = 4
 
+#FILES_TO_DUMP = ["00IPL.SCN"]
+
 
 def dump(files):
     worksheet = workbook.add_worksheet('SCNs')
@@ -26,7 +28,8 @@ def dump(files):
     worksheet.write(0, 3, 'JP_len', header)
     worksheet.write(0, 4, 'English', header)
     worksheet.write(0, 5, 'EN_len', header)
-    worksheet.write(0, 6, 'Comments', header)
+    worksheet.write(0, 6, 'English (Typeset)', header)
+    worksheet.write(0, 7, 'Comments', header)
 
     worksheet.set_column('A:A', 10)
     worksheet.set_column('B:B', 8)
@@ -35,6 +38,7 @@ def dump(files):
     worksheet.set_column('E:E', 60)
     worksheet.set_column('F:F', 5)
     worksheet.set_column('G:G', 60)
+    worksheet.set_column('H:H', 60)
     scn_row = 1
 
     for filename in FILES_TO_DUMP:
@@ -88,7 +92,6 @@ def dump(files):
             sjis_strings = []
 
             for c in COMPILER_MESSAGES:
-                print(c)
                 if c in contents:
                     #print(contents)
                     cursor = contents.index(c)
@@ -96,7 +99,7 @@ def dump(files):
                     break
 
             for (start, stop) in blocks:
-                print((hex(start), hex(stop)))
+                #print((hex(start), hex(stop)))
                 cursor = start
                 sjis_buffer_start = cursor
 
@@ -131,8 +134,13 @@ def dump(files):
                         elif 0xa1 <= contents[cursor] <= 0xdf:
                             sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
 
+                        # ASCII space only
+                        elif contents[cursor] == 0x20:
+                            sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
+
                         # ASCII text
-                        elif 0x20 <=contents[cursor] <= 0x7e and ASCII_MODE in (1, 2):
+                        elif 0x20 <= contents[cursor] <= 0x7e and ASCII_MODE in (1, 2):
+                            #print("Got some ASCII")
                             sjis_buffer += contents[cursor].to_bytes(1, byteorder='little')
 
                         # C string formatting with %
@@ -146,6 +154,7 @@ def dump(files):
                             sjis_strings.append((sjis_buffer_start, sjis_buffer, clean_filename))
                             sjis_buffer = b""
                             sjis_buffer_start = cursor+1
+
                         cursor += 1
                         #print(sjis_buffer)
                     except IndexError:
@@ -153,6 +162,8 @@ def dump(files):
 
                 # Catch anything left after exiting the loop
                 if sjis_buffer:
+                    if cursor >= stop:
+                        print(filename, "This file had a string left at the very end")
                     sjis_strings.append((sjis_buffer_start, sjis_buffer, clean_filename))
                     sjis_buffer = b''
 
@@ -176,18 +187,23 @@ def dump(files):
                 if len(s[1]) < THRESHOLD:
                     continue
 
+                # Remove the "ya ya ya" spam
+                if b'\x83\x83\x83' in s[1]:
+                    continue
+
                 loc = '0x' + hex(s[0]).lstrip('0x').zfill(5)
                 try:
                     jp = s[1].decode('shift-jis')
                 except UnicodeDecodeError:
-                    print("Couldn't decode that")
+                    #print("Couldn't decode that")
                     continue
 
                 filename = s[2]
 
-                if len(jp.strip()) == 0:
-                    continue
-                print(loc, jp)
+                #if len(jp.strip()) == 0:
+                #    continue
+                # TODO: But don't strip the jp!
+                #print(loc, jp)
 
                 if clean_filename.endswith('SCN'):
                     worksheet.write(scn_row, 0, filename)

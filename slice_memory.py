@@ -8,8 +8,8 @@ source = '../romtools/np2debug/memory.bin'
 
 if __name__ == "__main__":
     # Change these
-    name = b'31END.SCN'
-    start = 0x26d00
+    name = b'02OLB01.SCN'
+    start = 0x28580
 
     for bodfile in FILES:
         if bodfile.name == name:
