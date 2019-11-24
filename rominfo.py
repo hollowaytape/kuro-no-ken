@@ -74,8 +74,11 @@ FILES_TO_DUMP = [
 # Definitely too many files, with incredibly annoying names, to do this manually.
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
-FILES_TO_REINSERT = ['BD_FLAG0.DAT', 'BD.BIN', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',
-                     '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', '02OLB03.SCN', '02OLB03A.SCN',]
+FILES_TO_REINSERT = ['00IPL.SCN', 'BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', #'02OLB03A.SCN',
+                     '03YSK.SCN', '03YSK01A.SCN',]
+
+#FILES_TO_REINSERT = ['BD_FLAG0.DAT', 'BD.BIN', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',
+#                     '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', '02OLB03.SCN', '02OLB03A.SCN',]
 
 #FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',]
 ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
@@ -95,6 +98,8 @@ FILES_WITH_POINTERS = [
     '02OLB01B.SCN',
     '02OLB02A.SCN',
     '02OLB03A.SCN',
+
+    '03YSK01A.SCN',
 ]
 
 POINTER_CONSTANT = {
@@ -105,7 +110,17 @@ POINTER_CONSTANT = {
     '02OLB01B.SCN': -0x3d00,   # Just a guess
     '02OLB02A.SCN': -0x3d00,   # Just a guess
     '02OLB03A.SCN': -0x3d00,   # Just a guess
+
+    '03YSK01A.SCN': -0x1800,
 }
+
+# One SCN code is X, 00, text location. If X is certain values, it's a pointer. Otherwise it's something else.
+# Adding 00 and 02 due to observations, it wasn't in the original results
+ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43, 0x46, 0x49,
+                        0x4c, 0x50, 0x50, 0x51, 0x52, 0x54, 0x55, 0x57,
+                        0x5a, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x64, 0x65,
+                        0x66, 0x7e, 0x8b, 0x90, 0x94, 0xa0, 0xa1, 0xa4,
+                        0xab, 0xb0, 0xb1, 0xb3, 0xb7, 0xbe,]
 
 FILE_BLOCKS = {
 
@@ -140,6 +155,9 @@ FILE_BLOCKS = {
     #    (0x4af, 0x11eb),
     #    (0x142b, 0x1652),
     #]
+    '03YSK01A.SCN': [
+        (0x6a, 0x145d),
+    ]
 }
 
 LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN']
@@ -1389,6 +1407,9 @@ POINTERS_TO_SKIP = [
     ('02OLB00A.SCN', 0x33b),
     ('02OLB01A.SCN', 0x33b),
     ('02OLB01B.SCN', 0x33b),
+    ('02OLB02A.SCN', 0x33b),
+    ('02OLB03A.SCN', 0x33b),
+    ('03YSK01A.SCN', 0x33b),
 ]
 
 # Put some default values in there
@@ -1404,10 +1425,10 @@ for bodfile in FILES:
 CONTROL_CODES = {
     b'[BLANK]': b'',
     b'[SPLIT]': b'\\f\x00;@\x02',
+    b'[New]': b'\x04\x06\x30\x40\x02',
 }
 
 # Auto-generate file blocks when they are not manually defined
-"""
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
 OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
@@ -1416,7 +1437,7 @@ for file in FILES_TO_DUMP:
     #print(file)
     if file.endswith("DAT"):
         continue
-    if file not in FILE_BLOCKS and file in FILES_TO_REINSERT:
+    if file not in FILE_BLOCKS and (file in FILES_TO_REINSERT or file in FILES_WITH_POINTERS):
         print(file, "not in FILE_BLOCKS")
         gf = Gamefile('original/decompressed/%s' % file, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
 
@@ -1441,4 +1462,3 @@ for file in FILES_TO_DUMP:
         blocks.append((start, last_string_end))
         FILE_BLOCKS[file] = blocks
         #print(file, blocks)
-"""

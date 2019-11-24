@@ -8,16 +8,18 @@ from collections import OrderedDict
 from romtools.dump import BorlandPointer, PointerExcel
 from romtools.disk import Gamefile
 
-from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS, POINTERS_TO_SKIP
+from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS, POINTERS_TO_SKIP, CONTROL_CODES
+from rominfo import ZERO_POINTER_FIRST_BYTES
 
 # POINTER_CONSTANT is the line where "Borland Compiler" appears, rounded down to the nearest 0x10.
 
 pointer_regex = r'\\xbe\\x([0-f][0-f])\\x([0-f][0-f])'
 bd_pointer_regex = r'\\x08\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
 #scn_pointer_regex = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
-scn_inner_pointer_regex_0 = r'\\x00\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_0 = r'\\x([0-f][0-f])\\x00\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_1 = r'\\x01\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_9 = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_892a = r'\\x89\\x2a\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex = r'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex_9c = r'\\x9c\\x9c\\x9c\\x9c\\x9c\\x9c\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex_ba = r'\\x00\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\xff\\xff'
@@ -70,7 +72,8 @@ for gamefile in FILES_WITH_POINTERS:
             relevant_regexes = [pointer_regex, bd_pointer_regex]
         elif gamefile.endswith('.SCN'):
             relevant_regexes = [scn_inner_pointer_regex_0, 
-                               scn_inner_pointer_regex_1, scn_inner_pointer_regex_9]
+                               scn_inner_pointer_regex_1, scn_inner_pointer_regex_9,
+                               scn_inner_pointer_regex_892a]
         else:
             relevant_regexes = [pointer_regex,]
 
@@ -90,13 +93,21 @@ for gamefile in FILES_WITH_POINTERS:
                     pointer_location = p.start()//4 + 6
                 elif relevant_regex == item_pointer_regex_ba:
                     pointer_location = p.start()//4 + 1
+                elif relevant_regex == scn_inner_pointer_regex_0:
+                    pointer_location = p.start()//4 + 2
+                elif relevant_regex == scn_inner_pointer_regex_892a:
+                    pointer_location = p.start()//4 + 2
                 else:
                     pointer_location = p.start()//4 + 1
 
                 pointer_location = '0x%05x' % pointer_location
                 #print("looking at ", pointer_location)
                 try:
-                    text_location = int(location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant), 16)
+                    # SIPR0 begins with an extra group, so need different indices
+                    if relevant_regex == scn_inner_pointer_regex_0:
+                        text_location = int(location_from_pointer((p.group(2), p.group(3)), GF.pointer_constant), 16)
+                    else:
+                        text_location = int(location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant), 16)
                 except ValueError:
                     #print("Bad value")
                     continue
@@ -110,6 +121,12 @@ for gamefile in FILES_WITH_POINTERS:
                 if (gamefile, text_location) in POINTERS_TO_SKIP:
                     print("Skipping this one")
                     continue
+
+                if relevant_regex == scn_inner_pointer_regex_0:
+                    print(p.group(1))
+                    if int(p.group(1), 16) not in ZERO_POINTER_FIRST_BYTES:
+                        print("Not a proper zero pointer first byte")
+                        continue
 
                 #if gamefile.endswith('.SCN') and any([t[0] <= int(pointer_location, 16) <= t[1] for t in target_areas]):
                 #    print("That pointer is probably just a text control code, skipping it")
@@ -156,16 +173,18 @@ for gamefile in FILES_WITH_POINTERS:
     row = 1
 
     for (gamefile, text_location), pointer_locations in sorted((pointer_locations).items()):
-        obj = BorlandPointer(gamefile, pointer_locations, text_location)
+        obj = BorlandPointer(gamefile, pointer_locations, text_location, separator=b'\f')
         #print(text_location)
         #print(pointer_locations)
         for pointer_loc in pointer_locations:
             worksheet.write(row, 0, hex(text_location))
             worksheet.write(row, 1, hex(pointer_loc))
+            worksheet.write(row, 2, obj.value)
             try:
-                worksheet.write(row, 2, obj.text())
+                worksheet.write(row, 3, obj.text(CONTROL_CODES))
             except:
-                worksheet.write(row, 2, u'')
+                worksheet.write(row, 3, u'')
+
             row += 1
 
 PtrXl.close()

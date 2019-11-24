@@ -428,6 +428,8 @@ When talking to Ennis and starting the dialog at 35c, the first breakpoint hit i
       * Northern gate (「北の門を出ると湿原に行けるんだが、) text:
          * 432a points to  0x62a, or 8 before text at 0x632
          * PC would be: 432a - 62a = 3d00
+      * YSK01A:
+         * 23f1 points to bf1. 23f1 - bf1 = 1800.
 
 * Why is there a crash when reading Ennis's final line of dialogue?
    * In original, it ends with 5c 66 00 09 27 43 b4 00 23 34 04 0c 30 0c 64 00 a9 42 1d 64 00
@@ -474,3 +476,56 @@ KIES.SMI = 32940-3377a
    * Speed: 5
    * Jutsu: Bird's Blade
 * Save files are BD_FLAG2.DAT, etc. There are 8 of them (0-7)
+
+
+## Better Pointer Understanding
+* 09: Read next two bytes as a pointer
+* 00: Do stuff depending on the next few bytes... 00 01 does something
+   * Setting a breakpoint on the 00 doesn't do anything. So it's reading the previous thing, 6f 00
+      * A few different 6x 00 control codes around.. 66 00, 6e 00, 6f 00, 6f 00, 6f 00, etc
+         * Changing the 6f 00 to 6e 00, 70 00, etc makes it load the previous thing this guard has said instead. Wonder if I can get it to load other strings
+         * 22 00 also makes it load the previous string. Wonder how it matters
+         * Maybe this is checking event flags?
+            * 0d 6e 00 8a 23 -> points to b8a          (83 09 79 23...)
+            * 0c 6e 00 be 23 -> points to bbe (b0 00 c5 23 09 79 23...)
+* b0: Call a function with an address based on b0
+   * This might just be everything though. It's at 16d8:33bb:
+      lodsb es:
+      mov bl, al (bl = 80)
+      xor bh, bh (bh = 0)
+      add bx, bx (bx = 160)
+      call bx+22d0 (bx is now 160)
+         -> call 17b8
+      These are functions that call a location at double the byte value. 
+         * 09: Call the function at 16d8:1cee (lodsw es:, mov si, ax, ret)
+         * b0, b8, c0, ... etc. call 17b8, and move register values into a few different locations
+         * 17b8 is the function that loads the next byte, ...
+            * If it's equal to 01, call 17cc
+               * 17cc: lodsw es:, mov bx, ax, add bx, bx, add bx, 06d2, return
+            * If it's > 01, xor ax ax + return
+               * Hm, this gives you a zero pointer. Not sure what to make of this
+            * If it's 00, lodsw the next two bytes (it's a pointer location)
+
+* Any way I could determine all the pointer-loading functions just by looking for all the locations of lodsb es: (26ac) in the segment?
+   * 40 instances of 26ac in BD.BIN
+   * bx + 22d0 = location of function to call
+      * 22d0 + 160 = 2430. This goes to 16d8:2aa4.
+         * 16d8:2430 = 2aa4.
+         * There's a big table of offsets beginning at 19050 (16d8:22d0).
+
+* Werid pointer when opening the lower-right door in noble manor. Value is 2ae5
+   * 02 00 81 21 07 04 03
+      * Entering upper-right room (also reads 03 00 00 a7 28 20 04?)
+   * 03 00 00 c0 29 80 00
+      * Entering lower-right room (also reads 04 00 00 e5 2a 80 00)
+      * FIrst thing read is 0d a bit before it. Value is 21a7.
+         * This is one of the locations mentioned in the very beginning of the file - 09 33 18, 09 0c 21, ... 09 a7 21. And these are all picked up by the pointer dump
+            * (Just not the pointers that get read here)
+
+   * 04 00 00 e5 2a 80 00
+   * 05 00 00 af 2b 20 04
+   * When entering the room, it loads all the pointers that happen when you talk to people under various circumstances
+      * 0d 20 89 2a (da 2c) 88 00 
+         * This is when you talk to the lower-right guy in the lower-right room (stay away from mercenary guy)
+
+* Crash when entering lower-left room.
