@@ -3,6 +3,7 @@
 	* This file has a bunch of code at the end responsible for scrolling the images. 
 	* 0x653	0x673
 	* 0x676	0x87b
+	* I wonder if this would go better after the pointer code improvements?
 
 * A handful of odd pointer issues in the menus. Save is "e", "        Silk Scarf" (with no description), etc
 	* Item names are fixed. Should investigate system text next
@@ -15,6 +16,8 @@
 	* \f
 	* ;@
 	* [22 5c 66 00 3b] (\f[00];[3b]) = [WAIT] at the end of a 
+* The auto-FILE_BLOCKS filling code should just set a single block for all .SCN files, consisting of the entire file.
+	* Otherwise pointers get skipped.
 
 ## Text Formatting
 * The newline character indents each character by 2. Solution would be to put an extra " " in front of every initial quote character, and maybe every nametag.

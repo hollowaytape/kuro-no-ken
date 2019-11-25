@@ -97,6 +97,8 @@ for gamefile in FILES_WITH_POINTERS:
                     pointer_location = p.start()//4 + 2
                 elif relevant_regex == scn_inner_pointer_regex_892a:
                     pointer_location = p.start()//4 + 2
+                elif relevant_regex == scn_inner_pointer_regex_9:
+                    pointer_location = p.start()//4 + 1
                 else:
                     pointer_location = p.start()//4 + 1
 

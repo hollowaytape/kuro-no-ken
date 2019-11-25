@@ -505,6 +505,8 @@ KIES.SMI = 32940-3377a
             * If it's > 01, xor ax ax + return
                * Hm, this gives you a zero pointer. Not sure what to make of this
             * If it's 00, lodsw the next two bytes (it's a pointer location)
+* 0d: calls one of the functions above. ex. 0d (70 00 (79 29))
+   * Wonder what this is for
 
 * Any way I could determine all the pointer-loading functions just by looking for all the locations of lodsb es: (26ac) in the segment?
    * 40 instances of 26ac in BD.BIN
@@ -529,3 +531,20 @@ KIES.SMI = 32940-3377a
          * This is when you talk to the lower-right guy in the lower-right room (stay away from mercenary guy)
 
 * Crash when entering lower-left room.
+   * Entering the room: 88 01 88 88 02 07 88 03 0b 89 04 e8 00 89 06 28 01 88 0d 20 89 2a (95 29)
+      * Pointer is: 95 29?
+   * Room pointer is: 296f (from 00 00 6f 29)
+
+* Setting a breakpoint on some parts of the room-definition-section tends to check every frame. Something to avoid changing too
+   * In LL room, it's 83 09 91 29
+      * Changing 83 to something else calls some other function
+      * 2991 = 1191, which is this same 83 09 91 29
+      * So it's a loop that just runs over and over. Definitely a thing that needs to be adjusted as it moves
+
+* Crash when talking to security commander second time ("Hey, don't loiter around here")
+
+* Crash when talking to main guards again?
+   * Is it those 1204 pointers that are a problem again?
+
+* Something goes wrong when leaving the emerald chamber. Also I can't collect it
+   * Some pointer that's after text location 0xb5b.

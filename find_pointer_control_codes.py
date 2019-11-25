@@ -47,9 +47,9 @@ for b in byte_function_offsets:
         called_func = called_func.split(b'\xc3')[0]  # c3 is "ret", so go to the end of the function
         #print(called_func)
         if b'\x26\xac' in called_func:
-            print(hex(b), "is a pointer")
+            print(hex(b), hex(offset),  "is a pointer")
         else:
-            print(hex(b))
+            print(hex(b), hex(offset))
 
     else:
-        print(hex(b))
+        print(hex(b), hex(offset))
