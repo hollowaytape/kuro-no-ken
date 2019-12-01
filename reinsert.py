@@ -149,6 +149,11 @@ if __name__ == '__main__':
                 this_diff = len(t.en_bytestring) - len(t.jp_bytestring)
                 diff += this_diff
 
+            # 03YSK01A has some pointers pointing to near the end of the file. Need a way to edit those
+            print("Still these pointers: " + hex(previous_text_offset), hex(block.stop))
+            if gf.pointers:
+                gf.edit_pointers_in_range((previous_text_offset, block.stop), diff)
+
             block_diff = len(block.blockstring) - len(block.original_blockstring)
 
             # Ignore size differences in .SCN files

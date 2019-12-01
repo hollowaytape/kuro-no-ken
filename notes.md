@@ -327,7 +327,8 @@ The file table appears to just be a not'd version of the big pattern table at th
    * 16d8: BD.BIN
 * 07c4: Filename of file getting loaded
 * 08b4: Where the compressed file is loaded
-* 2858: Where the decompressed file appears
+* 2858: Where the decompressed .SCN file appears
+* 2aa8: Where a decompressed .BSD file appears
 
 * BD.BIN - the file with the options in it. It is very big (0xfd70 long).
    * Begins at 16d80? So, ranges from 16d80-26af0
@@ -546,5 +547,16 @@ KIES.SMI = 32940-3377a
 * Crash when talking to main guards again?
    * Is it those 1204 pointers that are a problem again?
 
-* Something goes wrong when leaving the emerald chamber. Also I can't collect it
+* Something goes wrong when leaving the emerald chamber.
    * Some pointer that's after text location 0xb5b.
+   * Fixed by adding the 04 pointers and the FF pointers.
+
+* A few bad things and a crash upon entering the Zerfuedel battle:
+   * Doesn't load the background correctly (shows the glitched map instead)
+   * Crash when trying to load his next dialgoue
+   * What file is this text even in?
+      * D010_X10.BSD
+      * I haven't even messed with this file or been aware of it. Wonder what's going wrong here
+   * Turns out I need to learn some more about .BSD files
+      * Pointer constant is probably 0. That's nice at least
+      * Do the files all end with basically the same 50 bytes or so? (after hte "kin kin kin")

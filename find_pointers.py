@@ -18,8 +18,11 @@ bd_pointer_regex = r'\\x08\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
 #scn_pointer_regex = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_0 = r'\\x([0-f][0-f])\\x00\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_1 = r'\\x01\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_4 = r'\\x04\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_9 = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_ff = r'\\xff\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_892a = r'\\x89\\x2a\\x([0-f][0-f])\\x([0-f][0-f])'
+scn_inner_pointer_regex_892c = r'\\x89\\x2c\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex = r'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex_9c = r'\\x9c\\x9c\\x9c\\x9c\\x9c\\x9c\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex_ba = r'\\x00\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\xff\\xff'
@@ -72,8 +75,8 @@ for gamefile in FILES_WITH_POINTERS:
             relevant_regexes = [pointer_regex, bd_pointer_regex]
         elif gamefile.endswith('.SCN'):
             relevant_regexes = [scn_inner_pointer_regex_0, 
-                               scn_inner_pointer_regex_1, scn_inner_pointer_regex_9,
-                               scn_inner_pointer_regex_892a]
+                               scn_inner_pointer_regex_1, scn_inner_pointer_regex_4, scn_inner_pointer_regex_9,
+                               scn_inner_pointer_regex_ff, scn_inner_pointer_regex_892a, scn_inner_pointer_regex_892c]
         else:
             relevant_regexes = [pointer_regex,]
 
@@ -97,8 +100,8 @@ for gamefile in FILES_WITH_POINTERS:
                     pointer_location = p.start()//4 + 2
                 elif relevant_regex == scn_inner_pointer_regex_892a:
                     pointer_location = p.start()//4 + 2
-                elif relevant_regex == scn_inner_pointer_regex_9:
-                    pointer_location = p.start()//4 + 1
+                elif relevant_regex == scn_inner_pointer_regex_892c:
+                    pointer_location = p.start()//4 + 2
                 else:
                     pointer_location = p.start()//4 + 1
 
