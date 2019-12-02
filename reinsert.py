@@ -9,7 +9,8 @@ from romtools.dump import DumpExcel, PointerExcel
 from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, ARCHIVES_TO_REINSERT
 from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
 from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN, CONTROL_CODES
-from cheats import BYTE_EDITS
+
+from asm import BYTE_EDITS
 from fa1 import repack
 
 Dump = DumpExcel(DUMP_XLS_PATH)
@@ -124,6 +125,17 @@ if __name__ == '__main__':
                     #print(t)
                     loc_in_block = t.location - block.start + diff
 
+                    # New style of reinsertion - prevents the issue where you'd need to start
+                    # at the first repetition of a string
+                    this_original_segment = block.blockstring[loc_in_block:]
+                    this_segment = block.blockstring[loc_in_block:]
+                    assert t.jp_bytestring in this_segment
+                    this_segment = this_segment.replace(t.jp_bytestring, t.en_bytestring, 1)
+                    block.blockstring = block.blockstring.replace(this_original_segment, this_segment)
+
+
+                    # Old style. Getting replaced
+                    """
                     #print(t.jp_bytestring)
                     i = block.blockstring.index(t.jp_bytestring)
                     j = block.blockstring.count(t.jp_bytestring)
@@ -138,8 +150,9 @@ if __name__ == '__main__':
                     if j > 1:
                         print("%s multiples of this string found" % j)
                     assert loc_in_block == i, (hex(loc_in_block), hex(i))
+                    """
 
-                    block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
+                    #block.blockstring = block.blockstring.replace(t.jp_bytestring, t.en_bytestring, 1)
 
                 if gf.pointers:
                     gf.edit_pointers_in_range((previous_text_offset, t.location), diff)

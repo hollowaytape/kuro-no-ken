@@ -75,7 +75,7 @@ FILES_TO_DUMP = [
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
 FILES_TO_REINSERT = ['00IPL.SCN', 'BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', #'02OLB03A.SCN',
-                     '03YSK.SCN', '03YSK01A.SCN',]
+                     '03YSK.SCN', 'YSK1.MP1', '03YSK01A.SCN',]
 
 #FILES_TO_REINSERT = ['BD_FLAG0.DAT', 'BD.BIN', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',
 #                     '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', '02OLB03.SCN', '02OLB03A.SCN',]
@@ -117,7 +117,7 @@ POINTER_CONSTANT = {
 # One SCN code is X, 00, text location. If X is certain values, it's a pointer. Otherwise it's something else.
 # Adding 00 and 02 and 70 due to observations, they weren't in the original results
     # The 0x72 function seems to be a pointer-reading one. That adds a lot of things
-ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43, 0x46, 0x49,
+ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x03, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43, 0x46, 0x49,
                         0x4c, 0x50, 0x50, 0x51, 0x52, 0x54, 0x55, 0x57,
                         0x5a, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x64, 0x65,
                         0x66, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x8b, 0x90, 0x94, 0x99, 0x9f, 0xa0, 0xa1, 0xa4, 0xa5, 0xa7,
@@ -568,6 +568,7 @@ FILES = [
     BODFile(b'B.FA1', b'TOU5.MP1', 0x9dfd0, 0xb50, 0x9100),
     BODFile(b'B.FA1', b'TOU6.MP1', 0x9eb20, 0xd22, 0x8f48),
     BODFile(b'B.FA1', b'YSK1.MP1', 0x9f842, 0x163f, 0x8f3e),
+    # Part of it is at 6cb20. Could start between  63be2 - 75a5e
     BODFile(b'B.FA1', b'YSK2.MP1', 0xa0e82, 0x1f02, 0x9092),
     BODFile(b'B.FA1', b'OLB1.MP2', 0xa2d84, 0x21dd, 0x90ec),
     BODFile(b'B.FA1', b'MRS.MPC', 0xa4f62, 0x33ab, 0x5780),
@@ -1431,7 +1432,7 @@ OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
 TargetBOD = Disk(DEST_DISK)
 for file in FILES_TO_DUMP:
     #print(file)
-    if file.endswith("DAT"):
+    if any([t in file for t in ('.DAT', '.MP1')]):
         continue
     if file not in FILE_BLOCKS and (file in FILES_TO_REINSERT or file in FILES_WITH_POINTERS):
         print(file, "not in FILE_BLOCKS")

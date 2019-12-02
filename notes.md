@@ -327,7 +327,9 @@ The file table appears to just be a not'd version of the big pattern table at th
    * 16d8: BD.BIN
 * 07c4: Filename of file getting loaded
 * 08b4: Where the compressed file is loaded
-* 2858: Where the decompressed .SCN file appears
+
+* 26d9: Where a decompressed base .SCN file (03YSK.SCN, etc). appears
+* 2858: Where a decompressed .SCN file appears
 * 2aa8: Where a decompressed .BSD file appears
 
 * BD.BIN - the file with the options in it. It is very big (0xfd70 long).
@@ -560,3 +562,21 @@ KIES.SMI = 32940-3377a
    * Turns out I need to learn some more about .BSD files
       * Pointer constant is probably 0. That's nice at least
       * Do the files all end with basically the same 50 bytes or so? (after hte "kin kin kin")
+
+* 03YSK01A.SCN doesn't load if it's too long??
+   * Beyond like 1600 is when we start having issues.
+      * 0x29580 + 0x1600 = 0x29b80.
+      * After the end of the file are some leftovers that don't get referred to. They end at 0x29bd2
+      * This would be beyond 1652.
+      * This is the longest SCN file in that tier:
+         * BODFile(b'D.FA1', b'15MKR01B.SCN', 0xf832c, 0xcd2, 0x1624),  #
+         * Just below the 0x1652 limit.
+         * Other .SCN files in larger tiers (25TOU.SCN, 02OLB01.SCN) can be longer. They probably have different limits
+         * Any instances of 1652 we could just adjust manually? There appears to be space after it.
+            * Changed it to 1682, appears to load the file just fine now.
+               * YSK1.MP1:1320 62 15 -> 00 18
+            * This file is compressed and luckily these particular bytes are not compressed... wonder how I would tackle this kind of problem in the future.
+            * The file I sliced out is not working when I reinsert it. I should just try to reinsert the compressed file with the change, but need to edit the reinserter a bit to do this
+   * Anything in 03YSK we can tweak to avoid this? That's the last thing it loads before we start having problems
+      * It looks like it doesn't even load this file into the proper place. It might just try to load it over and over
+         * Does this happen with the original (compressed) file?

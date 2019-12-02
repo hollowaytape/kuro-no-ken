@@ -14,6 +14,7 @@ BYTE_EDITS = {
 		(0xc8fe, b'\x08'),  # Align Item 2 name properly
 	],
 
+	# Commenting these out for now, as scripted battles are acting kind of strange.
 	"BD_FLAG0.DAT": [
 		# Shinobu
 		#(0x56e, b'\xff\xff\xff'), # Set next-level EXP to something really high
@@ -42,16 +43,20 @@ BYTE_EDITS = {
 		#(0x47c, b'\xff\x10\xff\x10'), # Set Accuracy to 4351
 		#(0x480, b'\xff\x10\xff\x10'), # Set Evasion to 4351
 		#(0x484, b'\xff\x10\xff\x10'), # Set Speed to 4351
+	],
+
+	"YSK1.MP1": [
+		#(0x493c, b'\xf2\x15')  # Increase the max length of 03YSK01A.SCN from 0x1562 -> 0x1800
 	]
 }
 
 inventory = b''
 
-# All items
+# All items (messes up some plot flags)
 #for i in range(1, 118):
 #	inventory += i.to_bytes(1, 'little') + b'\x63'
 
-# Powerful equipment only
+# Trying something else: Powerful equipment only
 for i in [1, 2, 3, 4, 40, 71, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 89]:
 	inventory += i.to_bytes(1, 'little') + b'\x63'
 
