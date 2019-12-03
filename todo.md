@@ -7,6 +7,11 @@
 
 * A handful of odd pointer issues in the menus. Save is "e", "        Silk Scarf" (with no description), etc
 	* Item names are fixed. Should investigate system text next
+
+## Archives
+* Some .BSD files are duplicated across multiple archives. Need to make sure those are being handled
+	* Example: F023_L12.BSD (the one with the pug wizard thing I love)
+
 ## Dump
 * Need to re-dump a bunch of files, they were extracted from the wrong location
 	* Really difficult to dump 02OLB01.SCN - wonder what is in there, or what's going wrong

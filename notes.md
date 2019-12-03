@@ -533,7 +533,7 @@ KIES.SMI = 32940-3377a
       * 0d 20 89 2a (da 2c) 88 00 
          * This is when you talk to the lower-right guy in the lower-right room (stay away from mercenary guy)
 
-* Crash when entering lower-left room.
+* (Fixed) Crash when entering lower-left room.
    * Entering the room: 88 01 88 88 02 07 88 03 0b 89 04 e8 00 89 06 28 01 88 0d 20 89 2a (95 29)
       * Pointer is: 95 29?
    * Room pointer is: 296f (from 00 00 6f 29)
@@ -544,16 +544,16 @@ KIES.SMI = 32940-3377a
       * 2991 = 1191, which is this same 83 09 91 29
       * So it's a loop that just runs over and over. Definitely a thing that needs to be adjusted as it moves
 
-* Crash when talking to security commander second time ("Hey, don't loiter around here")
+* (Fixed) Crash when talking to security commander second time ("Hey, don't loiter around here")
 
-* Crash when talking to main guards again?
+* (Fixed) Crash when talking to main guards again?
    * Is it those 1204 pointers that are a problem again?
 
 * Something goes wrong when leaving the emerald chamber.
    * Some pointer that's after text location 0xb5b.
    * Fixed by adding the 04 pointers and the FF pointers.
 
-* A few bad things and a crash upon entering the Zerfuedel battle:
+* (Fixed) A few bad things and a crash upon entering the Zerfuedel battle:
    * Doesn't load the background correctly (shows the glitched map instead)
       * 83 8c 02 d\bac_11
       * 01 00 02 d\mk32
@@ -566,17 +566,31 @@ KIES.SMI = 32940-3377a
          * Before the soldier battle, it reads af and b0.
             * After hte battle is over it loads b1 (22), b2 (28 00), b4 (88), b5 (00), ...
                * lodsw are: b9 (c2 1b), bc (59 2c), c0 (d2 1b), c4 (28 00), cb (25 1c), ..., d2 (91 22), d5 (59 2c), d9 (30 1c), e4 (ce 1f), e7 (59 2c), eb (d3 1f), 
+                  * Things that tell it to lodsb:
+                     * 89 2c
+                     * 04 (large number)
+                     * b0 00
+                     * 89 2c
+                     * 05 00 00
+                     * 04
+                     * b0 00
+                     * 89 2c
+                     * 04
+                     * b0 00
+                        * These are all in the dump and the pointer-finder...
+                        * Well, guess it's fixed now.
                * "repne scasb" = scan the string, look for the same character in EAX (00)
                   * This is when loading a filename
    * Crash when trying to load his next dialgoue
    * What file is this text even in?
       * D010_X10.BSD
       * I haven't even messed with this file or been aware of it. Wonder what's going wrong here
-   * Turns out I need to learn some more about .BSD files
-      * Pointer constant is probably 0. That's nice at least
-      * Do the files all end with basically the same 50 bytes or so? (after hte "kin kin kin")
+      
+* Turns out I need to learn some more about .BSD files
+   * Pointer constant is probably 0. That's nice at least
+   * Do the files all end with basically the same 50 bytes or so? (after hte "kin kin kin")
 
-* 03YSK01A.SCN doesn't load if it's too long??
+* (Fixed) 03YSK01A.SCN doesn't load if it's too long??
    * Beyond like 1600 is when we start having issues.
       * 0x29580 + 0x1600 = 0x29b80.
       * After the end of the file are some leftovers that don't get referred to. They end at 0x29bd2

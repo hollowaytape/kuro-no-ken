@@ -8,11 +8,11 @@ source = '../romtools/np2debug/memory.bin'
 
 if __name__ == "__main__":
     # Change these
-    #name = b'D011_U20.BSD'
-    name = b'YSK1.MP1'
+    #name = b'YSK1.MP1'
     #start = 0x28580  # 01B-tier SCN file
-    #start = 0x2aa80  # .BSD file
-    start = 0x681f0   # .MP1 file 
+    #start = 0x681f0   # .MP1 file 
+    name = b'ED_01.BSD'
+    start = 0x2aa80  # .BSD file
 
     for bodfile in FILES:
         if bodfile.name == name:

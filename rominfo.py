@@ -123,7 +123,7 @@ ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x03, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43
                         0x4c, 0x50, 0x50, 0x51, 0x52, 0x54, 0x55, 0x57,
                         0x5a, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x64, 0x65,
                         0x66, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x8b, 0x90, 0x94, 0x99, 0x9f, 0xa0, 0xa1, 0xa4, 0xa5, 0xa7,
-                        0xab, 0xaf,  0xb0, 0xb1, 0xb3, 0xb5, 0xb7, 0xbe, 0xc5, 0xcf, 0xff]
+                        0xab, 0xaf, 0xb0, 0xb1, 0xb3, 0xb5, 0xb7, 0xbe, 0xc5, 0xcf, 0xff]
                         # TODO:  and then d6-ff. Wonder if those actually get used
 
 FILE_BLOCKS = {
@@ -483,8 +483,8 @@ FILES = [
     BODFile(b'B.FA1', b'WIZARD3.BCA', 0x73828, 0x214d, 0x45db),
     BODFile(b'B.FA1', b'YUMIHEI2.BCA', 0x75976, 0x16eb, 0x26a5),
     BODFile(b'B.FA1', b'ZEFYUDOR.BCA', 0x77062, 0xa1dd, 0x12a94),
-    BODFile(b'B.FA1', b'D010_S20.BSD', 0x81240, 0x1be, 0x351),     # two soldiers
-    BODFile(b'B.FA1', b'D010_X10.BSD', 0x813fe, 0x5e1, 0xd91),     # Zerfuedel battle
+    BODFile(b'B.FA1', b'D010_S20.BSD', 0x81240, 0x1be, 0x351), # ($) two soldiers
+    BODFile(b'B.FA1', b'D010_X10.BSD', 0x813fe, 0x5e1, 0xd91), # (*) Zerfuedel battle
     BODFile(b'B.FA1', b'D011_A20.BSD', 0x819e0, 0x183, 0x35b),     # two knights
     BODFile(b'B.FA1', b'D011_B02.BSD', 0x81b64, 0x183, 0x35b),     # two guys with arrow guns
     BODFile(b'B.FA1', b'D011_I10.BSD', 0x81ce8, 0x114, 0x21f),     # mimic
@@ -494,60 +494,60 @@ FILES = [
     BODFile(b'B.FA1', b'D011_T20.BSD', 0x822d4, 0x1d4, 0x357),     # two soldiers
     BODFile(b'B.FA1', b'D011_U20.BSD', 0x824a8, 0x1e0, 0x35b),     # two knights
     BODFile(b'B.FA1', b'D011_X10.BSD', 0x82688, 0x1eb, 0x35d),     # captain who likes to kick
-    BODFile(b'B.FA1', b'D020_A12.BSD', 0x82874, 0x11f, 0x21b),
-    BODFile(b'B.FA1', b'D020_A22.BSD', 0x82994, 0x11e, 0x21b),
-    BODFile(b'B.FA1', b'D020_A32.BSD', 0x82ab2, 0x120, 0x21b),
-    BODFile(b'B.FA1', b'D020_B02.BSD', 0x82bd2, 0x126, 0x223),
-    BODFile(b'B.FA1', b'D020_B12.BSD', 0x82cf8, 0x123, 0x223),
-    BODFile(b'B.FA1', b'D020_S10.BSD', 0x82e1c, 0x122, 0x223),
-    BODFile(b'B.FA1', b'D030_B10.BSD', 0x82f3e, 0x119, 0x223),
-    BODFile(b'B.FA1', b'D030_B20.BSD', 0x83058, 0x117, 0x223),
-    BODFile(b'B.FA1', b'D030_S10.BSD', 0x83170, 0x11b, 0x223),
-    BODFile(b'B.FA1', b'D031_S10.BSD', 0x8328c, 0x114, 0x221),
-    BODFile(b'B.FA1', b'D070_A12.BSD', 0x833a0, 0x11b, 0x225),
-    BODFile(b'B.FA1', b'D070_A22.BSD', 0x834bc, 0x11c, 0x225),
-    BODFile(b'B.FA1', b'D070_B02.BSD', 0x835d8, 0x163, 0x355),
-    BODFile(b'B.FA1', b'D070_C10.BSD', 0x8373c, 0x11e, 0x21d),
-    BODFile(b'B.FA1', b'D070_C20.BSD', 0x8385a, 0x11e, 0x21d),
-    BODFile(b'B.FA1', b'D070_K22.BSD', 0x83978, 0x163, 0x355),
-    BODFile(b'B.FA1', b'D070_S10.BSD', 0x83adc, 0x11d, 0x223),
-    BODFile(b'B.FA1', b'D070_T10.BSD', 0x83bfa, 0x11d, 0x223),
-    BODFile(b'B.FA1', b'D100_A10.BSD', 0x83d18, 0x11b, 0x221),
-    BODFile(b'B.FA1', b'D100_A20.BSD', 0x83e34, 0x11b, 0x221),
-    BODFile(b'B.FA1', b'D100_B02.BSD', 0x83f50, 0x19d, 0x357),
-    BODFile(b'B.FA1', b'D100_C12.BSD', 0x840ee, 0x139, 0x357),
-    BODFile(b'B.FA1', b'D100_C22.BSD', 0x84228, 0x139, 0x357),
-    BODFile(b'B.FA1', b'D100_I10.BSD', 0x84362, 0x112, 0x21f),
-    BODFile(b'B.FA1', b'D100_J10.BSD', 0x84474, 0x115, 0x21f),
-    BODFile(b'B.FA1', b'D100_K12.BSD', 0x8458a, 0x19e, 0x357),
-    BODFile(b'B.FA1', b'D100_K22.BSD', 0x84728, 0x19d, 0x357),
-    BODFile(b'B.FA1', b'D100_Q10.BSD', 0x848c6, 0x125, 0x227),
-    BODFile(b'B.FA1', b'D100_R10.BSD', 0x849ec, 0x124, 0x225),
-    BODFile(b'B.FA1', b'D100_S10.BSD', 0x84b10, 0x122, 0x223),
-    BODFile(b'B.FA1', b'D100_U10.BSD', 0x84c32, 0x11d, 0x221),
-    BODFile(b'B.FA1', b'D100_W10.BSD', 0x84d50, 0x117, 0x223),
-    BODFile(b'B.FA1', b'D100_X01.BSD', 0x84e68, 0x241, 0x48d),
-    BODFile(b'B.FA1', b'D100_X02.BSD', 0x850aa, 0x41c, 0x869),
-    BODFile(b'B.FA1', b'D100_ZA1.BSD', 0x854c6, 0x1d6, 0x34f),
-    BODFile(b'B.FA1', b'D100_ZA2.BSD', 0x8569c, 0x1dd, 0x353),
-    BODFile(b'B.FA1', b'D100_ZA3.BSD', 0x8587a, 0x1d8, 0x34f),
-    BODFile(b'B.FA1', b'D100_ZA4.BSD', 0x85a52, 0x1d3, 0x351),
-    BODFile(b'B.FA1', b'D100_ZA5.BSD', 0x85c26, 0x1d2, 0x34d),
-    BODFile(b'B.FA1', b'D100_ZA6.BSD', 0x85df8, 0x1cd, 0x353),
-    BODFile(b'B.FA1', b'D100_ZA7.BSD', 0x85fc6, 0x283, 0x491),
-    BODFile(b'B.FA1', b'DL21_X10.BSD', 0x8624a, 0x381, 0x63f),
-    BODFile(b'B.FA1', b'F011_A10.BSD', 0x865cc, 0x116, 0x221),
-    BODFile(b'B.FA1', b'F011_A20.BSD', 0x866e2, 0x114, 0x221),
-    BODFile(b'B.FA1', b'F011_B10.BSD', 0x867f6, 0x177, 0x355),
-    BODFile(b'B.FA1', b'F012_A12.BSD', 0x8696e, 0x117, 0x221),
-    BODFile(b'B.FA1', b'F012_A30.BSD', 0x86a86, 0x117, 0x221),
-    BODFile(b'B.FA1', b'F012_B20.BSD', 0x86b9e, 0x17a, 0x355),
-    BODFile(b'B.FA1', b'F022_D12.BSD', 0x86d18, 0x112, 0x223),
-    BODFile(b'B.FA1', b'F023_A32.BSD', 0x86e2a, 0x138, 0x34f),
-    BODFile(b'B.FA1', b'F023_L12.BSD', 0x86f62, 0x17f, 0x355),
-    BODFile(b'B.FA1', b'F023_L22.BSD', 0x870e2, 0x17f, 0x355),
-    BODFile(b'B.FA1', b'F033_D10.BSD', 0x87262, 0x19f, 0x351),
-    BODFile(b'B.FA1', b'F036_B12.BSD', 0x87402, 0x126, 0x21f),
+    BODFile(b'B.FA1', b'D020_A12.BSD', 0x82874, 0x11f, 0x21b),     # bat
+    BODFile(b'B.FA1', b'D020_A22.BSD', 0x82994, 0x11e, 0x21b),     # 2 bats
+    BODFile(b'B.FA1', b'D020_A32.BSD', 0x82ab2, 0x120, 0x21b), # 2 more bats
+    BODFile(b'B.FA1', b'D020_B02.BSD', 0x82bd2, 0x126, 0x223), # 2 fire guys
+    BODFile(b'B.FA1', b'D020_B12.BSD', 0x82cf8, 0x123, 0x223), # 1 fire guy
+    BODFile(b'B.FA1', b'D020_S10.BSD', 0x82e1c, 0x122, 0x223), # pill bug
+    BODFile(b'B.FA1', b'D030_B10.BSD', 0x82f3e, 0x119, 0x223), # turtle
+    BODFile(b'B.FA1', b'D030_B20.BSD', 0x83058, 0x117, 0x223), # 2 turtles
+    BODFile(b'B.FA1', b'D030_S10.BSD', 0x83170, 0x11b, 0x223), # lobster
+    BODFile(b'B.FA1', b'D031_S10.BSD', 0x8328c, 0x114, 0x221), # 2 soldiers
+    BODFile(b'B.FA1', b'D070_A12.BSD', 0x833a0, 0x11b, 0x225), # 3 shadow skeletons
+    BODFile(b'B.FA1', b'D070_A22.BSD', 0x834bc, 0x11c, 0x225), # 4 shadow skeletons
+    BODFile(b'B.FA1', b'D070_B02.BSD', 0x835d8, 0x163, 0x355), # 2 shadow cloak guys
+    BODFile(b'B.FA1', b'D070_C10.BSD', 0x8373c, 0x11e, 0x21d), # manticore
+    BODFile(b'B.FA1', b'D070_C20.BSD', 0x8385a, 0x11e, 0x21d), # 2 manticores
+    BODFile(b'B.FA1', b'D070_K22.BSD', 0x83978, 0x163, 0x355), # 2 skeletons 2 cloak guys
+    BODFile(b'B.FA1', b'D070_S10.BSD', 0x83adc, 0x11d, 0x223), # shield halberd guy
+    BODFile(b'B.FA1', b'D070_T10.BSD', 0x83bfa, 0x11d, 0x223), # shield halberd guy
+    BODFile(b'B.FA1', b'D100_A10.BSD', 0x83d18, 0x11b, 0x221), # golem
+    BODFile(b'B.FA1', b'D100_A20.BSD', 0x83e34, 0x11b, 0x221), # 2 golems
+    BODFile(b'B.FA1', b'D100_B02.BSD', 0x83f50, 0x19d, 0x357), # moon mage
+    BODFile(b'B.FA1', b'D100_C12.BSD', 0x840ee, 0x139, 0x357), # blue and red eyes
+    BODFile(b'B.FA1', b'D100_C22.BSD', 0x84228, 0x139, 0x357), # 2 red eyes
+    BODFile(b'B.FA1', b'D100_I10.BSD', 0x84362, 0x112, 0x21f), # red mimic
+    BODFile(b'B.FA1', b'D100_J10.BSD', 0x84474, 0x115, 0x21f), # brown mimic
+    BODFile(b'B.FA1', b'D100_K12.BSD', 0x8458a, 0x19e, 0x357), # 2 moon mages
+    BODFile(b'B.FA1', b'D100_K22.BSD', 0x84728, 0x19d, 0x357), # moon mage, 2 golem
+    BODFile(b'B.FA1', b'D100_Q10.BSD', 0x848c6, 0x125, 0x227), # armored gnome
+    BODFile(b'B.FA1', b'D100_R10.BSD', 0x849ec, 0x124, 0x225), # jelly rock
+    BODFile(b'B.FA1', b'D100_S10.BSD', 0x84b10, 0x122, 0x223), # giant spider
+    BODFile(b'B.FA1', b'D100_U10.BSD', 0x84c32, 0x11d, 0x221), # ghost armor
+    BODFile(b'B.FA1', b'D100_W10.BSD', 0x84d50, 0x117, 0x223), # tombstone
+    BODFile(b'B.FA1', b'D100_X01.BSD', 0x84e68, 0x241, 0x48d), # (*) magician girl summons Cho Aniki
+    BODFile(b'B.FA1', b'D100_X02.BSD', 0x850aa, 0x41c, 0x869), # (*) " " bigger Cho Aniki
+    BODFile(b'B.FA1', b'D100_ZA1.BSD', 0x854c6, 0x1d6, 0x34f), # small dragon
+    BODFile(b'B.FA1', b'D100_ZA2.BSD', 0x8569c, 0x1dd, 0x353), # jellyfish
+    BODFile(b'B.FA1', b'D100_ZA3.BSD', 0x8587a, 0x1d8, 0x34f), # harpy
+    BODFile(b'B.FA1', b'D100_ZA4.BSD', 0x85a52, 0x1d3, 0x351), # caveman
+    BODFile(b'B.FA1', b'D100_ZA5.BSD', 0x85c26, 0x1d2, 0x34d), # manticore
+    BODFile(b'B.FA1', b'D100_ZA6.BSD', 0x85df8, 0x1cd, 0x353), # skeleton knight
+    BODFile(b'B.FA1', b'D100_ZA7.BSD', 0x85fc6, 0x283, 0x491), # slime
+    BODFile(b'B.FA1', b'DL21_X10.BSD', 0x8624a, 0x381, 0x63f), # (*) grim reaper
+    BODFile(b'B.FA1', b'F011_A10.BSD', 0x865cc, 0x116, 0x221), # slime
+    BODFile(b'B.FA1', b'F011_A20.BSD', 0x866e2, 0x114, 0x221), # 2 slime
+    BODFile(b'B.FA1', b'F011_B10.BSD', 0x867f6, 0x177, 0x355), # gnome
+    BODFile(b'B.FA1', b'F012_A12.BSD', 0x8696e, 0x117, 0x221), # 2 slime
+    BODFile(b'B.FA1', b'F012_A30.BSD', 0x86a86, 0x117, 0x221), # 3 slime
+    BODFile(b'B.FA1', b'F012_B20.BSD', 0x86b9e, 0x17a, 0x355), # gnome
+    BODFile(b'B.FA1', b'F022_D12.BSD', 0x86d18, 0x112, 0x223), # 3 skeleton knights
+    BODFile(b'B.FA1', b'F023_A32.BSD', 0x86e2a, 0x138, 0x34f), # 2 red slime
+    BODFile(b'B.FA1', b'F023_L12.BSD', 0x86f62, 0x17f, 0x355), # 2 skeleton knights, something really dumb looking
+    BODFile(b'B.FA1', b'F023_L22.BSD', 0x870e2, 0x17f, 0x355), # "" but spread out more
+    BODFile(b'B.FA1', b'F033_D10.BSD', 0x87262, 0x19f, 0x351), # black slime
+    BODFile(b'B.FA1', b'F036_B12.BSD', 0x87402, 0x126, 0x21f), # 3 harpies
     BODFile(b'B.FA1', b'BAKUHATU.MCA', 0x87528, 0x925, 0x1474),
     BODFile(b'B.FA1', b'EBI.MCA', 0x87e4e, 0x3c0, 0x520),
     BODFile(b'B.FA1', b'KIZOKU_T.MCA', 0x8820e, 0x242, 0x44a),
@@ -570,7 +570,6 @@ FILES = [
     BODFile(b'B.FA1', b'TOU5.MP1', 0x9dfd0, 0xb50, 0x9100),
     BODFile(b'B.FA1', b'TOU6.MP1', 0x9eb20, 0xd22, 0x8f48),
     BODFile(b'B.FA1', b'YSK1.MP1', 0x9f842, 0x163f, 0x8f3e),
-    # Part of it is at 6cb20. Could start between  63be2 - 75a5e
     BODFile(b'B.FA1', b'YSK2.MP1', 0xa0e82, 0x1f02, 0x9092),
     BODFile(b'B.FA1', b'OLB1.MP2', 0xa2d84, 0x21dd, 0x90ec),
     BODFile(b'B.FA1', b'MRS.MPC', 0xa4f62, 0x33ab, 0x5780),
@@ -727,69 +726,69 @@ FILES = [
     BODFile(b'C.FA1', b'YUMIHEI1.BCA', 0x8dc1e, 0x16d0, 0x2685),
     BODFile(b'C.FA1', b'ZEFYUDOR.BCA', 0x8f2ee, 0xa1dd, 0x12a94),
     BODFile(b'C.FA1', b'ZOMBIE1.BCA', 0x994cc, 0x2178, 0x3274),
-    BODFile(b'C.FA1', b'C020_A01.BSD', 0x9b644, 0x196, 0x355),
-    BODFile(b'C.FA1', b'C020_X10.BSD', 0x9b7da, 0x1da, 0x357),
-    BODFile(b'C.FA1', b'C021_A10.BSD', 0x9b9b4, 0x132, 0x231),
-    BODFile(b'C.FA1', b'C021_X10.BSD', 0x9bae6, 0x7f0, 0x11fb),
-    BODFile(b'C.FA1', b'C022_S10.BSD', 0x9c2d6, 0x1e5, 0x35b),
-    BODFile(b'C.FA1', b'C022_S20.BSD', 0x9c4bc, 0x1e4, 0x35b),
-    BODFile(b'C.FA1', b'C022_T10.BSD', 0x9c6a0, 0x1ce, 0x351),
-    BODFile(b'C.FA1', b'D040_A12.BSD', 0x9c86e, 0x11e, 0x21b),
-    BODFile(b'C.FA1', b'D040_A22.BSD', 0x9c98c, 0x11f, 0x21b),
-    BODFile(b'C.FA1', b'D040_A32.BSD', 0x9caac, 0x11f, 0x21b),
-    BODFile(b'C.FA1', b'D040_B02.BSD', 0x9cbcc, 0x126, 0x223),
-    BODFile(b'C.FA1', b'D040_B12.BSD', 0x9ccf2, 0x123, 0x223),
-    BODFile(b'C.FA1', b'D040_S10.BSD', 0x9ce16, 0x1d2, 0x355),
-    BODFile(b'C.FA1', b'D050_A20.BSD', 0x9cfe8, 0x185, 0x357),
-    BODFile(b'C.FA1', b'D050_A30.BSD', 0x9d16e, 0x183, 0x357),
-    BODFile(b'C.FA1', b'D050_B01.BSD', 0x9d2f2, 0x184, 0x357),
-    BODFile(b'C.FA1', b'D050_B02.BSD', 0x9d476, 0x181, 0x357),
-    BODFile(b'C.FA1', b'D050_K12.BSD', 0x9d5f8, 0x182, 0x357),
-    BODFile(b'C.FA1', b'D050_K22.BSD', 0x9d77a, 0x181, 0x357),
-    BODFile(b'C.FA1', b'D050_K32.BSD', 0x9d8fc, 0x182, 0x357),
-    BODFile(b'C.FA1', b'D050_S10.BSD', 0x9da7e, 0x1ce, 0x34d),
-    BODFile(b'C.FA1', b'D050_T01.BSD', 0x9dc4c, 0x1cd, 0x353),
-    BODFile(b'C.FA1', b'D050_T02.BSD', 0x9de1a, 0x1d2, 0x353),
-    BODFile(b'C.FA1', b'D051_A10.BSD', 0x9dfec, 0x18f, 0x361),
-    BODFile(b'C.FA1', b'D051_B20.BSD', 0x9e17c, 0x19b, 0x35b),
-    BODFile(b'C.FA1', b'D051_C02.BSD', 0x9e318, 0x18f, 0x361),
-    BODFile(b'C.FA1', b'D051_D02.BSD', 0x9e4a8, 0x19c, 0x35b),
-    BODFile(b'C.FA1', b'D051_K21.BSD', 0x9e644, 0x190, 0x361),
-    BODFile(b'C.FA1', b'D051_L21.BSD', 0x9e7d4, 0x19d, 0x35b),
-    BODFile(b'C.FA1', b'D051_S01.BSD', 0x9e972, 0x132, 0x22d),
-    BODFile(b'C.FA1', b'D051_W32.BSD', 0x9eaa4, 0x134, 0x233),
-    BODFile(b'C.FA1', b'D051_X10.BSD', 0x9ebd8, 0x499, 0x8b9),
-    BODFile(b'C.FA1', b'D052_A12.BSD', 0x9f072, 0x12c, 0x225),
-    BODFile(b'C.FA1', b'D052_A22.BSD', 0x9f19e, 0x12e, 0x225),
-    BODFile(b'C.FA1', b'D052_B01.BSD', 0x9f2cc, 0x12f, 0x22b),
-    BODFile(b'C.FA1', b'D052_B02.BSD', 0x9f3fc, 0x17e, 0x359),
-    BODFile(b'C.FA1', b'D052_B12.BSD', 0x9f57a, 0x12f, 0x22b),
-    BODFile(b'C.FA1', b'D052_C10.BSD', 0x9f6aa, 0x116, 0x221),
-    BODFile(b'C.FA1', b'D052_C20.BSD', 0x9f7c0, 0x116, 0x221),
-    BODFile(b'C.FA1', b'D052_K12.BSD', 0x9f8d6, 0x183, 0x359),
-    BODFile(b'C.FA1', b'D052_S10.BSD', 0x9fa5a, 0x1d0, 0x351),
-    BODFile(b'C.FA1', b'D060_S21.BSD', 0x9fc2a, 0x45a, 0xa37),
-    BODFile(b'C.FA1', b'D060_T21.BSD', 0xa0084, 0x115, 0x225),
-    BODFile(b'C.FA1', b'D061_X10.BSD', 0xa019a, 0x1d4, 0x355),
-    BODFile(b'C.FA1', b'D080_A12.BSD', 0xa036e, 0x11c, 0x223),
-    BODFile(b'C.FA1', b'D080_A22.BSD', 0xa048a, 0x11d, 0x223),
-    BODFile(b'C.FA1', b'D080_A30.BSD', 0xa05a8, 0x11d, 0x223),
-    BODFile(b'C.FA1', b'D080_B10.BSD', 0xa06c6, 0x124, 0x225),
-    BODFile(b'C.FA1', b'D080_B12.BSD', 0xa07ea, 0x126, 0x225),
-    BODFile(b'C.FA1', b'D080_B20.BSD', 0xa0910, 0x124, 0x225),
-    BODFile(b'C.FA1', b'D080_C12.BSD', 0xa0a34, 0x122, 0x225),
-    BODFile(b'C.FA1', b'D080_C21.BSD', 0xa0b56, 0x122, 0x225),
-    BODFile(b'C.FA1', b'D080_S10.BSD', 0xa0c78, 0x125, 0x227),
-    BODFile(b'C.FA1', b'D080_T10.BSD', 0xa0d9e, 0x1d6, 0x353),
-    BODFile(b'C.FA1', b'F012_B20.BSD', 0xa0f74, 0x17a, 0x355),
-    BODFile(b'C.FA1', b'F013_B30.BSD', 0xa10ee, 0x173, 0x351),
-    BODFile(b'C.FA1', b'F023_A32.BSD', 0xa1262, 0x138, 0x34f),
-    BODFile(b'C.FA1', b'F023_L12.BSD', 0xa139a, 0x17f, 0x355),
-    BODFile(b'C.FA1', b'F023_L22.BSD', 0xa151a, 0x17f, 0x355),
-    BODFile(b'C.FA1', b'F023_S20.BSD', 0xa169a, 0x12f, 0x22d),
-    BODFile(b'C.FA1', b'F033_D10.BSD', 0xa17ca, 0x19f, 0x351),
-    BODFile(b'C.FA1', b'F036_A12.BSD', 0xa196a, 0x12e, 0x223),
-    BODFile(b'C.FA1', b'F036_B12.BSD', 0xa1a98, 0x126, 0x21f),
+    BODFile(b'C.FA1', b'C020_A01.BSD', 0x9b644, 0x196, 0x355), # blue mage
+    BODFile(b'C.FA1', b'C020_X10.BSD', 0x9b7da, 0x1da, 0x357), # captain guy who likes to kick
+    BODFile(b'C.FA1', b'C021_A10.BSD', 0x9b9b4, 0x132, 0x231), # stone armor guy
+    BODFile(b'C.FA1', b'C021_X10.BSD', 0x9bae6, 0x7f0, 0x11fb), # (*) Zerfeudel again
+    BODFile(b'C.FA1', b'C022_S10.BSD', 0x9c2d6, 0x1e5, 0x35b), # pitchfork guy
+    BODFile(b'C.FA1', b'C022_S20.BSD', 0x9c4bc, 0x1e4, 0x35b), # 2 pitchfork guys
+    BODFile(b'C.FA1', b'C022_T10.BSD', 0x9c6a0, 0x1ce, 0x351), # caveman
+    BODFile(b'C.FA1', b'D040_A12.BSD', 0x9c86e, 0x11e, 0x21b), # 2 bats
+    BODFile(b'C.FA1', b'D040_A22.BSD', 0x9c98c, 0x11f, 0x21b), # 3 bats
+    BODFile(b'C.FA1', b'D040_A32.BSD', 0x9caac, 0x11f, 0x21b), # 4 bats
+    BODFile(b'C.FA1', b'D040_B02.BSD', 0x9cbcc, 0x126, 0x223), # skittish fire
+    BODFile(b'C.FA1', b'D040_B12.BSD', 0x9ccf2, 0x123, 0x223), # skittish fire
+    BODFile(b'C.FA1', b'D040_S10.BSD', 0x9ce16, 0x1d2, 0x355), # jelly rock
+    BODFile(b'C.FA1', b'D050_A20.BSD', 0x9cfe8, 0x185, 0x357), # soldier
+    BODFile(b'C.FA1', b'D050_A30.BSD', 0x9d16e, 0x183, 0x357), # 2 soldiers
+    BODFile(b'C.FA1', b'D050_B01.BSD', 0x9d2f2, 0x184, 0x357), # blue mage
+    BODFile(b'C.FA1', b'D050_B02.BSD', 0x9d476, 0x181, 0x357), # another blue mage
+    BODFile(b'C.FA1', b'D050_K12.BSD', 0x9d5f8, 0x182, 0x357), # blue mage + soldier
+    BODFile(b'C.FA1', b'D050_K22.BSD', 0x9d77a, 0x181, 0x357), # blue  mage + 2 soldiers
+    BODFile(b'C.FA1', b'D050_K32.BSD', 0x9d8fc, 0x182, 0x357), # 2 blue mage + soldier
+    BODFile(b'C.FA1', b'D050_S10.BSD', 0x9da7e, 0x1ce, 0x34d), # manticore
+    BODFile(b'C.FA1', b'D050_T01.BSD', 0x9dc4c, 0x1cd, 0x353), # soldier
+    BODFile(b'C.FA1', b'D050_T02.BSD', 0x9de1a, 0x1d2, 0x353), # soldier
+    BODFile(b'C.FA1', b'D051_A10.BSD', 0x9dfec, 0x18f, 0x361), # arrow guy + soldier
+    BODFile(b'C.FA1', b'D051_B20.BSD', 0x9e17c, 0x19b, 0x35b), # 2 red mage
+    BODFile(b'C.FA1', b'D051_C02.BSD', 0x9e318, 0x18f, 0x361), # stone armor
+    BODFile(b'C.FA1', b'D051_D02.BSD', 0x9e4a8, 0x19c, 0x35b), # stone amor
+    BODFile(b'C.FA1', b'D051_K21.BSD', 0x9e644, 0x190, 0x361), # two arrow guys
+    BODFile(b'C.FA1', b'D051_L21.BSD', 0x9e7d4, 0x19d, 0x35b), # red mage and stone armor
+    BODFile(b'C.FA1', b'D051_S01.BSD', 0x9e972, 0x132, 0x22d), # grey armor
+    BODFile(b'C.FA1', b'D051_W32.BSD', 0x9eaa4, 0x134, 0x233), # 4 stone armor
+    BODFile(b'C.FA1', b'D051_X10.BSD', 0x9ebd8, 0x499, 0x8b9), # (*) green manticore boss
+    BODFile(b'C.FA1', b'D052_A12.BSD', 0x9f072, 0x12c, 0x225), # 2 grey eyes
+    BODFile(b'C.FA1', b'D052_A22.BSD', 0x9f19e, 0x12e, 0x225), # 4 grey eyes
+    BODFile(b'C.FA1', b'D052_B01.BSD', 0x9f2cc, 0x12f, 0x22b), # grey armor
+    BODFile(b'C.FA1', b'D052_B02.BSD', 0x9f3fc, 0x17e, 0x359), # 2 gold golems
+    BODFile(b'C.FA1', b'D052_B12.BSD', 0x9f57a, 0x12f, 0x22b), # 3 grey armors
+    BODFile(b'C.FA1', b'D052_C10.BSD', 0x9f6aa, 0x116, 0x221), # gold golem
+    BODFile(b'C.FA1', b'D052_C20.BSD', 0x9f7c0, 0x116, 0x221), # gold golem
+    BODFile(b'C.FA1', b'D052_K12.BSD', 0x9f8d6, 0x183, 0x359), # gold golem, 2 grey armor
+    BODFile(b'C.FA1', b'D052_S10.BSD', 0x9fa5a, 0x1d0, 0x351), # 2 ghost armor
+    BODFile(b'C.FA1', b'D060_S21.BSD', 0x9fc2a, 0x45a, 0xa37), # (*) blue mage + 2 shadow soldiers
+    BODFile(b'C.FA1', b'D060_T21.BSD', 0xa0084, 0x115, 0x225), # 3 shadow soldiers
+    BODFile(b'C.FA1', b'D061_X10.BSD', 0xa019a, 0x1d4, 0x355), # (*) big dumb snake
+    BODFile(b'C.FA1', b'D080_A12.BSD', 0xa036e, 0x11c, 0x223), # 3 zombies
+    BODFile(b'C.FA1', b'D080_A22.BSD', 0xa048a, 0x11d, 0x223), # 5 zombies
+    BODFile(b'C.FA1', b'D080_A30.BSD', 0xa05a8, 0x11d, 0x223), # 5 zombies
+    BODFile(b'C.FA1', b'D080_B10.BSD', 0xa06c6, 0x124, 0x225), # jelly rock
+    BODFile(b'C.FA1', b'D080_B12.BSD', 0xa07ea, 0x126, 0x225), # 3 jelly rocks
+    BODFile(b'C.FA1', b'D080_B20.BSD', 0xa0910, 0x124, 0x225), # 3 jelly rocks
+    BODFile(b'C.FA1', b'D080_C12.BSD', 0xa0a34, 0x122, 0x225), # brown eye
+    BODFile(b'C.FA1', b'D080_C21.BSD', 0xa0b56, 0x122, 0x225), # brown eye
+    BODFile(b'C.FA1', b'D080_S10.BSD', 0xa0c78, 0x125, 0x227), # armor goblin
+    BODFile(b'C.FA1', b'D080_T10.BSD', 0xa0d9e, 0x1d6, 0x353), # grey big dumb snake
+    BODFile(b'C.FA1', b'F012_B20.BSD', 0xa0f74, 0x17a, 0x355), # goblin
+    BODFile(b'C.FA1', b'F013_B30.BSD', 0xa10ee, 0x173, 0x351), # armor goblin and wolf
+    BODFile(b'C.FA1', b'F023_A32.BSD', 0xa1262, 0x138, 0x34f), # 2 red slimes
+    BODFile(b'C.FA1', b'F023_L12.BSD', 0xa139a, 0x17f, 0x355), # 
+    BODFile(b'C.FA1', b'F023_L22.BSD', 0xa151a, 0x17f, 0x355), #
+    BODFile(b'C.FA1', b'F023_S20.BSD', 0xa169a, 0x12f, 0x22d), # 2 grey armors
+    BODFile(b'C.FA1', b'F033_D10.BSD', 0xa17ca, 0x19f, 0x351), # black slime
+    BODFile(b'C.FA1', b'F036_A12.BSD', 0xa196a, 0x12e, 0x223), # black ghosts
+    BODFile(b'C.FA1', b'F036_B12.BSD', 0xa1a98, 0x126, 0x21f), #
     BODFile(b'C.FA1', b'ENIS_BRK.MCA', 0xa1bbe, 0xade, 0x142e),
     BODFile(b'C.FA1', b'NUE.MCA', 0xa269c, 0x147, 0x440),
     BODFile(b'C.FA1', b'SANSITO1.MCA', 0xa27e4, 0xebd, 0x1ab4),
@@ -974,70 +973,70 @@ FILES = [
     BODFile(b'D.FA1', b'ZEFYUDOR.BCA', 0x69088, 0xa1dd, 0x12a94),
     BODFile(b'D.FA1', b'ZOMBIE1.BCA', 0x73266, 0x2178, 0x3274),
     BODFile(b'D.FA1', b'ZOMBIE2.BCA', 0x753de, 0x210f, 0x3234),
-    BODFile(b'D.FA1', b'C030_S10.BSD', 0x774ee, 0x110, 0x221),
-    BODFile(b'D.FA1', b'C031_I10.BSD', 0x775fe, 0x110, 0x21f),
-    BODFile(b'D.FA1', b'C031_S10.BSD', 0x7770e, 0x11d, 0x223),
-    BODFile(b'D.FA1', b'C031_T10.BSD', 0x7782c, 0x11a, 0x223),
-    BODFile(b'D.FA1', b'C031_U10.BSD', 0x77946, 0x115, 0x221),
-    BODFile(b'D.FA1', b'C041_X11.BSD', 0x77a5c, 0x122, 0x355),
-    BODFile(b'D.FA1', b'C042_X10.BSD', 0x77b7e, 0x4a9, 0x913),
-    BODFile(b'D.FA1', b'C051_B10.BSD', 0x78028, 0x123, 0x21f),
-    BODFile(b'D.FA1', b'C051_C10.BSD', 0x7814c, 0x11c, 0x223),
-    BODFile(b'D.FA1', b'C051_D21.BSD', 0x78268, 0x127, 0x227),
-    BODFile(b'D.FA1', b'C051_E10.BSD', 0x78390, 0x117, 0x21d),
-    BODFile(b'D.FA1', b'C051_S10.BSD', 0x784a8, 0x47e, 0xb2f),
-    BODFile(b'D.FA1', b'C051_X10.BSD', 0x78926, 0x1ce, 0x351),
-    BODFile(b'D.FA1', b'D080_B12.BSD', 0x78af4, 0x126, 0x225),
-    BODFile(b'D.FA1', b'D090_A10.BSD', 0x78c1a, 0x11f, 0x221),
-    BODFile(b'D.FA1', b'D090_A20.BSD', 0x78d3a, 0x11f, 0x221),
-    BODFile(b'D.FA1', b'D090_B22.BSD', 0x78e5a, 0x123, 0x225),
-    BODFile(b'D.FA1', b'D090_C12.BSD', 0x78f7e, 0x124, 0x225),
-    BODFile(b'D.FA1', b'D090_C22.BSD', 0x790a2, 0x126, 0x225),
-    BODFile(b'D.FA1', b'D090_K12.BSD', 0x791c8, 0x13a, 0x357),
-    BODFile(b'D.FA1', b'D090_K22.BSD', 0x79302, 0x13c, 0x357),
-    BODFile(b'D.FA1', b'D090_X32.BSD', 0x7943e, 0x1d6, 0x34f),
-    BODFile(b'D.FA1', b'D091_B32.BSD', 0x79614, 0x123, 0x225),
-    BODFile(b'D.FA1', b'D091_C32.BSD', 0x79738, 0x126, 0x225),
-    BODFile(b'D.FA1', b'D091_D12.BSD', 0x7985e, 0x127, 0x21f),
-    BODFile(b'D.FA1', b'D091_D22.BSD', 0x79986, 0x125, 0x21f),
-    BODFile(b'D.FA1', b'D091_K32.BSD', 0x79aac, 0x13b, 0x357),
-    BODFile(b'D.FA1', b'D110_A12.BSD', 0x79be8, 0x124, 0x225),
-    BODFile(b'D.FA1', b'D110_A30.BSD', 0x79d0c, 0x125, 0x225),
-    BODFile(b'D.FA1', b'D110_B10.BSD', 0x79e32, 0x11d, 0x221),
-    BODFile(b'D.FA1', b'D110_B20.BSD', 0x79f50, 0x11c, 0x221),
-    BODFile(b'D.FA1', b'D110_C10.BSD', 0x7a06c, 0x17c, 0x355),
-    BODFile(b'D.FA1', b'D110_D10.BSD', 0x7a1e8, 0x123, 0x225),
-    BODFile(b'D.FA1', b'D110_K21.BSD', 0x7a30c, 0x170, 0x355),
-    BODFile(b'D.FA1', b'D110_S10.BSD', 0x7a47c, 0x1d6, 0x355),
-    BODFile(b'D.FA1', b'D120_A12.BSD', 0x7a652, 0x128, 0x225),
-    BODFile(b'D.FA1', b'D120_A30.BSD', 0x7a77a, 0x127, 0x225),
-    BODFile(b'D.FA1', b'D120_B10.BSD', 0x7a8a2, 0x11d, 0x223),
-    BODFile(b'D.FA1', b'D120_B20.BSD', 0x7a9c0, 0x11f, 0x223),
-    BODFile(b'D.FA1', b'D120_C02.BSD', 0x7aae0, 0x195, 0x353),
-    BODFile(b'D.FA1', b'D120_K12.BSD', 0x7ac76, 0x194, 0x353),
-    BODFile(b'D.FA1', b'D120_K22.BSD', 0x7ae0a, 0x196, 0x353),
-    BODFile(b'D.FA1', b'D120_S10.BSD', 0x7afa0, 0x124, 0x221),
-    BODFile(b'D.FA1', b'D120_V10.BSD', 0x7b0c4, 0x122, 0x225),
-    BODFile(b'D.FA1', b'D130_A22.BSD', 0x7b1e6, 0x11e, 0x221),
-    BODFile(b'D.FA1', b'D130_B12.BSD', 0x7b304, 0x11b, 0x223),
-    BODFile(b'D.FA1', b'D130_B22.BSD', 0x7b420, 0x11d, 0x223),
-    BODFile(b'D.FA1', b'D130_C12.BSD', 0x7b53e, 0x11b, 0x223),
-    BODFile(b'D.FA1', b'D130_D10.BSD', 0x7b65a, 0x12c, 0x223),
-    BODFile(b'D.FA1', b'D130_K21.BSD', 0x7b786, 0x179, 0x351),
-    BODFile(b'D.FA1', b'D130_S10.BSD', 0x7b900, 0x114, 0x221),
-    BODFile(b'D.FA1', b'D130_T32.BSD', 0x7ba14, 0x1d2, 0x353),
-    BODFile(b'D.FA1', b'D130_X10.BSD', 0x7bbe6, 0x39b, 0x739),
-    BODFile(b'D.FA1', b'F022_D12.BSD', 0x7bf82, 0x112, 0x223),
-    BODFile(b'D.FA1', b'F023_A32.BSD', 0x7c094, 0x138, 0x34f),
-    BODFile(b'D.FA1', b'F023_L12.BSD', 0x7c1cc, 0x17f, 0x355),
-    BODFile(b'D.FA1', b'F023_L22.BSD', 0x7c34c, 0x17f, 0x355),
-    BODFile(b'D.FA1', b'F026_B32.BSD', 0x7c4cc, 0x11c, 0x223),
-    BODFile(b'D.FA1', b'F026_D22.BSD', 0x7c5e8, 0x119, 0x223),
-    BODFile(b'D.FA1', b'F033_D10.BSD', 0x7c702, 0x19f, 0x351),
-    BODFile(b'D.FA1', b'F036_A12.BSD', 0x7c8a2, 0x12e, 0x223),
-    BODFile(b'D.FA1', b'F036_B02.BSD', 0x7c9d0, 0x126, 0x21f),
-    BODFile(b'D.FA1', b'F036_B12.BSD', 0x7caf6, 0x126, 0x21f),
-    BODFile(b'D.FA1', b'F036_C10.BSD', 0x7cc1c, 0x120, 0x21f),
+    BODFile(b'D.FA1', b'C030_S10.BSD', 0x774ee, 0x110, 0x221), # brown golem
+    BODFile(b'D.FA1', b'C031_I10.BSD', 0x775fe, 0x110, 0x21f), # red mimic
+    BODFile(b'D.FA1', b'C031_S10.BSD', 0x7770e, 0x11d, 0x223), # zombie
+    BODFile(b'D.FA1', b'C031_T10.BSD', 0x7782c, 0x11a, 0x223), # skeleton knight
+    BODFile(b'D.FA1', b'C031_U10.BSD', 0x77946, 0x115, 0x221), # caveman
+    BODFile(b'D.FA1', b'C041_X11.BSD', 0x77a5c, 0x122, 0x355), # possessed people
+    BODFile(b'D.FA1', b'C042_X10.BSD', 0x77b7e, 0x4a9, 0x913), # (*) Zerfeudel
+    BODFile(b'D.FA1', b'C051_B10.BSD', 0x78028, 0x123, 0x21f), # 2 harpies
+    BODFile(b'D.FA1', b'C051_C10.BSD', 0x7814c, 0x11c, 0x223), # 3 zombies
+    BODFile(b'D.FA1', b'C051_D21.BSD', 0x78268, 0x127, 0x227), # 3 armor goblins
+    BODFile(b'D.FA1', b'C051_E10.BSD', 0x78390, 0x117, 0x21d), # wolf
+    BODFile(b'D.FA1', b'C051_S10.BSD', 0x784a8, 0x47e, 0xb2f), # possessed monk
+    BODFile(b'D.FA1', b'C051_X10.BSD', 0x78926, 0x1ce, 0x351), # giant dragon
+    BODFile(b'D.FA1', b'D080_B12.BSD', 0x78af4, 0x126, 0x225), #
+    BODFile(b'D.FA1', b'D090_A10.BSD', 0x78c1a, 0x11f, 0x221), # caveman
+    BODFile(b'D.FA1', b'D090_A20.BSD', 0x78d3a, 0x11f, 0x221), # 2 cavemen
+    BODFile(b'D.FA1', b'D090_B22.BSD', 0x78e5a, 0x123, 0x225), # 2 jelly rocks
+    BODFile(b'D.FA1', b'D090_C12.BSD', 0x78f7e, 0x124, 0x225), # 2 jelly rocks
+    BODFile(b'D.FA1', b'D090_C22.BSD', 0x790a2, 0x126, 0x225), # 3 jelly rocks
+    BODFile(b'D.FA1', b'D090_K12.BSD', 0x791c8, 0x13a, 0x357), # 2 jelly rocks
+    BODFile(b'D.FA1', b'D090_K22.BSD', 0x79302, 0x13c, 0x357), # 2 jelly rocks
+    BODFile(b'D.FA1', b'D090_X32.BSD', 0x7943e, 0x1d6, 0x34f), # 5 harpies
+    BODFile(b'D.FA1', b'D091_B32.BSD', 0x79614, 0x123, 0x225), # 3 jelly rocks
+    BODFile(b'D.FA1', b'D091_C32.BSD', 0x79738, 0x126, 0x225), # 4 jelly rocks
+    BODFile(b'D.FA1', b'D091_D12.BSD', 0x7985e, 0x127, 0x21f), # 2 harpies
+    BODFile(b'D.FA1', b'D091_D22.BSD', 0x79986, 0x125, 0x21f), # 3 harpies
+    BODFile(b'D.FA1', b'D091_K32.BSD', 0x79aac, 0x13b, 0x357), # 5 jelly rocks
+    BODFile(b'D.FA1', b'D110_A12.BSD', 0x79be8, 0x124, 0x225), # 2 blue lobsters
+    BODFile(b'D.FA1', b'D110_A30.BSD', 0x79d0c, 0x125, 0x225), # 2 blue lobsters
+    BODFile(b'D.FA1', b'D110_B10.BSD', 0x79e32, 0x11d, 0x221), # caveman
+    BODFile(b'D.FA1', b'D110_B20.BSD', 0x79f50, 0x11c, 0x221), # 2 cavemen
+    BODFile(b'D.FA1', b'D110_C10.BSD', 0x7a06c, 0x17c, 0x355), # jellyfish
+    BODFile(b'D.FA1', b'D110_D10.BSD', 0x7a1e8, 0x123, 0x225), # muscular small dragon
+    BODFile(b'D.FA1', b'D110_K21.BSD', 0x7a30c, 0x170, 0x355), # jellyfish + blue lobster
+    BODFile(b'D.FA1', b'D110_S10.BSD', 0x7a47c, 0x1d6, 0x355), # 2 muscle dragons
+    BODFile(b'D.FA1', b'D120_A12.BSD', 0x7a652, 0x128, 0x225), # 3 jelly rocks
+    BODFile(b'D.FA1', b'D120_A30.BSD', 0x7a77a, 0x127, 0x225), # 3 jelly rocks
+    BODFile(b'D.FA1', b'D120_B10.BSD', 0x7a8a2, 0x11d, 0x223), # 3 zombies with red pants
+    BODFile(b'D.FA1', b'D120_B20.BSD', 0x7a9c0, 0x11f, 0x223), # 4 zombies with red pants
+    BODFile(b'D.FA1', b'D120_C02.BSD', 0x7aae0, 0x195, 0x353), # shadow moon mage
+    BODFile(b'D.FA1', b'D120_K12.BSD', 0x7ac76, 0x194, 0x353), # shadow moon mage + 2 red pants zombies
+    BODFile(b'D.FA1', b'D120_K22.BSD', 0x7ae0a, 0x196, 0x353), # 2 SMM + 2 RPZ
+    BODFile(b'D.FA1', b'D120_S10.BSD', 0x7afa0, 0x124, 0x221), # mantis
+    BODFile(b'D.FA1', b'D120_V10.BSD', 0x7b0c4, 0x122, 0x225), # shadow armor goblin
+    BODFile(b'D.FA1', b'D130_A22.BSD', 0x7b1e6, 0x11e, 0x221), # 3 green pill bugs
+    BODFile(b'D.FA1', b'D130_B12.BSD', 0x7b304, 0x11b, 0x223), # 3 2-headed skeleton knights
+    BODFile(b'D.FA1', b'D130_B22.BSD', 0x7b420, 0x11d, 0x223), # 4 2-headed skeleton knights
+    BODFile(b'D.FA1', b'D130_C12.BSD', 0x7b53e, 0x11b, 0x223), # 2 turtles
+    BODFile(b'D.FA1', b'D130_D10.BSD', 0x7b65a, 0x12c, 0x223), # giant spider
+    BODFile(b'D.FA1', b'D130_K21.BSD', 0x7b786, 0x179, 0x351), # giant spider + 2 pill bugs
+    BODFile(b'D.FA1', b'D130_S10.BSD', 0x7b900, 0x114, 0x221), # caveman
+    BODFile(b'D.FA1', b'D130_T32.BSD', 0x7ba14, 0x1d2, 0x353), # 5 RPZ
+    BODFile(b'D.FA1', b'D130_X10.BSD', 0x7bbe6, 0x39b, 0x739), # (*) Gordon
+    BODFile(b'D.FA1', b'F022_D12.BSD', 0x7bf82, 0x112, 0x223), # 3 skeleton knights
+    BODFile(b'D.FA1', b'F023_A32.BSD', 0x7c094, 0x138, 0x34f), # 2 red slime
+    BODFile(b'D.FA1', b'F023_L12.BSD', 0x7c1cc, 0x17f, 0x355), #
+    BODFile(b'D.FA1', b'F023_L22.BSD', 0x7c34c, 0x17f, 0x355), #
+    BODFile(b'D.FA1', b'F026_B32.BSD', 0x7c4cc, 0x11c, 0x223), #
+    BODFile(b'D.FA1', b'F026_D22.BSD', 0x7c5e8, 0x119, 0x223), # goblin
+    BODFile(b'D.FA1', b'F033_D10.BSD', 0x7c702, 0x19f, 0x351), #
+    BODFile(b'D.FA1', b'F036_A12.BSD', 0x7c8a2, 0x12e, 0x223), #
+    BODFile(b'D.FA1', b'F036_B02.BSD', 0x7c9d0, 0x126, 0x21f), # 2 harpies
+    BODFile(b'D.FA1', b'F036_B12.BSD', 0x7caf6, 0x126, 0x21f), #
+    BODFile(b'D.FA1', b'F036_C10.BSD', 0x7cc1c, 0x120, 0x21f), # small dragon
     BODFile(b'D.FA1', b'CHRBAKU3.MCA', 0x7cd3c, 0x155, 0x580),
     BODFile(b'D.FA1', b'GOBLIN_S.MCA', 0x7ce92, 0x303, 0xc3e),
     BODFile(b'D.FA1', b'PALMAN.MCA', 0x7d196, 0x9c6, 0x11f4),
@@ -1260,50 +1259,50 @@ FILES = [
     BODFile(b'E.FA1', b'WYVERN2.BCA', 0xd41d6, 0x3ddf, 0x7502),
     BODFile(b'E.FA1', b'WYVN_E.BCA', 0xd7fb6, 0x338f, 0x6d09),
     BODFile(b'E.FA1', b'ZEFY_E.BCA', 0xdb346, 0x9cd9, 0x11e90),
-    BODFile(b'E.FA1', b'DL10_A22.BSD', 0xe5020, 0x127, 0x227),
-    BODFile(b'E.FA1', b'DL10_B22.BSD', 0xe5148, 0x122, 0x221),
-    BODFile(b'E.FA1', b'DL10_C12.BSD', 0xe526a, 0x11e, 0x225),
-    BODFile(b'E.FA1', b'DL10_K32.BSD', 0xe5388, 0x17c, 0x355),
-    BODFile(b'E.FA1', b'DL10_L22.BSD', 0xe5504, 0x17d, 0x359),
-    BODFile(b'E.FA1', b'DL10_S10.BSD', 0xe5682, 0x125, 0x223),
-    BODFile(b'E.FA1', b'DL10_T10.BSD', 0xe57a8, 0x117, 0x223),
-    BODFile(b'E.FA1', b'DL10_U10.BSD', 0xe58c0, 0x197, 0x359),
-    BODFile(b'E.FA1', b'DL11_A22.BSD', 0xe5a58, 0x129, 0x225),
-    BODFile(b'E.FA1', b'DL11_A30.BSD', 0xe5b82, 0x128, 0x225),
-    BODFile(b'E.FA1', b'DL11_B12.BSD', 0xe5caa, 0x125, 0x221),
-    BODFile(b'E.FA1', b'DL11_B20.BSD', 0xe5dd0, 0x124, 0x221),
-    BODFile(b'E.FA1', b'DL11_C10.BSD', 0xe5ef4, 0x119, 0x221),
-    BODFile(b'E.FA1', b'DL11_D02.BSD', 0xe600e, 0x1a5, 0x359),
-    BODFile(b'E.FA1', b'DL11_K12.BSD', 0xe61b4, 0x1a6, 0x359),
-    BODFile(b'E.FA1', b'DL11_X10.BSD', 0xe635a, 0x195, 0x357),
-    BODFile(b'E.FA1', b'DL20_T12.BSD', 0xe64f0, 0x333, 0x619),
-    BODFile(b'E.FA1', b'DL21_K22.BSD', 0xe6824, 0x1a4, 0x359),
-    BODFile(b'E.FA1', b'DL21_O10.BSD', 0xe69c8, 0x1c4, 0x351),
-    BODFile(b'E.FA1', b'DL21_P10.BSD', 0xe6b8c, 0x1c8, 0x355),
-    BODFile(b'E.FA1', b'DL21_Q10.BSD', 0xe6d54, 0x1c8, 0x351),
-    BODFile(b'E.FA1', b'DL21_R10.BSD', 0xe6f1c, 0x1c4, 0x353),
-    BODFile(b'E.FA1', b'DL21_S12.BSD', 0xe70e0, 0x1f7, 0x35b),
-    BODFile(b'E.FA1', b'DL21_T10.BSD', 0xe72d8, 0x112, 0x21f),
-    BODFile(b'E.FA1', b'DL30_000.BSD', 0xe73ea, 0x21b, 0x4d1),
-    BODFile(b'E.FA1', b'DL30_E22.BSD', 0xe7606, 0x11a, 0x221),
-    BODFile(b'E.FA1', b'DL30_S0F.BSD', 0xe7720, 0x118, 0x223),
-    BODFile(b'E.FA1', b'DL30_S0M.BSD', 0xe7838, 0x118, 0x223),
-    BODFile(b'E.FA1', b'DL30_S1F.BSD', 0xe7950, 0x118, 0x223),
-    BODFile(b'E.FA1', b'DL30_S1M.BSD', 0xe7a68, 0x118, 0x223),
-    BODFile(b'E.FA1', b'DL30_S2F.BSD', 0xe7b80, 0x118, 0x223),
-    BODFile(b'E.FA1', b'DL30_S2M.BSD', 0xe7c98, 0x118, 0x223),
-    BODFile(b'E.FA1', b'DL30_X10.BSD', 0xe7db0, 0x4ab, 0xa1b),
-    BODFile(b'E.FA1', b'DL30_Y10.BSD', 0xe825c, 0x2d4, 0x53d),
-    BODFile(b'E.FA1', b'DL30_Z10.BSD', 0xe8530, 0x3bb, 0x677),
-    BODFile(b'E.FA1', b'DL31_C12.BSD', 0xe88ec, 0x119, 0x221),
-    BODFile(b'E.FA1', b'DL31_E12.BSD', 0xe8a06, 0x119, 0x221),
-    BODFile(b'E.FA1', b'DL31_E20.BSD', 0xe8b20, 0x11a, 0x221),
-    BODFile(b'E.FA1', b'DL31_F10.BSD', 0xe8c3a, 0x123, 0x223),
-    BODFile(b'E.FA1', b'DL31_G10.BSD', 0xe8d5e, 0x11c, 0x221),
-    BODFile(b'E.FA1', b'DL31_H10.BSD', 0xe8e7a, 0x128, 0x225),
-    BODFile(b'E.FA1', b'DL31_K32.BSD', 0xe8fa2, 0x1a6, 0x359),
-    BODFile(b'E.FA1', b'DS00_E10.BSD', 0xe9148, 0x367, 0x717),
-    BODFile(b'E.FA1', b'ED_01.BSD', 0xe94b0, 0x107, 0x213),
+    BODFile(b'E.FA1', b'DL10_A22.BSD', 0xe5020, 0x127, 0x227), # 3 armor goblins
+    BODFile(b'E.FA1', b'DL10_B22.BSD', 0xe5148, 0x122, 0x221), # grey pill bug
+    BODFile(b'E.FA1', b'DL10_C12.BSD', 0xe526a, 0x11e, 0x225), # grey lobster
+    BODFile(b'E.FA1', b'DL10_K32.BSD', 0xe5388, 0x17c, 0x355), # 2 armor goblins
+    BODFile(b'E.FA1', b'DL10_L22.BSD', 0xe5504, 0x17d, 0x359), # armor goblin
+    BODFile(b'E.FA1', b'DL10_S10.BSD', 0xe5682, 0x125, 0x223), # jellyfish
+    BODFile(b'E.FA1', b'DL10_T10.BSD', 0xe57a8, 0x117, 0x223), # gravestone
+    BODFile(b'E.FA1', b'DL10_U10.BSD', 0xe58c0, 0x197, 0x359), # 2 red wizards
+    BODFile(b'E.FA1', b'DL11_A22.BSD', 0xe5a58, 0x129, 0x225), # 2 eyes
+    BODFile(b'E.FA1', b'DL11_A30.BSD', 0xe5b82, 0x128, 0x225), # 3 eyes
+    BODFile(b'E.FA1', b'DL11_B12.BSD', 0xe5caa, 0x125, 0x221), # grey mantis
+    BODFile(b'E.FA1', b'DL11_B20.BSD', 0xe5dd0, 0x124, 0x221), # 2 grey mantis
+    BODFile(b'E.FA1', b'DL11_C10.BSD', 0xe5ef4, 0x119, 0x221), # golem
+    BODFile(b'E.FA1', b'DL11_D02.BSD', 0xe600e, 0x1a5, 0x359), # 2 smiley mages
+    BODFile(b'E.FA1', b'DL11_K12.BSD', 0xe61b4, 0x1a6, 0x359), # 2 smiley mages + golem
+    BODFile(b'E.FA1', b'DL11_X10.BSD', 0xe635a, 0x195, 0x357), # magician girl + head
+    BODFile(b'E.FA1', b'DL20_T12.BSD', 0xe64f0, 0x333, 0x619), # (*) 3 eyes with dialogue
+    BODFile(b'E.FA1', b'DL21_K22.BSD', 0xe6824, 0x1a4, 0x359), # 2 golem 1 smiley mage
+    BODFile(b'E.FA1', b'DL21_O10.BSD', 0xe69c8, 0x1c4, 0x351), # ghost armor
+    BODFile(b'E.FA1', b'DL21_P10.BSD', 0xe6b8c, 0x1c8, 0x355), # muscle dragon
+    BODFile(b'E.FA1', b'DL21_Q10.BSD', 0xe6d54, 0x1c8, 0x351), # diamond golem
+    BODFile(b'E.FA1', b'DL21_R10.BSD', 0xe6f1c, 0x1c4, 0x353), # tombstone
+    BODFile(b'E.FA1', b'DL21_S12.BSD', 0xe70e0, 0x1f7, 0x35b), # smiley mage
+    BODFile(b'E.FA1', b'DL21_T10.BSD', 0xe72d8, 0x112, 0x21f), # mimic
+    BODFile(b'E.FA1', b'DL30_000.BSD', 0xe73ea, 0x21b, 0x4d1), # 3 blue manticores
+    BODFile(b'E.FA1', b'DL30_E22.BSD', 0xe7606, 0x11a, 0x221), # gold ghost armors
+    BODFile(b'E.FA1', b'DL30_S0F.BSD', 0xe7720, 0x118, 0x223), # possessed girl
+    BODFile(b'E.FA1', b'DL30_S0M.BSD', 0xe7838, 0x118, 0x223), # possessed guy
+    BODFile(b'E.FA1', b'DL30_S1F.BSD', 0xe7950, 0x118, 0x223), # possessed little girl
+    BODFile(b'E.FA1', b'DL30_S1M.BSD', 0xe7a68, 0x118, 0x223), # possessed little boy
+    BODFile(b'E.FA1', b'DL30_S2F.BSD', 0xe7b80, 0x118, 0x223), # possessed old woman
+    BODFile(b'E.FA1', b'DL30_S2M.BSD', 0xe7c98, 0x118, 0x223), # possessed old coot
+    BODFile(b'E.FA1', b'DL30_X10.BSD', 0xe7db0, 0x4ab, 0xa1b), # (*) shrine maiden
+    BODFile(b'E.FA1', b'DL30_Y10.BSD', 0xe825c, 0x2d4, 0x53d), # (*) dragon
+    BODFile(b'E.FA1', b'DL30_Z10.BSD', 0xe8530, 0x3bb, 0x677), # (*) dragon red
+    BODFile(b'E.FA1', b'DL31_C12.BSD', 0xe88ec, 0x119, 0x221), # 3 golems
+    BODFile(b'E.FA1', b'DL31_E12.BSD', 0xe8a06, 0x119, 0x221), # 3 gold ghost armors
+    BODFile(b'E.FA1', b'DL31_E20.BSD', 0xe8b20, 0x11a, 0x221), # 2 gold ghost armors
+    BODFile(b'E.FA1', b'DL31_F10.BSD', 0xe8c3a, 0x123, 0x223), # big dumb snake
+    BODFile(b'E.FA1', b'DL31_G10.BSD', 0xe8d5e, 0x11c, 0x221), # big dragon
+    BODFile(b'E.FA1', b'DL31_H10.BSD', 0xe8e7a, 0x128, 0x225), # huge turtle
+    BODFile(b'E.FA1', b'DL31_K32.BSD', 0xe8fa2, 0x1a6, 0x359), # 3 golems 3 smiley mages
+    BODFile(b'E.FA1', b'DS00_E10.BSD', 0xe9148, 0x367, 0x717), # (*) sword
+    BODFile(b'E.FA1', b'ED_01.BSD', 0xe94b0, 0x107, 0x213), # can't load these files
     BODFile(b'E.FA1', b'ED_02.BSD', 0xe95b8, 0x107, 0x213),
     BODFile(b'E.FA1', b'ED_03.BSD', 0xe96c0, 0x106, 0x213),
     BODFile(b'E.FA1', b'ED_04.BSD', 0xe97c6, 0x106, 0x213),
