@@ -555,6 +555,19 @@ KIES.SMI = 32940-3377a
 
 * A few bad things and a crash upon entering the Zerfuedel battle:
    * Doesn't load the background correctly (shows the glitched map instead)
+      * 83 8c 02 d\bac_11
+      * 01 00 02 d\mk32
+      * It'd be some pointer with a value between (1ed-2c0) = (19ed-1ac0)
+         * Something looks at 1a18 (18 1a)
+         * RReads 28770, then 16f52 (a 18 1a), then goes to the 1a18 location.
+         * So what is this 16f52 file??
+            * This is the stack. (begins at 16d8?)
+            * Probably just remembering where it left off during reading all the control codes...
+         * Before the soldier battle, it reads af and b0.
+            * After hte battle is over it loads b1 (22), b2 (28 00), b4 (88), b5 (00), ...
+               * lodsw are: b9 (c2 1b), bc (59 2c), c0 (d2 1b), c4 (28 00), cb (25 1c), ..., d2 (91 22), d5 (59 2c), d9 (30 1c), e4 (ce 1f), e7 (59 2c), eb (d3 1f), 
+               * "repne scasb" = scan the string, look for the same character in EAX (00)
+                  * This is when loading a filename
    * Crash when trying to load his next dialgoue
    * What file is this text even in?
       * D010_X10.BSD

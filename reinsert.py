@@ -6,7 +6,7 @@ import os
 from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
-from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, ARCHIVES_TO_REINSERT
+from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, COMPRESSED_FILES_TO_EDIT, ARCHIVES_TO_REINSERT
 from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
 from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN, CONTROL_CODES
 
@@ -185,6 +185,22 @@ if __name__ == '__main__':
 
             block.incorporate()
 
+        gf.write(skip_disk=True)
+
+    # Editing compressed files without decompressing them. A truly barbaric practice
+    for filename in COMPRESSED_FILES_TO_EDIT:
+        print(filename)
+        original_path = os.path.join('original', filename)
+        patched_path = os.path.join('patched', filename)
+        copyfile(original_path, patched_path)
+
+        gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
+
+        if filename in BYTE_EDITS:
+            print(BYTE_EDITS[filename])
+            for (loc, value) in BYTE_EDITS[filename]:
+                gf.edit(loc, value)
+                
         gf.write(skip_disk=True)
 
     for filename in ARCHIVES_TO_REINSERT:
