@@ -21,31 +21,39 @@ THRESHOLD = 4
 
 
 def dump(files):
-    worksheet = workbook.add_worksheet('SCNs')
-    worksheet.write(0, 0, 'Filename', header)
-    worksheet.write(0, 1, 'Offset', header)
-    worksheet.write(0, 2, 'Japanese', header)
-    worksheet.write(0, 3, 'JP_len', header)
-    worksheet.write(0, 4, 'English', header)
-    worksheet.write(0, 5, 'EN_len', header)
-    worksheet.write(0, 6, 'English (Typeset)', header)
-    worksheet.write(0, 7, 'Comments', header)
 
-    worksheet.set_column('A:A', 10)
-    worksheet.set_column('B:B', 8)
-    worksheet.set_column('C:C', 60)
-    worksheet.set_column('D:D', 5)
-    worksheet.set_column('E:E', 60)
-    worksheet.set_column('F:F', 5)
-    worksheet.set_column('G:G', 60)
-    worksheet.set_column('H:H', 60)
+    for sheet in ('SCNs', 'BSDs'):
+        worksheet = workbook.add_worksheet(sheet)
+        worksheet.write(0, 0, 'Filename', header)
+        worksheet.write(0, 1, 'Offset', header)
+        worksheet.write(0, 2, 'Japanese', header)
+        worksheet.write(0, 3, 'JP_len', header)
+        worksheet.write(0, 4, 'English', header)
+        worksheet.write(0, 5, 'EN_len', header)
+        worksheet.write(0, 6, 'English (Typeset)', header)
+        worksheet.write(0, 7, 'Comments', header)
+
+        worksheet.set_column('A:A', 10)
+        worksheet.set_column('B:B', 8)
+        worksheet.set_column('C:C', 60)
+        worksheet.set_column('D:D', 5)
+        worksheet.set_column('E:E', 60)
+        worksheet.set_column('F:F', 5)
+        worksheet.set_column('G:G', 60)
+        worksheet.set_column('H:H', 60)
+
+
     scn_row = 1
+    bsd_row = 1
 
     for filename in FILES_TO_DUMP:
         clean_filename = filename
+        print(filename)
 
         if clean_filename.endswith('.SCN'):
             worksheet = workbook.get_worksheet_by_name('SCNs')
+        elif clean_filename.endswith('.BSD'):
+            worksheet = workbook.get_worksheet_by_name('BSDs')
         else:
             # Create a new sheet
             worksheet = workbook.add_worksheet(clean_filename)
@@ -185,7 +193,9 @@ def dump(files):
                     s = (s[0], s[1].replace(b'=', b'[=]'), s[2])
 
                 if len(s[1]) < THRESHOLD:
-                    continue
+                    # Keep 男 (man) kanji, the rest can be eliminated
+                    if s[1] != b'\x92\x6a':
+                        continue
 
                 # Remove the "ya ya ya" spam
                 if b'\x83\x83\x83' in s[1]:
@@ -212,6 +222,13 @@ def dump(files):
                     worksheet.write(scn_row, 3, '=LEN(C%s)' % str(scn_row+1))
                     worksheet.write(scn_row, 5, '=LEN(E%s)' % str(scn_row+1))
                     scn_row += 1
+                elif clean_filename.endswith("BSD"):
+                    worksheet.write(bsd_row, 0, filename)
+                    worksheet.write(bsd_row, 1, loc)
+                    worksheet.write(bsd_row, 2, jp)
+                    worksheet.write(bsd_row, 3, '=LEN(C%s)' % str(bsd_row+1))
+                    worksheet.write(bsd_row, 5, '=LEN(E%s)' % str(bsd_row+1))
+                    bsd_row += 1
                 else:
                     worksheet.write(row, 0, loc)
                     worksheet.write(row, 1, jp)
