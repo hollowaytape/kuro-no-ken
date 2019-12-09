@@ -75,7 +75,7 @@ FILES_TO_DUMP = [
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
 FILES_TO_REINSERT = ['00IPL.SCN', 'BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', #'02OLB03A.SCN',
-                     '03YSK.SCN', '03YSK01A.SCN',]
+                     '03YSK.SCN', '03YSK01A.SCN', 'D010_X10.BSD']
 
 COMPRESSED_FILES_TO_EDIT = ['YSK1.MP1',]
 
@@ -152,6 +152,10 @@ FILE_BLOCKS = {
     # Probably not necessary anymore
     '03YSK01A.SCN': [
         (0x0, 0x145d),
+    ],
+
+    'D010_X10.BSD': [
+        (0x222, 0xd90)
     ]
 }
 
@@ -1444,6 +1448,8 @@ for file in FILES_TO_DUMP:
         last_string_end = None
         if file.endswith('SCN'):
             translations = Dump.get_translations(file, include_blank=True, sheet_name="SCNs")
+        elif file.endswith("BSD"):
+            translations = Dump.get_translations(file, include_blank=True, sheet_name="BSDs")
         else:
             translations = Dump.get_translations(file, include_blank=True)
         for t in translations:

@@ -164,7 +164,7 @@ def repack(archive):
         #print(table)
 
         # Invert the table and write it
-        print(table)
+        #print(table)
         table = invert(table)
         f.write(table)
 

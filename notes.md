@@ -607,3 +607,13 @@ KIES.SMI = 32940-3377a
    * Anything in 03YSK we can tweak to avoid this? That's the last thing it loads before we start having problems
       * It looks like it doesn't even load this file into the proper place. It might just try to load it over and over
          * Does this happen with the original (compressed) file?
+
+* Some issue with the dumped .BSD file. That sucks
+   * Reinserting the extracted D010_X10.BSD file produces some similar effects to something that was happening earlier - failing to load the background, and crashing as soon as he's about to do the counterattack
+       * Why was this happening earlier...? I thought it was a pointer thing.
+       * Maybe a problem with the 03YSK or 03YSK01A extraction? I didn't reinsert those (with no changes) and it works fine.
+         * Works fine with 03YSK inserted.
+         * Works fine with 03YSK01A inserted.
+            * But doesn't work fine with all 3: 03YSK, 03YSK01A, and the BSD file inserted... maybe it's an available-memory issue?
+            * How feasible is it to edit 03YSK as the compressed version?
+            * Check the memory where the background file gets loaded, see what it is running into at the end.

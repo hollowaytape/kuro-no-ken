@@ -88,9 +88,14 @@ if __name__ == '__main__':
                 #print(filename)
                 translations = Dump.get_translations(block, include_blank=True, sheet_name="SCNs")
                 #print(translations)
+            elif filename.endswith('BSD'):
+                print("Using the BSDs sheet")
+                translations = Dump.get_translations(block, include_blank=True, sheet_name="BSDs")
+
             else:
                 translations = Dump.get_translations(block, include_blank=True)
             for t in translations:
+                print(t)
                 if t.en_bytestring == b'':
                     t.en_bytestring = t.jp_bytestring
                     
