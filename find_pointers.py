@@ -148,10 +148,8 @@ for gamefile in FILES_WITH_POINTERS:
                 if all([not t[0] <= text_location<= t[1] for t in target_areas]):
                     print("It's not in any of the blocks, so skipping it")
                     continue
-                #print("It was in a block")
 
-                print((gamefile, int(pointer_location, 16)))
-                if (gamefile, text_location) in POINTERS_TO_SKIP or (gamefile, int(pointer_location, 16)) in POINTERS_TO_SKIP:
+                if (gamefile, text_location) in POINTERS_TO_SKIP or (gamefile, int(pointer_location, 16), 'pointer_location') in POINTERS_TO_SKIP:
                     print("Skipping this one")
                     continue
 
@@ -161,13 +159,7 @@ for gamefile in FILES_WITH_POINTERS:
                         print("Not a proper zero pointer first byte")
                         continue
 
-                #if gamefile.endswith('.SCN') and any([t[0] <= int(pointer_location, 16) <= t[1] for t in target_areas]):
-                #    print("That pointer is probably just a text control code, skipping it")
-                #    continue
-
                 all_locations = [int(pointer_location, 16),]
-
-                #print(pointer_locations)
 
                 if (GF, text_location) in pointer_locations:
                     all_locations = pointer_locations[(GF, text_location)]
@@ -178,8 +170,6 @@ for gamefile in FILES_WITH_POINTERS:
 
                 print(pointer_location, hex(text_location))
                 pointer_locations[(GF, text_location)] = all_locations
-                #print(pointer_locations[(GF, text_location)])
-                #print((GF, text_location) in pointer_locations)
 
                 if relevant_regex in [item_pointer_regex, item_pointer_regex_ba, item_pointer_regex_9c]:
 

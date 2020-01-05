@@ -132,8 +132,8 @@ FILE_BLOCKS = {
 
     'BD.BIN': [
         (0x9ddd, 0x9e64),
-        (0x9ed5, 0x9ee2),
-        (0x9f2e, 0x9f3b),
+        (0x9ed2, 0x9ee2),
+        (0x9f2c, 0x9f3b),
         (0x9f6b, 0x9f80),
         (0xb1e0, 0xb1f8),
         (0xba4a, 0xbc3e),
@@ -1402,7 +1402,8 @@ POINTERS_TO_REASSIGN = {
 }
 
 POINTERS_TO_SKIP = [
-    ('BD.BIN', 0xb696), # this is the pointer location, does it work this way?
+    ('BD.BIN', 0xb696, 'pointer_location'), # This pointer breaks the "HP" display in pause menu
+    ('BD.BIN', 0xe49f, 'pointer_location'), # This pointer breaks the "HP" display in battle
     ('ITEM.SMI', 0x2c00),
     ('02OLB00A.SCN', 0x150),  # Causes soft lock after some line in the intro
     ('02OLB00A.SCN', 0x33b),
@@ -1430,6 +1431,7 @@ CONTROL_CODES = {
     b'[BLANK]': b'',
     b'[SPLIT]': b'\\f\x00;@\x02',
     b'[New]': b'\x04\x06\x30\x40\x02',
+    b'[00]': b'\x00',
 }
 
 # Auto-generate file blocks when they are not manually defined
