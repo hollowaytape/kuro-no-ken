@@ -617,3 +617,24 @@ KIES.SMI = 32940-3377a
             * But doesn't work fine with all 3: 03YSK, 03YSK01A, and the BSD file inserted... maybe it's an available-memory issue?
             * How feasible is it to edit 03YSK as the compressed version?
             * Check the memory where the background file gets loaded, see what it is running into at the end.
+
+## BSD pointers
+* D010_X10 Zerfuedel line after attack: 0xc90 「お前・・・
+   * First thing in the block that gets read: 0x2b6f7 (00 02 08 00 00 ff 00...)
+      * This is just a cmp of that value.
+   * Then part of the block gets executed as code: 2b6a2 (1e 06 60 2e 8b 1e 00...) (push ds)
+   * Lots of code would need to be adjusted. Here are a few:
+      * mov cs:[0c77] is 2ec606770c02
+      * mov cs:[0d91] is 2ec706910d780c
+         * Pointer formats would be c6 06 xx yy and c7 06 xx yy.
+         * Also the stuff that's moving would get changed too? So it'd be c6 06 xx yy aa bb, and c6 07 xx yy aa bb.
+
+
+## (Fixed?) Space issue with 03YSK
+* Let's see what I can remember.
+* Reinserting just D010_X10.BSD: Works fine. It's decompressed, so it skips the compressed staging area and writes directly to the final BSD-file area.
+* Reinserting D010_X10.BSD, 03YSK.SCN, and 03YSK01A.SCN: (with no text in the ysks): It's fine
+* Reinserting D010_X10.BSD, 03YSK.SCN, and 03YSK01A.SCN: (with full script reinserted): It's fine...??
+   * Might be the addition of some other file? Let me work up to the most recent all-files-inserted situation
+   * This problem is just not reproducing anymore? 
+* Do I get this same problem with reinserting the soldiers BSD?

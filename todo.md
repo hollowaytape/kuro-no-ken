@@ -29,37 +29,7 @@
 * No attempt at typesetting yet, what are the length limits?
 
 ## .BSD files
-* Battle scenario files.
-* A handful of them have the "I can't run" string (げられない) which will need to be translated.
-	* C020_X10.BSD
-	* C021_X10.BSD
-	* C022_S10.BSD
-	* C022_S20.BSD
-	* C022_T10.BSD
-	* C051_X10.BSD
-	* D010_X10.BSD
-	* D011_S20.BSD
-	* D011_T20.BSD
-	* D011_U20.BSD
-	* D011_X10.BSD
-	* D050_S10.BSD
-	* D050_T01.BSD
-	* D050_T02.BSD
-	* D052_S10.BSD
-	* D061_X10.BSD
-	* D080_T10.BSD
-	* D090_X32.BSD
-	* D100_ZA3.BSD
-	* D100_ZA7.BSD
-	* D110_S10.BSD
-	* DL20_T12.BSD
-	* DL21_O10.BSD
-	* DL21_Q10.BSD
-	* DL21_R10.BSD
-	* DL21_S12.BSD
-	* DL30_X10.BSD
-* These files are compressed, so they should get extracted.
-* They also have attack names in them maybe?
+* Haven't tried pointer edits or reinsertion with these yet.
 
 ## Images
 * What file is the logo image?

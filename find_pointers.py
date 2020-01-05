@@ -27,6 +27,11 @@ item_pointer_regex = r'\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x([0-f][0-f])\\x([0-
 item_pointer_regex_9c = r'\\x9c\\x9c\\x9c\\x9c\\x9c\\x9c\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 item_pointer_regex_ba = r'\\x00\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\xff\\xff'
 
+bsd_pointer_regex_c6_first = r'\\xc6\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
+bsd_pointer_regex_c6_second = r'\\xc6\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
+bsd_pointer_regex_c7_first = r'\\xc7\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
+bsd_pointer_regex_c7_second = r'\\xc7\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
+
 def capture_pointers_from_function(regex, hx): 
     return re.compile(regex).finditer(hx, overlapped=True)
 
@@ -77,6 +82,9 @@ for gamefile in FILES_WITH_POINTERS:
             relevant_regexes = [scn_inner_pointer_regex_0, 
                                scn_inner_pointer_regex_1, scn_inner_pointer_regex_4, scn_inner_pointer_regex_9,
                                scn_inner_pointer_regex_ff, scn_inner_pointer_regex_892a, scn_inner_pointer_regex_892c]
+        elif gamefile.endswith(".BSD"):
+            relevant_regexes = [bsd_pointer_regex_c6_first, bsd_pointer_regex_c6_second,
+                bsd_pointer_regex_c7_first, bsd_pointer_regex_c7_second]
         else:
             relevant_regexes = [pointer_regex,]
 
@@ -102,6 +110,10 @@ for gamefile in FILES_WITH_POINTERS:
                     pointer_location = p.start()//4 + 2
                 elif relevant_regex == scn_inner_pointer_regex_892c:
                     pointer_location = p.start()//4 + 2
+                elif relevant_regex in (bsd_pointer_regex_c6_first, bsd_pointer_regex_c7_first):
+                    pointer_location = p.start()//4 + 2
+                elif relevant_regex in (bsd_pointer_regex_c6_second, bsd_pointer_regex_c7_second):
+                    pointer_location = p.start()//4 + 4
                 else:
                     pointer_location = p.start()//4 + 1
 
@@ -111,6 +123,8 @@ for gamefile in FILES_WITH_POINTERS:
                     # SIPR0 begins with an extra group, so need different indices
                     if relevant_regex == scn_inner_pointer_regex_0:
                         text_location = int(location_from_pointer((p.group(2), p.group(3)), GF.pointer_constant), 16)
+                    elif relevant_regex in (bsd_pointer_regex_c6_second, bsd_pointer_regex_c7_second):
+                        text_location = int(location_from_pointer((p.group(3), p.group(4)), GF.pointer_constant), 16)
                     else:
                         text_location = int(location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant), 16)
                 except ValueError:
