@@ -131,8 +131,7 @@ ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x03, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43
 FILE_BLOCKS = {
 
     'BD.BIN': [
-        (0x9e01, 0x9e0d),
-        (0x9e33, 0x9e64),
+        (0x9ddd, 0x9e64),
         (0x9ed5, 0x9ee2),
         (0x9f2e, 0x9f3b),
         (0x9f6b, 0x9f80),
@@ -156,9 +155,9 @@ FILE_BLOCKS = {
         (0x0, 0x145d),
     ],
 
-    'D010_X10.BSD': [
-        (0x222, 0xd90)
-    ]
+    #'D010_X10.BSD': [
+    #    (0x222, 0xd90)
+    #]
 }
 
 LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN']
@@ -1403,6 +1402,7 @@ POINTERS_TO_REASSIGN = {
 }
 
 POINTERS_TO_SKIP = [
+    ('BD.BIN', 0xb696), # this is the pointer location, does it work this way?
     ('ITEM.SMI', 0x2c00),
     ('02OLB00A.SCN', 0x150),  # Causes soft lock after some line in the intro
     ('02OLB00A.SCN', 0x33b),

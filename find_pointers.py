@@ -14,7 +14,8 @@ from rominfo import ZERO_POINTER_FIRST_BYTES
 # POINTER_CONSTANT is the line where "Borland Compiler" appears, rounded down to the nearest 0x10.
 
 pointer_regex = r'\\xbe\\x([0-f][0-f])\\x([0-f][0-f])'
-bd_pointer_regex = r'\\x08\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
+bd_pointer_regex_5 = r'\\x05\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
+bd_pointer_regex_8 = r'\\x08\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
 #scn_pointer_regex = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_0 = r'\\x([0-f][0-f])\\x00\\x([0-f][0-f])\\x([0-f][0-f])'
 scn_inner_pointer_regex_1 = r'\\x01\\x([0-f][0-f])\\x([0-f][0-f])'
@@ -32,11 +33,17 @@ bsd_pointer_regex_c6_second = r'\\xc6\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f
 bsd_pointer_regex_c7_first = r'\\xc7\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 bsd_pointer_regex_c7_second = r'\\xc7\\x06\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])\\x([0-f][0-f])'
 
+pointer_table = r''
+
 def capture_pointers_from_function(regex, hx): 
     return re.compile(regex).finditer(hx, overlapped=True)
 
 def location_from_pointer(pointer, constant):
-    return '0x' + str(format((unpack(pointer[0], pointer[1]) + constant), '05x'))
+    try:
+        result = '0x' + str(format((unpack(pointer[0], pointer[1]) + constant), '05x'))
+    except:
+        result = '0x' + str(format((unpack(hex(pointer[0]), hex(pointer[1])) + constant), '05x'))
+    return result
 
 def unpack(s, t=None):
     if t is None:
@@ -64,6 +71,8 @@ for gamefile in FILES_WITH_POINTERS:
     with open(gamefile_path, 'rb') as f:
         bs = f.read()
         target_areas = FILE_BLOCKS[gamefile]
+        if gamefile.endswith(".BSD"):
+            target_areas = [(0x0, len(GF.filestring))]
         #print(target_areas)
         # target_area = (GF.pointer_constant, len(bs))
         #print(hex(target_area[0]), hex(target_area[1]))
@@ -77,33 +86,32 @@ for gamefile in FILES_WITH_POINTERS:
             relevant_regexes = [item_pointer_regex, item_pointer_regex_9c,
                                item_pointer_regex_ba]
         elif gamefile.endswith('.BIN'):
-            relevant_regexes = [pointer_regex, bd_pointer_regex]
+            relevant_regexes = [pointer_regex, bd_pointer_regex_5, bd_pointer_regex_8]
         elif gamefile.endswith('.SCN'):
             relevant_regexes = [scn_inner_pointer_regex_0, 
                                scn_inner_pointer_regex_1, scn_inner_pointer_regex_4, scn_inner_pointer_regex_9,
                                scn_inner_pointer_regex_ff, scn_inner_pointer_regex_892a, scn_inner_pointer_regex_892c]
         elif gamefile.endswith(".BSD"):
             relevant_regexes = [bsd_pointer_regex_c6_first, bsd_pointer_regex_c6_second,
-                bsd_pointer_regex_c7_first, bsd_pointer_regex_c7_second]
+                bsd_pointer_regex_c7_first, bsd_pointer_regex_c7_second,
+                pointer_table]
         else:
             relevant_regexes = [pointer_regex,]
 
         for relevant_regex in relevant_regexes:
             print("Using", relevant_regex)
-            pointers = capture_pointers_from_function(relevant_regex, only_hex)
+
+            if relevant_regex == pointer_table:
+                pointers = range(0x12, 0x32, 0x2)
+            else:
+                pointers = capture_pointers_from_function(relevant_regex, only_hex)
 
             for p in pointers:
-                #print(p)
-                if relevant_regex == pointer_regex:
-                    pointer_location = p.start()//4 + 1
-                elif relevant_regex == bd_pointer_regex:
-                    pointer_location = p.start()//4 + 1
-                elif relevant_regex == item_pointer_regex:
+                # Handle all cases where the pointer signature begins is more than 1 byte long
+                if relevant_regex == item_pointer_regex:
                     pointer_location = p.start()//4 + 7
                 elif relevant_regex == item_pointer_regex_9c:
                     pointer_location = p.start()//4 + 6
-                elif relevant_regex == item_pointer_regex_ba:
-                    pointer_location = p.start()//4 + 1
                 elif relevant_regex == scn_inner_pointer_regex_0:
                     pointer_location = p.start()//4 + 2
                 elif relevant_regex == scn_inner_pointer_regex_892a:
@@ -114,6 +122,8 @@ for gamefile in FILES_WITH_POINTERS:
                     pointer_location = p.start()//4 + 2
                 elif relevant_regex in (bsd_pointer_regex_c6_second, bsd_pointer_regex_c7_second):
                     pointer_location = p.start()//4 + 4
+                elif relevant_regex == pointer_table:
+                    pointer_location = p
                 else:
                     pointer_location = p.start()//4 + 1
 
@@ -125,6 +135,9 @@ for gamefile in FILES_WITH_POINTERS:
                         text_location = int(location_from_pointer((p.group(2), p.group(3)), GF.pointer_constant), 16)
                     elif relevant_regex in (bsd_pointer_regex_c6_second, bsd_pointer_regex_c7_second):
                         text_location = int(location_from_pointer((p.group(3), p.group(4)), GF.pointer_constant), 16)
+                    elif relevant_regex == pointer_table:
+                        print(hex(p), bs[p], bs[p+1])
+                        text_location = int(location_from_pointer((bs[p], bs[p+1]), GF.pointer_constant), 16)
                     else:
                         text_location = int(location_from_pointer((p.group(1), p.group(2)), GF.pointer_constant), 16)
                 except ValueError:
@@ -137,7 +150,8 @@ for gamefile in FILES_WITH_POINTERS:
                     continue
                 #print("It was in a block")
 
-                if (gamefile, text_location) in POINTERS_TO_SKIP:
+                print((gamefile, int(pointer_location, 16)))
+                if (gamefile, text_location) in POINTERS_TO_SKIP or (gamefile, int(pointer_location, 16)) in POINTERS_TO_SKIP:
                     print("Skipping this one")
                     continue
 

@@ -628,6 +628,10 @@ KIES.SMI = 32940-3377a
       * mov cs:[0d91] is 2ec706910d780c
          * Pointer formats would be c6 06 xx yy and c7 06 xx yy.
          * Also the stuff that's moving would get changed too? So it'd be c6 06 xx yy aa bb, and c6 07 xx yy aa bb.
+      * Some stuff in the header that looks like pointers:
+         * Just a bunch of two-byte pointer values stuck together
+         * This looks like it might be the same from file to file.
+            * Starts at 0x12, ends at 0x32
 
 
 ## (Fixed?) Space issue with 03YSK
@@ -638,3 +642,18 @@ KIES.SMI = 32940-3377a
    * Might be the addition of some other file? Let me work up to the most recent all-files-inserted situation
    * This problem is just not reproducing anymore? 
 * Do I get this same problem with reinserting the soldiers BSD?
+
+## Fixing minor system pointer issues
+* No "HP" label in battle
+* No "HP" label on menu screen
+      * Here the text VRAM is getting written to directly. (0xa1a8d ish)
+      * HP = 09 48 09 50
+      * Is this the result of some hack I did to BD.BIN? Remove it and let's find out
+            * No
+      * Some bad pointer in the first 49 pointers?
+* "ad" instead of Load
+      * Missing a pointer, it has a different format (05 xx yy), added that now
+      * Now it's a different problem? Hmm
+* The pointer to "Shinobu got" is incorrect, it probably points to something earlier
+   * There's some window-creating code up there, the pointer is probably to the beginning of that
+      * A pointer to 0x20b8d (00 ff 00 ff 00 5c 6f 32), which is 9e0d. Fixed
