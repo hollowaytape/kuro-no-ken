@@ -8,12 +8,13 @@ from collections import OrderedDict
 from romtools.dump import BorlandPointer, PointerExcel
 from romtools.disk import Gamefile
 
-from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS, POINTERS_TO_SKIP, CONTROL_CODES
+from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS, POINTERS_TO_SKIP, POINTERS_TO_ADD, CONTROL_CODES
 from rominfo import ZERO_POINTER_FIRST_BYTES
 
 # POINTER_CONSTANT is the line where "Borland Compiler" appears, rounded down to the nearest 0x10.
 
 pointer_regex = r'\\xbe\\x([0-f][0-f])\\x([0-f][0-f])'
+bd_pointer_regex_4 = r'\\x04\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
 bd_pointer_regex_5 = r'\\x05\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
 bd_pointer_regex_8 = r'\\x08\\x([0-f][0-f])\\x([0-f][0-f])\\x00'
 #scn_pointer_regex = r'\\x09\\x([0-f][0-f])\\x([0-f][0-f])'
@@ -86,7 +87,7 @@ for gamefile in FILES_WITH_POINTERS:
             relevant_regexes = [item_pointer_regex, item_pointer_regex_9c,
                                item_pointer_regex_ba]
         elif gamefile.endswith('.BIN'):
-            relevant_regexes = [pointer_regex, bd_pointer_regex_5, bd_pointer_regex_8]
+            relevant_regexes = [pointer_regex, bd_pointer_regex_4, bd_pointer_regex_5, bd_pointer_regex_8]
         elif gamefile.endswith('.SCN'):
             relevant_regexes = [scn_inner_pointer_regex_0, 
                                scn_inner_pointer_regex_1, scn_inner_pointer_regex_4, scn_inner_pointer_regex_9,
@@ -194,6 +195,15 @@ for gamefile in FILES_WITH_POINTERS:
     worksheet = PtrXl.add_worksheet(GF.filename)
 
     row = 1
+
+    for pta in POINTERS_TO_ADD:
+        filename, pointer_location, text_location = pta
+        if filename == gamefile:
+            print("Adding a manually defined pointer:", pta)
+            if (GF, text_location) in pointer_locations:
+                pointer_locations[(GF, text_location)].append(pointer_location)
+            else:
+                pointer_locations[(GF, text_location)] = [pointer_location,]
 
     for (gamefile, text_location), pointer_locations in sorted((pointer_locations).items()):
         obj = BorlandPointer(gamefile, pointer_locations, text_location, separator=b'\f')

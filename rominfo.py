@@ -1395,9 +1395,9 @@ POINTERS_TO_REASSIGN = {
             (0xd8cb, 0xd8ea),   # Item
             (0xd8d0, 0xd8ef),   # Equip
             (0xd8d5, 0xd8f4),   # Run
-            (0xbad2, 0xba9e),   # Save
-            (0xbaba, 0xba9e),   # Save
-            (0xbad9, 0xbac1),   # Load
+            #(0xbad2, 0xba9e),   # Save
+            #(0xbaba, 0xba9e),   # Save
+            #(0xbad9, 0xbac1),   # Load
         ]
 }
 
@@ -1415,6 +1415,15 @@ POINTERS_TO_SKIP = [
     ('03YSK01A.SCN', 0xe09),  # 01 09 26 23 gets mistaken for an "01 09 26" pointer instead of "09 26 23"
     ('03YSK01A.SCN', 0x1204),
     ('03YSK01A.SCN', 0x1289),
+]
+
+# Some pointers are just values in tables at particular locations... let's try just doing this
+POINTERS_TO_ADD = [
+    # file,     location,  text_location
+    ('BD.BIN', 0xcbb4, 0xbb96),
+    ('BD.BIN', 0xcbb6, 0xbb9b),
+    ('BD.BIN', 0xcbb8, 0xbba0),
+    ('BD.BIN', 0xcbba, 0xbbac),
 ]
 
 # Put some default values in there

@@ -653,12 +653,16 @@ KIES.SMI = 32940-3377a
             * Yep. Successfully removed
       * Does this fix the in-battle problem?
             * No. That must be some other pointer issue?
-* "ad" instead of Load
+* (Fixed) "ad" instead of Load
       * Missing a pointer, it has a different format (05 xx yy), added that now
       * Now it's a different problem? Hmm (Save/Load are s/No now)
+      * Removed the pointer reassignments, now it's good
 * (Fixed) The pointer to "Shinobu got" is incorrect, it probably points to something earlier
    * There's some window-creating code up there, the pointer is probably to the beginning of that
       * A pointer to 0x20b8d (00 ff 00 ff 00 5c 6f 32), which is 9e0d. Fixed
-* Just weird stuff happening when you select equipment
+* (Fixed) Just weird stuff happening when you select equipment
+   * Weapon: 96bb (c3 90 96 bb 9b bb)
+   * Armor:  9bbb (c3 90 96 bb 9b bb)
+   * Just a table of values embedded in the code one after another.
 * It'd be great to be able to re-order "X gold received" to "Got X gold".
       * Moving the \f doesn't seem to work? That puts the text at the end after a million spaces for some reason
