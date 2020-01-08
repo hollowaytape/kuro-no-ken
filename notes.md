@@ -666,3 +666,8 @@ KIES.SMI = 32940-3377a
    * Just a table of values embedded in the code one after another.
 * It'd be great to be able to re-order "X gold received" to "Got X gold".
       * Moving the \f doesn't seem to work? That puts the text at the end after a million spaces for some reason
+
+## Continuing reinsertion
+* Got an initial pointer dump for 02OLB01.SCN. All the pointers to 1509 look suspicious, they should probably get removed
+   * THe game only doesn't crash if I just insert the very last line. Hmm
+   * I should check if the "duplicate strings" are just leftovers from some other file maybe. Maybe the file is just the long Eris speech, and the leftovers are in the same position as every other file?

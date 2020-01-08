@@ -74,7 +74,8 @@ FILES_TO_DUMP = [
 # Definitely too many files, with incredibly annoying names, to do this manually.
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
-FILES_TO_REINSERT = ['00IPL.SCN', 'BD.BIN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
+FILES_TO_REINSERT = ['BD.BIN', 'ITEM.SMI', 'KIES.SMI', 'SHINOBU.SMI',
+                     '00IPL.SCN', '02OLB.SCN', '02OLB01.SCN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
                      '02OLB02A.SCN', '03YSK.SCN', '03YSK01A.SCN', 'D010_X10.BSD']
 
 COMPRESSED_FILES_TO_EDIT = ['YSK1.MP1',]
@@ -96,6 +97,7 @@ FILES_WITH_POINTERS = [
     'SHINOBU.SMI',
     #'00IPL.SCN',
     #'02OLB00A.SCN',
+    '02OLB01.SCN',
     '02OLB01A.SCN',
     '02OLB01B.SCN',
     '02OLB02A.SCN',

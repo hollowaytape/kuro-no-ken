@@ -134,6 +134,8 @@ if __name__ == '__main__':
                     # at the first repetition of a string
                     this_original_segment = block.blockstring[loc_in_block:]
                     this_segment = block.blockstring[loc_in_block:]
+                    print([hex(i) for i in t.jp_bytestring])
+                    print([hex(i) for i in this_segment])
                     assert t.jp_bytestring in this_segment
                     this_segment = this_segment.replace(t.jp_bytestring, t.en_bytestring, 1)
                     block.blockstring = block.blockstring.replace(this_original_segment, this_segment)
