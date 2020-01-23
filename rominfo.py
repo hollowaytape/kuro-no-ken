@@ -111,6 +111,7 @@ FILES_WITH_POINTERS = [
 POINTER_CONSTANT = {
     'BD.BIN': 0,
     #'00IPL.SCN': 0,
+    '02OLB01.SCN': -0x3d00, # just a guess
     '02OLB00A.SCN': -0x3d00,
     '02OLB01A.SCN': -0x3d00,
     '02OLB01B.SCN': -0x3d00,   # Just a guess
@@ -157,12 +158,17 @@ FILE_BLOCKS = {
         (0x0, 0x145d),
     ],
 
+    #'02OLB01.SCN': [
+    #    (0x432, 0x1168),
+    #    (0x13b1, 0x164c)
+    #]
+
     #'D010_X10.BSD': [
     #    (0x222, 0xd90)
     #]
 }
 
-LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN']
+LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN', ]
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),

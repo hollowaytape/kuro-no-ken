@@ -48,6 +48,11 @@ BYTE_EDITS = {
 	"YSK1.MP1": [
 		(0x1320, b'\xf2\x15')  # Increase the max length of 03YSK01A.SCN from 0x1562 -> 0x1800
 	]
+
+	"OLB2.MPC": [
+		(0x3431, b'\xf2\x15'),
+		(0x3e94, b'\xf2\x15'),
+	]
 }
 
 inventory = b''

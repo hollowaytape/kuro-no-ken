@@ -331,6 +331,7 @@ The file table appears to just be a not'd version of the big pattern table at th
 * 26d9: Where a decompressed base .SCN file (03YSK.SCN, etc). appears
 * 2858: Where a decompressed .SCN file appears
 * 2aa8: Where a decompressed .BSD file appears
+* 681e: Where a decompressed .MP1 file appears?
 
 * BD.BIN - the file with the options in it. It is very big (0xfd70 long).
    * Begins at 16d80? So, ranges from 16d80-26af0
@@ -671,3 +672,7 @@ KIES.SMI = 32940-3377a
 * Got an initial pointer dump for 02OLB01.SCN. All the pointers to 1509 look suspicious, they should probably get removed
    * THe game only doesn't crash if I just insert the very last line. Hmm
    * I should check if the "duplicate strings" are just leftovers from some other file maybe. Maybe the file is just the long Eris speech, and the leftovers are in the same position as every other file?
+      * Nah, this file seems real.
+* Oddly this file is exactly 0x1562 long, which was the limit of the YSK file...
+   * I extracted OLB2.MP1 but there isn't any 6215 in it.
+   * There are some other 6215s in various other random files I haven't extracted yet... I should replace them and see what happens. (Found a few in OLB2.MPC, try those next)
