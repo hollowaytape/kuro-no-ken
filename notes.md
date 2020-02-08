@@ -322,9 +322,6 @@ The file table appears to just be a not'd version of the big pattern table at th
 
 
 # Important segments
-* 2aa8: First dialogue (02OLB00A.SCN)
-* 216f: Options menu
-   * 16d8: BD.BIN
 * 07c4: Filename of file getting loaded
 * 08b4: Where the compressed file is loaded
 
@@ -378,15 +375,15 @@ The 40 before that:
 3b 01 ee 44 4f 01 ac 44: control code to scroll the image to the left
 
 * Series of offsets(?) at the beginning of 020LB01A.SCN:
-09 54 3d
-09 9e 3d
-09 14 3e
-09 44 3e
-09 68 3e
-09 bf 3f
-09 e7 3f
-09 15 40
-09 4b 40 <- this is the "where's my sword?" Ennis dialogue thing
+09 54 3d = 0054
+09 9e 3d = 009e
+09 14 3e = 0114
+09 44 3e = 0144
+09 68 3e = 0168
+09 bf 3f = 02bf
+09 e7 3f = 02e7
+09 15 40 = 0315
+09 4b 40 = 034b <- this is the "where's my sword?" Ennis dialogue thing (no it isn't?)
 09 21 43
 09 aa 43
 09 ce 43
@@ -403,12 +400,22 @@ The 40 before that:
 09 60 48
 09 26 49
 09 58 49
-09 91 4c
-09 df 4c
-09 2f 4d
+09 91 4c = 0991
+09 df 4c = 09df
+09 2f 4d = 102f
 
 04 30 40
 02 5c 69
+
+These seem to indicate the pointer constant is not 3d00.
+* When talking to Ennis (ab0ut 0x432, 0x289ad)
+   * lodsb es:
+   * es: 26d8, si: 1c2d
+   * (0x26d80 - 27747) File at ES is 02OLB.SCN (0x9c7 long)
+   * File after that is... ? something with a lot of filenames in it
+   * (0x28580 - 29bd2) File at 0x28580 is 02OLB01.SCN
+      * 289ad - 1c2d = 26d80
+      * 28580 - 26d80 = 1800. That's probably the pointer constant
 
 Text is between 5c-1080
 
@@ -673,6 +680,28 @@ KIES.SMI = 32940-3377a
    * THe game only doesn't crash if I just insert the very last line. Hmm
    * I should check if the "duplicate strings" are just leftovers from some other file maybe. Maybe the file is just the long Eris speech, and the leftovers are in the same position as every other file?
       * Nah, this file seems real.
-* Oddly this file is exactly 0x1562 long, which was the limit of the YSK file...
-   * I extracted OLB2.MP1 but there isn't any 6215 in it.
+* Oddly this file is exactly 0x1652 long, which was the limit of the YSK file...
+   * I extracted OLB2.MP1 but there isn't any 5216 in it.
    * There are some other 6215s in various other random files I haven't extracted yet... I should replace them and see what happens. (Found a few in OLB2.MPC, try those next)
+* When the file is too long, the crash is while loading OLB2.MPC, it seems.
+* The file crashes when it's 1654 or longer. SO maybe I should look for 1653 or 1654 instead?\
+   * OLB1.MPC:12d1 is 5316.
+   * YSK1.MPC:1795 is also 5316 in a similar byte context.
+* The file table seems to say the length is 0x1653 when my script is telling me it's 0x1654 long?
+   * All file table values should be padded right? Check and see what's happening
+   * Oops, I was looking at the "compressed length" instead of the "Decompressed length" which is the one that gets padded
+* The file crashes if I decrease the length, too. Maybe there is a pointer to something right at the end?
+* Another possibility - 02OLB01.SCN ends with 09 15 30 07, where the other files just end with 09 15 30. Is that extra byte the problem?
+   * Nah, there are other files that end with 09 15 30 07 too. It probably just means something else
+* Fixed at least part of this. Pointer constant was wrong (1800, not 3d00) and need to always dump & edit pointers to the end of the file (1652).
+* (Fixed) Now it is crashing when I reinsert the string at 1449. (Welcome! Will you be staying the night?) Does it do this if I don't insert other strings?
+   * Yes, still crashes. SO probably a missing pointer, not a file length thing
+      * Other strings have 3 pointers like: 15a2 (b1 00 f3 2d), 55 (09 f6 2d), 15fb (b0 00 fe 2d)
+      * 1504 only has 4c (09 f8 2c) and 14fd (b0 00 04 2d). So, missing b1 00 pointer?
+
+* Next step: reinserting stuff in the Innes/Shinobu conversation. Lots of code after it, so might need to add that segment manually as a "text block" so its pointers get considered
+   * (0x116a, ~0x13bf)
+   * Text: Stuff doesn't point to it, and it doesn't contain pointers
+   * Code sections: Stuff points to it and it contains pointers
+   * Code in between strings: Stuff points to it and it contains pointers
+   * (!) So, might need to reconsider "target areas" in the pointer finder. Maybe use a stricter version of the current auto-block-identifier that stops immediately when something is not a string, rather than waiting 0x35 bytes to get to more text

@@ -74,9 +74,21 @@ FILES_TO_DUMP = [
 # Definitely too many files, with incredibly annoying names, to do this manually.
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
-FILES_TO_REINSERT = ['BD.BIN', 'ITEM.SMI', 'KIES.SMI', 'SHINOBU.SMI',
-                     '00IPL.SCN', '02OLB.SCN', '02OLB01.SCN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
-                     '02OLB02A.SCN', '03YSK.SCN', '03YSK01A.SCN', 'D010_X10.BSD']
+FILES_TO_REINSERT = ['BD.BIN', 
+                     'ITEM.SMI', 
+                     'KIES.SMI', 
+                     'SHINOBU.SMI',
+                     '00IPL.SCN', 
+                     '02OLB.SCN', 
+                     '02OLB01.SCN', 
+                     #'02OLB00A.SCN', 
+                     #'02OLB01A.SCN', 
+                     #'02OLB01B.SCN', 
+                     #'02OLB02A.SCN', 
+                     #'03YSK.SCN', 
+                     #'03YSK01A.SCN', 
+                     #'D010_X10.BSD'
+]
 
 COMPRESSED_FILES_TO_EDIT = ['YSK1.MP1',]
 
@@ -111,7 +123,7 @@ FILES_WITH_POINTERS = [
 POINTER_CONSTANT = {
     'BD.BIN': 0,
     #'00IPL.SCN': 0,
-    '02OLB01.SCN': -0x3d00, # just a guess
+    '02OLB01.SCN': -0x1800,
     '02OLB00A.SCN': -0x3d00,
     '02OLB01A.SCN': -0x3d00,
     '02OLB01B.SCN': -0x3d00,   # Just a guess
@@ -127,7 +139,7 @@ POINTER_CONSTANT = {
 ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x03, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43, 0x46, 0x49,
                         0x4c, 0x50, 0x50, 0x51, 0x52, 0x54, 0x55, 0x57,
                         0x5a, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x64, 0x65,
-                        0x66, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x8b, 0x90, 0x94, 0x99, 0x9f, 0xa0, 0xa1, 0xa4, 0xa5, 0xa7,
+                        0x66, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f, 0x8b, 0x90, 0x94, 0x99, 0x9f, 0xa0, 0xa1, 0xa4, 0xa5, 0xa7,
                         0xab, 0xaf, 0xb0, 0xb1, 0xb3, 0xb5, 0xb7, 0xbe, 0xc5, 0xcf, 0xff]
                         # TODO:  and then d6-ff. Wonder if those actually get used
 
@@ -1480,10 +1492,16 @@ for file in FILES_TO_DUMP:
             else:
                 distance = t.location - last_string_end
                 # 17 seemed good, but I'm finding dialogue with lots of control codes now. Let's try 32 (0x20)
-                if distance > 0x20:
+                if distance > 0x25:
                     blocks.append((start, last_string_end))
                     start = t.location
             last_string_end = t.location + len(t.jp_bytestring)
-        blocks.append((start, last_string_end))
+        #blocks.append((start, last_string_end))
+        blocks.append((start, len(gf.original_filestring)))
+
+        ## Include a block that's just the very end, so pointers to the end of the file get picked up
+        #file_length = len(gf.original_filestring)
+        #blocks.append((file_length-1, file_length))
+
         FILE_BLOCKS[file] = blocks
         #print(file, blocks)

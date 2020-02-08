@@ -73,8 +73,8 @@ for gamefile in FILES_WITH_POINTERS:
         bs = f.read()
         target_areas = FILE_BLOCKS[gamefile]
         if gamefile.endswith(".BSD"):
-            target_areas = [(0x0, len(GF.filestring))]
-        #print(target_areas)
+            target_areas = [(0x0, len(GF.filestring)+1)]
+        print(target_areas)
         # target_area = (GF.pointer_constant, len(bs))
         #print(hex(target_area[0]), hex(target_area[1]))
 
