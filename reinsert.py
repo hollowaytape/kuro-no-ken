@@ -7,7 +7,7 @@ from shutil import copyfile
 from romtools.disk import Disk, Gamefile, Block
 from romtools.dump import DumpExcel, PointerExcel
 from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, COMPRESSED_FILES_TO_EDIT, ARCHIVES_TO_REINSERT
-from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS
+from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, NAMES
 from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN, CONTROL_CODES
 
 from asm import BYTE_EDITS
@@ -15,6 +15,33 @@ from fa1 import repack
 
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
+
+def typeset(s):
+    if s in NAMES:
+        return s
+
+    words = s.split(b' ')
+    print(words)
+    lines = []
+    this_line = b'  '
+    while words:
+        if (len(this_line) + len(words[0]) + 1) > 48:
+            this_line = this_line.rstrip()
+            lines.append(this_line)
+            this_line = b''
+
+        this_line += words.pop(0) + b' '
+        print(this_line)
+        
+    if this_line:
+        this_line = this_line.rstrip()
+        lines.append(this_line)
+
+    #print(lines)
+    result = b'\\n\x00\x40\x02'.join(lines)
+    print(result)
+
+    return result
 
 if __name__ == '__main__':
     # Fresh start each reinsertion
@@ -58,12 +85,12 @@ if __name__ == '__main__':
             print("Time to reassign some pointers")
             reassignments = POINTERS_TO_REASSIGN[filename]
             for src, dest in reassignments:
-                print("Reassigning", hex(src), hex(dest))
+                #print("Reassigning", hex(src), hex(dest))
                 if src not in gf.pointers:
-                    print("Skipping this one: %s, %s" % (hex(src), hex(dest)))
+                    #print("Skipping this one: %s, %s" % (hex(src), hex(dest)))
                     continue
                 if dest not in gf.pointers:
-                    print("No pointer for that dest. We'll just move the src pointer to the dest")
+                    #print("No pointer for that dest. We'll just move the src pointer to the dest")
                     gf.pointers[dest] = []
                 #assert src in gf.pointers
                 #assert dest in gf.pointers
@@ -75,12 +102,12 @@ if __name__ == '__main__':
                 gf.pointers.pop(src)
 
         if filename in BYTE_EDITS:
-            print(BYTE_EDITS[filename])
+            #print(BYTE_EDITS[filename])
             for (loc, value) in BYTE_EDITS[filename]:
                 gf.edit(loc, value)
 
         for block in gf.blocks:
-            print(block)
+            #print(block)
             previous_text_offset = block.start
             diff = 0
             #print(repr(block.blockstring))
@@ -89,13 +116,13 @@ if __name__ == '__main__':
                 translations = Dump.get_translations(block, include_blank=True, sheet_name="SCNs")
                 #print(translations)
             elif filename.endswith('BSD'):
-                print("Using the BSDs sheet")
+                #print("Using the BSDs sheet")
                 translations = Dump.get_translations(block, include_blank=True, sheet_name="BSDs")
 
             else:
                 translations = Dump.get_translations(block, include_blank=True)
             for t in translations:
-                print(t)
+                #print(t)
                 if t.en_bytestring == b'':
                     t.en_bytestring = t.jp_bytestring
                     
@@ -104,10 +131,10 @@ if __name__ == '__main__':
                         t.en_bytestring = t.en_bytestring.replace(cc, CONTROL_CODES[cc])
 
                 if t.en_bytestring != t.jp_bytestring:
-                    print(t.en_bytestring)
+                    #print(t.en_bytestring)
                         # Prepend 85, add 1f if it's a num, sub 2 if it's a char
                     if 0xb0 <= t.jp_bytestring[0] <= 0xdf:
-                        print("This is a halfwidth kana string")
+                        #print("This is a halfwidth kana string")
                         new_bytestring = b''
                         for b in t.jp_bytestring:
                             if 0xb0 <= b <= 0xdf:
@@ -126,6 +153,11 @@ if __name__ == '__main__':
                     #        print(t.en_bytestring[0], t.en_bytestring[0] == 0x20)
                     #        t.en_bytestring = b' ' + t.en_bytestring
 
+                    # EXPERIMENTAL: Typesetting, just starting with the OLB files
+                    if filename.endswith('.SCN') and filename.startswith('02OLB0'):
+                        if t.en_bytestring:
+                            t.en_bytestring = typeset(t.en_bytestring)
+
 
                     #print(t)
                     loc_in_block = t.location - block.start + diff
@@ -134,8 +166,8 @@ if __name__ == '__main__':
                     # at the first repetition of a string
                     this_original_segment = block.blockstring[loc_in_block:]
                     this_segment = block.blockstring[loc_in_block:]
-                    print([hex(i) for i in t.jp_bytestring])
-                    print([hex(i) for i in this_segment])
+                    #print([hex(i) for i in t.jp_bytestring])
+                    #print([hex(i) for i in this_segment])
                     assert t.jp_bytestring in this_segment
                     this_segment = this_segment.replace(t.jp_bytestring, t.en_bytestring, 1)
                     block.blockstring = block.blockstring.replace(this_original_segment, this_segment)
@@ -170,7 +202,7 @@ if __name__ == '__main__':
                 diff += this_diff
 
             # 03YSK01A has some pointers pointing to near the end of the file. Need a way to edit those
-            print("Still these pointers: " + hex(previous_text_offset), hex(block.stop))
+            #print("Still these pointers: " + hex(previous_text_offset), hex(block.stop))
             if gf.pointers:
                 gf.edit_pointers_in_range((previous_text_offset, block.stop), diff)
 

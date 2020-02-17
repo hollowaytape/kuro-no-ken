@@ -49,6 +49,11 @@ LINE_MAX_LENGTH = 48
 
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
+NAMES = [b'Shinobu',
+         b'Innes',
+         b'Zerfuedel',
+         b'Keiuss']
+
 """
 FILES_TO_DUMP = [
     'BD.BIN', 
@@ -82,7 +87,7 @@ FILES_TO_REINSERT = ['BD.BIN',
                      '02OLB.SCN', 
                      '02OLB01.SCN', 
                      #'02OLB00A.SCN', 
-                     #'02OLB01A.SCN', 
+                     '02OLB01A.SCN', 
                      #'02OLB01B.SCN', 
                      #'02OLB02A.SCN', 
                      #'03YSK.SCN', 
@@ -139,7 +144,7 @@ POINTER_CONSTANT = {
 ZERO_POINTER_FIRST_BYTES = [0x00, 0x02, 0x03, 0x08, 0x39, 0x3f, 0x40, 0x41, 0x43, 0x46, 0x49,
                         0x4c, 0x50, 0x50, 0x51, 0x52, 0x54, 0x55, 0x57,
                         0x5a, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x64, 0x65,
-                        0x66, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f, 0x8b, 0x90, 0x94, 0x99, 0x9f, 0xa0, 0xa1, 0xa4, 0xa5, 0xa7,
+                        0x66, 0x69, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f, 0x8b, 0x90, 0x94, 0x99, 0x9f, 0xa0, 0xa1, 0xa4, 0xa5, 0xa7,
                         0xab, 0xaf, 0xb0, 0xb1, 0xb3, 0xb5, 0xb7, 0xbe, 0xc5, 0xcf, 0xff]
                         # TODO:  and then d6-ff. Wonder if those actually get used
 
@@ -178,6 +183,11 @@ FILE_BLOCKS = {
     #'D010_X10.BSD': [
     #    (0x222, 0xd90)
     #]
+}
+
+# The locations of all strings. Testing on 02OLB01.SCN
+FILE_STRING_LOCATIONS = {
+    '02OLB1.SCN': [],
 }
 
 LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN', ]
@@ -1472,11 +1482,13 @@ for file in FILES_TO_DUMP:
     #print(file)
     if any([t in file for t in ('.DAT', '.MP1')]):
         continue
-    if file not in FILE_BLOCKS and (file in FILES_TO_REINSERT or file in FILES_WITH_POINTERS):
+    if (file not in FILE_BLOCKS) and (file in FILES_TO_REINSERT or file in FILES_WITH_POINTERS):
         print(file, "not in FILE_BLOCKS")
         gf = Gamefile('original/decompressed/%s' % file, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
 
         blocks = []
+        string_locations = []
+
         start = None
         last_string_end = None
         if file.endswith('SCN'):
@@ -1499,9 +1511,17 @@ for file in FILES_TO_DUMP:
         #blocks.append((start, last_string_end))
         blocks.append((start, len(gf.original_filestring)))
 
-        ## Include a block that's just the very end, so pointers to the end of the file get picked up
-        #file_length = len(gf.original_filestring)
-        #blocks.append((file_length-1, file_length))
-
         FILE_BLOCKS[file] = blocks
-        #print(file, blocks)
+
+
+        # EXPERIMENTAL: Trying to get all segments that are pure text, to get pointer-dumper to ignore "pointers" it finds there
+        if file in FILE_STRING_LOCATIONS:
+            if FILE_STIRNG_LOCATIONS == []:
+                start = None
+                last_string_end = None
+
+                for t in translations:
+                    string_locations.append((t.location, t.location + len(t.jp_bytestring)))
+
+                FILE_STRING_LOCATIONS[file] = string_locations
+                print(string_locations)

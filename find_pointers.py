@@ -8,7 +8,7 @@ from collections import OrderedDict
 from romtools.dump import BorlandPointer, PointerExcel
 from romtools.disk import Gamefile
 
-from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS, POINTERS_TO_SKIP, POINTERS_TO_ADD, CONTROL_CODES
+from rominfo import POINTER_CONSTANT, FILES_WITH_POINTERS, FILE_BLOCKS, FILE_STRING_LOCATIONS, POINTERS_TO_SKIP, POINTERS_TO_ADD, CONTROL_CODES
 from rominfo import ZERO_POINTER_FIRST_BYTES
 
 # POINTER_CONSTANT is the line where "Borland Compiler" appears, rounded down to the nearest 0x10.
@@ -74,6 +74,11 @@ for gamefile in FILES_WITH_POINTERS:
         target_areas = FILE_BLOCKS[gamefile]
         if gamefile.endswith(".BSD"):
             target_areas = [(0x0, len(GF.filestring)+1)]
+
+        string_locations = []
+        if gamefile in FILE_STRING_LOCATIONS:
+            string_locations = FILE_STRING_LOCATIONS[gamefile]
+
         print(target_areas)
         # target_area = (GF.pointer_constant, len(bs))
         #print(hex(target_area[0]), hex(target_area[1]))
@@ -146,8 +151,12 @@ for gamefile in FILES_WITH_POINTERS:
                     continue
                 print(pointer_location, hex(text_location))
 
-                if all([not t[0] <= text_location<= t[1] for t in target_areas]):
+                if all([not t[0] <= text_location <= t[1] for t in target_areas]):
                     print("It's not in any of the blocks, so skipping it")
+                    continue
+
+                if any([t[0] <= pointer_location <= t[1] for t in string_locations]):
+                    print("It's in the middle of real text, so skipping it")
                     continue
 
                 if (gamefile, text_location) in POINTERS_TO_SKIP or (gamefile, int(pointer_location, 16), 'pointer_location') in POINTERS_TO_SKIP:
