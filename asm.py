@@ -1,5 +1,5 @@
 """
-	Not really cheats, but also necessary ASM edits
+	Not just cheats, but also necessary ASM edits
 """
 
 FILE_0_OFFSET = 0xfe0
@@ -49,6 +49,7 @@ BYTE_EDITS = {
 		(0x1320, b'\xf2\x15')  # Increase the max length of 03YSK01A.SCN from 0x1562 -> 0x1800
 	],
 
+	# EXPERIMENTAL
 	"OLB2.MPC": [
 		(0x3431, b'\xf2\x15'),
 		(0x3e94, b'\xf2\x15'),

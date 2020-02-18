@@ -705,3 +705,12 @@ KIES.SMI = 32940-3377a
    * Code sections: Stuff points to it and it contains pointers
    * Code in between strings: Stuff points to it and it contains pointers
    * (!) So, might need to reconsider "target areas" in the pointer finder. Maybe use a stricter version of the current auto-block-identifier that stops immediately when something is not a string, rather than waiting 0x35 bytes to get to more text
+
+# Save file hacking
+* It appears that saves are incompatible between reinsertions. Does it save something like the offsets of which conversations have been had?
+   * Save state on map, reinsert some 02OLB files, load state, enter ALbein = crash.
+   * Save state on map, reinsert 02OLB files, load state, save file, reset, load file, etner Albein = still crash.
+
+# Some missing location names
+* 05SKS.SCN has the location name in the compressed but not the decompressed. 関所 It's visible in memory so it may have just been misdumped
+   * They may have been dumped correctly before the big re-dumping? I at least have their names in the Names + Places section of the sheet, so I must have had htem at some point

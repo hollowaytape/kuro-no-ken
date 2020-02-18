@@ -11,7 +11,7 @@ from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, NAMES
 from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN, CONTROL_CODES
 
 from asm import BYTE_EDITS
-from fa1 import repack
+from fa1 import repack, unpack
 
 Dump = DumpExcel(DUMP_XLS_PATH)
 PtrDump = PointerExcel(POINTER_XLS_PATH)
@@ -21,17 +21,17 @@ def typeset(s):
         return s
 
     words = s.split(b' ')
-    print(words)
+    #print(words)
     lines = []
     this_line = b'  '
     while words:
         if (len(this_line) + len(words[0]) + 1) > 48:
             this_line = this_line.rstrip()
             lines.append(this_line)
-            this_line = b''
+            this_line = b'  '
 
         this_line += words.pop(0) + b' '
-        print(this_line)
+        #print(this_line)
         
     if this_line:
         this_line = this_line.rstrip()
@@ -39,16 +39,32 @@ def typeset(s):
 
     #print(lines)
     result = b'\\n\x00\x40\x02'.join(lines)
-    print(result)
+    #print(result)
 
     return result
 
 if __name__ == '__main__':
-    # Fresh start each reinsertion
-    copyfile(SRC_DISK, DEST_DISK)
-
     OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
     TargetBOD = Disk(DEST_DISK)
+
+    # First, extract the current save file from the patched game so I don't lose progress
+    TargetBOD.extract('A.FA1', path_in_disk="B-DRKNS", dest_path="patched")
+    unpack(b'A.FA1', file_dir=b'patched')
+
+    copyfile(os.path.join('patched', 'BD_FLAG0.DAT'), os.path.join('original', 'BD_FLAG0.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG1.DAT'), os.path.join('original', 'BD_FLAG1.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG2.DAT'), os.path.join('original', 'BD_FLAG2.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG3.DAT'), os.path.join('original', 'BD_FLAG3.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG4.DAT'), os.path.join('original', 'BD_FLAG4.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG5.DAT'), os.path.join('original', 'BD_FLAG5.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG6.DAT'), os.path.join('original', 'BD_FLAG6.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAG7.DAT'), os.path.join('original', 'BD_FLAG7.DAT'))
+    copyfile(os.path.join('patched', 'BD_FLAGH.DAT'), os.path.join('original', 'BD_FLAGH.DAT'))
+
+    #input()
+
+    # (otherwise) Fresh start each reinsertion
+    #copyfile(SRC_DISK, DEST_DISK)
 
     # Because the archives get re-inserted with all files, need to copy all the original files into the
     # patched directory to ensure a fresh start.
@@ -61,7 +77,7 @@ if __name__ == '__main__':
             copyfile(original_path, patched_path)
 
     for filename in FILES_TO_REINSERT:
-        print(filename)
+        #print(filename)
         try:
             original_path = os.path.join('original', 'decompressed', filename)
             patched_path = os.path.join('patched', filename)
@@ -82,7 +98,7 @@ if __name__ == '__main__':
             gf.blocks = []
 
         if filename in POINTERS_TO_REASSIGN:
-            print("Time to reassign some pointers")
+            #print("Time to reassign some pointers")
             reassignments = POINTERS_TO_REASSIGN[filename]
             for src, dest in reassignments:
                 #print("Reassigning", hex(src), hex(dest))
@@ -210,17 +226,18 @@ if __name__ == '__main__':
 
             # Ignore size differences in .SCN files
             if filename in LENGTH_SENSITIVE_BLOCKS:
-                print(filename, "is length sensitive")
-                if block_diff < 0:
-                    print("block_diff of", block, "is", block_diff)
-                    if filename.endswith('SCN'):
-                        PADDING_CHARACTER = b' '
-                    else:
-                        PADDING_CHARACTER = b'\x00'
+                if (block.start, block.stop) in LENGTH_SENSITIVE_BLOCKS[filename]:
+                    print(block, "is length sensitive")
+                    if block_diff < 0:
+                        print("block_diff of", block, "is", block_diff)
+                        if filename.endswith('SCN'):
+                            PADDING_CHARACTER = b' '
+                        else:
+                            PADDING_CHARACTER = b'\x00'
 
-                    block.blockstring += (-1)*block_diff*PADDING_CHARACTER
-                block_diff = len(block.blockstring) - len(block.original_blockstring)
-                assert block_diff == 0, (block_diff, block)
+                        block.blockstring += (-1)*block_diff*PADDING_CHARACTER
+                    block_diff = len(block.blockstring) - len(block.original_blockstring)
+                    assert block_diff == 0, (block_diff, block)
 
             block.incorporate()
 

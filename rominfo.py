@@ -79,20 +79,37 @@ FILES_TO_DUMP = [
 # Definitely too many files, with incredibly annoying names, to do this manually.
 FILES_TO_DUMP = os.listdir('original/decompressed')
 
-FILES_TO_REINSERT = ['BD.BIN', 
-                     'ITEM.SMI', 
-                     'KIES.SMI', 
-                     'SHINOBU.SMI',
-                     '00IPL.SCN', 
-                     '02OLB.SCN', 
-                     '02OLB01.SCN', 
-                     #'02OLB00A.SCN', 
-                     '02OLB01A.SCN', 
-                     #'02OLB01B.SCN', 
-                     #'02OLB02A.SCN', 
-                     #'03YSK.SCN', 
-                     #'03YSK01A.SCN', 
-                     #'D010_X10.BSD'
+FILES_TO_REINSERT = [
+    'BD_FLAG0.DAT',
+    'BD_FLAG1.DAT',
+    'BD_FLAG2.DAT',
+    'BD_FLAG3.DAT',
+    'BD_FLAG4.DAT',
+    'BD_FLAG5.DAT',
+    'BD_FLAG6.DAT',
+    'BD_FLAG7.DAT',
+    'BD_FLAGH.DAT',
+    'BD.BIN', 
+    'ITEM.SMI', 
+    'KIES.SMI', 
+    'SHINOBU.SMI',
+    '00IPL.SCN', 
+    '02OLB.SCN', 
+    '02OLB01.SCN', 
+    '02OLB00A.SCN', 
+    '02OLB01A.SCN', 
+    '02OLB01B.SCN', 
+    '02OLB02A.SCN', 
+    '02OLB02.SCN', 
+    '02OLB02A.SCN', 
+    '02OLB03.SCN', 
+    '02OLB04.SCN', 
+    '02OLB05.SCN', 
+    '02OLB06.SCN', 
+    '03YSK.SCN', 
+    '03YSK01A.SCN', 
+    '03YSK01B.SCN', 
+    #'D010_X10.BSD'
 ]
 
 COMPRESSED_FILES_TO_EDIT = ['YSK1.MP1',]
@@ -117,10 +134,17 @@ FILES_WITH_POINTERS = [
     '02OLB01.SCN',
     '02OLB01A.SCN',
     '02OLB01B.SCN',
+    '02OLB02.SCN',
     '02OLB02A.SCN',
+    '02OLB03.SCN', 
     '02OLB03A.SCN',
+    '02OLB04.SCN', 
+    '02OLB05.SCN', 
+    '02OLB06.SCN', 
 
+    '03YSK.SCN',
     '03YSK01A.SCN',
+    '03YSK01B.SCN',
 
     'D010_X10.BSD',
 ]
@@ -129,6 +153,11 @@ POINTER_CONSTANT = {
     'BD.BIN': 0,
     #'00IPL.SCN': 0,
     '02OLB01.SCN': -0x1800,
+    '02OLB02.SCN': -0x1800,
+    '02OLB03.SCN': -0x1800,
+    '02OLB04.SCN': -0x1800,
+    '02OLB05.SCN': -0x1800,
+    '02OLB06.SCN': -0x1800,
     '02OLB00A.SCN': -0x3d00,
     '02OLB01A.SCN': -0x3d00,
     '02OLB01B.SCN': -0x3d00,   # Just a guess
@@ -136,6 +165,7 @@ POINTER_CONSTANT = {
     '02OLB03A.SCN': -0x3d00,   # Just a guess
 
     '03YSK01A.SCN': -0x1800,
+    '03YSK01B.SCN': -0x1800,
 }
 
 # One SCN code is X, 00, text location. If X is certain values, it's a pointer. Otherwise it's something else.
@@ -178,7 +208,7 @@ FILE_BLOCKS = {
     #'02OLB01.SCN': [
     #    (0x432, 0x1168),
     #    (0x13b1, 0x164c)
-    #]
+    #],
 
     #'D010_X10.BSD': [
     #    (0x222, 0xd90)
@@ -190,7 +220,28 @@ FILE_STRING_LOCATIONS = {
     '02OLB1.SCN': [],
 }
 
-LENGTH_SENSITIVE_BLOCKS = ['BD.BIN', '00IPL.SCN', '02OLB00A.SCN', ]
+LENGTH_SENSITIVE_BLOCKS = {
+    'BD.BIN': [
+        (0x9ddd, 0x9e64),
+        (0x9ed2, 0x9ee2),
+        (0x9f2c, 0x9f3b),
+        (0x9f6b, 0x9f80),
+        (0xb1e0, 0xb1f8),
+        (0xba4a, 0xbc3e),
+        (0xd240, 0xd28f),
+        (0xd8bc, 0xd8f9),
+        (0xe6f0, 0xe797),
+    ],
+   '00IPL.SCN': [
+        (0x00, 0xb24)
+   ],
+   #'02OLB00A.SCN': [
+   #    (0x40, 0x660)
+   #],
+   '02OLB01.SCN': [
+        (0x432, 0x1168),
+   ]
+}
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -1525,3 +1576,8 @@ for file in FILES_TO_DUMP:
 
                 FILE_STRING_LOCATIONS[file] = string_locations
                 print(string_locations)
+
+    if file in LENGTH_SENSITIVE_BLOCKS and file in FILE_BLOCKS:
+        for ls_block in LENGTH_SENSITIVE_BLOCKS[file]:
+            print(FILE_BLOCKS[file])
+            assert ls_block in FILE_BLOCKS[file], ls_block

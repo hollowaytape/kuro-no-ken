@@ -15,9 +15,10 @@ def invert(bs):
     return result
 
 
-def unpack(archive):
+def unpack(archive, file_dir=b'original'):
     #print(archive)
-    with open(b'original/%s' % archive, 'rb') as f:
+    files_to_extract = []
+    with open(os.path.join(file_dir, archive), 'rb') as f:
         header = f.read(0xa)
         entries = int.from_bytes(header[0x8:0xa], 'little')
         compressed_end = int.from_bytes(header[0x4:0x7], 'little')
@@ -69,13 +70,16 @@ def unpack(archive):
             this_file = BODFile(archive, filename, offset, compressed_length, decompressed_length)
             files_to_extract.append(this_file)
 
-            print(name, ext, " ".join([hex(b)[2:].zfill(2) for b in data]), "at", hex(offset), "length is", hex(compressed_length))
+            #print(name, ext, " ".join([hex(b)[2:].zfill(2) for b in data]), "at", hex(offset), "length is", hex(compressed_length))
             #print(this_file)
             offset += compressed_length
 
     for f in files_to_extract:
-        filestring = f.get_filestring()
-        with open(b'original/%b' % f.name, 'wb+') as g:
+        filestring = f.get_filestring(path=file_dir)
+        with open(os.path.join(file_dir, f.name), 'wb+') as g:
+            #if f.name == b'BD_FLAG1.DAT':
+                #print(filestring)
+                #print(file_dir)
             g.write(filestring)
 
 
@@ -170,7 +174,7 @@ def repack(archive):
 
 
 if __name__ == "__main__":
-    files_to_extract = []
+    #files_to_extract = []
     for archive in ARCHIVES:
         unpack(archive)
     unpack(b'A.FA1')
