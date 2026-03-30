@@ -1,55 +1,41 @@
-from collections import OrderedDict
-from romtools.dump import pack, unpack
+"""
+    Analyzes the BD.BIN control code dispatch table to identify which codes
+    contain pointer arguments.
 
-# Need to find out what those pointer prefixes mean.
-# They point to a particular function to call... need to figure out which ones of those start with lodsb es: (26ac).
-# Those are pointers.
+    This is a lightweight wrapper around analyze_control_codes.py that prints
+    a focused summary of pointer-related control codes.
 
-with open('original/decompressed/BD.BIN', 'rb') as f:
-    contents = f.read()
+    For the full dispatch table analysis, run: python analyze_control_codes.py
+"""
 
-byte_to_function_offset_table = contents[0x22d0:0x24d0]
-byte_function_offsets = OrderedDict()
-i = 0
-while i <= 0xff:
-    first = hex(byte_to_function_offset_table[i*2])
-    second = hex(byte_to_function_offset_table[(i*2)+1])
-    #print(first, second)
-    function_offset = unpack(first, second)
-    #print(hex(i), hex(function_offset))
-    byte_function_offsets[i] = function_offset
-    i += 1
+from analyze_control_codes import analyze, get_zero_pointer_first_bytes, get_direct_pointer_codes
 
+results = analyze()
 
-for b in byte_function_offsets:
-    offset = byte_function_offsets[b]
-    #print(hex(b), hex(byte_function_offsets[b]), contents[offset:offset+10])
+# Mode-dispatched pointers: CC 00 ptr_lo ptr_hi
+zpfb = get_zero_pointer_first_bytes(results)
+print("=== Mode-dispatched pointer codes (CC 00 ptr_lo ptr_hi) ===")
+print("These call 0x17b8 as first instruction; mode=0x00 means raw pointer.")
+for code in zpfb:
+    info = results[code]
+    print("  0x%02x -> handler 0x%04x  [%db]" % (code, info['handler'], info.get('func_len', 0)))
 
-    # TODO: Now to translate function calls into the location they're at.
-    # offset is 2aa4, function call bytes are e811ed, destination is 17b8.
-    # e8 is "call"
-    # ed11 = offset from something? 
-            # ffff - ed11 = 12ee
-            # 17b8 + 12ee = 2aa6 (offset of hte last byte in the function call)
-    #print(contents[offset])
-    if contents[offset] == 0xe8:
-        base = offset + 2
+# Direct pointer reads: CC ptr_lo ptr_hi
+direct = get_direct_pointer_codes(results)
+print()
+print("=== Direct pointer codes (CC ptr_lo ptr_hi) ===")
+print("These start with lodsw es: and read 2 bytes directly as a pointer.")
+for code in direct:
+    info = results[code]
+    print("  0x%02x -> handler 0x%04x  [%db]  %s" % (code, info['handler'], info.get('func_len', 0), info['doc']))
 
-        first = hex(contents[offset+1])
-        second = hex(contents[offset+2])
+# Conditional branch codes (calls 0x17d7) — these also read pointers
+print()
+print("=== Conditional pointer codes (calls 0x17d7) ===")
+print("These follow a pointer conditionally based on flag state.")
+for code, info in results.items():
+    if info.get('first_call') == 0x17d7:
+        print("  0x%02x -> handler 0x%04x  [%db]" % (code, info['handler'], info.get('func_len', 0)))
 
-        call_offset = unpack(first, second)
-        call_destination = base - (0xffff - call_offset)
-        #print(hex(base), hex(call_offset), hex(call_destination))
-
-        #print(contents[call_destination:call_destination+10])
-        called_func = contents[call_destination:call_destination+50]
-        called_func = called_func.split(b'\xc3')[0]  # c3 is "ret", so go to the end of the function
-        #print(called_func)
-        if b'\x26\xac' in called_func:
-            print(hex(b), hex(offset),  "is a pointer")
-        else:
-            print(hex(b), hex(offset))
-
-    else:
-        print(hex(b), hex(offset))
+print()
+print("ZERO_POINTER_FIRST_BYTES = %s" % zpfb)

@@ -5,16 +5,13 @@
 	* 0x676	0x87b
 	* I wonder if this would go better after the pointer code improvements?
 
-* A handful of odd pointer issues in the menus. Save is "e", "        Silk Scarf" (with no description), etc
-	* Item names are fixed. Should investigate system text next
-
 ## Archives
 * Some .BSD files are duplicated across multiple archives. Need to make sure those are being handled
 	* Example: F023_L12.BSD (the one with the pug wizard thing I love)
 
 ## Dump
-* Need to re-dump a bunch of files, they were extracted from the wrong location
-	* Really difficult to dump 02OLB01.SCN - wonder what is in there, or what's going wrong
+* The latest (2/17/20) dump has spaces that properly indent the strings... should I be putting those into my dump?
+	* That would explain the kind of bad approximation that my current typesetting code is making
 * What are the control codes?
 	* \i0
 	* \i2
@@ -23,10 +20,6 @@
 	* [22 5c 66 00 3b] (\f[00];[3b]) = [WAIT] at the end of a 
 * The auto-FILE_BLOCKS filling code should just set a single block for all .SCN files, consisting of the entire file.
 	* Otherwise pointers get skipped.
-
-## Text Formatting
-* The newline character indents each character by 2. Solution would be to put an extra " " in front of every initial quote character, and maybe every nametag.
-* No attempt at typesetting yet, what are the length limits?
 
 ## .BSD files
 * Haven't tried pointer edits or reinsertion with these yet.

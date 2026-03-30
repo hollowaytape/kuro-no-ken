@@ -10,8 +10,9 @@ if __name__ == "__main__":
     # Change these
     #name = b'YSK1.MP1'
     #start = 0x28580  # 01B-tier SCN file
-    start = 0x681e0   # .MP1 file 
-    name = b'OLB2.MP1'
+    start = 0x26d80  # 02OLB.SCN -tier SCN file
+    #start = 0x681e0   # .MP1 file 
+    name = b'31END.SCN'
     #start = 0x2aa80  # .BSD file
 
     for bodfile in FILES:
