@@ -1,0 +1,87 @@
+{
+ "description": "New Game -> manor (route 01) -> the jewel (bump zone 9 in ysk2) -> Mercenary scene and battle",
+ "start": {
+  "new_game": true
+ },
+ "steps": [
+  {
+   "op": "wait_field",
+   "timeout": 180
+  },
+  {
+   "op": "save_state",
+   "name": "r01_after_opening"
+  },
+  {
+   "op": "noclip"
+  },
+  {
+   "op": "talk",
+   "slot": 1
+  },
+  {
+   "op": "zone",
+   "index": 9,
+   "approach": "UP",
+   "y_first": true,
+   "map": "olb1",
+   "note": "the house door; approach from below, since Innes stands just above it"
+  },
+  {
+   "op": "zone",
+   "index": 10,
+   "approach": "DOWN",
+   "map": "fld1"
+  },
+  {
+   "op": "save_state",
+   "name": "r01_world_map"
+  },
+  {
+   "op": "zone",
+   "index": 3,
+   "map": "ysk1.mp1"
+  },
+  {
+   "op": "save_state",
+   "name": "r01_manor_grounds"
+  },
+  {
+   "op": "zone",
+   "index": 1,
+   "approach": "UP"
+  },
+  {
+   "op": "save_state",
+   "name": "r03_manor_inside"
+  },
+  {
+   "op": "settle",
+   "quiet": 4
+  },
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 9
+  },
+  {
+   "op": "settle",
+   "quiet": 3
+  },
+  {
+   "op": "zone",
+   "index": 11,
+   "approach": "DOWN",
+   "note": "leaving the jewel room south: the Mercenary's scene and battle start here"
+  },
+  {
+   "op": "settle",
+   "quiet": 10,
+   "timeout": 400
+  },
+  {
+   "op": "save_state",
+   "name": "r03_after_mercenary"
+  }
+ ]
+}

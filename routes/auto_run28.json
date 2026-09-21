@@ -1,0 +1,27 @@
+{
+ "start": {
+  "state": "auto_run26_09"
+ },
+ "steps": [
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 0
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 5
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

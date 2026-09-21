@@ -1,0 +1,122 @@
+{
+ "graph": {
+  "?|npc|1": {
+   "map": "?",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "?|npc|2": {
+   "map": "?",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "?|npc|3": {
+   "map": "?",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "?|npc|4": {
+   "map": "?",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "?|bump|0": {
+   "map": "?",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|bump|1": {
+   "map": "?",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|bump|2": {
+   "map": "?",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|bump|4": {
+   "map": "?",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|bump|3": {
+   "map": "?",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|bump|6": {
+   "map": "?",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 6 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|step|0": {
+   "map": "?",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|step|1": {
+   "map": "?",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  },
+  "?|step|2": {
+   "map": "?",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "stg",
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 3,
+   "text": []
+  }
+ },
+ "coverage": {}
+}

@@ -1,0 +1,77 @@
+{
+ "start": {
+  "map": "ysk2.mp1",
+  "x": 6,
+  "y": 441,
+  "state": "02c_manor_onward_start"
+ },
+ "steps": [
+  {
+   "op": "walk",
+   "x": 6,
+   "y": 439,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 26,
+   "y": 442,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 26,
+   "y": 436,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 15,
+   "y": 436,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 15,
+   "y": 478,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 119,
+   "y": 478,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 116,
+   "y": 355
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "walk",
+   "x": 116,
+   "y": 476,
+   "y_first": true
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "exit",
+   "key": "UP",
+   "map": "bac_11.as2"
+  }
+ ]
+}

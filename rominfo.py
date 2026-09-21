@@ -29,10 +29,7 @@ class BODFile:
         return contents
 
     def is_compressed(self):
-        if self.name.decode('ascii') in FILES_TO_REINSERT:
-            return False
-        else:
-            return self.compressed_length < self.decompressed_length
+        return self.compressed_length < self.decompressed_length
 
     def __repr__(self):
         return "BODFile(%s, %s, %s, %s, %s)," % (self.source, self.name, hex(self.location),
@@ -42,8 +39,19 @@ class BODFile:
 ORIGINAL_ROM_DIR = 'original'
 SRC_DISK = 'original/Blade of Darkness (Kuro no Ken).hdi'
 DEST_DISK = 'patched/Blade of Darkness (Kuro no Ken).hdi'
-DUMP_XLS_PATH = 'KuroNoKen_dump.xlsx'
-POINTER_XLS_PATH = 'KuroNoKen_pointer_dump.xlsx'
+DUMP_XLS_PATH = os.environ.get('KURO_DUMP_XLS', 'KuroNoKen_dump.xlsx')   # override for test builds
+# Hand-curated pointer sheets. build.py merges them with decoder-generated sheets for every
+# other translated script into KuroNoKen_pointer_dump_full.xlsx, which a build then uses.
+CURATED_POINTER_XLS_PATH = 'KuroNoKen_pointer_dump.xlsx'
+POINTER_XLS_PATH = os.environ.get('KURO_POINTER_XLS', 'KuroNoKen_pointer_dump_full.xlsx'
+                                  if os.path.exists('KuroNoKen_pointer_dump_full.xlsx')
+                                  else CURATED_POINTER_XLS_PATH)
+
+# A "mapping build" replaces every line with a FILE-INDEX placeholder and reinserts
+# *every* script, to exercise the reinsertion path for the ~190 files that have never
+# been through it (see docs/testing.md). Off unless asked for, so ordinary builds are
+# untouched; mapping.py sets these.
+MAPPING_BUILD = bool(os.environ.get('KURO_MAPPING'))
 
 LINE_MAX_LENGTH = 48
 
@@ -112,13 +120,70 @@ FILES_TO_REINSERT = [
     #'D010_X10.BSD'
 ]
 
+def _translated_scripts():
+    """Every .SCN with at least one English cell in the workbook.
+
+    The list above used to be the whole build, so ~70% of the translated lines (1359 of
+    1922 in Sept 2026) sat in the workbook and never reached the game. Now a translated
+    script is built as soon as it has English in it; its pointers come from the
+    generated sheet (gen_pointers.py, which build.py runs first).
+    """
+    from openpyxl import load_workbook
+    out = set()
+    try:
+        wb = load_workbook(DUMP_XLS_PATH, read_only=True)
+    except FileNotFoundError:
+        return out
+    if 'SCNs' in wb.sheetnames:
+        for r in wb['SCNs'].iter_rows(min_row=2, max_col=5, values_only=True):
+            if r[0] and str(r[0]).endswith('.SCN') and isinstance(r[4], str) and r[4].strip():
+                out.add(r[0])
+    wb.close()
+    return out
+
+
+# The hand-listed scripts were each verified in game; build.py keeps their curated pointer
+# sheets rather than regenerating them.
+CURATED_FILES = list(FILES_TO_REINSERT)
+
+# KURO_CURATED_ONLY=1 builds just the hand-listed files above, as before.
+if not os.environ.get('KURO_CURATED_ONLY'):
+    FILES_TO_REINSERT += sorted(_translated_scripts() - set(FILES_TO_REINSERT))
+
+# BSD files with translatable dialogue text (auto-discovered by bsd_tool)
+# KURO_ONLY=A.SCN,B.SCN narrows a build to those files, for isolating one that fails.
+_ONLY = [f for f in os.environ.get('KURO_ONLY', '').split(',') if f]
+
+if MAPPING_BUILD:
+    import glob as _glob
+    _scn = sorted(os.path.basename(p) for p in _glob.glob('original/decompressed/*.SCN'))
+    FILES_TO_REINSERT = [f for f in FILES_TO_REINSERT if not f.endswith('.SCN')] + _scn
+
+if _ONLY:
+    FILES_TO_REINSERT = _ONLY
+
+BSD_FILES_WITH_TEXT = [
+    'C020_X10.BSD', 'C021_X10.BSD', 'C022_S10.BSD', 'C022_S20.BSD',
+    'C022_T10.BSD', 'C042_X10.BSD', 'C051_S10.BSD', 'C051_X10.BSD',
+    'D010_S20.BSD', 'D010_X10.BSD', 'D011_S20.BSD', 'D011_T20.BSD',
+    'D011_U20.BSD', 'D031_S10.BSD', 'D040_S10.BSD', 'D050_S10.BSD',
+    'D050_T01.BSD', 'D050_T02.BSD', 'D051_X10.BSD', 'D052_S10.BSD',
+    'D060_S21.BSD', 'D061_X10.BSD', 'D080_T10.BSD', 'D090_X32.BSD',
+    'D100_X01.BSD', 'D100_X02.BSD', 'D100_ZA1.BSD', 'D100_ZA2.BSD',
+    'D100_ZA3.BSD', 'D100_ZA4.BSD', 'D100_ZA5.BSD', 'D100_ZA6.BSD',
+    'D100_ZA7.BSD', 'D110_S10.BSD', 'D130_T32.BSD', 'D130_X10.BSD',
+    'DL20_T12.BSD', 'DL21_O10.BSD', 'DL21_P10.BSD', 'DL21_Q10.BSD',
+    'DL21_R10.BSD', 'DL21_S12.BSD', 'DL21_X10.BSD', 'DL30_X10.BSD',
+    'DL30_Y10.BSD', 'DL30_Z10.BSD', 'DS00_E10.BSD',
+]
+
 COMPRESSED_FILES_TO_EDIT = ['YSK1.MP1',]
 
 #FILES_TO_REINSERT = ['BD_FLAG0.DAT', 'BD.BIN', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',
 #                     '02OLB01A.SCN', '02OLB01B.SCN', '02OLB02A.SCN', '02OLB03.SCN', '02OLB03A.SCN',]
 
 #FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', 'ITEM.SMI', 'SHINOBU.SMI', '00IPL.SCN', '02OLB00A.SCN',]
-ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1']
+ARCHIVES_TO_REINSERT = ['A.FA1', 'B.FA1', 'C.FA1', 'D.FA1', 'E.FA1']
 
 #FILES_TO_REINSERT = ['BD.BIN', 'BD_FLAG0.DAT', '00IPL.SCN', '02OLB00A.SCN', '02OLB01A.SCN', '02OLB01B.SCN', 
 #                     'SHINOBU.SMI', 'ITEM.SMI']
@@ -130,7 +195,11 @@ FILES_WITH_POINTERS = [
     'KIES.SMI',
     'SHINOBU.SMI',
     #'00IPL.SCN',
-    #'02OLB00A.SCN',
+    # Not 02OLB.SCN: the regexes misread hub files' fixed-size script units and miss
+    # their pointer tables (e.g. 0x91c). Hubs keep fixed-length strings instead (see
+    # FIXED_LENGTH_SCN in reinsert.py). 03YSK.SCN's sheet below has the same problems
+    # and is only safe because its string length never changes.
+    '02OLB00A.SCN',
     '02OLB01.SCN',
     '02OLB01A.SCN',
     '02OLB01B.SCN',
@@ -151,22 +220,28 @@ FILES_WITH_POINTERS = [
 
 POINTER_CONSTANT = {
     'BD.BIN': 0,
-    #'00IPL.SCN': 0,
-    '02OLB01.SCN': -0x1800,
-    '02OLB02.SCN': -0x1800,
-    '02OLB03.SCN': -0x1800,
-    '02OLB04.SCN': -0x1800,
-    '02OLB05.SCN': -0x1800,
-    '02OLB06.SCN': -0x1800,
-    '02OLB00A.SCN': -0x3d00,
-    '02OLB01A.SCN': -0x3d00,
-    '02OLB01B.SCN': -0x3d00,   # Just a guess
-    '02OLB02A.SCN': -0x3d00,   # Just a guess
-    '02OLB03A.SCN': -0x3d00,   # Just a guess
-
-    '03YSK01A.SCN': -0x1800,
-    '03YSK01B.SCN': -0x1800,
 }
+
+# Auto-derive POINTER_CONSTANT from control code 0x39 (file-loader) in hub SCN files.
+# CC 0x39 pattern: 39 00 [load_addr_lo] [load_addr_hi] 02 [filename\0]
+# The load address is where the sub-file gets loaded in memory.
+# POINTER_CONSTANT = -load_address (converts memory pointers back to file offsets).
+# Previously these were manually guessed; now derived from the binaries themselves.
+import struct as _struct
+for _scn in [f for f in os.listdir(b'original/decompressed') if f.endswith(b'.SCN')]:
+    _data = open(b'original/decompressed/' + _scn, 'rb').read()
+    for _i in range(len(_data) - 6):
+        if _data[_i] == 0x39 and _data[_i+1] == 0x00:
+            _addr = _struct.unpack('<H', _data[_i+2:_i+4])[0]
+            if _addr in (0x1800, 0x3d00):
+                _name_start = _i + 5  # skip 39 00 XX XX 02
+                _null_pos = _data.find(b'\x00', _name_start, _name_start + 20)
+                if _null_pos > _name_start:
+                    _name = _data[_name_start:_null_pos].decode('ascii', errors='replace').upper()
+                    if not _name.endswith('.SCN'):
+                        _name += '.SCN'
+                    if _name not in POINTER_CONSTANT:
+                        POINTER_CONSTANT[_name] = -_addr
 
 # One SCN code is X, 00, text location. If X is certain values, it's a pointer. Otherwise it's something else.
 # Adding 00 and 02 and 70 due to observations, they weren't in the original results
@@ -247,6 +322,25 @@ LENGTH_SENSITIVE_BLOCKS = {
         (0x432, 0x1168),
    ]
 }
+
+# Maximum decompressed sizes. Scripts share segment 0x26d8 in fixed slots, and a
+# file that outgrows its slot overwrites whatever is loaded after it:
+#   26d8:0000  hub SCNs (02OLB.SCN, 03YSK.SCN, ...)  -> next slot starts at 0x1800
+#   26d8:1800  SCNs loaded with `39 00 00 18`        -> 99CMN.SCN (resident common
+#              script) starts at 26d8:3000. Seen in live RAM 2026-09-18.
+#   26d8:3d00  SCNs loaded with `39 00 00 3d`, and every BSD -> resident battle code
+#              at 26d8:5100 (phys 0x2be80), caught executing mid-battle 2026-09-14.
+#              Not yet confirmed outside battle, so treat 0x1400 as a soft ceiling.
+# The old "0x1653 limit" on 02OLB01.SCN was a misdiagnosed pointer bug: a 0x16eb-byte
+# 02OLB01.SCN loads and runs fine, with 99CMN.SCN intact after it.
+SCN_SLOT_SIZES = {0: 0x1800, 0x1800: 0x1800, 0x3d00: 0x1400}
+
+DECOMPRESSED_SIZE_LIMITS = {
+    f: SCN_SLOT_SIZES[-POINTER_CONSTANT.get(f, 0)]
+    for f in FILES_TO_REINSERT if f.endswith('.SCN')
+}
+
+BSD_DECOMPRESSED_SIZE_LIMIT = SCN_SLOT_SIZES[0x3d00]
 
 FILES = [
     BODFile(b'A.FA1', b'FAD.BIN', 0xc, 0xfd3, 0xfd3),
@@ -1488,11 +1582,31 @@ POINTERS_TO_REASSIGN = {
 }
 
 POINTERS_TO_SKIP = [
+    # 03YSK01B.SCN: the zero-pointer pattern read "00 <lo>" at 0x11e as a pointer to
+    # 0x700. The operand is one byte later (0x11f -> 0xd1f, added above), and writing
+    # at 0x11e would overwrite its low byte.
+    ('03YSK01B.SCN', 0x11e),
     ('BD.BIN', 0xb696, 'pointer_location'), # This pointer breaks the "HP" display in pause menu
     ('BD.BIN', 0xe49f, 'pointer_location'), # This pointer breaks the "HP" display in battle
     ('ITEM.SMI', 0x2c00),
     ('02OLB00A.SCN', 0x150),  # Causes soft lock after some line in the intro
     ('02OLB00A.SCN', 0x33b),
+    # The 0x150 entry above was meant as a pointer location; these are the real skips.
+    # 02OLB02.SCN (Albein): "xx 00 89 1e" here is a variable/flag ID (0x1e89), not a
+    # pointer to 0x689 (that's the 2nd byte of a 「). "Relocating" it to 0x1e99 made the
+    # town-entry script exit to DOS when arriving from the manor side.
+    # 02OLB02A.SCN (Albein events): " 00" followed by opcode 09 makes the zero-pointer
+    # pattern read "09 <lo>" as the pointer. The operand is one byte later (np2core read
+    # watchpoints: the interpreter's operand fetch at BD 0x18a6e reads 0xb6 and 0x315,
+    # never 0xb5/0x314). Editing the misaligned ones crashed Albein to DOS.
+    ('02OLB02A.SCN', 0xb5, 'pointer_location'),
+    ('02OLB02A.SCN', 0x314, 'pointer_location'),
+    ('02OLB02.SCN', 0x271, 'pointer_location'),
+    ('02OLB02.SCN', 0x2a1, 'pointer_location'),
+    ('02OLB02.SCN', 0x31b, 'pointer_location'),
+    ('02OLB00A.SCN', 0x150, 'pointer_location'),  # "09 45 40" overlapping the real "01 09 45" call at 0x14f
+    ('02OLB00A.SCN', 0x84f, 'pointer_location'),  # opcode of x86 "cmp word [0x4448], 0xc"
+    ('02OLB00A.SCN', 0x887, 'pointer_location'),  # opcode of x86 "lds di, [0x43f4]"
     ('02OLB01A.SCN', 0x33b),
     ('02OLB01B.SCN', 0x33b),
     ('02OLB02A.SCN', 0x33b),
@@ -1505,11 +1619,203 @@ POINTERS_TO_SKIP = [
 
 # Some pointers are just values in tables at particular locations... let's try just doing this
 POINTERS_TO_ADD = [
+
+    # The remaining stale pointers in the Albein hub scripts, found by running
+    # script_decode.py over every translated file and keeping the addresses whose target
+    # moved while the stored value did not (tools/stale_report.py). Two are entry
+    # table slots, two are a branch and a next-block pointer. (Two more candidates in
+    # 02OLB01/02OLB02 turned out to be artifacts of aligning a repetitive entry table -
+    # those tables are relocated correctly.)
+    ('02OLB03.SCN', 0x7bc, 0x7cb),
+    ('02OLB03.SCN', 0x7c1, 0x7cb),   # opcode 0c, the branch beside it
+    ('02OLB03.SCN', 0x7cd, 0x7d4),
+    ('02OLB02A.SCN', 0x49d, 0x54a),  # opcode 0c: branch if flag 0x6b clear
+
+    # Found by script_decode.py, which decodes a script the way the interpreter does
+    # instead of matching byte patterns. Most of these are `89 2a <addr>`: opcode 0x89
+    # writes a constant into a field of the current object, and field +0x2a is that
+    # object's script pointer, so the constant is an address even though the same opcode
+    # three bytes earlier (`89 04 <number>`) is writing a plain number. Left behind, an
+    # object ran whatever had moved into its old block and eventually read a 00 byte -
+    # which is the opcode whose handler (BD.BIN 0x0072) exits to DOS. That is why these
+    # looked like crashes but were the game quitting cleanly.
+    ('03YSK01B.SCN', 0x50, 0x5a),
+    ('03YSK01B.SCN', 0x6a, 0x6d),
+    ('03YSK01B.SCN', 0x191, 0x19b),
+    ('03YSK01B.SCN', 0x1ca, 0x1d4),
+    ('03YSK01B.SCN', 0x20f, 0x22a),
+    ('03YSK01B.SCN', 0x3bc, 0x3d7),
+    ('03YSK01B.SCN', 0xca7, 0xcc2),
+    ('03YSK01B.SCN', 0xd2f, 0xd4a),
+    ('03YSK01B.SCN', 0xdbf, 0xdda),
+    ('03YSK01B.SCN', 0xe97, 0xe9d),
+    ('03YSK01B.SCN', 0xf3b, 0xf56),
+    ('03YSK01B.SCN', 0xff1, 0x100c),
+
+    # Fourth family in the same file: `09 <jump> b0 00 <addr>`. The block ends with a
+    # yield-and-loop (`83`, then a jump back to it) and the word after `b0 00` names the
+    # block to run next. Left behind, it pointed two bytes past `04 06 30` - into the
+    # middle of the call that opens the text window - and the interpreter ended up in
+    # the engine's "return to DOS" path, which quits cleanly via INT 21h/4C: the game
+    # looked like it crashed, but it was an orderly exit.
+    # Located by diffing the script-read trace of the patched build against the
+    # untranslated one (tools/trace_script.py --diff): the two runs first disagree
+    # exactly here.
+    ('03YSK01B.SCN', 0x019d, 0x01a2),
+    ('03YSK01B.SCN', 0x01d6, 0x01db),
+    ('03YSK01B.SCN', 0x022c, 0x0231),
+    ('03YSK01B.SCN', 0x03d9, 0x03de),
+    ('03YSK01B.SCN', 0x0cc4, 0x0cc9),
+    ('03YSK01B.SCN', 0x0d4c, 0x0d51),
+    ('03YSK01B.SCN', 0x0ddc, 0x0de1),
+    ('03YSK01B.SCN', 0x0e9f, 0x0ea4),
+    ('03YSK01B.SCN', 0x0f58, 0x0f5d),
+    ('03YSK01B.SCN', 0x100e, 0x1013),
+
+    # And the third family in the same file: inline `09 <addr>` jumps in the body (not
+    # just the entry table), which come in pairs - one after a block's 0x83 terminator
+    # and one after `b0 00 <w>`. Two of them were confirmed by watching the interpreter
+    # fetch them as address operands on the way into the manor interior
+    # (tools/confirm_pointers.py); the rest are the same shape in the same file.
+    # Without them the interior soft-locked: input stayed disabled because the script
+    # jumped two bytes past where it meant to.
+    ('03YSK01B.SCN', 0x0199, 0x0197),
+    ('03YSK01B.SCN', 0x01a0, 0x0197),
+    ('03YSK01B.SCN', 0x01d2, 0x01d0),
+    ('03YSK01B.SCN', 0x01d9, 0x01d0),
+    ('03YSK01B.SCN', 0x0228, 0x0226),
+    ('03YSK01B.SCN', 0x022f, 0x0226),
+    ('03YSK01B.SCN', 0x035f, 0x03a9),
+    ('03YSK01B.SCN', 0x03d5, 0x03d3),
+    ('03YSK01B.SCN', 0x03dc, 0x03d3),
+    ('03YSK01B.SCN', 0x0a32, 0x0c94),
+    ('03YSK01B.SCN', 0x0a70, 0x0c94),
+    ('03YSK01B.SCN', 0x0c33, 0x0c94),
+    ('03YSK01B.SCN', 0x0cc0, 0x0cbe),
+    ('03YSK01B.SCN', 0x0cc7, 0x0cbe),
+    ('03YSK01B.SCN', 0x0d48, 0x0d46),
+    ('03YSK01B.SCN', 0x0d4f, 0x0d46),
+    ('03YSK01B.SCN', 0x0dd8, 0x0dd6),
+    ('03YSK01B.SCN', 0x0ddf, 0x0dd6),
+    ('03YSK01B.SCN', 0x0e9b, 0x0e99),
+    ('03YSK01B.SCN', 0x0ea2, 0x0e99),
+    ('03YSK01B.SCN', 0x0f54, 0x0f52),
+    ('03YSK01B.SCN', 0x0f5b, 0x0f52),
+    ('03YSK01B.SCN', 0x100a, 0x1008),
+    ('03YSK01B.SCN', 0x1011, 0x1008),
+
+    # The same file's short branches, `07 0d 02 00 <addr>`, which jump to the very next
+    # instruction, plus one more `80 00 03 00 00 <addr>`. They are not block starts, so
+    # find_branch_pointers.py could not see them; tools/deep_pointer_audit.py
+    # found them by aligning the original and patched files and asking which addresses
+    # stayed behind while their target moved.
+    ('03YSK01B.SCN', 0xbb, 0xbe),
+    ('03YSK01B.SCN', 0xc6, 0x185),
+    ('03YSK01B.SCN', 0xe1, 0xe4),
+    ('03YSK01B.SCN', 0xfe, 0x101),
+    ('03YSK01B.SCN', 0x114, 0x117),
+    ('03YSK01B.SCN', 0x12a, 0x12d),
+    ('03YSK01B.SCN', 0x149, 0x14c),
+
+    # 03YSK01B.SCN again: a block's conditional branches, `80 00 0X 00 00 <addr>`, are
+    # addresses too, and no byte pattern matches them. With the text two bytes shorter
+    # they still pointed at the pre-shift blocks, so going through the manor door
+    # (ysk1 -> ysk2) exited to DOS even after the entry table was fixed. Found with
+    # tools/find_branch_pointers.py: a word that lands exactly on a block start,
+    # outside any dumped string, is a pointer - all nine here share the same opcode.
+    ('03YSK01B.SCN', 0xcd, 0x1be),
+    ('03YSK01B.SCN', 0xec, 0x1ff),
+    ('03YSK01B.SCN', 0xf3, 0x3ac),
+    ('03YSK01B.SCN', 0x109, 0xc97),
+    ('03YSK01B.SCN', 0x11f, 0xd1f),
+    ('03YSK01B.SCN', 0x135, 0xdaf),
+    ('03YSK01B.SCN', 0x154, 0xe87),
+    ('03YSK01B.SCN', 0x15b, 0xf2b),
+    ('03YSK01B.SCN', 0x162, 0xfe1),
+
+    # A script's own entry table (`09 <addr>` per entry, at the top of the file) is not
+    # matched by any of the byte patterns, so those addresses stayed put while the
+    # blocks they name moved with the text. 03YSK01B.SCN entry 15 ended up 2 bytes past
+    # its block - the first name in the file, カイエス -> "Keiuss", is 2 bytes shorter -
+    # and entering the manor grounds exited to DOS. Found by the autoplayer, located by
+    # check_pointers.py, which compares each entry against the same block in the
+    # original and flags exactly these two files.
+    # 03YSK01B.SCN: 17 entry-table pointers
+    ('03YSK01B.SCN', 0x1, 0x33),
+    ('03YSK01B.SCN', 0x4, 0xb1),
+    ('03YSK01B.SCN', 0x7, 0xb8),
+    ('03YSK01B.SCN', 0xa, 0xd5),
+    ('03YSK01B.SCN', 0xd, 0xde),
+    ('03YSK01B.SCN', 0x10, 0xfb),
+    ('03YSK01B.SCN', 0x13, 0x111),
+    ('03YSK01B.SCN', 0x16, 0x127),
+    ('03YSK01B.SCN', 0x19, 0x13d),
+    ('03YSK01B.SCN', 0x1c, 0x146),
+    ('03YSK01B.SCN', 0x1f, 0x16a),
+    ('03YSK01B.SCN', 0x22, 0x173),
+    ('03YSK01B.SCN', 0x25, 0x17c),
+    ('03YSK01B.SCN', 0x28, 0x45),
+    ('03YSK01B.SCN', 0x2b, 0x68),
+    ('03YSK01B.SCN', 0x2e, 0xaf),
+    ('03YSK01B.SCN', 0x31, 0xb0),
+    # 02OLB03.SCN: 31 entry-table pointers
+    ('02OLB03.SCN', 0x1, 0x5e),
+    ('02OLB03.SCN', 0x4, 0x76),
+    ('02OLB03.SCN', 0x7, 0xa0),
+    ('02OLB03.SCN', 0xa, 0xa0),
+    ('02OLB03.SCN', 0xd, 0xa0),
+    ('02OLB03.SCN', 0x10, 0x7e),
+    ('02OLB03.SCN', 0x13, 0x86),
+    ('02OLB03.SCN', 0x16, 0x8e),
+    ('02OLB03.SCN', 0x19, 0x98),
+    ('02OLB03.SCN', 0x1c, 0xa0),
+    ('02OLB03.SCN', 0x1f, 0xa0),
+    ('02OLB03.SCN', 0x22, 0xa1),
+    ('02OLB03.SCN', 0x25, 0xea),
+    ('02OLB03.SCN', 0x28, 0x10b),
+    ('02OLB03.SCN', 0x2b, 0x125),
+    ('02OLB03.SCN', 0x2e, 0x169),
+    ('02OLB03.SCN', 0x31, 0x198),
+    ('02OLB03.SCN', 0x34, 0x1b2),
+    ('02OLB03.SCN', 0x37, 0x1d3),
+    ('02OLB03.SCN', 0x3a, 0x1e6),
+    ('02OLB03.SCN', 0x3d, 0x207),
+    ('02OLB03.SCN', 0x40, 0x5d),
+    ('02OLB03.SCN', 0x43, 0x690),
+    ('02OLB03.SCN', 0x4c, 0x7b6),
     # file,     location,  text_location
+
+    # 02OLB02A.SCN (Albein events): the script jumps here on several town actions, and
+    # none of the byte patterns match this one, so it stayed at 0x4017 while its target
+    # moved with the text -> the town crashed to DOS (bump 0/8/10, step 0). Confirmed
+    # with an np2core read watchpoint: the interpreter's operand fetch at BD 0x18aa9
+    # reads this word (untranslated 0x282 = 0x4017 -> 0x317).
+    ('02OLB02A.SCN', 0x282, 0x317),
     ('BD.BIN', 0xcbb4, 0xbb96),
     ('BD.BIN', 0xcbb6, 0xbb9b),
     ('BD.BIN', 0xcbb8, 0xbba0),
     ('BD.BIN', 0xcbba, 0xbbac),
+
+    # 02OLB00A.SCN ends with an x86 image-scrolling routine (0x74b-0x89f) that keeps
+    # its variables in the zero area at 0x6f4-0x74a and addresses them absolutely
+    # (file is loaded at +0x3d00). The script-pointer regexes can't see these.
+    ('02OLB00A.SCN', 0x778, 0x74a),  # mov [0x444a], al
+    ('02OLB00A.SCN', 0x780, 0x6f4),  # mov [0x43f4], bx
+    ('02OLB00A.SCN', 0x784, 0x6f6),  # mov [0x43f6], es
+    ('02OLB00A.SCN', 0x78e, 0x748),  # mov word [0x4448], 0x18
+    ('02OLB00A.SCN', 0x7bc, 0x6f8),  # mov di, 0x43f8
+    ('02OLB00A.SCN', 0x7ca, 0x6f8),  # mov si, 0x43f8
+    ('02OLB00A.SCN', 0x7f8, 0x748),  # dec word [0x4448]
+    ('02OLB00A.SCN', 0x803, 0x748),  # cmp word [0x4448], 0
+    ('02OLB00A.SCN', 0x813, 0x748),  # inc word [0x4448]
+    ('02OLB00A.SCN', 0x81e, 0x748),  # cmp word [0x4448], 0x18
+    ('02OLB00A.SCN', 0x82e, 0x748),  # dec word [0x4448]
+    ('02OLB00A.SCN', 0x839, 0x748),  # mov di, [0x4448]
+    ('02OLB00A.SCN', 0x848, 0x748),  # sub di, [0x4448]
+    ('02OLB00A.SCN', 0x851, 0x748),  # cmp word [0x4448], 0xc
+    ('02OLB00A.SCN', 0x872, 0x748),  # mov ax, [0x4448]
+    ('02OLB00A.SCN', 0x87d, 0x74a),  # mov dh, [0x444a]
+    ('02OLB00A.SCN', 0x889, 0x6f4),  # lds di, [0x43f4]
 ]
 
 # Put some default values in there
@@ -1524,10 +1830,99 @@ for bodfile in FILES:
 
 CONTROL_CODES = {
     b'[BLANK]': b'',
-    b'[SPLIT]': b'\\f\x00;@\x02',
-    b'[New]': b'\x04\x06\x30\x40\x02',
-    b'[00]': b'\x00',
+    b'[SPLIT]': b'\\f\x00;@\x02',          # page break: \f + rendering sync
+    b'[BR]':    b'\\n\x00\x40\x02',         # line break: \n + rendering sync
+    b'[New]':   b'\x04\x06\x30\x40\x02',    # new dialogue box
+    b'[00]':    b'\x00',
+    b'[DELAY]': b'\\u60',                   # dramatic-beat pause; see \u note below
 }
+
+# Backslash sub-command reference (0x5C prefix):
+#   \n        - newline (most common, 3186 occurrences)
+#   \f[NNNN]  - page break / clear screen (often followed by \0 terminator)
+#   \o N,M    - text position (row N, column M)
+#   \w N,M    - text window width (width N, lines M)
+#   \c NN     - text color (palette index 00-15)
+#   \b N      - background color (0-255)
+#   \t N      - text mode / font selection
+#   \i N      - indent level / icon position (0-2)
+#   \k N      - kerning / character spacing
+#   \d [N]    - display / delay
+#   \g N      - graphics / glyph (0-8)
+#   \p N      - palette select
+#   \u 60     - [DELAY] in CONTROL_CODES above. Live-tested 2026-09-14
+#               (RAM-patched a \k0 to \u5/\u9 mid-battle, D010_X10.BSD):
+#               consumed cleanly, no crash, no visible effect on its own.
+#               Script-usage search (2026-09-14, across every dumped
+#               SCN/BSD/SMI) found the real signal instead: \u appears 50
+#               times, ALWAYS as \u60 (never any other value), and always
+#               sitting right at an ellipsis or a beat before a reaction -
+#               e.g. "・・・\n\u60なにっ？！" ("...\u60 what?!"), and
+#               "・\u60・\u60・\u60\n" (three dots, each followed by \u60).
+#               Never used mid-sentence. That's a dramatic-pause pattern, not
+#               a formatting one - read as a fixed-duration wait/delay (60 of
+#               some tick unit), always the same length, which also explains
+#               why patching it produced no visible still-frame effect: it's
+#               a timing thing, invisible to a screenshot.
+#   \s N      - Only 2 genuine occurrences in the whole game (00IPL.SCN and
+#               27KKII00.SCN), both \s1, both inside the SAME alternate
+#               preamble shape: \i0\g8\b255\p0\s1\k0 - no portrait, no
+#               speaker name, heavily padded/centered text (chapter-opening
+#               narration caption in 27KKII00.SCN: "　　　　　　　　その時、
+#               クライツェアン全土を..."). Normal character dialogue always
+#               uses \c+\t instead (\i0\c7\b255\t0\k0) and never \g/\p/\s.
+#               Live-tested 2026-09-15: inserted \g8\b255\p0\s1 whole (all
+#               four codes together, matching the real narration preamble
+#               exactly) right before the speaker name in a normal, live,
+#               not-yet-displayed overworld dialogue box (Shinobu's manor-
+#               door warning line, SCN buffer at 0x26d80+offset), then
+#               re-triggered it. Result: rendered as a completely normal
+#               portrait+name dialogue box, no change at all - the
+#               "narration mode" hypothesis did NOT hold up under a fair
+#               test. Whatever actually selects narration-vs-dialogue
+#               rendering for 00IPL.SCN/27KKII00.SCN, it isn't these escape
+#               codes appearing in the text stream - more likely a
+#               different display routine gets called for those two special
+#               files/contexts at a level above the text parser (i.e.
+#               something like a distinct draw_narration() vs
+#               draw_dialogue() call, decided by the calling code rather
+#               than by \s). \g/\p/\s may just be cosmetic within that
+#               already-selected narration path rather than the switch that
+#               selects it. Real purpose still open - would need to trace
+#               what's different in the surrounding non-text control flow
+#               for those two files, not the text itself.
+#   \m        - Zero genuine occurrences anywhere in the shipped script.
+#               Live-tested (\m0): consumed cleanly, no visible effect -
+#               consistent with being vestigial/never exercised by the
+#               original writers, not just subtle.
+#   \y        - Zero genuine occurrences anywhere in the shipped script, and
+#               live-tested (\y0) as NOT consumed - printed literally as
+#               "y0" and broke the following box's normal open (text bled
+#               into the previous speaker's box). Genuinely unimplemented,
+#               and the total absence from real content is exactly what
+#               you'd expect if it never worked for the original writers
+#               either.
+#
+# \u/\s/\m/\y were tested by direct RAM patch + re-trigger, not a
+# compressed-file edit: found a \k0 occurrence in the not-yet-displayed tail
+# of the current dialogue's decompressed text at physical 0x2aa80+offset,
+# overwrote it in-place (same byte length, so nothing downstream shifted),
+# then advanced the dialogue with the debug bridge already attached for the
+# BSD buffer investigation.
+#
+# The "BD.BIN:0x2129" dispatcher address previously cited here was wrong -
+# disassembling there lands on an unrelated bit-flag test/set helper.
+# Searching BD.BIN for `cmp al, 0x5C` (checking a byte against backslash)
+# found exactly two hits (0x9c1a, 0x9c50), and both turned out to be a
+# different routine: a template-filler that scans a string for literal
+# "\o??,??\w??,??" placeholders and overwrites the "??"s with real
+# coordinates at runtime (explains the literal "??" seen in battle dialogue
+# dumps). The general per-character escape-code dispatcher used while
+# rendering ordinary dialogue text is still unlocated - a jump table indexed
+# by letter wouldn't show up as a direct cmp against 0x5C. Finding it for
+# real would mean going back to the live emulator and single-stepping
+# through an actual \u60/\s1 as the game encounters it, the same way the
+# BSD buffer boundary was found.
 
 # Auto-generate file blocks when they are not manually defined
 Dump = DumpExcel(DUMP_XLS_PATH)
@@ -1539,7 +1934,9 @@ for file in FILES_TO_DUMP:
     if any([t in file for t in ('.DAT', '.MP1')]):
         continue
     if (file not in FILE_BLOCKS) and (file in FILES_TO_REINSERT or file in FILES_WITH_POINTERS):
-        print(file, "not in FILE_BLOCKS")
+        if os.environ.get('KURO_VERBOSE'):
+            # This runs on import, so every tool that touches rominfo printed it.
+            print(file, "not in FILE_BLOCKS")
         gf = Gamefile('original/decompressed/%s' % file, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
 
         blocks = []
@@ -1553,19 +1950,26 @@ for file in FILES_TO_DUMP:
             translations = Dump.get_translations(file, include_blank=True, sheet_name="BSDs")
         else:
             translations = Dump.get_translations(file, include_blank=True)
-        for t in translations:
 
-            if not start:
-                start = t.location
-            else:
-                distance = t.location - last_string_end
-                # 17 seemed good, but I'm finding dialogue with lots of control codes now. Let's try 32 (0x20)
-                if distance > 0x25:
-                    blocks.append((start, last_string_end))
+        # SCN files: use a single whole-file block so no pointers get skipped.
+        # Exception: files with LENGTH_SENSITIVE_BLOCKS need precise sub-blocks
+        # to prevent shifting code sections that follow text.
+        if file.endswith('SCN') and translations and file not in LENGTH_SENSITIVE_BLOCKS:
+            blocks = [(translations[0].location, len(gf.original_filestring))]
+        else:
+            for t in translations:
+
+                if not start:
                     start = t.location
-            last_string_end = t.location + len(t.jp_bytestring)
-        #blocks.append((start, last_string_end))
-        blocks.append((start, len(gf.original_filestring)))
+                else:
+                    distance = t.location - last_string_end
+                    # 17 seemed good, but I'm finding dialogue with lots of control codes now. Let's try 32 (0x20)
+                    if distance > 0x25:
+                        blocks.append((start, last_string_end))
+                        start = t.location
+                last_string_end = t.location + len(t.jp_bytestring)
+            #blocks.append((start, last_string_end))
+            blocks.append((start, len(gf.original_filestring)))
 
         FILE_BLOCKS[file] = blocks
 
@@ -1580,9 +1984,11 @@ for file in FILES_TO_DUMP:
                     string_locations.append((t.location, t.location + len(t.jp_bytestring)))
 
                 FILE_STRING_LOCATIONS[file] = string_locations
-                print(string_locations)
+                if os.environ.get('KURO_VERBOSE'):
+                    print(string_locations)
 
     if file in LENGTH_SENSITIVE_BLOCKS and file in FILE_BLOCKS:
         for ls_block in LENGTH_SENSITIVE_BLOCKS[file]:
-            print(FILE_BLOCKS[file])
+            if os.environ.get('KURO_VERBOSE'):
+                print(FILE_BLOCKS[file])
             assert ls_block in FILE_BLOCKS[file], ls_block

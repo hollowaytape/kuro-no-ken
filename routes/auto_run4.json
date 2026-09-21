@@ -1,0 +1,16 @@
+{
+ "start": {
+  "state": "r03_after_mercenary"
+ },
+ "steps": [
+  {
+   "op": "talk",
+   "slot": 1
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

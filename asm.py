@@ -45,15 +45,17 @@ BYTE_EDITS = {
 		#(0x484, b'\xff\x10\xff\x10'), # Set Speed to 4351
 	],
 
+	# Raw edit to the *compressed* file; lands on literal bytes, so it changes exactly
+	# one decompressed value (0x494c): 0x1562 -> 0x15f2. Meant to lift a 03YSK01A.SCN
+	# length limit, but OLB's equivalent "limit" turned out to be a pointer bug, so
+	# whether this one is a real check is unverified.
 	"YSK1.MP1": [
-		(0x1320, b'\xf2\x15')  # Increase the max length of 03YSK01A.SCN from 0x1562 -> 0x1800
+		(0x1320, b'\xf2\x15')
 	],
 
-	# EXPERIMENTAL
-	"OLB2.MPC": [
-		(0x3431, b'\xf2\x15'),
-		(0x3e94, b'\xf2\x15'),
-	]
+	# Removed: OLB2.MPC (0x3431, 0x3e94) -> f2 15. One of those raw compressed-byte
+	# edits hits a back-reference, zeroing map data in 7 other places, and the
+	# 0x1653 limit it targeted doesn't exist - see DECOMPRESSED_SIZE_LIMITS.
 }
 
 inventory = b''

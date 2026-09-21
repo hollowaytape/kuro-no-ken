@@ -2,7 +2,9 @@
     Dump the files from the FA1 filesystem of BOD.
 """
 import os
-from rominfo import BODFile, ARCHIVES, FILES
+from rominfo import BODFile, ARCHIVES, FILES, FILES_TO_REINSERT, BSD_FILES_WITH_TEXT
+from compress import compress as compress_data
+from decompress import decompress as decompress_data
 
 def getSize(filename):
     st = os.stat(filename)
@@ -85,36 +87,78 @@ def unpack(archive, file_dir=b'original'):
 
 def repack(archive):
     print("Calling repack on", archive)
-    #print(archive)
     just_archive = bytes(archive.split('\\')[-1], 'ascii')
-    #print(just_archive)
+
+    # Original archive size for overflow validation
+    orig_archive_path = os.path.join(b'original', just_archive)
+    orig_archive_size = os.path.getsize(orig_archive_path)
+
     with open(archive, 'wb+') as f:
         archive_files = []
+        file_buffers = []  # pre-read (and possibly compressed) file contents
         compressed_files_end = 0xc
 
-        # Collect info on which files are in this, and how long they are
         for bodfile in FILES:
-            if bodfile.source == just_archive:
-                #print(bodfile)
+            if bodfile.source != just_archive:
+                continue
 
-                with open(b'patched/%s' % bodfile.name, 'rb') as g:
-                    buf = g.read()
-                    #assert len(buf) == bodfile.compressed_length
-                    if len(buf) != bodfile.compressed_length:
-                        print('%s was changed, its length is now %s' % (bodfile.name, hex(len(buf))))
-                    bodfile.compressed_length = len(buf)
+            with open(b'patched/%s' % bodfile.name, 'rb') as g:
+                buf = g.read()
 
-                compressed_files_end += bodfile.compressed_length
-                #print(hex(compressed_files_end))
-                #print(hex(bodfile.location + bodfile.compressed_length))
-                #print(bodfile)
-                archive_files.append(bodfile)
-                #assert compressed_files_end == bodfile.location + bodfile.compressed_length
+            filename = bodfile.name.decode('ascii')
+            was_compressed = bodfile.compressed_length < bodfile.decompressed_length
+            is_reinserted = filename in FILES_TO_REINSERT or filename in BSD_FILES_WITH_TEXT
 
-                # Pad so each file begins at a word boundary
-                if compressed_files_end & 0x1 == 1:
-                    compressed_files_end += 1
+            if is_reinserted and was_compressed:
+                with open(b'original/%s' % bodfile.name, 'rb') as g:
+                    original_compressed = g.read()
+                original_stream = decompress_data(original_compressed)
 
+                # The compressed stream encodes all bytes of BSD/SMI files, but the game
+                # overwrites the first 6 in RAM (b4 0b ...), so memory dumps show runtime
+                # values there. Always write the stream's own header back.
+                ext = filename.rsplit('.', 1)[-1].upper()
+                if ext in ('BSD', 'SMI'):
+                    buf = original_stream[:6] + buf[6:]
+
+                if buf == original_stream:
+                    # Unchanged - keep the original compressed bytes
+                    buf = original_compressed
+                    bodfile._repack_is_compressed = True
+                    bodfile.decompressed_length = len(original_stream)
+                    compressed = None
+                else:
+                    bodfile.decompressed_length = len(buf)
+                    compressed = compress_data(buf)
+
+                if compressed is None:
+                    pass
+                elif len(compressed) < len(buf):
+                    buf = compressed
+                    bodfile._repack_is_compressed = True
+                else:
+                    # Compression didn't help; store uncompressed
+                    bodfile._repack_is_compressed = False
+                    print('  %s: compression inflated, storing uncompressed' % filename)
+            elif is_reinserted:
+                # Uncompressed file (e.g. DAT files) — store as-is
+                bodfile.decompressed_length = len(buf)
+                bodfile._repack_is_compressed = False
+            else:
+                # Not reinserted — keep original (already compressed or not)
+                bodfile._repack_is_compressed = was_compressed
+
+            if len(buf) != bodfile.compressed_length:
+                print('  %s: %s -> %s' % (filename,
+                    hex(bodfile.compressed_length), hex(len(buf))))
+            bodfile.compressed_length = len(buf)
+
+            compressed_files_end += bodfile.compressed_length
+            if compressed_files_end & 0x1 == 1:
+                compressed_files_end += 1
+
+            archive_files.append(bodfile)
+            file_buffers.append(buf)
 
         # Write FA1 header
         f.write(b'FA1')
@@ -127,50 +171,45 @@ def repack(archive):
 
         # Write file contents
         cursor = 0xc
-        for bodfile in archive_files:
-            #print(bodfile)
-            #f.write(bodfile.get_filestring(b'patched'))
-            #cursor += len(bodfile.get_filestring(b'patched'))
-            with open(b'patched/%s' % bodfile.name, 'rb') as g:
-                buf = g.read()
-                #print(buf)
-                f.write(buf)
-                cursor += len(buf)
-            #cursor += getSize(b'patched/%s' % bodfile.name)
+        for bodfile, buf in zip(archive_files, file_buffers):
+            f.write(buf)
+            cursor += len(buf)
 
-            #print(hex(cursor))
             if cursor & 1 == 1:
                 f.write(b'\x00')
                 cursor += 1
 
-        # what do 10ec00, 104c00, 109800, 10d800, 115c00 have in common?
-            # Multiples of 0x400
         # Pad so the table begins at the next multiple of 0x400
         while cursor % 0x400 != 0:
             f.write(b'\x00')
             cursor += 1
-        #print(hex(cursor))
 
-        # Write file table to a normal string first
+        # Write inverted file table
         table = b''
         for bodfile in archive_files:
-            #print(bodfile, bodfile.is_compressed())
             table += bodfile.name_no_ext + (8 - len(bodfile.name_no_ext)) * b' '
             table += bodfile.ext
-            if bodfile.is_compressed():
+            if bodfile._repack_is_compressed:
                 table += b'\x01'
             else:
                 table += b'\x00'
             table += bodfile.compressed_length.to_bytes(4, 'little')
             table += bodfile.decompressed_length.to_bytes(4, 'little')
 
-
-        #print(table)
-
-        # Invert the table and write it
-        #print(table)
         table = invert(table)
         f.write(table)
+
+        final_size = f.tell()
+
+    # Overflow validation
+    if final_size > orig_archive_size:
+        print('WARNING: %s overflows! %s -> %s (+%d bytes)' % (
+            just_archive.decode(), hex(orig_archive_size),
+            hex(final_size), final_size - orig_archive_size))
+    else:
+        slack = orig_archive_size - final_size
+        print('  %s: %s bytes (slack: %d bytes)' % (
+            just_archive.decode(), hex(final_size), slack))
 
 
 if __name__ == "__main__":

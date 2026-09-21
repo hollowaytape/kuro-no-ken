@@ -1,0 +1,149 @@
+{
+ "graph": {
+  "map_a942|npc|1": {
+   "map": "map_a942",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|npc|2": {
+   "map": "map_a942",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|npc|3": {
+   "map": "map_a942",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|npc|4": {
+   "map": "map_a942",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|bump|6": {
+   "map": "map_a942",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|bump|5": {
+   "map": "map_a942",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "map_a942|step|0": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x5a, at 0xac",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|bump|0": {
+   "map": "map_a942",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x45, at 0xac",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|2": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x93, at 0xac",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|1": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x4d, at 0xac",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|3": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x7d, at 0x11a",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|4": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|5": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|6": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: zone 6 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|7": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x10f, at 0x11a",
+   "pages": 0,
+   "text": []
+  },
+  "map_a942|step|8": {
+   "map": "map_a942",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x7d, at 0xac",
+   "pages": 0,
+   "text": []
+  }
+ },
+ "coverage": {}
+}

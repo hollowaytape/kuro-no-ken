@@ -1,0 +1,16 @@
+{
+ "start": {
+  "state": "albein_arrival_fixed"
+ },
+ "steps": [
+  {
+   "op": "talk",
+   "slot": 1
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

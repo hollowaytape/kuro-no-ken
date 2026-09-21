@@ -1,0 +1,577 @@
+{
+ "graph": {
+  "map_90d0|npc|2": {
+   "map": "map_90d0",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|npc|4": {
+   "map": "map_90d0",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|npc|3": {
+   "map": "map_90d0",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|0": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x200) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|1": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1f3) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|4": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1da) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|5": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1e2) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|7": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1f2) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|9": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1a9) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|8": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1ad) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|10": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x86) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|11": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0xa2) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|12": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x172) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|13": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1fa) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|bump|14": {
+   "map": "map_90d0",
+   "kind": "bump",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1dd) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|0": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x226) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|1": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1da) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|2": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1dc) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|3": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1ff) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|4": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1ff) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|5": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1ff) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|6": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1ef) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|7": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1cf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|8": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1bf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|9": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1bf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|10": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1bf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|11": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1cf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|12": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1ef) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|14": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x116) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|13": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x1dc) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|15": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x118) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|16": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x157) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|18": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x19d) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|17": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1e3) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|19": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x19d) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|20": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x88) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|21": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x88) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|22": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0xa6) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|23": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x88) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|24": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0xc7) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|26": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x3c) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|25": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x3c) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|27": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x73) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|28": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0xc7) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|29": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x127) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|30": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x137) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|31": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 31,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x127) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|32": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 32,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x147) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|34": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 34,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x163) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|33": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 33,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x147) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|35": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 35,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x17b) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|36": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 36,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x183) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|38": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 38,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x193) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|37": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 37,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1af) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|39": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 39,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1af) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|40": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 40,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1cf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|42": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 42,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1cf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|41": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 41,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x1bf) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|43": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 43,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0xb9) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|44": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 44,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0xa7) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|45": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 45,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x8f) - no movement (wall, NPC, or ",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|46": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 46,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x120) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "map_90d0|step|47": {
+   "map": "map_90d0",
+   "kind": "step",
+   "index": 47,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1e7 (target 0x194) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  }
+ },
+ "coverage": {},
+ "map_files": {
+  "map_90d0": [
+   "25TOU.SCN"
+  ]
+ }
+}

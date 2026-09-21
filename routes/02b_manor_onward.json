@@ -1,0 +1,85 @@
+{
+ "start": {
+  "map": "ysk2.mp1",
+  "x": 129,
+  "y": 475,
+  "state": "02b_manor_onward_start"
+ },
+ "steps": [
+  {
+   "op": "walk",
+   "x": 107,
+   "y": 478,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 106,
+   "y": 471,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 100,
+   "y": 470,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 103,
+   "y": 483,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 120,
+   "y": 483,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 129,
+   "y": 479,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 111,
+   "y": 479,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 106,
+   "y": 470,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 100,
+   "y": 470,
+   "y_first": false
+  },
+  {
+   "op": "walk",
+   "x": 99,
+   "y": 483,
+   "y_first": true
+  },
+  {
+   "op": "walk",
+   "x": 116,
+   "y": 483,
+   "y_first": false
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "read"
+  },
+  {
+   "op": "read"
+  }
+ ]
+}

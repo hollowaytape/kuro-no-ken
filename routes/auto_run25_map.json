@@ -1,0 +1,1916 @@
+{
+ "graph": {
+  "fld1|step|0": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x00100"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ]
+   ]
+  },
+  "fld1|npc|1": {
+   "map": "fld1",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ]
+   ]
+  },
+  "fld1|npc|2": {
+   "map": "fld1",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|npc|3": {
+   "map": "fld1",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|npc|4": {
+   "map": "fld1",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|1": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|2": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|6": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xd1 (target 0xbd) - no movement (wall, NPC, or a",
+   "pages": 7,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x006d0"
+    ]
+   ]
+  },
+  "fld1|step|8": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|3": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|4": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ]
+   ]
+  },
+  "fld1|step|7": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|11": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|13": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|14": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 14,
+   "leads_to": "mk12",
+   "outcome": "blocked: y stuck at 0x20c (target 0xf) - no movement (wall, NPC, or a",
+   "pages": 28,
+   "text": [
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x000a1"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "02OLB01A.SCN",
+     "0x00c6e"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x0019b"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x00333"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x00384"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x004b9"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x004e1"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x005e2"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ]
+   ]
+  },
+  "fld1|step|15": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|16": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "fld1|step|5": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|17": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 1,
+   "text": [
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|step|19": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1ad (target 0x189) - no movement (wall, NPC, or",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|18": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1ad (target 0x189) - no movement (wall, NPC, or",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|9": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|10": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 10,
+   "leads_to": "mk12",
+   "outcome": "blocked: y stuck at 0x20c (target 0xf) - no movement (wall, NPC, or a",
+   "pages": 28,
+   "text": [
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x000a1"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "02OLB01A.SCN",
+     "0x00c6e"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x0019b"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x00333"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x00384"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x004b9"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x004e1"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x005e2"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ]
+   ]
+  },
+  "fld1|step|20": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 2,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|21": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|24": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "06BLK01C.SCN",
+     "0x00b15"
+    ]
+   ]
+  },
+  "fld1|step|12": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 12,
+   "leads_to": "mk12",
+   "outcome": "ok",
+   "pages": 28,
+   "text": [
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x000a1"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "02OLB01A.SCN",
+     "0x00c6e"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x0019b"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x00333"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x00384"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x004b9"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x004e1"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "25TOU00A.SCN",
+     "0x005e2"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ],
+    [
+     "10TNI02A.SCN",
+     "0x000e6"
+    ],
+    [
+     "07CSL08A.SCN",
+     "0x003d3"
+    ]
+   ]
+  },
+  "fld1|step|22": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|23": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|bump|0": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|bump|2": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "25TOU00B.SCN",
+     "0x00059"
+    ],
+    [
+     "25TOU00B.SCN",
+     "0x0007f"
+    ],
+    [
+     "99CMN.SCN",
+     "0x0097b"
+    ],
+    [
+     "99CMN.SCN",
+     "0x0097b"
+    ]
+   ]
+  },
+  "fld1|bump|4": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|bump|1": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|bump|5": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": [
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ],
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|bump|6": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": [
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ],
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|bump|7": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|bump|3": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0005d"
+    ]
+   ]
+  },
+  "soh2|npc|4": {
+   "map": "soh2",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "fld1",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "soh2|npc|1": {
+   "map": "soh2",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "soh2|npc|3": {
+   "map": "soh2",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": "fld1",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "soh2|npc|2": {
+   "map": "soh2",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|bump|1": {
+   "map": "soh2",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "fld1",
+   "outcome": "blocked: x did not converge on 0x19a, at 0x178",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|bump|2": {
+   "map": "soh2",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "fld1",
+   "outcome": "blocked: x did not converge on 0x1ca, at 0x178",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|bump|0": {
+   "map": "soh2",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|bump|3": {
+   "map": "soh2",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": "fld1",
+   "outcome": "blocked: x did not converge on 0x1b2, at 0x178",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|bump|4": {
+   "map": "soh2",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: stuck entering zone 4 at (156, 321)",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|0": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "fld1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|1": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "fld1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|2": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x190, at 0x165",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|3": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x1c8, at 0x165",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|4": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x18d, at 0x13d",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|5": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|7": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "fld1",
+   "outcome": "blocked: x did not converge on 0x19a, at 0x178",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|6": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x170, at 0x165",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|8": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 8,
+   "leads_to": "fld1",
+   "outcome": "blocked: x did not converge on 0x1ca, at 0x178",
+   "pages": 0,
+   "text": []
+  },
+  "soh2|step|9": {
+   "map": "soh2",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|bump|9": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1bb (target 0x196) - no movement (wall, NPC, or",
+   "pages": 2,
+   "text": [
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ],
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|bump|8": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|bump|10": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|bump|11": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|bump|12": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|bump|13": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 3,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "29KNT.SCN",
+     "0x01e1c"
+    ]
+   ]
+  },
+  "fld1|bump|14": {
+   "map": "fld1",
+   "kind": "bump",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "fld1|step|25": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|26": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|27": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|28": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|29": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|30": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|31": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 31,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|32": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 32,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|33": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 33,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|37": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 37,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|34": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 34,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|35": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 35,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|36": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 36,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|39": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 39,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|38": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 38,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|40": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 40,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|41": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 41,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|42": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 42,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|43": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 43,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|44": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 44,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|45": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 45,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|47": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 47,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|46": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 46,
+   "leads_to": null,
+   "outcome": "gameover",
+   "pages": 7,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  }
+ },
+ "coverage": {
+  "02OLB03A.SCN": {
+   "0x0051f": [
+    "fld1"
+   ]
+  },
+  "23SOH01A.SCN": {
+   "0x0005d": [
+    "fld1"
+   ],
+   "0x000df": [
+    "fld1"
+   ],
+   "0x00100": [
+    "fld1"
+   ],
+   "0x000c2": [
+    "fld1"
+   ],
+   "0x0011d": [
+    "soh2",
+    "fld1"
+   ],
+   "0x001ce": [
+    "fld1"
+   ],
+   "0x006d0": [
+    "fld1"
+   ]
+  },
+  "23SOH01I.SCN": {
+   "0x001df": [
+    "fld1"
+   ]
+  },
+  "10TNI02A.SCN": {
+   "0x000e6": [
+    "fld1"
+   ]
+  },
+  "07CSL08A.SCN": {
+   "0x003d3": [
+    "fld1"
+   ]
+  },
+  "25TOU00A.SCN": {
+   "0x000a1": [
+    "fld1"
+   ],
+   "0x0019b": [
+    "fld1"
+   ],
+   "0x00333": [
+    "fld1"
+   ],
+   "0x00384": [
+    "fld1"
+   ],
+   "0x004b9": [
+    "fld1"
+   ],
+   "0x004e1": [
+    "fld1"
+   ],
+   "0x005e2": [
+    "fld1"
+   ]
+  },
+  "02OLB01A.SCN": {
+   "0x00c6e": [
+    "fld1"
+   ]
+  },
+  "06BLK01C.SCN": {
+   "0x00b15": [
+    "fld1"
+   ]
+  },
+  "99CMN.SCN": {
+   "0x007ea": [
+    "fld1"
+   ],
+   "0x0097b": [
+    "fld1"
+   ]
+  },
+  "29KNT.SCN": {
+   "0x01e1c": [
+    "fld1"
+   ]
+  },
+  "25TOU00B.SCN": {
+   "0x00059": [
+    "fld1"
+   ],
+   "0x0007f": [
+    "fld1"
+   ]
+  }
+ },
+ "map_files": {
+  "fld1": [
+   "01FLD.SCN",
+   "11STG01.SCN",
+   "23SOH.SCN",
+   "23SOH01.SCN",
+   "23SOH01A.SCN",
+   "25TOU.SCN",
+   "25TOU00A.SCN",
+   "25TOU00B.SCN"
+  ],
+  "soh2": [
+   "23SOH.SCN",
+   "23SOH01.SCN",
+   "23SOH01A.SCN"
+  ]
+ }
+}

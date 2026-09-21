@@ -1,0 +1,17 @@
+{
+ "start": {
+  "state": "r03_after_mercenary"
+ },
+ "steps": [
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 0
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

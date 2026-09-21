@@ -1,0 +1,55 @@
+{
+ "description": "New Game -> opening scene -> talk to Innes -> town -> world map -> manor grounds -> manor",
+ "start": {
+  "new_game": true
+ },
+ "steps": [
+  {
+   "op": "wait_field",
+   "timeout": 180
+  },
+  {
+   "op": "save_state",
+   "name": "r01_after_opening"
+  },
+  {
+   "op": "noclip"
+  },
+  {
+   "op": "talk",
+   "slot": 1
+  },
+  {
+   "op": "zone",
+   "index": 9,
+   "approach": "UP",
+   "y_first": true,
+   "map": "olb1",
+   "note": "the house door; approach from below, since Innes stands just above it"
+  },
+  {
+   "op": "zone",
+   "index": 10,
+   "approach": "DOWN",
+   "map": "fld1"
+  },
+  {
+   "op": "save_state",
+   "name": "r01_world_map"
+  },
+  {
+   "op": "zone",
+   "index": 3,
+   "map": "ysk1.mp1"
+  },
+  {
+   "op": "save_state",
+   "name": "r01_manor_grounds"
+  },
+  {
+   "op": "zone",
+   "index": 1,
+   "approach": "UP"
+  }
+ ]
+}

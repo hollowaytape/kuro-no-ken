@@ -29,11 +29,14 @@ Length tree (for 00xxxx copy operations):
 Special: when offset is 0 in a variable-length copy, it's RLE
 (repeat last output byte for the given length).
 
-Note on the 6-byte pre-filled header:
-  BSD files: the game writes b4 0b 5c 99 d8 16 to the output buffer before
-  decompressing. SMI files: b4 0b 00 00 06 00. These headers are NOT part
-  of the compressed data. Memory dumps include them, but this decompressor
-  does not produce them. Use the header parameter in decompress() to prepend.
+Note on the first 6 bytes of BSD/SMI files:
+  The compressed stream encodes them (BSD: 00 00 00 00 00 00, SMI:
+  00 00 00 00 06 00) and decompress() reproduces the full file. The game then
+  overwrites them in RAM (BSD: b4 0b 5c 99 d8 16, SMI: b4 0b ...), so the
+  memory dumps in original/decompressed/ show runtime values there. BSD dumps
+  can also hold relocated event-table/handler values further in. When
+  rebuilding a file, start from decompress(original compressed file), not
+  the dump.
 """
 
 import os

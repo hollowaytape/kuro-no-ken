@@ -1,0 +1,5 @@
+openpyxl
+xlsxwriter
+bitstring
+capstone
+ndcpy

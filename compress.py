@@ -345,25 +345,18 @@ if __name__ == '__main__':
 
         name = bodfile.name.decode()
 
-        # Use the decompressed file as ground truth (skip header for BSD/SMI)
-        with open(decomp_path, 'rb') as f:
-            original = f.read()
-
-        # Determine if file has a pre-filled header
-        ext = name.rsplit('.', 1)[-1].upper()
-        header_size = 6 if ext in ('BSD', 'SMI') else 0
+        # Ground truth is the real stream, not the RAM dump in decompressed/ -
+        # BSD/SMI dumps hold runtime-modified bytes (see decompress.py).
+        with open(comp_path, 'rb') as f:
+            original = decompress(f.read())
 
         tested += 1
         try:
-            # Compress the original decompressed data
-            compressed = compress(original, header_size)
+            compressed = compress(original)
             size_stats.append((name, comp_size, len(compressed), decomp_size))
 
-            # Decompress our compressed data
             redecompressed = decompress(compressed)
-
-            # Compare (skip the header bytes)
-            expected = original[header_size:]
+            expected = original
             if redecompressed == expected:
                 passed += 1
             else:
