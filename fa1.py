@@ -85,7 +85,10 @@ def unpack(archive, file_dir=b'original'):
             g.write(filestring)
 
 
-def repack(archive):
+def repack(archive, also_reinserted=()):
+    """Rebuild `archive` from patched/. Files in FILES_TO_REINSERT, BSD_FILES_WITH_TEXT or
+    `also_reinserted` are read from patched/ decompressed and recompressed; the rest keep
+    their original bytes."""
     print("Calling repack on", archive)
     just_archive = bytes(archive.split('\\')[-1], 'ascii')
 
@@ -107,7 +110,8 @@ def repack(archive):
 
             filename = bodfile.name.decode('ascii')
             was_compressed = bodfile.compressed_length < bodfile.decompressed_length
-            is_reinserted = filename in FILES_TO_REINSERT or filename in BSD_FILES_WITH_TEXT
+            is_reinserted = (filename in FILES_TO_REINSERT or filename in BSD_FILES_WITH_TEXT
+                             or filename in also_reinserted)
 
             if is_reinserted and was_compressed:
                 with open(b'original/%s' % bodfile.name, 'rb') as g:

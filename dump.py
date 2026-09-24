@@ -8,6 +8,9 @@ import xlsxwriter
 from shutil import copyfile
 from rominfo import FILE_BLOCKS, FILES_TO_DUMP, ORIGINAL_ROM_DIR, DUMP_XLS_PATH
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tools'))
+import script_decode
+
 COMPILER_MESSAGES = [b'Turbo', b'Borland', b'C++', b'Library', b'Copyright']
 
 ASCII_MODE = 2
@@ -178,6 +181,21 @@ def dump(files):
 
             if len(sjis_strings) == 0:
                 continue
+
+            # The scan above reads bytes, not the script, so a jump address or an object
+            # field that happens to be a valid Shift-JIS pair comes out looking like text
+            # (06BLK05J 0x1ad is the `94 40` of `10 20 00 00 00 94 40`). The interpreter
+            # knows better: drop a string the decoder places inside an instruction, or one
+            # from a file that never prints anything. Seven rows in the whole game.
+            if clean_filename.endswith('SCN'):
+                offsets = [x[0] for x in sjis_strings]
+                kept = [x for x in sjis_strings
+                        if not script_decode.is_code_row(clean_filename, x[0], len(x[1]), offsets,
+                                                         x[1].decode('cp932', 'replace'))]
+                if len(kept) != len(sjis_strings):
+                    print('%s: %d row(s) dropped - script code, not text'
+                          % (clean_filename, len(sjis_strings) - len(kept)))
+                sjis_strings = kept
 
             for s in sjis_strings:
                 #print(s)

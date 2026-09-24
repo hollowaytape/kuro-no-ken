@@ -1,6 +1,7 @@
 """Build a playable patched disk from the workbook - one command, for the translator.
 
     python build.py            (or double-click build.bat)
+    python build.py --gfx-dialogue     dialogue boxes in graphics mode (VWF groundwork)
 
 1. checks the setup and says exactly what is missing, instead of a traceback
 2. generates pointer sheets for every translated script (gen_pointers.py), keeping the
@@ -116,7 +117,8 @@ def main():
         fail('generating pointer sheets failed - see patched\\build_pointers.log')
 
     env['KURO_POINTER_XLS'] = FULL_PTRS
-    code, reinsert_out = run('reinsert', ['reinsert.py'], env)
+    extra = ['--gfx-dialogue'] if '--gfx-dialogue' in sys.argv else []   # see reinsert.py
+    code, reinsert_out = run('reinsert', ['reinsert.py'] + extra, env)
     if code:
         tail = [l for l in reinsert_out.splitlines() if l.strip()][-1:] or ['']
         fail('reinsertion failed:\n    %s\nThe line above names the file and offset. If it '

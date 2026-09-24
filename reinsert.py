@@ -10,7 +10,9 @@ from shutil import copyfile
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tools'))
 
 from romtools.disk import Disk, Gamefile, Block
-from romtools.dump import DumpExcel, PointerExcel
+from romtools.dump import PointerExcel
+from ordered_dump import OrderedDumpExcel
+from pointer_edit import KuroGamefile
 from rominfo import SRC_DISK, DEST_DISK, FILES, FILES_TO_REINSERT, COMPRESSED_FILES_TO_EDIT, ARCHIVES_TO_REINSERT
 from rominfo import FILE_BLOCKS, LENGTH_SENSITIVE_BLOCKS, DECOMPRESSED_SIZE_LIMITS, NAMES
 from rominfo import  DUMP_XLS_PATH, POINTER_XLS_PATH, POINTERS_TO_REASSIGN, CONTROL_CODES
@@ -22,8 +24,9 @@ from fa1 import repack, unpack
 from bsd_tool import parse_bsd, reinsert_bsd
 from decompress import decompress
 import fix_pointers
+import script_decode
 
-Dump = DumpExcel(DUMP_XLS_PATH)
+Dump = OrderedDumpExcel(DUMP_XLS_PATH)   # row order in the sheet is free
 PtrDump = PointerExcel(POINTER_XLS_PATH)
 
 # Area hub scripts whose only text is the centered location name. Their pointer
@@ -54,11 +57,132 @@ FIXED_LENGTH_SCN |= UNKNOWN_FORMAT_SCN
 SKIPPED_TOO_LONG = []
 
 
+_NO_TEXT = {}
+
+
+def file_shows_no_text(filename):
+    """True when not one of a file's dump rows sits inside a `40 02 <string> 00` print.
+
+    A row outside every print can still be real - menu choices are drawn another way - but
+    a file where *no* row is inside one displays nothing at all. 31END.SCN is the only one:
+    the ending is x86 code (`e8 22 00` call, `eb 05` jmp), and the four strings the dumper
+    found in it are stray bytes, one of them `ab ab ab ab` filler.
+    """
+    if filename not in _NO_TEXT:
+        from script_map import strings
+        path = os.path.join('original', 'decompressed', filename)
+        try:
+            said = strings(open(path, 'rb').read())
+        except OSError:
+            said = []
+        rows = [t.location for t in translations_of(filename, include_blank=True,
+                                                          sheet_name='SCNs')]
+        _NO_TEXT[filename] = bool(rows) and bool(said) and not any(
+            any(a - 4 <= o <= b for a, b in said) for o in rows)
+    return _NO_TEXT[filename]
+
+
+NAME_FILLED = []            # (filename, offset, english) for the report at the end
+_NAME_MAP = {}
+
+
+
+FORMULA_CELLS = []          # (filename, offset) for the report at the end
+
+
+def translations_of(block, **kw):
+    """Dump.get_translations, with any formula in the English column resolved.
+
+    The translator's sheet holds formulas there on purpose: a name plate reads its English
+    out of Names + Places, so a character's name is written down once. romtools loads the
+    workbook without `data_only`, so what comes back for those cells is the formula itself
+    - `='Names + Places'!C12` - and writing that into the game is exactly the failure
+    tools/merge_dump.py describes for `=E14` references.
+
+    The formula is resolved here rather than left to the blank-cell path further down,
+    because everything in between measures the English: the check that decides whether a
+    script can keep the Japanese's byte length runs on these very rows, and a formula read
+    as an empty cell sailed past it and then failed hard when the fill put the name back
+    ('Shinobu' is 7 bytes where 07CSLI01 has 6). Resolved here, the row carries exactly
+    what the literal used to, and that script gets the same warning it always did.
+
+    A formula that names nothing in the glossary becomes an empty cell, which falls back to
+    the Japanese, as an untouched row does - never to the text of the formula itself.
+    """
+    out = Dump.get_translations(block, **kw)
+    for t in out:
+        if t.en_bytestring.startswith(b'='):
+            FORMULA_CELLS.append((getattr(block, 'filename', None), t.location))
+            t.en_bytestring = name_plate_english(t.jp_bytestring) or b''
+    return out
+
+
+def name_plate_english(japanese):
+    """English for a cell that is *only* a character's name, or None.
+
+    A name plate is the same string hundreds of times over - 171 rows already carry one,
+    and 224 identical rows are blank - so it should be written down once and filled in on
+    the way past. Two sources, glossary first:
+
+    * **Names + Places** (rominfo.NAMES), which is where a name is decided. Its Japanese is
+      the full name, so the part before the first `・` is indexed too: the plates say
+      シノブ and カイエス where the sheet says シノブ・リュード and カイエス・ナインターク.
+    * **the translator's own rows**: a short, unpunctuated Japanese cell that always has
+      the same English wherever it is filled in (リーエ -> Lilie, 170 times) is that name,
+      spelled the way they chose. Any Japanese with two different Englishes is left alone.
+
+    Only a cell that is the whole name matches; a name inside a sentence stays the
+    translator's to write.
+    """
+    if not _NAME_MAP:
+        _NAME_MAP.update(_build_name_map())
+    try:
+        text = bytes(japanese).decode('cp932')
+    except UnicodeDecodeError:
+        return None
+    return _NAME_MAP.get(text.strip().strip('\u3000').strip())
+
+
+def _looks_like_plate(jp, en):
+    """Short, unpunctuated, and the English is short too - a label, not a line."""
+    return (jp and en and len(jp) <= 8 and len(en) <= 24
+            and not any(c in jp for c in '\u300c\u300d\u3002\u3001\uff1f\uff01\u30fb\\')
+            and not any(c in en for c in '.!?"'))
+
+
+def _build_name_map():
+    """-> {japanese name plate: english}, glossary over learned, conflicts dropped."""
+    import collections
+    learned = collections.defaultdict(set)
+    try:
+        import openpyxl
+        from rominfo import sheet_columns
+        wb = openpyxl.load_workbook(DUMP_XLS_PATH, read_only=True, data_only=True)
+        ws = wb['SCNs']
+        col = sheet_columns(ws)
+        ji, ei = col.get('Japanese'), col.get('English')
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            if ji is None or ei is None or len(row) <= max(ji, ei):
+                continue
+            jp = str(row[ji]).strip() if isinstance(row[ji], str) else ''
+            en = str(row[ei]).strip() if isinstance(row[ei], str) else ''
+            if _looks_like_plate(jp, en):
+                learned[jp].add(en)
+    except Exception:
+        learned = {}
+    out = {jp: next(iter(v)) for jp, v in learned.items() if len(v) == 1}
+    for jp_full, en in getattr(NAMES, 'pairs', lambda: [])():
+        out[jp_full] = en
+        head = jp_full.split('\u30fb')[0]
+        if head:
+            out.setdefault(head, en)
+    return {jp: en.encode('cp932', 'replace') for jp, en in out.items()}
+
 def too_long_for_fixed(gf):
     """-> [(offset, english, jp_len)] for lines that can't keep the Japanese length."""
     probe = Block(gf, (0, len(gf.original_filestring)))
     return [(t.location, t.en_bytestring, len(t.jp_bytestring))
-            for t in Dump.get_translations(probe, include_blank=True, sheet_name='SCNs')
+            for t in translations_of(probe, include_blank=True, sheet_name='SCNs')
             if t.en_bytestring and len(t.en_bytestring) > len(t.jp_bytestring)]
 
 LINE_MAX = 48
@@ -66,8 +190,17 @@ INDENT = b'  '
 NEWLINE_SEQ = b'\\n\x00\x40\x02'   # \n + rendering sync (5C 6E 00 40 02)
 SPLIT_SEQ = b'\\f\x00;@\x02'       # \f page break (5C 66 00 3B 40 02)
 
-def wrap_line(text, max_width=LINE_MAX, indent=INDENT):
-    """Word-wrap a single line of text, returning a list of wrapped lines."""
+# --gfx-dialogue: text inside a box frame is drawn with the variable-width font, so it is
+# wrapped by pixel width (tools/vwf_metrics.py) instead of by characters. The box is 50
+# columns = 400 px; like LINE_MAX (50 - 2), leave the 16 px of a speaker line's \i2.
+VWF = '--gfx-dialogue' in sys.argv
+VWF_LINE_PX = 50 * 8 - 16
+TYPESET_COUNTS = {'vwf': 0, 'text': 0, 'unknown': 0}
+
+
+def wrap_line(text, max_width=LINE_MAX, indent=INDENT, measure=len):
+    """Word-wrap a single line of text, returning a list of wrapped lines.
+    `measure` gives a line's width in the units of `max_width` (characters by default)."""
     if not text:
         return [indent]
 
@@ -78,7 +211,7 @@ def wrap_line(text, max_width=LINE_MAX, indent=INDENT):
     for word in words:
         if not word:
             continue
-        needed = len(current) + len(word) + (1 if current != indent else 0)
+        needed = measure(current + (b' ' if current != indent else b'') + word)
         if needed > max_width and current != indent:
             lines.append(current.rstrip())
             current = indent
@@ -97,10 +230,10 @@ def wrap_line(text, max_width=LINE_MAX, indent=INDENT):
 BOX_ROWS = 5   # a text box shows a speaker name + 4 lines (02OLB00A 0x3bb's 6th row never showed)
 
 
-def typeset(s, rows_before=0):
+def typeset(s, rows_before=0, vwf=False):
     """Format English text for the game's text box.
 
-    Word-wraps to LINE_MAX characters per line with INDENT prefix, honours
+    Word-wraps to LINE_MAX characters per line (vwf: VWF_LINE_PX pixels) with INDENT prefix, honours
     [SPLIT] page breaks and existing newlines, and starts a new page ([SPLIT])
     whenever the box would run past BOX_ROWS rows. `rows_before` is how many
     rows of the current page earlier cells already used (tracked in the reinsert loop).
@@ -118,7 +251,11 @@ def typeset(s, rows_before=0):
             rows = 0
         lines = []
         for raw_line in page.split(NEWLINE_SEQ):
-            lines.extend(wrap_line(raw_line))
+            if vwf:
+                import vwf_metrics
+                lines.extend(wrap_line(raw_line, VWF_LINE_PX, measure=vwf_metrics.width))
+            else:
+                lines.extend(wrap_line(raw_line))
         current = []
         for line in lines:
             if rows >= BOX_ROWS:
@@ -223,7 +360,7 @@ if __name__ == '__main__':
                 print('  %s: using the decompressed stream, not the RAM dump (%d bytes differ)'
                       % (filename, sum(a != b for a, b in zip(real, dumped))))
 
-        gf = Gamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
+        gf = KuroGamefile(patched_path, disk=OriginalBOD, dest_disk=TargetBOD, pointer_constant=0)
 
         if filename in UNKNOWN_FORMAT_SCN:
             over = too_long_for_fixed(gf)
@@ -269,6 +406,12 @@ if __name__ == '__main__':
             for (loc, value) in BYTE_EDITS[filename]:
                 gf.edit(loc, value)
 
+        # Every length change, in original offsets: (where, old length, new length). This is
+        # the exact original->patched map, which fix_pointers and stale_report use instead of
+        # re-deriving it with difflib (which can slip a few bytes and "repair" a pointer that
+        # was right - 05SKS03 0x26b).
+        edits = []
+        too_long = None
         for block in gf.blocks:
             #print(block)
             previous_text_offset = block.start
@@ -277,14 +420,14 @@ if __name__ == '__main__':
             #print(repr(block.blockstring))
             if filename.endswith('SCN'):
                 #print(filename)
-                translations = Dump.get_translations(block, include_blank=True, sheet_name="SCNs")
+                translations = translations_of(block, include_blank=True, sheet_name="SCNs")
                 #print(translations)
             elif filename.endswith('BSD'):
                 #print("Using the BSDs sheet")
-                translations = Dump.get_translations(block, include_blank=True, sheet_name="BSDs")
+                translations = translations_of(block, include_blank=True, sheet_name="BSDs")
 
             else:
-                translations = Dump.get_translations(block, include_blank=True)
+                translations = translations_of(block, include_blank=True)
             page_rows = 0      # rows used on the current text-box page (SCN typesetting)
             prev_t = None
             for t in translations:
@@ -293,7 +436,15 @@ if __name__ == '__main__':
                     page_rows = 0
                 prev_t = t
                 if t.en_bytestring == b'':
-                    t.en_bytestring = t.jp_bytestring
+                    # a blank name plate is filled from the glossary, so a name is
+                    # written down once rather than in every row that shows it
+                    filled = (name_plate_english(t.jp_bytestring)
+                              if filename.endswith('.SCN') else None)
+                    if filled:
+                        t.en_bytestring = filled
+                        NAME_FILLED.append((filename, t.location, filled))
+                    else:
+                        t.en_bytestring = t.jp_bytestring
                 # A mapping build writes FILE-INDEX placeholders that already fit the
                 # line and carry the original's own control codes, so typesetting them
                 # only re-encodes each newline from 2 bytes to 5 and makes the file grow
@@ -308,6 +459,21 @@ if __name__ == '__main__':
                 for cc in CONTROL_CODES:
                     if cc in t.en_bytestring:
                         t.en_bytestring = t.en_bytestring.replace(cc, CONTROL_CODES[cc])
+
+                if t.en_bytestring != t.jp_bytestring and filename.endswith('.SCN'):
+                    code = script_decode.code_bytes(filename)
+                    if any(x in code for x in range(t.location, t.location + len(t.jp_bytestring))):
+                        raise ValueError(
+                            '%s @%#x is not text: the dumper read script code as Japanese '
+                            '(the decoder places an instruction there). Clear its English - '
+                            'writing it would overwrite the instruction.' % (filename, t.location))
+                    if file_shows_no_text(filename):
+                        raise ValueError(
+                            '%s @%#x is not text: the game never prints anything from this '
+                            'file - not one of its dump rows follows a print instruction. '
+                            '31END.SCN is the ending sequence, x86 code rather than script, '
+                            'and its four "strings" are stray bytes. Clear its English.'
+                            % (filename, t.location))
 
                 if t.en_bytestring != t.jp_bytestring:
                     #print(t.en_bytestring)
@@ -340,7 +506,16 @@ if __name__ == '__main__':
                         t.en_bytestring = t.en_bytestring.ljust(len(t.jp_bytestring), b' ')
                     elif typeset_scn and t.en_bytestring:
                         # Typeset SCN files (word-wrap for text box, new page when full)
-                        t.en_bytestring, page_rows = typeset(t.en_bytestring, page_rows)
+                        # With --gfx-dialogue, pixel widths only where the string is known
+                        # to print in a box frame (tools/dialogue_modes.py); elsewhere it
+                        # may be text mode, where a VWF-length line would overflow.
+                        vwf = False
+                        if VWF:
+                            import dialogue_modes
+                            mode = dialogue_modes.mode_of(filename, t.location)
+                            vwf = mode == 'g'
+                            TYPESET_COUNTS['vwf' if vwf else 'text' if mode else 'unknown'] += 1
+                        t.en_bytestring, page_rows = typeset(t.en_bytestring, page_rows, vwf=vwf)
                         typeset_scn = False      # rows already counted
 
 
@@ -360,6 +535,7 @@ if __name__ == '__main__':
                     this_segment = this_segment.replace(t.jp_bytestring, t.en_bytestring, 1)
                     block.blockstring = block.blockstring.replace(this_original_segment, this_segment)
                     last_text_end = loc_in_block + idx_in_segment + len(t.en_bytestring)
+                    edits.append((t.location + idx_in_segment, len(t.jp_bytestring), len(t.en_bytestring)))
 
 
                     # Old style. Getting replaced
@@ -424,25 +600,56 @@ if __name__ == '__main__':
                             block.blockstring = (block.blockstring[:last_text_end] +
                                                  b' '*padding_len +
                                                  block.blockstring[last_text_end:])
+                            last_at, last_len, _ = max(e for e in edits if block.start <= e[0] < block.stop)
+                            edits.append((last_at + last_len, 0, padding_len))
                         else:
                             block.blockstring += padding_len*b'\x00'
+                            edits.append((block.stop, 0, padding_len))
                     block_diff = len(block.blockstring) - len(block.original_blockstring)
+                    if block_diff > 0:
+                        # Grew, and a length-sensitive block can only be padded, not cut.
+                        too_long = ('its length-sensitive block %#x-%#x is %d bytes over'
+                                    % (block.start, block.stop, block_diff))
+                        break
                     assert block_diff == 0, (block_diff, block)
 
             block.incorporate()
+        else:
+            too_long = None
 
-        # Backward pointers (the pointer word sits after the text it points at) are
-        # written at a stale index by BorlandPointer.edit and so keep their old value.
-        # Now that the file is final, rewrite the ones whose target provably moved.
+        # A script past its RAM slot would load over its neighbour (slot 1 ends where the
+        # common script begins), which crashes the game - so it is not inserted at all.
+        if not too_long and filename in DECOMPRESSED_SIZE_LIMITS \
+                and len(gf.filestring) > DECOMPRESSED_SIZE_LIMITS[filename]:
+            too_long = 'it is %d bytes over its %#x-byte RAM slot' % (
+                len(gf.filestring) - DECOMPRESSED_SIZE_LIMITS[filename],
+                DECOMPRESSED_SIZE_LIMITS[filename])
+        if too_long:
+            # Leave the original in patched/: repack sees it unchanged and stores the
+            # original compressed bytes.
+            open(patched_path, 'wb').write(gf.original_filestring)
+            SKIPPED_TOO_LONG.append((filename, too_long))
+            print('WARNING: %s left in Japanese - the English does not fit: %s. Shorten '
+                  'lines in this script (the Story order / Scene columns show which).'
+                  % (filename, too_long))
+            continue
+
+        # Safety net: a pointer the decoder knows but the pointer sheet lacks still points at
+        # the old offset. (Backward pointers used to land here too; pointer_edit.KuroGamefile
+        # now places those correctly during the walk.) With the exact edit map, rewrite the
+        # ones whose target provably moved while their value did not.
         if filename.endswith('.SCN'):
-            fixed, ptr_fixes = fix_pointers.repair(filename, gf.original_filestring, gf.filestring)
+            fixed, ptr_fixes = fix_pointers.repair(filename, gf.original_filestring, gf.filestring,
+                                                   edits=edits)
             if ptr_fixes:
                 gf.filestring = fixed
-                print('  %s: repaired %d backward pointer(s): %s' % (
+                print('  %s: repaired %d pointer(s) missing from the sheet: %s' % (
                     filename, len(ptr_fixes),
-                    ', '.join('%#x->%#x' % (old, new) for _loc, old, new in ptr_fixes)))
+                    ', '.join('@%#x %#x->%#x' % (loc, old, new) for loc, old, new in ptr_fixes)))
 
         gf.write(skip_disk=True)
+        if filename.endswith('.SCN'):
+            fix_pointers.save_edits(os.path.join('patched', filename), edits)
 
         # Check decompressed file size against its RAM slot (see rominfo.SCN_SLOT_SIZES)
         if filename in DECOMPRESSED_SIZE_LIMITS:
@@ -481,7 +688,7 @@ if __name__ == '__main__':
         last_text = max(r.end for r in parsed['text_regions'])
         block = Block(gf, (first_text, last_text + 1))
 
-        translations_raw = Dump.get_translations(block, include_blank=True, sheet_name="BSDs")
+        translations_raw = translations_of(block, include_blank=True, sheet_name="BSDs")
 
         # Build translations list for bsd_tool: (offset, jp_bytes, en_bytes)
         translations = []
@@ -531,10 +738,38 @@ if __name__ == '__main__':
                 
         gf.write(skip_disk=True)
 
+    # Dialogue boxes in MB3N's graphics mode (python reinsert.py --gfx-dialogue): the
+    # groundwork for a variable-width font, see docs/vwf_findings.md. Off by default: it
+    # looks the same as text mode, and the text-layer readback that verify_text.py,
+    # verify_blocks.py and the bench use sees no dialogue in graphics mode.
+    code_patched = []
+    if '--gfx-dialogue' in sys.argv:
+        sys.path.insert(0, 'tools')
+        import mb3_gfx          # needs keystone (pip install keystone-engine)
+        import dialogue_gfx
+        for name, patch in (('MB3N.BIN', mb3_gfx.patch), ('99CMN.SCN', dialogue_gfx.patch)):
+            if name in FILES_TO_REINSERT:
+                raise SystemExit('%s is now reinserted from the workbook; the graphics-mode '
+                                 'patch expects the original file and needs updating' % name)
+            data = decompress(open(os.path.join('original', name), 'rb').read())
+            with open(os.path.join('patched', name), 'wb') as fh:
+                fh.write(patch(data))
+            code_patched.append(name)
+            print('  %s: graphics-mode dialogue patch applied' % name)
+        print('  typeset: %(vwf)d cells by pixel width (VWF), %(text)d by characters (text '
+              'mode), %(unknown)d by characters (never reached by the mode sweep)' % TYPESET_COUNTS)
+        # BD.BIN is already reinserted (its text), so patch the reinserted copy
+        bd_path = os.path.join('patched', 'BD.BIN')
+        with open(bd_path, 'rb') as fh:
+            bd = fh.read()
+        with open(bd_path, 'wb') as fh:
+            fh.write(dialogue_gfx.patch_bd(bd))
+        print('  BD.BIN: back to text mode at the end of every script run')
+
     for filename in ARCHIVES_TO_REINSERT:
         gamefile_path = os.path.join('patched', filename)
 
-        repack(gamefile_path)
+        repack(gamefile_path, also_reinserted=code_patched)
         # Gotta repack it first, then initialize the gamefile
         gf = Gamefile(gamefile_path, disk=OriginalBOD, dest_disk=TargetBOD)
 

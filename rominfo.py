@@ -4,7 +4,8 @@
 
 import os
 from romtools.disk import Disk, Gamefile
-from romtools.dump import DumpExcel, PointerExcel
+from romtools.dump import PointerExcel
+from ordered_dump import OrderedDumpExcel
 
 
 class BODFile:
@@ -57,10 +58,83 @@ LINE_MAX_LENGTH = 48
 
 ARCHIVES = [b'A.FA1', b'B.FA1', b'C.FA1', b'D.FA1', b'E.FA1']
 
-NAMES = [b'Shinobu',
-         b'Innes',
-         b'Zerfuedel',
-         b'Keiuss']
+class _Names:
+    """The character names, read from the workbook's **Names + Places** sheet.
+
+    `reinsert.typeset` passes a cell through unchanged when it is one of these: a name
+    plate is a label, not prose, so it must not be word-wrapped and it uses one row of the
+    text box. That list used to be four names typed in here, which meant a name the
+    translator added to the glossary was wrapped like a sentence, and a name they renamed
+    was still matched under its old spelling. Now the glossary is the only place a name is
+    written down.
+
+    Loaded on first use, not at import: `rominfo` is imported by everything, and opening
+    the workbook costs a second or two. `in` is all any caller needs.
+    """
+
+    def __init__(self, fallback=(b'Shinobu', b'Innes', b'Zerfuedel', b'Keiuss')):
+        self.fallback = list(fallback)
+        self._names = None
+        self._of = {}
+
+    def _load(self):
+        if self._names is not None:
+            return self._names
+        names, of = [], {}
+        try:
+            import openpyxl
+            wb = openpyxl.load_workbook(DUMP_XLS_PATH, read_only=True, data_only=True)
+            for row in wb['Names + Places'].iter_rows(min_row=2, values_only=True):
+                src, jp, en = (list(row) + [None] * 3)[:3]
+                # a character row names a person: Japanese and English, no file prefix
+                if jp and en and not src:
+                    text = str(en).strip()
+                    if text:
+                        names.append(text.encode('cp932', 'replace'))
+                        of[str(jp).strip().encode('cp932', 'replace')] = names[-1]
+        except Exception:
+            names, of = [], {}
+        self._names = names or self.fallback
+        self._of = of
+        return self._names
+
+    def pairs(self):
+        """[(japanese, english)] from the glossary, for callers that match names."""
+        self._load()
+        return [(jp.decode('cp932', 'replace'), en.decode('cp932', 'replace'))
+                for jp, en in self._of.items()]
+
+    def english_for(self, japanese):
+        """The English for a cell that is *only* a character's name, or None.
+
+        This is what lets a name plate stay blank in the workbook: the glossary is where a
+        name is written down, and the reinserter fills it in on the way past. A cell has to
+        be the whole name and nothing else - a name inside a sentence is the translator's
+        to write.
+        """
+        self._load()
+        try:
+            text = bytes(japanese).decode('cp932')
+        except UnicodeDecodeError:
+            return None
+        # a name plate is padded with the full-width space, which is not part of it
+        return self._of.get(text.strip().strip('\u3000').strip()
+                            .encode('cp932', 'replace'))
+
+    def __contains__(self, item):
+        return item in self._load()
+
+    def __iter__(self):
+        return iter(self._load())
+
+    def __len__(self):
+        return len(self._load())
+
+    def __repr__(self):
+        return 'Names(%s)' % b', '.join(self._load()).decode('cp932', 'replace')
+
+
+NAMES = _Names()
 
 """
 FILES_TO_DUMP = [
@@ -135,11 +209,30 @@ def _translated_scripts():
     except FileNotFoundError:
         return out
     if 'SCNs' in wb.sheetnames:
-        for r in wb['SCNs'].iter_rows(min_row=2, max_col=5, values_only=True):
-            if r[0] and str(r[0]).endswith('.SCN') and isinstance(r[4], str) and r[4].strip():
-                out.add(r[0])
+        ws = wb['SCNs']
+        col = sheet_columns(ws)
+        fi, ei = col.get('Filename'), col.get('English')
+        if fi is not None and ei is not None:
+            for r in ws.iter_rows(min_row=2, values_only=True):
+                if len(r) <= max(fi, ei):
+                    continue
+                if r[fi] and str(r[fi]).endswith('.SCN') and isinstance(r[ei], str)                         and r[ei].strip():
+                    out.add(r[fi])
     wb.close()
     return out
+
+
+def sheet_columns(ws):
+    """{header: index} for a dump sheet.
+
+    Columns are found by their header, never by position: the workbook the translator
+    reads is laid out for reading (Area, Scene, Who, Shown when, Japanese, ... Filename,
+    Offset), and the original dump is laid out for the dumper. romtools already reads it
+    this way; this is for the places in the project that did not, which is how a build
+    from the rearranged sheet quietly reinserted 8 scripts instead of 117.
+    """
+    head = next(ws.iter_rows(min_row=1, max_row=1, values_only=True), ())
+    return {h: i for i, h in enumerate(head) if isinstance(h, str)}
 
 
 # The hand-listed scripts were each verified in game; build.py keeps their curated pointer
@@ -149,6 +242,7 @@ CURATED_FILES = list(FILES_TO_REINSERT)
 # KURO_CURATED_ONLY=1 builds just the hand-listed files above, as before.
 if not os.environ.get('KURO_CURATED_ONLY'):
     FILES_TO_REINSERT += sorted(_translated_scripts() - set(FILES_TO_REINSERT))
+FILES_TO_REINSERT[:] = list(dict.fromkeys(FILES_TO_REINSERT))   # 02OLB02A was listed twice
 
 # BSD files with translatable dialogue text (auto-discovered by bsd_tool)
 # KURO_ONLY=A.SCN,B.SCN narrows a build to those files, for isolating one that fails.
@@ -335,10 +429,27 @@ LENGTH_SENSITIVE_BLOCKS = {
 # 02OLB01.SCN loads and runs fine, with 99CMN.SCN intact after it.
 SCN_SLOT_SIZES = {0: 0x1800, 0x1800: 0x1800, 0x3d00: 0x1400}
 
-DECOMPRESSED_SIZE_LIMITS = {
-    f: SCN_SLOT_SIZES[-POINTER_CONSTANT.get(f, 0)]
-    for f in FILES_TO_REINSERT if f.endswith('.SCN')
-}
+def _slot_limit(f):
+    """The RAM slot a script loads into, read from its own `09 <base+offset>` entry table
+    (the addresses say which slot base they were assembled for) - POINTER_CONSTANT only
+    covers the hand-listed files, and defaulting the rest to slot 0 checked 0x3d00-slot
+    scenes against 0x1800 instead of 0x1400. A file whose original is already bigger than
+    its slot (28KDI.SCN, 0x20ca, a map script) shows the slot size does not apply to it; it
+    is held to its original size instead."""
+    try:
+        data = open(os.path.join('original', 'decompressed', f), 'rb').read()
+    except OSError:
+        return SCN_SLOT_SIZES[-POINTER_CONSTANT.get(f, 0)]
+    addrs, i = [], 0
+    while i + 3 <= len(data) and data[i] == 0x09:
+        addrs.append(int.from_bytes(data[i + 1:i + 3], 'little'))
+        i += 3
+    slot = next((b for b in (0x3d00, 0x1800, 0) if addrs and all(b <= a < b + len(data) for a in addrs)),
+                -POINTER_CONSTANT.get(f, 0))
+    return max(SCN_SLOT_SIZES[slot], len(data))
+
+
+DECOMPRESSED_SIZE_LIMITS = {f: _slot_limit(f) for f in FILES_TO_REINSERT if f.endswith('.SCN')}
 
 BSD_DECOMPRESSED_SIZE_LIMIT = SCN_SLOT_SIZES[0x3d00]
 
@@ -1601,6 +1712,13 @@ POINTERS_TO_SKIP = [
     # never 0xb5/0x314). Editing the misaligned ones crashed Albein to DOS.
     ('02OLB02A.SCN', 0xb5, 'pointer_location'),
     ('02OLB02A.SCN', 0x314, 'pointer_location'),
+    # 02OLB02A.SCN: "4a 40" at 0xcb4 is the high byte of a stage check's jump target plus
+    # the next print opcode: `10 84 00 04 00 [09 4a] 40 02`. The previous case's jump
+    # (0xc20) lands on 0xcae, so an instruction starts there, and opcode 10 takes three
+    # words (BD.BIN handler 1d62 -> 1daa: lodsw x3), putting the real operand at 0xcb3.
+    # Relocating 0xcb4 overwrote the text at 0xc24 (stale-index write) and, once that was
+    # fixed, would have rewritten the real operand and the opcode.
+    ('02OLB02A.SCN', 0xcb4, 'pointer_location'),
     ('02OLB02.SCN', 0x271, 'pointer_location'),
     ('02OLB02.SCN', 0x2a1, 'pointer_location'),
     ('02OLB02.SCN', 0x31b, 'pointer_location'),
@@ -1925,7 +2043,7 @@ CONTROL_CODES = {
 # BSD buffer boundary was found.
 
 # Auto-generate file blocks when they are not manually defined
-Dump = DumpExcel(DUMP_XLS_PATH)
+Dump = OrderedDumpExcel(DUMP_XLS_PATH)   # row order in the sheet is free
 PtrDump = PointerExcel(POINTER_XLS_PATH)
 OriginalBOD = Disk(SRC_DISK, dump_excel=Dump, pointer_excel=PtrDump)
 TargetBOD = Disk(DEST_DISK)
