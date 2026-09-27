@@ -1,0 +1,892 @@
+{
+ "start": "r03_manor_inside",
+ "when": "2026-09-24 00:05",
+ "sequence": [
+  "03YSK01A #11",
+  "03YSK01A #10",
+  "03YSK01A #14",
+  "03YSK01A #2",
+  "03YSK01A #3",
+  "99CMN #1",
+  "03YSK01A #18"
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "map": "ysk2",
+   "target": [
+    "npc",
+    1
+   ],
+   "at": [
+    261,
+    467
+   ],
+   "from": [
+    264,
+    513
+   ],
+   "dist": 22,
+   "noclip": false,
+   "outcome": "ok",
+   "scenes": [
+    "03YSK01A #11",
+    "03YSK01A #10"
+   ],
+   "pages": 4
+  },
+  {
+   "n": 4,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    0
+   ],
+   "at": [
+    263,
+    457
+   ],
+   "from": [
+    262,
+    470
+   ],
+   "dist": 11,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "03YSK01A #14"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 5,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    1
+   ],
+   "at": [
+    247,
+    365
+   ],
+   "from": [
+    264,
+    147
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 6,
+   "map": "ysk2",
+   "target": [
+    "step",
+    1
+   ],
+   "at": [
+    263,
+    456
+   ],
+   "from": [
+    248,
+    476
+   ],
+   "dist": 14,
+   "noclip": true,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 7,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    2
+   ],
+   "at": [
+    279,
+    365
+   ],
+   "from": [
+    264,
+    123
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 8,
+   "map": "ysk2",
+   "target": [
+    "step",
+    0
+   ],
+   "at": [
+    263,
+    514
+   ],
+   "from": [
+    280,
+    476
+   ],
+   "dist": 24,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "ysk1"
+  },
+  {
+   "n": 10,
+   "map": "ysk1",
+   "target": [
+    "step",
+    1
+   ],
+   "at": [
+    251,
+    154
+   ],
+   "from": [
+    252,
+    155
+   ],
+   "dist": 0,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "ysk2"
+  },
+  {
+   "n": 11,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    3
+   ],
+   "at": [
+    231,
+    333
+   ],
+   "from": [
+    264,
+    513
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 12,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    4
+   ],
+   "at": [
+    263,
+    333
+   ],
+   "from": [
+    144,
+    39
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 13,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    5
+   ],
+   "at": [
+    295,
+    333
+   ],
+   "from": [
+    264,
+    510
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 14,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    6
+   ],
+   "at": [
+    115,
+    453
+   ],
+   "from": [
+    436,
+    81
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: y did not converge on 0x1c5, at 0x141",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 15,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    7
+   ],
+   "at": [
+    463,
+    449
+   ],
+   "from": [
+    116,
+    321
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: y stuck at 0x15b (target 0x147) - no movement (wall, NPC, or",
+   "scenes": [
+    "03YSK01A #2",
+    "03YSK01A #3"
+   ],
+   "pages": 6
+  },
+  {
+   "n": 16,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    8
+   ],
+   "at": [
+    467,
+    157
+   ],
+   "from": [
+    116,
+    347
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 8 did nothing within 20s",
+   "scenes": [
+    "99CMN #1"
+   ],
+   "pages": 2
+  },
+  {
+   "n": 17,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    9
+   ],
+   "at": [
+    115,
+    349
+   ],
+   "from": [
+    587,
+    155
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 18,
+   "map": "ysk2",
+   "target": [
+    "bump",
+    14
+   ],
+   "at": [
+    478,
+    65
+   ],
+   "from": [
+    -4,
+    347
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x1de, at 0xec",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 19,
+   "map": "ysk2",
+   "target": [
+    "npc",
+    2
+   ],
+   "at": [
+    318,
+    269
+   ],
+   "from": [
+    236,
+    67
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 2",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 20,
+   "map": "ysk2",
+   "target": [
+    "npc",
+    3
+   ],
+   "at": [
+    231,
+    212
+   ],
+   "from": [
+    238,
+    185
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 3",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 21,
+   "map": "ysk2",
+   "target": [
+    "npc",
+    4
+   ],
+   "at": [
+    241,
+    85
+   ],
+   "from": [
+    232,
+    211
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 4",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 22,
+   "map": "ysk2",
+   "target": [
+    "step",
+    2
+   ],
+   "at": [
+    263,
+    398
+   ],
+   "from": [
+    232,
+    99
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "ysk1"
+  },
+  {
+   "n": 23,
+   "map": "ysk1",
+   "target": [
+    "npc",
+    3
+   ],
+   "at": [
+    231,
+    212
+   ],
+   "from": [
+    252,
+    155
+   ],
+   "dist": 36,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 3",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 24,
+   "map": "ysk1",
+   "target": [
+    "npc",
+    2
+   ],
+   "at": [
+    318,
+    269
+   ],
+   "from": [
+    232,
+    211
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 2",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 25,
+   "map": "ysk1",
+   "target": [
+    "npc",
+    4
+   ],
+   "at": [
+    241,
+    85
+   ],
+   "from": [
+    307,
+    255
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 4",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 26,
+   "map": "ysk1",
+   "target": [
+    "step",
+    0
+   ],
+   "at": [
+    251,
+    263
+   ],
+   "from": [
+    297,
+    145
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "ysk2"
+  },
+  {
+   "n": 27,
+   "map": "ysk2",
+   "target": [
+    "step",
+    3
+   ],
+   "at": [
+    247,
+    364
+   ],
+   "from": [
+    252,
+    265
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 28,
+   "map": "ysk2",
+   "target": [
+    "step",
+    4
+   ],
+   "at": [
+    279,
+    364
+   ],
+   "from": [
+    248,
+    474
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "03YSK01A #18"
+   ],
+   "pages": 2
+  },
+  {
+   "n": 29,
+   "map": "ysk2",
+   "target": [
+    "step",
+    5
+   ],
+   "at": [
+    231,
+    332
+   ],
+   "from": [
+    312,
+    269
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: y did not converge on 0x14c, at 0x16d",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 30,
+   "map": "ysk2",
+   "target": [
+    "step",
+    6
+   ],
+   "at": [
+    263,
+    332
+   ],
+   "from": [
+    280,
+    365
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 6 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 31,
+   "map": "ysk2",
+   "target": [
+    "step",
+    7
+   ],
+   "at": [
+    295,
+    332
+   ],
+   "from": [
+    264,
+    55
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 32,
+   "map": "ysk2",
+   "target": [
+    "step",
+    8
+   ],
+   "at": [
+    263,
+    418
+   ],
+   "from": [
+    296,
+    448
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 8 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 33,
+   "map": "ysk2",
+   "target": [
+    "step",
+    9
+   ],
+   "at": [
+    15,
+    411
+   ],
+   "from": [
+    153,
+    420
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 34,
+   "map": "ysk2",
+   "target": [
+    "step",
+    10
+   ],
+   "at": [
+    115,
+    452
+   ],
+   "from": [
+    65441,
+    412
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x73, at 0xfdc1",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 35,
+   "map": "ysk2",
+   "target": [
+    "step",
+    11
+   ],
+   "at": [
+    115,
+    406
+   ],
+   "from": [
+    64961,
+    451
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x73, at 0xfbe1",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 36,
+   "map": "ysk2",
+   "target": [
+    "step",
+    12
+   ],
+   "at": [
+    463,
+    448
+   ],
+   "from": [
+    64481,
+    407
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x1cf, at 0xfa01",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 37,
+   "map": "ysk2",
+   "target": [
+    "step",
+    13
+   ],
+   "at": [
+    215,
+    290
+   ],
+   "from": [
+    64001,
+    447
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0xd7, at 0xf821",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 38,
+   "map": "ysk2",
+   "target": [
+    "step",
+    14
+   ],
+   "at": [
+    191,
+    286
+   ],
+   "from": [
+    63521,
+    291
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0xbf, at 0xf641",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 39,
+   "map": "ysk2",
+   "target": [
+    "step",
+    15
+   ],
+   "at": [
+    311,
+    290
+   ],
+   "from": [
+    63041,
+    287
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x137, at 0xf461",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 40,
+   "map": "ysk2",
+   "target": [
+    "step",
+    16
+   ],
+   "at": [
+    143,
+    150
+   ],
+   "from": [
+    62561,
+    290
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x8f, at 0xf281",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 41,
+   "map": "ysk2",
+   "target": [
+    "step",
+    17
+   ],
+   "at": [
+    263,
+    170
+   ],
+   "from": [
+    62081,
+    151
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x107, at 0xf0a1",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 42,
+   "map": "ysk2",
+   "target": [
+    "step",
+    18
+   ],
+   "at": [
+    435,
+    194
+   ],
+   "from": [
+    61601,
+    170
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x1b3, at 0xeec1",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 43,
+   "map": "ysk2",
+   "target": [
+    "step",
+    19
+   ],
+   "at": [
+    467,
+    156
+   ],
+   "from": [
+    61121,
+    193
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x1d3, at 0xece1",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 44,
+   "map": "ysk2",
+   "target": [
+    "step",
+    20
+   ],
+   "at": [
+    467,
+    82
+   ],
+   "from": [
+    60641,
+    157
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: x did not converge on 0x1d3, at 0xeb01",
+   "scenes": [],
+   "pages": 0
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "start": {
+  "state": "fo_route18_01"
+ },
+ "steps": [
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 0
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 1
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 12
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 0
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 2
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 2
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

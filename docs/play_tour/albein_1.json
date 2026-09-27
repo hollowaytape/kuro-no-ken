@@ -1,0 +1,1136 @@
+{
+ "start": "r01_after_opening",
+ "when": "2026-09-23 23:54",
+ "sequence": [
+  "02OLB01A #9",
+  "99CMN #1",
+  "02OLB01 #9",
+  "02OLB01A #20",
+  "02OLB01 #5",
+  "29KNT #4",
+  "02OLB01 #3",
+  "02OLB01A #1",
+  "02OLB01A #23"
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "map": "?",
+   "target": [
+    "npc",
+    1
+   ],
+   "at": [
+    274,
+    52
+   ],
+   "from": [
+    349,
+    47
+   ],
+   "dist": 44,
+   "noclip": false,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01A #9"
+   ],
+   "pages": 6
+  },
+  {
+   "n": 2,
+   "map": "?",
+   "target": [
+    "step",
+    9
+   ],
+   "at": [
+    275,
+    70
+   ],
+   "from": [
+    278,
+    53
+   ],
+   "dist": 8,
+   "noclip": false,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1.mp2"
+  },
+  {
+   "n": 3,
+   "map": "olb1",
+   "target": [
+    "bump",
+    9
+   ],
+   "at": [
+    83,
+    65
+   ],
+   "from": [
+    104,
+    77
+   ],
+   "dist": 22,
+   "noclip": false,
+   "outcome": "ok",
+   "scenes": [
+    "99CMN #1"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 4,
+   "map": "olb1",
+   "target": [
+    "bump",
+    7
+   ],
+   "at": [
+    79,
+    113
+   ],
+   "from": [
+    84,
+    69
+   ],
+   "dist": 40,
+   "noclip": false,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb2"
+  },
+  {
+   "n": 5,
+   "map": "?",
+   "target": [
+    "bump",
+    0
+   ],
+   "at": [
+    187,
+    445
+   ],
+   "from": [
+    152,
+    77
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01 #9"
+   ],
+   "pages": 8,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 6,
+   "map": "olb1",
+   "target": [
+    "bump",
+    0
+   ],
+   "at": [
+    95,
+    217
+   ],
+   "from": [
+    100,
+    161
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "gakusha2.m"
+  },
+  {
+   "n": 7,
+   "map": "?",
+   "target": [
+    "bump",
+    1
+   ],
+   "at": [
+    211,
+    413
+   ],
+   "from": [
+    188,
+    461
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01A #20"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 8,
+   "map": "?",
+   "target": [
+    "bump",
+    2
+   ],
+   "at": [
+    191,
+    349
+   ],
+   "from": [
+    212,
+    322
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "lost: not back on a map",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 9,
+   "map": "?",
+   "target": [
+    "bump",
+    3
+   ],
+   "at": [
+    167,
+    349
+   ],
+   "from": [
+    212,
+    322
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 10,
+   "map": "?",
+   "target": [
+    "bump",
+    4
+   ],
+   "at": [
+    181,
+    185
+   ],
+   "from": [
+    58,
+    349
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01 #5"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 11,
+   "map": "?",
+   "target": [
+    "bump",
+    5
+   ],
+   "at": [
+    359,
+    373
+   ],
+   "from": [
+    181,
+    189
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 12,
+   "map": "olb1",
+   "target": [
+    "bump",
+    1
+   ],
+   "at": [
+    143,
+    217
+   ],
+   "from": [
+    359,
+    372
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 13,
+   "map": "olb1",
+   "target": [
+    "bump",
+    3
+   ],
+   "at": [
+    99,
+    161
+   ],
+   "from": [
+    34,
+    217
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 14,
+   "map": "olb1",
+   "target": [
+    "bump",
+    5
+   ],
+   "at": [
+    179,
+    149
+   ],
+   "from": [
+    209,
+    162
+   ],
+   "dist": 19,
+   "noclip": true,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 15,
+   "map": "olb1",
+   "target": [
+    "step",
+    7
+   ],
+   "at": [
+    79,
+    112
+   ],
+   "from": [
+    70,
+    150
+   ],
+   "dist": 21,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb2"
+  },
+  {
+   "n": 16,
+   "map": "?",
+   "target": [
+    "bump",
+    6
+   ],
+   "at": [
+    393,
+    133
+   ],
+   "from": [
+    152,
+    77
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 17,
+   "map": "olb1",
+   "target": [
+    "bump",
+    2
+   ],
+   "at": [
+    195,
+    193
+   ],
+   "from": [
+    392,
+    132
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "botchan.mc"
+  },
+  {
+   "n": 18,
+   "map": "?",
+   "target": [
+    "bump",
+    7
+   ],
+   "at": [
+    365,
+    133
+   ],
+   "from": [
+    360,
+    293
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "lost: not back on a map",
+   "scenes": [
+    "02OLB01 #8"
+   ],
+   "pages": 3
+  },
+  {
+   "n": 19,
+   "map": "?",
+   "target": [
+    "bump",
+    8
+   ],
+   "at": [
+    462,
+    45
+   ],
+   "from": [
+    360,
+    293
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "29KNT #4"
+   ],
+   "pages": 2
+  },
+  {
+   "n": 20,
+   "map": "?",
+   "target": [
+    "bump",
+    10
+   ],
+   "at": [
+    442,
+    33
+   ],
+   "from": [
+    460,
+    38
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "29KNT #4"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 21,
+   "map": "?",
+   "target": [
+    "bump",
+    11
+   ],
+   "at": [
+    359,
+    273
+   ],
+   "from": [
+    447,
+    34
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 22,
+   "map": "olb1",
+   "target": [
+    "bump",
+    4
+   ],
+   "at": [
+    151,
+    145
+   ],
+   "from": [
+    196,
+    193
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "kyupi.mca"
+  },
+  {
+   "n": 23,
+   "map": "?",
+   "target": [
+    "bump",
+    12
+   ],
+   "at": [
+    189,
+    185
+   ],
+   "from": [
+    292,
+    165
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 24,
+   "map": "olb1",
+   "target": [
+    "bump",
+    6
+   ],
+   "at": [
+    195,
+    97
+   ],
+   "from": [
+    196,
+    185
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb2"
+  },
+  {
+   "n": 25,
+   "map": "?",
+   "target": [
+    "npc",
+    2
+   ],
+   "at": [
+    108,
+    135
+   ],
+   "from": [
+    456,
+    61
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 2",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 26,
+   "map": "?",
+   "target": [
+    "npc",
+    3
+   ],
+   "at": [
+    263,
+    216
+   ],
+   "from": [
+    336,
+    61
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 3",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 27,
+   "map": "?",
+   "target": [
+    "npc",
+    4
+   ],
+   "at": [
+    251,
+    107
+   ],
+   "from": [
+    316,
+    161
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 4",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 28,
+   "map": "?",
+   "target": [
+    "step",
+    0
+   ],
+   "at": [
+    187,
+    462
+   ],
+   "from": [
+    260,
+    119
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "scenes": [
+    "02OLB01 #9"
+   ],
+   "pages": 8
+  },
+  {
+   "n": 29,
+   "map": "?",
+   "target": [
+    "step",
+    1
+   ],
+   "at": [
+    211,
+    408
+   ],
+   "from": [
+    208,
+    304
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 30,
+   "map": "?",
+   "target": [
+    "step",
+    2
+   ],
+   "at": [
+    211,
+    362
+   ],
+   "from": [
+    211,
+    528
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 31,
+   "map": "?",
+   "target": [
+    "step",
+    3
+   ],
+   "at": [
+    359,
+    402
+   ],
+   "from": [
+    212,
+    241
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 32,
+   "map": "olb1",
+   "target": [
+    "bump",
+    8
+   ],
+   "at": [
+    103,
+    77
+   ],
+   "from": [
+    359,
+    401
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: y did not converge on 0x4d, at 0xa2",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 33,
+   "map": "olb1",
+   "target": [
+    "bump",
+    10
+   ],
+   "at": [
+    221,
+    80
+   ],
+   "from": [
+    103,
+    162
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01 #3"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 34,
+   "map": "olb1",
+   "target": [
+    "step",
+    5
+   ],
+   "at": [
+    179,
+    148
+   ],
+   "from": [
+    219,
+    82
+   ],
+   "dist": 58,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb2"
+  },
+  {
+   "n": 35,
+   "map": "?",
+   "target": [
+    "step",
+    4
+   ],
+   "at": [
+    359,
+    294
+   ],
+   "from": [
+    380,
+    161
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 36,
+   "map": "olb1",
+   "target": [
+    "npc",
+    1
+   ],
+   "at": [
+    183,
+    192
+   ],
+   "from": [
+    196,
+    193
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01A #1"
+   ],
+   "pages": 1
+  },
+  {
+   "n": 37,
+   "map": "olb1",
+   "target": [
+    "npc",
+    2
+   ],
+   "at": [
+    124,
+    130
+   ],
+   "from": [
+    186,
+    204
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 2",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 38,
+   "map": "olb1",
+   "target": [
+    "step",
+    8
+   ],
+   "at": [
+    103,
+    76
+   ],
+   "from": [
+    122,
+    150
+   ],
+   "dist": 93,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "enis.mca"
+  },
+  {
+   "n": 39,
+   "map": "?",
+   "target": [
+    "step",
+    5
+   ],
+   "at": [
+    379,
+    162
+   ],
+   "from": [
+    276,
+    69
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 40,
+   "map": "olb1",
+   "target": [
+    "npc",
+    3
+   ],
+   "at": [
+    231,
+    219
+   ],
+   "from": [
+    379,
+    160
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 3",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 41,
+   "map": "olb1",
+   "target": [
+    "npc",
+    4
+   ],
+   "at": [
+    224,
+    97
+   ],
+   "from": [
+    277,
+    178
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: could not reach slot 4",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 42,
+   "map": "olb1",
+   "target": [
+    "step",
+    0
+   ],
+   "at": [
+    95,
+    216
+   ],
+   "from": [
+    277,
+    68
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 43,
+   "map": "olb1",
+   "target": [
+    "step",
+    1
+   ],
+   "at": [
+    143,
+    216
+   ],
+   "from": [
+    -15,
+    215
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  },
+  {
+   "n": 44,
+   "map": "olb1",
+   "target": [
+    "step",
+    2
+   ],
+   "at": [
+    195,
+    192
+   ],
+   "from": [
+    253,
+    215
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "botchan.mc"
+  },
+  {
+   "n": 45,
+   "map": "?",
+   "target": [
+    "step",
+    6
+   ],
+   "at": [
+    291,
+    166
+   ],
+   "from": [
+    360,
+    293
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 46,
+   "map": "olb1",
+   "target": [
+    "step",
+    3
+   ],
+   "at": [
+    99,
+    160
+   ],
+   "from": [
+    152,
+    145
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb2"
+  },
+  {
+   "n": 47,
+   "map": "?",
+   "target": [
+    "step",
+    7
+   ],
+   "at": [
+    151,
+    78
+   ],
+   "from": [
+    164,
+    225
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 48,
+   "map": "olb1",
+   "target": [
+    "step",
+    4
+   ],
+   "at": [
+    151,
+    144
+   ],
+   "from": [
+    80,
+    113
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "kyupi.mca"
+  },
+  {
+   "n": 49,
+   "map": "?",
+   "target": [
+    "step",
+    8
+   ],
+   "at": [
+    163,
+    226
+   ],
+   "from": [
+    292,
+    165
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [],
+   "pages": 0,
+   "leads_to": "olb1"
+  },
+  {
+   "n": 50,
+   "map": "olb1",
+   "target": [
+    "step",
+    6
+   ],
+   "at": [
+    195,
+    96
+   ],
+   "from": [
+    172,
+    225
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "ok",
+   "scenes": [
+    "02OLB01A #23"
+   ],
+   "pages": 2,
+   "leads_to": "botchan.mc"
+  },
+  {
+   "n": 51,
+   "map": "?",
+   "target": [
+    "step",
+    10
+   ],
+   "at": [
+    455,
+    62
+   ],
+   "from": [
+    196,
+    104
+   ],
+   "dist": 9999,
+   "noclip": true,
+   "outcome": "blocked: zone 10 did nothing within 20s",
+   "scenes": [],
+   "pages": 0
+  }
+ ]
+}

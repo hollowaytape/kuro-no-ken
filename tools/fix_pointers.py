@@ -1,4 +1,9 @@
-"""Repair the pointers reinsert leaves behind: backward pointers.
+"""Find (and, called from reinsert, repair) pointers reinsert leaves behind.
+
+History: this began as the repair for backward pointers, below. That bug is now fixed at
+its source (pointer_edit.KuroGamefile), and reinsert records its exact edits, so this is
+the safety net for pointers the decoder knows and the pointer sheet does not.
+
 
 `Gamefile.edit_pointers_in_range` walks the dump rows of a block in ascending order
 and, for each gap between two consecutive rows, adds the diff accumulated so far to
@@ -53,10 +58,64 @@ def _analyse(fn):
     return _ANALYSED[fn]
 
 
-def repair(filename, original, patched):
+class ExactMap(object):
+    """old offset -> new offset from reinsert's own record of what it changed.
+
+    `edits` is [(where, old length, new length)] in original offsets. Bytes inside a
+    replaced span have no counterpart (None); everything else moves by the sum of the
+    length changes that end at or before it. Unlike difflib this cannot slip.
+    """
+    def __init__(self, edits):
+        self.edits = sorted(edits)
+
+    def get(self, x, default=None):
+        shift = 0
+        for at, old, new in self.edits:
+            if at + old <= x:
+                shift += new - old
+            elif at <= x:
+                return default                  # inside replaced text
+            else:
+                break
+        return x + shift
+
+
+def edits_path(patched_path):
+    return patched_path + '.edits.json'
+
+
+def save_edits(patched_path, edits):
+    import json
+    with open(edits_path(patched_path), 'w') as f:
+        json.dump(edits, f)
+
+
+def load_edits(patched_path):
+    import json
+    try:
+        with open(edits_path(patched_path)) as f:
+            return [tuple(e) for e in json.load(f)]
+    except (OSError, ValueError):
+        return None
+
+
+def skipped(filename, loc, target, entry_slot=False):
+    """rominfo.POINTERS_TO_SKIP, found in game. Its target-form entries do not apply to the
+    entry table, whose slots the engine enters through and so are always real (02OLB03A's
+    slot 0x19 -> 0x33b was being kept out by the `('02OLB03A.SCN', 0x33b)` entry)."""
+    from rominfo import POINTERS_TO_SKIP
+    if (filename, loc, 'pointer_location') in POINTERS_TO_SKIP:
+        return True
+    return not entry_slot and (filename, target) in POINTERS_TO_SKIP
+
+
+def repair(filename, original, patched, edits=None):
     """-> (patched bytes, [(ptr_loc, old_target, new_target)]).
 
     `original` and `patched` are the decompressed script before and after reinsertion.
+    `edits` is reinsert's record of its length changes; without it the offsets are
+    re-derived with difflib, which is only an approximation - it slipped 2 bytes in
+    05SKS03 and "repaired" two correct pointers into wrong ones.
     """
     if not filename.endswith('.SCN') or patched == original:
         return patched, []
@@ -66,7 +125,8 @@ def repair(filename, original, patched):
         # enough to rewrite bytes from (see gen_pointers).
         return patched, []
     base = r['base']
-    amap = offset_map(original, patched)
+    exact = edits is not None
+    amap = ExactMap(edits) if exact else offset_map(original, patched)
 
     # difflib will happily slide a repetitive run (an entry table is N copies of
     # `09 xx 18`), and the word read back is then a neighbour's, which looks stale when
@@ -82,6 +142,8 @@ def repair(filename, original, patched):
     out = bytearray(patched)
     fixes = []
     for loc, target in r['pointers']:
+        if skipped(filename, loc, target, loc in entry_slots):
+            continue
         at = starts.get(loc)
         if at is not None:
             ja = amap.get(at)
@@ -113,7 +175,7 @@ def main():
         p = as_script(open(po, 'rb').read())
         if p is None:
             continue
-        _, fixes = repair(fn, open(oo, 'rb').read(), p)
+        _, fixes = repair(fn, open(oo, 'rb').read(), p, edits=load_edits(po))
         if fixes:
             total += len(fixes)
             print('%-18s %d stale' % (fn, len(fixes)))

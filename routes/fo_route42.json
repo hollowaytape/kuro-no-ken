@@ -1,0 +1,27 @@
+{
+ "start": {
+  "state": "fo_mkr_open"
+ },
+ "steps": [
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 5
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 5
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

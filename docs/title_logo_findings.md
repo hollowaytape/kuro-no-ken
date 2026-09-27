@@ -190,3 +190,47 @@ CoreEmu()                      # defaults to the patched disk
 
 This is unrelated to the logo work but worth fixing; the opening is reachable
 from the title menu, so players will hit it.
+
+## Artwork from an artist, and fitting sprites to it
+
+`img/title/artist/title_mask.png` is the stock stencil with the Japanese in
+white; the artist adds to it and `python tools/make_title_disk.py --mask
+<file>` builds a disk from their file. `--plan` shows the sprite plan without
+building, and `--shot` screenshots the result in-game.
+
+White pixels inside the kanji's own rectangles are painted by the kanji's
+sprites. Everything else gets new sprites from `ipl_sprites.fit`:
+
+* the artwork is split into horizontal bands (rows closer than 12 apart share
+  one, so a letter's dot doesn't restart the fire gradient);
+* each band's columns are covered by 192/112px rectangles on the 8px grid,
+  chosen by a small DP that minimises, in order, the number of rectangles,
+  the rows cut by a join, and the area. Joins that do cut a stroke are
+  reported;
+* a band that fits under the kanji's own texture mapping (row + 53) uses it,
+  so it brightens and burns in exactly like the kanji; lower bands start at
+  texture row 230, the subtitle look chosen earlier.
+
+New sprites are drawn **before** the kanji (the hook is at cs:0x0ece, not the
+end of the loop), so a rectangle may overlap a kanji rectangle freely: the
+kanji repaint their own area afterwards.
+
+### Frame budget
+
+`tools/title_timing.py` counts passes of the title card's loop. Stock: 0.500
+passes per frame (every other frame). Extra sprite area against that:
+
+| extra area | passes/frame |
+|-----------:|-------------:|
+| 20,160 (default subtitle) | 0.500 |
+| 129,024 (8 short sprites) | 0.500 |
+| 133,536 (a stress design) | 0.472 |
+| 164,736 | 0.394 |
+| 219,648 | 0.333 |
+
+So there is room for roughly **125,000 px** of new sprites per frame — about
+1.2x what the kanji themselves draw. Past that the flames slow down; nothing
+breaks. The build prints the area against that budget with every plan. (Measured
+on the emulator configuration the project uses; a slower real machine would
+have less room.)
+

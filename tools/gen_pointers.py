@@ -81,6 +81,51 @@ def sheets_for(names):
     return out
 
 
+_ENTRY_SLOTS = {}
+
+
+def skipped(fn, loc, target):
+    """rominfo.POINTERS_TO_SKIP: each entry was found the hard way (a crash or a soft
+    lock in game), so decoded pointers honour it as well as find_pointers' ones - except
+    that a target-form entry never removes an entry-table slot, which the engine enters
+    through (see fix_pointers.skipped)."""
+    import fix_pointers
+    if fn not in _ENTRY_SLOTS:
+        data = open(os.path.join(HERE, 'original', 'decompressed', fn), 'rb').read()
+        _ENTRY_SLOTS[fn] = {1 + 3 * k for k in range(len(sd.slot_base(data)[1]))}
+    return fix_pointers.skipped(fn, loc, target, loc in _ENTRY_SLOTS[fn])
+
+
+def reconcile(fn, curated_rows, decoded_rows):
+    """Merge a hand-made sheet with the decoder's pointers.
+
+    The curated rows were checked in game, so none is ever dropped automatically (only
+    POINTERS_TO_SKIP removes one). The decoder adds what the sheet lacks - the entry table
+    and the stage checks' jumps (opcodes 10-1b) were missing from every curated sheet,
+    and with a file fully translated each one would go stale.
+
+    The decoder's instruction boundaries can be wrong, though: right after a string it
+    falls through `5c 66 00 09 09 3e` as a jump at 0xb4 in 02OLB02A, while the engine's own
+    operand fetch reads 0xb6 (np2core watchpoints). So a decoded pointer one byte from a
+    curated one is a *conflict*: nothing is added, it is reported, and it is resolved by
+    hand with evidence (see the 0xcb4 entry in rominfo.POINTERS_TO_SKIP).
+    """
+    kept = [(t, loc) for t, loc in curated_rows if not skipped(fn, loc, t)]
+    have = {loc for _t, loc in kept}
+    added, conflicts = [], []
+    for t, loc in decoded_rows:
+        if loc in have or skipped(fn, loc, t):
+            continue
+        if loc - 1 in have or loc + 1 in have:
+            conflicts.append(loc)
+            continue
+        added.append((t, loc))
+    for loc in conflicts:
+        print('  %-16s CONFLICT: decoded pointer %#x is one byte from a curated one - '
+              'not added; resolve by hand' % (fn, loc))
+    return sorted(set(kept + added)), len(curated_rows) - len(kept), len(added)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default='KuroNoKen_pointer_dump_mapping.xlsx')
@@ -93,7 +138,7 @@ def main():
     names = args.only or sorted(os.path.basename(p) for p in
                                 glob.glob(os.path.join(HERE, 'original', 'decompressed', '*.SCN')))
     print('decoding %d script(s)' % len(names))
-    generated = sheets_for([n for n in names if n not in args.keep])
+    generated = sheets_for(names)      # kept sheets are reconciled against these too
 
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
@@ -109,8 +154,12 @@ def main():
             rows = [(r[0], r[1]) for r in curated[fn].iter_rows(min_row=2, values_only=True)
                     if r and r[0] and r[1]]
             rows = [(int(str(a), 16), int(str(b), 16)) for a, b in rows]
+            rows, dropped, added = reconcile(fn, rows, generated.get(fn, []))
+            if dropped or added:
+                print('  %-16s curated sheet: %d skipped, %d decoded added'
+                      % (fn, dropped, added))
         elif fn in generated:
-            rows = generated[fn]
+            rows = [(t, loc) for t, loc in generated[fn] if not skipped(fn, loc, t)]
         if not rows:
             continue
         ws = wb.create_sheet(fn[:31])

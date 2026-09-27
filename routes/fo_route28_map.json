@@ -1,0 +1,994 @@
+{
+ "graph": {
+  "07_e7ca|npc|1": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0002a"
+    ]
+   ]
+  },
+  "07_e7ca|npc|2": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0002a"
+    ]
+   ]
+  },
+  "07_e7ca|step|3": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ]
+   ]
+  },
+  "07_e7ca|bump|4": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ]
+   ]
+  },
+  "07_e7ca|bump|0": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "07_e7ca|step|0": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "07_e7ca|npc|4": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|npc|3": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|step|2": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|bump|2": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|bump|3": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|bump|5": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": []
+  },
+  "07_e7ca|step|4": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": []
+  },
+  "07_e7ca|bump|1": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x8e (target 0x76) - no movement (wall, NPC, or a",
+   "state": "dialogue",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "07CSL01A.SCN",
+     "0x000c4"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|step|1": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x8e (target 0x76) - no movement (wall, NPC, or a",
+   "state": "dialogue",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "07CSL01A.SCN",
+     "0x000c4"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|step|6": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": []
+  },
+  "07_e7ca|step|5": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "14_6ee6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "06_62e9|step|24": {
+   "map": "06_62e9",
+   "kind": "step",
+   "index": 24,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "06_62e9|step|11": {
+   "map": "06_62e9",
+   "kind": "step",
+   "index": 11,
+   "leads_to": "06_74ea",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "06_62e9|bump|11": {
+   "map": "06_62e9",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": "06_74ea",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "06_62e9|step|0": {
+   "map": "06_62e9",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "14_6ee6|npc|1": {
+   "map": "14_6ee6",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 3,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ]
+   ]
+  },
+  "14_6ee6|npc|4": {
+   "map": "14_6ee6",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 3,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ]
+   ]
+  },
+  "14_6ee6|npc|3": {
+   "map": "14_6ee6",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 3,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ]
+   ]
+  },
+  "14_6ee6|bump|3": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|4": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|0": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|6": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|1": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|2": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|5": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|step|0": {
+   "map": "14_6ee6",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "14_6ee6|step|4": {
+   "map": "14_6ee6",
+   "kind": "step",
+   "index": 4,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: y did not converge on 0x233, at 0x1db",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "14_6ee6|step|5": {
+   "map": "14_6ee6",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: y did not converge on 0x236, at 0x1db",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "14_6ee6|bump|7": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|8": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|bump|9": {
+   "map": "14_6ee6",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|step|2": {
+   "map": "14_6ee6",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|step|3": {
+   "map": "14_6ee6",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "14_6ee6|step|1": {
+   "map": "14_6ee6",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  }
+ },
+ "coverage": {
+  "07CSL02A.SCN": {
+   "0x0002a": [
+    "07_e7ca"
+   ],
+   "0x0012e": [
+    "07_e7ca"
+   ]
+  },
+  "99CMN.SCN": {
+   "0x007ea": [
+    "07_e7ca"
+   ]
+  },
+  "07CSL01A.SCN": {
+   "0x000c4": [
+    "07_e7ca"
+   ]
+  },
+  "0x09f6b": {
+   "0x09f6b": [
+    "14_6ee6",
+    "07_e7ca"
+   ]
+  },
+  "0x0e6f0": {
+   "0x0e6f0": [
+    "14_6ee6",
+    "07_e7ca"
+   ]
+  },
+  "0x0e710": {
+   "0x0e710": [
+    "14_6ee6",
+    "07_e7ca"
+   ]
+  },
+  "0x09e33": {
+   "0x09e33": [
+    "14_6ee6",
+    "07_e7ca"
+   ]
+  },
+  "0x09ed5": {
+   "0x09ed5": [
+    "14_6ee6",
+    "07_e7ca"
+   ]
+  },
+  "0x09f2c": {
+   "0x09f2c": [
+    "07_e7ca"
+   ]
+  }
+ },
+ "map_files": {
+  "07_e7ca": [
+   "07CSL.SCN",
+   "07CSL02.SCN",
+   "07CSL02A.SCN"
+  ],
+  "06_62e9": [
+   "06BLK.SCN",
+   "06BLK01.SCN",
+   "07CSL02A.SCN"
+  ],
+  "14_6ee6": [
+   "14YMM.SCN",
+   "14YMM53.SCN",
+   "07CSL02A.SCN"
+  ],
+  "07_0bef": [
+   "07CSL.SCN",
+   "07CSL02.SCN",
+   "07CSL02A.SCN"
+  ]
+ }
+}

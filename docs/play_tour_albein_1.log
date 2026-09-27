@@ -1,0 +1,60 @@
+  learning ? ...
+  grid: 596 tiles reachable in 90s
+on 02olb01a.scn at (349, 47), 25 targets
+  1 ?        ('npc', 1)       44 steps ok 02OLB01A #9
+  2 ?        ('step', 9)       8 steps ok -> olb1.mp2
+  learning olb1 ...
+  grid: out of time after 1957 cells
+  grid: 1957 tiles reachable in 300s
+  3 olb1     ('bump', 9)      22 steps ok 99CMN #1
+  4 olb1     ('bump', 7)      40 steps ok -> olb2
+  5 ?        ('bump', 0)    9999 steps ok 02OLB01 #9
+  6 olb1     ('bump', 0)    9999 steps ok -> gakusha2.m
+  7 ?        ('bump', 1)    9999 steps ok 02OLB01A #20
+  8 ?        ('bump', 2)    lost: not back on a map, undone
+  9 ?        ('bump', 3)    9999 steps blocked: zone 3 did nothing within 20s 
+ 10 ?        ('bump', 4)    9999 steps ok 02OLB01 #5
+ 11 ?        ('bump', 5)    9999 steps ok -> olb1
+ 12 olb1     ('bump', 1)    9999 steps blocked: zone 1 did nothing within 20s 
+ 13 olb1     ('bump', 3)    9999 steps blocked: zone 3 did nothing within 20s 
+ 14 olb1     ('bump', 5)      19 steps blocked: zone 5 did nothing within 20s 
+ 15 olb1     ('step', 7)      21 steps ok -> olb2
+ 16 ?        ('bump', 6)    9999 steps ok -> olb1
+ 17 olb1     ('bump', 2)    9999 steps ok -> botchan.mc
+  (settle: battle made no progress for 90 s (no menu, no message) after)
+ 18 ?        ('bump', 7)    lost: not back on a map, undone
+ 19 ?        ('bump', 8)    9999 steps ok 29KNT #4
+ 20 ?        ('bump', 10)   9999 steps ok 29KNT #4
+ 21 ?        ('bump', 11)   9999 steps ok -> olb1
+ 22 olb1     ('bump', 4)    9999 steps ok -> kyupi.mca
+ 23 ?        ('bump', 12)   9999 steps ok -> olb1
+ 24 olb1     ('bump', 6)    9999 steps ok -> olb2
+ 25 ?        ('npc', 2)     9999 steps blocked: could not reach slot 2 
+ 26 ?        ('npc', 3)     9999 steps blocked: could not reach slot 3 
+ 27 ?        ('npc', 4)     9999 steps blocked: could not reach slot 4 
+ 28 ?        ('step', 0)    9999 steps blocked: zone 0 did nothing within 20s 02OLB01 #9
+ 29 ?        ('step', 1)    9999 steps blocked: zone 1 did nothing within 20s 
+ 30 ?        ('step', 2)    9999 steps blocked: zone 2 did nothing within 20s 
+ 31 ?        ('step', 3)    9999 steps ok -> olb1
+ 32 olb1     ('bump', 8)    9999 steps blocked: y did not converge on 0x4d, at 0xa2 
+ 33 olb1     ('bump', 10)   9999 steps ok 02OLB01 #3
+ 34 olb1     ('step', 5)      58 steps ok -> olb2
+ 35 ?        ('step', 4)    9999 steps ok -> olb1
+ 36 olb1     ('npc', 1)     9999 steps ok 02OLB01A #1
+ 37 olb1     ('npc', 2)     9999 steps blocked: could not reach slot 2 
+ 38 olb1     ('step', 8)      93 steps ok -> enis.mca
+ 39 ?        ('step', 5)    9999 steps ok -> olb1
+ 40 olb1     ('npc', 3)     9999 steps blocked: could not reach slot 3 
+ 41 olb1     ('npc', 4)     9999 steps blocked: could not reach slot 4 
+ 42 olb1     ('step', 0)    9999 steps blocked: zone 0 did nothing within 20s 
+ 43 olb1     ('step', 1)    9999 steps blocked: zone 1 did nothing within 20s 
+ 44 olb1     ('step', 2)    9999 steps ok -> botchan.mc
+ 45 ?        ('step', 6)    9999 steps ok -> olb1
+ 46 olb1     ('step', 3)    9999 steps ok -> olb2
+ 47 ?        ('step', 7)    9999 steps ok -> olb1
+ 48 olb1     ('step', 4)    9999 steps ok -> kyupi.mca
+ 49 ?        ('step', 8)    9999 steps ok -> olb1
+ 50 olb1     ('step', 6)    9999 steps ok 02OLB01A #23
+ 51 ?        ('step', 10)   9999 steps blocked: zone 10 did nothing within 20s 
+nothing left to try on ?
+-> D:\Code\roms\KuroNoKen\docs\play_tour\albein_1.json (51 steps, 9 scenes)

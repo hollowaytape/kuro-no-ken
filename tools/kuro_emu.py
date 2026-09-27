@@ -34,7 +34,10 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # the proje
 sys.path.append(os.path.join(HERE, '..', 'romtools'))
 sys.path.append(os.path.join(HERE, '..', 'Possessioner'))  # bp_bridge.DebugBridge
 from win32_bridge import find_windows, post_key, capture_window_image  # noqa: E402
-from bp_bridge import DebugBridge  # noqa: E402
+try:
+    from bp_bridge import DebugBridge  # noqa: E402  (the GUI-debugger path only; Possessioner moves it about)
+except ImportError:                    # headless np2core use never needs it
+    DebugBridge = None
 
 BD_SEG = 0x16d8          # BD.BIN (resident engine code + variables)
 PLAYER_X = (BD_SEG << 4) + 0x136
@@ -49,8 +52,10 @@ NOCLIP_ORIG = b'\x73\x58'
 STAT_HP = (BD_SEG << 4) + 0x1007
 STAT_HP_MAX = (BD_SEG << 4) + 0x100b
 STAT_HP_COPY = (BD_SEG << 4) + 0x100d   # mirrors HP; write both
+PARTY_STRIDE = 0x116                     # one member's stat block: HP, ?, HP max, HP copy, MP, ?, MP max ...
 STAT_MP = (BD_SEG << 4) + 0x100f
 STAT_MP_MAX = (BD_SEG << 4) + 0x1013
+STAT_ST = (BD_SEG << 4) + 0x8800        # stamina meters, 0-100: Kaies's, then the second member's
 
 NP2_DIR =os.path.join(HERE, '..', 'romtools', 'np2debug')
 STATE_DIR = os.path.join(HERE, 'states')
@@ -437,11 +442,26 @@ class Emu:
         self.write(NOCLIP_ADDR, want)
 
     def heal(self):
-        """Refill Shinobu's HP and MP (works mid-battle; the panel updates next turn)."""
-        hp_max, mp_max = self.word(STAT_HP_MAX), self.word(STAT_MP_MAX)
-        for addr in (STAT_HP, STAT_HP_COPY):
-            self.write(addr, hp_max.to_bytes(2, 'little'))
-        self.write(STAT_MP, mp_max.to_bytes(2, 'little'))
+        """Refill the party's HP, MP and stamina (works mid-battle; the panel updates
+        next turn). The members' stat blocks are 0x116 bytes apart, the one at
+        STAT_HP - 0x116 (BD 0xef1) being the leader Kaies's - the block the battle
+        panel shows; STAT_HP itself is the second member's. The block after those two
+        is the enemy's during a battle (the prison monster's 500 HP sat there), so only
+        the two are touched. The stamina meters the sword skills spend (0-100, one per
+        member, BD 0x8800) are refilled too: a story fight that plain attacks cannot win
+        (the prison monster: the sword does 4 of its 500) needs them every round."""
+        for k in (-1, 0):
+            base = STAT_HP + k * PARTY_STRIDE
+            hp_max, mp_max = self.word(base + 4), self.word(base + 12)
+            if not 0 < hp_max < 10000:
+                continue
+            for addr in (base, base + 6):
+                self.write(addr, hp_max.to_bytes(2, 'little'))
+            if 0 < mp_max < 10000:
+                self.write(base + 8, mp_max.to_bytes(2, 'little'))
+        for addr in (STAT_ST, STAT_ST + 2):
+            if self.word(addr) <= 100:
+                self.write(addr, (100).to_bytes(2, 'little'))
 
     # --- emulator control ----------------------------------------------------
     def command(self, cmd_id):

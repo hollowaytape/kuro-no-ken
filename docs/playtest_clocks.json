@@ -1,0 +1,54 @@
+{
+ "02OLB": {
+  "clocks": {
+   "0x84": 2,
+   "0x85": 1,
+   "0x86": 1,
+   "0x87": 1,
+   "0x88": 1
+  },
+  "file": "02OLB02A.SCN",
+  "lines": 6,
+  "run": "auto_run23"
+ },
+ "10TNI": {
+  "clocks": {
+   "0x84": 1
+  },
+  "file": "10TNI01A.SCN",
+  "lines": 7,
+  "run": "auto_par"
+ },
+ "12MRS": {
+  "clocks": {
+   "0x84": 1
+  },
+  "file": "12MRS.SCN",
+  "lines": 36,
+  "run": "auto_run14"
+ },
+ "23SOH": {
+  "clocks": {
+   "0x84": 2,
+   "0x85": 1,
+   "0x86": 1,
+   "0x87": 1,
+   "0x88": 1
+  },
+  "file": "23SOH01A.SCN",
+  "lines": 5,
+  "run": "auto_run23"
+ },
+ "25TOU": {
+  "clocks": {
+   "0x84": 2,
+   "0x85": 1,
+   "0x86": 1,
+   "0x87": 1,
+   "0x88": 1
+  },
+  "file": "25TOU00A.SCN",
+  "lines": 35,
+  "run": "auto_run25"
+ }
+}

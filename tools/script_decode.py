@@ -20,6 +20,7 @@ distinction the regexes never had.
     python tools/script_decode.py 03YSK01B.SCN --listing  # the decoded script
     python tools/script_decode.py --check 03YSK01B.SCN    # vs what rominfo registers
 """
+import glob
 import os
 import sys
 
@@ -43,9 +44,30 @@ LAYOUTS = {
     0x04: ['word'],                      # 1c9d  call
     0x07: [],                            # 1cdc
     0x09: ['word'],                      # 1cee  jump
-    0x0c: ['word', 'word'],              # 1d26  branch if flag <w0> clear -> <w1>
-    0x0d: ['word', 'word'],              # 1d30  branch if flag <w0> set -> <w1>
+    0x0c: ['word', 'word'],              # 1d26  branch if flag <w0> SET -> <w1> (the `je` after
+    0x0d: ['word', 'word'],              # 1d30  branch if flag <w0> CLEAR -> <w1>  `test` skips the jump)
     0x1d: ['word'],                      # 1dcb  set flag <w0>
+    # 0x10-0x1b: compare, then branch to <w2> through 1d2d (`mov si, ax`), like 0c/0d.
+    # Even opcodes compare variable <w0> with the constant <w1> (1daa), odd ones two
+    # variables (1db6). 10 jumps if !=, 12 if ==, 14 <=, 16 <, 18 >, 1a >= (unsigned);
+    # the odd ones likewise. `10 <stage var> <n> <next case>` is how every area hub
+    # picks the scene scripts for story stage n - so until these were listed, decoding
+    # stopped at the first stage check and the jump operands were never relocated.
+    **{op: ['word', 'word', 'word'] for op in range(0x10, 0x1c)},
+    # Variable arithmetic, read from BD.BIN 1dc3-1e8f. 17cc reads a variable index (word),
+    # 17c6 a variable's value (index word), 17dd/17d7 a flag index (word). None of these
+    # holds an address; they are listed so a walk continues past them - a stage advance
+    # (`22 <stage var>`) used to stop it.
+    0x1c: ['word'],                      # flag <w0> cleared
+    0x1e: ['word', 'word'],              # flag <w0> copied from flag <w1>
+    0x21: ['word', 'word'],              # var <w0> = var <w1>
+    0x22: ['word'],                      # var <w0> += 1
+    0x23: ['word'],                      # var <w0> -= 1
+    0x24: ['word'],                      # flag <w0> toggled
+    0x25: ['word'],                      # var <w0> = ~var <w0>
+    0x27: ['word', 'word'],              # swap var <w0>, var <w1>
+    **{op: ['word', 'word'] for op in range(0x28, 0x30)},   # +,-,&,| with a constant (even)
+                                                            # or another variable (odd)
     0xb1: ['tagged'],                    # 2ab4  -> [0x93a]
     0x1f: ['word'],                      # 1de5 -> 17cc  variable index
     0x20: ['word', 'word'],              # 1ded
@@ -67,7 +89,7 @@ LAYOUTS = {
 
 # Which operand of an opcode names a script address.
 ADDRESS_OPS = {0x04: 0, 0x09: 0, 0x0c: 1, 0x0d: 1, 0x80: 1, 0xb0: 0,
-               0xb1: 0, 0x9e: 3}
+               0xb1: 0, 0x9e: 3, **{op: 2 for op in range(0x10, 0x1c)}}
 ADDRESS_TABLE_OPS = {0x8b}               # every entry of the table is an address
 
 # `89 <var> <word>` writes a constant into a field of the *current object* (its handler
@@ -81,6 +103,158 @@ OBJECT_SCRIPT_FIELDS = {0x28, 0x2a, 0x2c}
 def _bd():
     with open(BD_PATH, 'rb') as f:
         return f.read()
+
+
+VARIABLE_COUNT = 0x100
+FLAG_COUNT = (0x951 - 0x8d2) * 8     # the flag bits end where the resource-name buffer starts
+
+# Which operands of the opcodes added from BD.BIN name a variable (v) or a flag (f).
+# (0c/0d/1d/1f/20 were listed before and are left as they were.)
+OPERAND_KINDS = {0x1c: 'f', 0x1e: 'ff', 0x21: 'vv', 0x22: 'v', 0x23: 'v', 0x24: 'f',
+                 0x25: 'v', 0x27: 'vv',
+                 **{op: ('vv' if op & 1 else 'v') for op in range(0x28, 0x30)},
+                 **{op: ('vv' if op & 1 else 'v') for op in range(0x10, 0x1c)}}
+
+
+def compare_is_plausible(op, values):
+    """Opcodes 10-2f name variables by index, resolved (BD.BIN 17cc) as the word at
+    0x6d2 + 2*index - and the flag bit array starts at 0x8d2, so there are 0x100 of them.
+    An index past that means the walk has fallen into bytes that are not script (15MKR01C
+    0x365 read `10 53 5f ...` as a compare on "variable 0x5f53" and went on to decode
+    overlapping nonsense). Before these opcodes were listed such a walk stopped at them;
+    this keeps it stopping there. Flag operands are bounded the same way."""
+    kinds = OPERAND_KINDS.get(op)
+    if kinds is None:
+        return True
+    if len(values) < len(kinds):
+        return False
+    limit = {'v': VARIABLE_COUNT, 'f': FLAG_COUNT}
+    return all(values[i][2] < limit[k] for i, k in enumerate(kinds))
+
+
+_CODE_BYTES = {}
+
+
+def code_bytes(fn):
+    """Offsets the decoder proves are script instructions (opcodes and operands; a print's
+    string is text, so not included). A dump row overlapping these is code the dumper read
+    as Shift-JIS - 06BLK05J 0x1ad is the `94 40` jump address of `10 20 00 00 00 94 40` -
+    and English written there would overwrite the instruction."""
+    if fn not in _CODE_BYTES:
+        out = set()
+        try:
+            r = analyse(fn)
+        except Exception:
+            r = None
+        if r and not r.get('guessed_base'):
+            for at, op, values in r['insns']:
+                if op == 0x40:
+                    continue
+                out.add(at)
+                for kind, vloc, _v in values:
+                    out.add(vloc)
+                    if kind != 'byte':
+                        out.add(vloc + 1)
+        _CODE_BYTES[fn] = out
+    return _CODE_BYTES[fn]
+
+
+_NO_TEXT = {}
+
+
+def shows_no_text(fn, rows):
+    """True when a file never prints: not one of its dump rows is inside a print.
+
+    `rows` are the file's dump offsets. A print is `40 02 <string> 00`, so a row that is
+    text starts just inside one (script_map.strings gives the spans). One row outside a
+    span proves nothing - 05SKS04's menu choices are drawn another way and are real text -
+    but a whole file outside them is 31END.SCN, which is x86 code, not script: its four
+    "strings" are stray bytes, one of them `ab ab ab ab` filler.
+    """
+    key = (fn, tuple(sorted(rows)))
+    if key not in _NO_TEXT:
+        from script_map import strings
+        path = os.path.join(HERE, 'original', 'decompressed', fn)
+        try:
+            said = strings(open(path, 'rb').read())
+        except OSError:
+            _NO_TEXT[key] = False            # not on disk: say nothing rather than guess
+            return False
+        # No print spans at all counts too: 06BLK07.SCN is a stage hub that only loads
+        # other scripts, and its two "strings" are bytes of those load instructions. It is
+        # the only file in the game with no print in it.
+        _NO_TEXT[key] = bool(rows) and not any(
+            any(a - 4 <= o <= b for a, b in said) for o in rows)
+    return _NO_TEXT[key]
+
+
+_TEXT_CHARS = set()
+
+
+def text_chars(min_uses=3):
+    """Every character the game really prints, from the `40 02 <string> 00` of every SCN.
+
+    A character that appears three times or more in text the game prints is normal; one
+    that never does is a sign the "string" is not text at all. 1600-odd characters.
+    """
+    if not _TEXT_CHARS:
+        import collections
+        from script_map import strings
+        seen = collections.Counter()
+        for path in glob.glob(os.path.join(HERE, 'original', 'decompressed', '*.SCN')):
+            data = open(path, 'rb').read()
+            for a, b in strings(data):
+                seen.update(data[a:b + 1].decode('cp932', 'ignore'))
+        _TEXT_CHARS.update(c for c, n in seen.items() if n >= min_uses)
+    return _TEXT_CHARS
+
+
+def in_a_print(fn, offset):
+    """Is this offset inside one of the file's `40 02 <string> 00` prints?"""
+    from script_map import strings
+    try:
+        said = strings(open(os.path.join(HERE, 'original', 'decompressed', fn), 'rb').read())
+    except OSError:
+        return True
+    return any(a - 4 <= offset <= b for a, b in said)
+
+
+def looks_like_garbage(jp):
+    """Bytes that decoded as Japanese but are not - used only outside a print.
+
+    Half-width katakana (the game writes its own kana another way, `85 <b>`), or a string
+    with no kana at all that uses a character the game never prints. Checked against the
+    67 rows in the game that sit outside every print: it takes all 39 of the mojibake
+    (`ｨ尺ｹ`, `膿θ`, `看鐇`, `ﾀ諧諧諧諧`) and leaves all 28 real ones - the menu choices
+    (`賄賂を渡す`, `サクッと斬る`), the `５つ`/`６つ` counters, 99CMN's `ＹＥＳ`/`ＮＯ`
+    and 17DRL01B's two name plates.
+    """
+    if not jp:
+        return False
+    if any(0xff61 <= ord(c) <= 0xff9f for c in jp):
+        return True
+    kana = any(0x3041 <= ord(c) <= 0x30ff or 0xff01 <= ord(c) <= 0xff5e for c in jp)
+    return not kana and any(c not in text_chars() for c in jp)
+
+
+def is_code_row(fn, offset, length, rows=(), japanese=''):
+    """Is this dump row script code rather than text?
+
+    Three tests, each conservative, because a false positive deletes a line of the game:
+
+    * the row overlaps bytes the decoder proves are an instruction (06BLK05J 0x1ad is the
+      `94 40` jump address of `10 20 00 00 00 94 40`);
+    * the file prints nothing at all (31END.SCN is x86 code; 06BLK07.SCN only loads other
+      scripts) - `rows`, all of the file's dump offsets, enables this one;
+    * the row is outside every print *and* reads as mojibake - `japanese` enables this one.
+      Being outside a print is not enough on its own: menu choices and 99CMN's YES/NO are
+      drawn another way and are real text.
+    """
+    if any(x in code_bytes(fn) for x in range(offset, offset + max(length, 1))):
+        return True
+    if rows and shows_no_text(fn, rows):
+        return True
+    return bool(japanese) and looks_like_garbage(japanese) and not in_a_print(fn, offset)
 
 
 def opcode_layouts():
@@ -142,6 +316,8 @@ def decode(data, base, layouts, starts):
                         i += 2
                     else:
                         values.append(('zero', i, 0))
+            if not compare_is_plausible(op, values):
+                break                    # not a real compare: stop, as for an unknown opcode
             insns.append((at, op, values))
             if op == 0x40:                               # print: a string follows
                 end = data.find(b'\x00', i)

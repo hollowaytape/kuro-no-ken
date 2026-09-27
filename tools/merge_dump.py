@@ -17,8 +17,9 @@ A straight replace loses work in both directions, and breaks reinsertion outrigh
 So: take the sheet's SCNs and BSDs (it has the newer row set there and adds nothing
 anywhere else), resolve every English formula to the value it displays, and fill in any
 English the repo has and the sheet does not. Rows are aligned per file by their
-Japanese, in order, because the offsets differ between the two files until dump_audit
-has run. Every other tab is taken from the repo verbatim - the sheet's copies are
+Japanese, in offset order (each file sorted by its own Offset column, so a sheet sorted
+by Story order still lines up), because the offsets differ between the two files until
+dump_audit has run. Every other tab is taken from the repo verbatim - the sheet's copies are
 strictly older, and BD.BIN's lost rows are easier to keep than to re-insert.
 
     python tools/merge_dump.py --repo KuroNoKen_dump.xlsx --sheet ~/Downloads/KuroNoKen_dump.xlsx \
@@ -32,12 +33,34 @@ import sys
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # the project root; this file is in tools/
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(HERE, 'tools'))
 
 
 def columns(ws):
     hdr = [c.value for c in list(ws.rows)[0]]
     idx = {n: i for i, n in enumerate(hdr) if isinstance(n, str)}
     return idx.get('Filename'), idx.get('Japanese'), idx.get('English')
+
+
+def offset_col(ws):
+    hdr = [c.value for c in list(ws.rows)[0]]
+    return hdr.index('Offset') if 'Offset' in hdr else None
+
+
+def file_order(rows, ws):
+    """Sort one file's rows by their Offset, so the alignment below sees file order
+    whatever order the sheet is in (the translator may sort by Story order)."""
+    oi = offset_col(ws)
+    if oi is None:
+        return rows
+
+    def key(r):
+        v = ws.cell(row=r[3], column=oi + 1).value
+        try:
+            return (int(str(v), 16), r[3])
+        except ValueError:
+            return (float('inf'), r[3])
+    return sorted(rows, key=key)
 
 
 def read_rows(ws, fi, ji, ei, sheet_name):
@@ -138,6 +161,7 @@ def main():
             mrs = by_file_mine.get(fn)
             if not mrs:
                 continue
+            trs, mrs = file_order(trs, rs), file_order(mrs, ws)
             sm = difflib.SequenceMatcher(None, [r[1].strip() for r in trs],
                                          [r[1].strip() for r in mrs], autojunk=False)
             for tag, i1, i2, j1, j2 in sm.get_opcodes():
@@ -152,7 +176,43 @@ def main():
                         ws.cell(row=m[3], column=ji + 1).value = t[1]
                         repadded[name] += 1
 
+    # 3. drop the rows that are not text at all. The dumper reads bytes, so a jump address
+    #    or an object field that is a valid Shift-JIS pair comes out looking like a string;
+    #    the interpreter knows which bytes are instructions. Seven rows in the whole game
+    #    (06BLK05J 0x1ad, two in 06BLK07, 31END's four), none ever translated. Deleting
+    #    them here is safe because step 1 has already turned every formula into its value,
+    #    so no `=E14` can be left pointing at a row that moves.
+    import script_decode
+    removed = collections.Counter()
+    for name in FROM_SHEET:
+        ws = book[name]
+        fi, ji, ei = columns(ws)
+        if ji is None:
+            continue
+        rows = collections.defaultdict(list)
+        for row in ws.iter_rows(min_row=2):
+            fn = row[fi].value if fi is not None and fi < len(row) else None
+            off = row[offset_col(ws)].value if offset_col(ws) is not None else None
+            if not fn or not str(fn).endswith('.SCN') or off is None:
+                continue
+            try:
+                rows[fn].append((int(str(off), 16), row[0].row,
+                                 str(row[ji].value or '')))
+            except ValueError:
+                continue
+        drop = []
+        for fn, rs in rows.items():
+            offsets = [o for o, _r, _jp in rs]
+            for o, r, jp in rs:
+                if script_decode.is_code_row(fn, o, len(jp.encode('cp932', 'replace')),
+                                             offsets, jp):
+                    drop.append(r)
+                    removed[name] += 1
+        for r in sorted(drop, reverse=True):
+            ws.delete_rows(r)
+
     book.save(args.out)
+    print('rows dropped as script code, not text: %s' % dict(removed))
     print('tabs taken from the repo verbatim:  %s' % dict(restored))
     print('formulas resolved to their value: %s' % dict(resolved))
     print('formulas showing nothing, cleared: %s' % dict(dropped))

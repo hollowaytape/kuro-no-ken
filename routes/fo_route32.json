@@ -1,0 +1,142 @@
+{
+ "start": {
+  "state": "fo_route31_04"
+ },
+ "steps": [
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 0
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 2
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "talk",
+   "slot": 2
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "talk",
+   "slot": 3
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "talk",
+   "slot": 4
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 12
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 4
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 9
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 4
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 10
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "step",
+   "index": 4
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "zone",
+   "kind": "bump",
+   "index": 10
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "talk",
+   "slot": 1
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  },
+  {
+   "op": "talk",
+   "slot": 4
+  },
+  {
+   "op": "settle",
+   "quiet": 3,
+   "timeout": 180
+  }
+ ]
+}

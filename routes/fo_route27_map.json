@@ -1,0 +1,142 @@
+{
+ "graph": {
+  "07_e7ca|npc|2": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0002a"
+    ]
+   ]
+  },
+  "07_e7ca|npc|1": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0002a"
+    ]
+   ]
+  },
+  "07_e7ca|step|3": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ]
+   ]
+  },
+  "07_e7ca|bump|4": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ],
+    [
+     "07CSL02A.SCN",
+     "0x0012e"
+    ]
+   ]
+  }
+ },
+ "coverage": {
+  "07CSL02A.SCN": {
+   "0x0002a": [
+    "07_e7ca"
+   ],
+   "0x0012e": [
+    "07_e7ca"
+   ]
+  }
+ },
+ "map_files": {
+  "07_e7ca": [
+   "07CSL.SCN",
+   "07CSL02.SCN",
+   "07CSL02A.SCN"
+  ],
+  "07_0bef": [
+   "07CSL.SCN",
+   "07CSL02.SCN",
+   "07CSL02A.SCN"
+  ]
+ }
+}

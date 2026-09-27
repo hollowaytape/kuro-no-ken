@@ -1,0 +1,1248 @@
+{
+ "graph": {
+  "map_62e9|npc|2": {
+   "map": "map_62e9",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|npc|3": {
+   "map": "map_62e9",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "map_62e9|npc|5": {
+   "map": "map_62e9",
+   "kind": "npc",
+   "index": 5,
+   "leads_to": "blk2",
+   "outcome": "blocked: no object in slot 5",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|npc|4": {
+   "map": "map_62e9",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "blk2",
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|0": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|npc|1": {
+   "map": "map_62e9",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": []
+  },
+  "map_62e9|bump|5": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|1": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|3": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|4": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|7": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|6": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|8": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: zone 8 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "D051_X10.BSD",
+     "0x006f5"
+    ]
+   ]
+  },
+  "map_62e9|bump|2": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "D051_X10.BSD",
+     "0x006f5"
+    ]
+   ]
+  },
+  "map_62e9|bump|9": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|11": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|12": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|13": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|10": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 10,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|0": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "sks1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|15": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 15,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|14": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|1": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|2": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|4": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|5": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|6": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 6,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|3": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "D051_X10.BSD",
+     "0x006f5"
+    ]
+   ]
+  },
+  "map_62e9|bump|17": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 17,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|8": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|9": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "D051_X10.BSD",
+     "0x006f5"
+    ]
+   ]
+  },
+  "map_62e9|step|7": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|10": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 10,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|11": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 11,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|13": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|bump|16": {
+   "map": "map_62e9",
+   "kind": "bump",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1a0) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "map_62e9|step|14": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|12": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 12,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|16": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 16,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|15": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 3,
+   "text": []
+  },
+  "map_62e9|step|20": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|17": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1a0) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "map_62e9|step|21": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 21,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|22": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: zone 22 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "D051_X10.BSD",
+     "0x006f5"
+    ]
+   ]
+  },
+  "map_62e9|step|18": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 18,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|23": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|24": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 24,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "map_62e9|step|19": {
+   "map": "map_62e9",
+   "kind": "step",
+   "index": 19,
+   "leads_to": "blk2",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "blk2|npc|1": {
+   "map": "blk2",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "blk2|npc|4": {
+   "map": "blk2",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "blk2|npc|2": {
+   "map": "blk2",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "blk2|npc|3": {
+   "map": "blk2",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "blk2|bump|2": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|4": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|bump|5": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|bump|1": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 19,
+   "text": []
+  },
+  "blk2|bump|6": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|bump|0": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|8": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|7": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|9": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|10": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|11": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|12": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|13": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|14": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|15": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|16": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|17": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|18": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|19": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|20": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|21": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|3": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 3,
+   "text": []
+  },
+  "blk2|bump|23": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|22": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|24": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|25": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|26": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|27": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|28": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|bump|29": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "blocked: zone 29 did nothing within 20s",
+   "pages": 10,
+   "text": [
+    [
+     "C042_X10.BSD",
+     "0x00775"
+    ]
+   ]
+  },
+  "blk2|bump|30": {
+   "map": "blk2",
+   "kind": "bump",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "blocked: stuck entering zone 30 at (437, 308)",
+   "pages": 0,
+   "text": []
+  },
+  "blk2|step|0": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|1": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|6": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|5": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|4": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|3": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|2": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 19,
+   "text": []
+  },
+  "blk2|step|9": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|10": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|7": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|11": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|8": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|12": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|13": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|14": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|15": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 3,
+   "text": []
+  },
+  "blk2|step|18": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|17": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1a1 (target 0x18d) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|21": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|19": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|16": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|20": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|22": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: zone 22 did nothing within 20s",
+   "pages": 9,
+   "text": [
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ]
+   ]
+  },
+  "blk2|step|24": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|25": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 10,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|step|26": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|23": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "blocked: zone 23 did nothing within 20s",
+   "pages": 9,
+   "text": [
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ],
+    [
+     "City McCulloch",
+     "15MKR01B #32"
+    ]
+   ]
+  },
+  "blk2|step|27": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|30": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "blocked: zone 30 did nothing within 20s",
+   "pages": 10,
+   "text": [
+    [
+     "C042_X10.BSD",
+     "0x00775"
+    ]
+   ]
+  },
+  "blk2|step|28": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|29": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x1b4 (target 0x1c8) - no movement (wall, NPC, or",
+   "pages": 4,
+   "text": []
+  },
+  "blk2|step|31": {
+   "map": "blk2",
+   "kind": "step",
+   "index": 31,
+   "leads_to": null,
+   "outcome": "blocked: zone 31 did nothing within 20s",
+   "pages": 3,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  },
+  "blk2|npc|5": {
+   "map": "blk2",
+   "kind": "npc",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "C021_X10.BSD",
+     "0x00b15"
+    ]
+   ]
+  }
+ },
+ "coverage": {
+  "C042_X10.BSD": {
+   "0x00775": [
+    "blk2"
+   ]
+  },
+  "D051_X10.BSD": {
+   "0x006f5": [
+    "map_62e9"
+   ]
+  },
+  "C021_X10.BSD": {
+   "0x00b15": [
+    "blk2"
+   ]
+  },
+  "City McCulloch": {
+   "15MKR01B #32": [
+    "blk2"
+   ]
+  }
+ },
+ "map_files": {
+  "map_62e9": [
+   "06BLK.SCN",
+   "06BLK01.SCN",
+   "06BLK00A.SCN",
+   "06BLK01B.SCN",
+   "06BLK01D.SCN"
+  ],
+  "blk2": [
+   "06BLK.SCN",
+   "06BLK01.SCN",
+   "06BLK01B.SCN",
+   "06BLK01C.SCN",
+   "06BLK00A.SCN",
+   "06BLK01D.SCN"
+  ]
+ }
+}

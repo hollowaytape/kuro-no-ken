@@ -1,0 +1,3613 @@
+{
+ "graph": {
+  "07_0bef|step|5": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|38": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 38,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|8": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: zone 8 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|2": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|6": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 6,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|9": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 9,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x1e3, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|0": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x1e3, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|2": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x1e3, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|1": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x1e3, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|step|3": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "07_0bef",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|44": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 44,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|npc|4": {
+   "map": "07_0bef",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|npc|3": {
+   "map": "07_0bef",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|npc|1": {
+   "map": "07_0bef",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|6": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_0bef|bump|5": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_0bef|bump|4": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|8": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_0bef|bump|1": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x12f, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|11": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|bump|9": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|3": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|bump|10": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|bump|12": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|bump|13": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|bump|14": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|bump|7": {
+   "map": "07_0bef",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|3": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|0": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x189, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|4": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 4,
+   "leads_to": "07_e7ca",
+   "outcome": "blocked: x did not converge on 0x12f, at 0x124",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|7": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|10": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: zone 10 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|12": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: zone 12 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|11": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: zone 11 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|13": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: zone 13 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|19": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_0bef|step|16": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x4a, at 0xb5",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|20": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: zone 20 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|15": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: zone 15 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|18": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: zone 18 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|14": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: zone 14 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|step|17": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x93, at 0x125",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|22": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: zone 22 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|23": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "blocked: zone 23 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|21": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: zone 21 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|24": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|step|26": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x2f, at 0x8d",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|27": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x26, at 0x8d",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|28": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x2f, at 0x151",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|29": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x26, at 0x151",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|30": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "blocked: zone 30 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|25": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "blocked: zone 25 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "07_0bef|step|32": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 32,
+   "leads_to": null,
+   "outcome": "blocked: zone 32 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|35": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 35,
+   "leads_to": null,
+   "outcome": "blocked: zone 35 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|34": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 34,
+   "leads_to": null,
+   "outcome": "blocked: zone 34 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|36": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 36,
+   "leads_to": null,
+   "outcome": "blocked: zone 36 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|37": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 37,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|31": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 31,
+   "leads_to": null,
+   "outcome": "blocked: zone 31 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|33": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 33,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x9e, at 0x151",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|39": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 39,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|40": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 40,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|41": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 41,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|42": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 42,
+   "leads_to": "07_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|43": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 43,
+   "leads_to": null,
+   "outcome": "blocked: zone 43 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|45": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 45,
+   "leads_to": null,
+   "outcome": "blocked: zone 45 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|46": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 46,
+   "leads_to": null,
+   "outcome": "blocked: zone 46 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_0bef|step|47": {
+   "map": "07_0bef",
+   "kind": "step",
+   "index": 47,
+   "leads_to": null,
+   "outcome": "blocked: zone 47 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|npc|2": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|npc|4": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|npc|3": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|npc|5": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 5",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|npc|1": {
+   "map": "07_e7ca",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|step|0": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "06_62e9",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|bump|1": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "06_62e9",
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ],
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ],
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ]
+   ]
+  },
+  "07_e7ca|bump|0": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "06_62e9",
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ],
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ],
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ]
+   ]
+  },
+  "07_e7ca|step|1": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "06_62e9",
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ],
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ],
+    [
+     "06BLK01B.SCN",
+     "0x0021d"
+    ]
+   ]
+  },
+  "07_e7ca|step|5": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x5, at 0x24",
+   "pages": 0,
+   "text": []
+  },
+  "07_e7ca|step|6": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "07_e7ca|bump|5": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "pages": 8,
+   "text": []
+  },
+  "07_e7ca|bump|2": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|bump|3": {
+   "map": "07_e7ca",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "07CSL01A.SCN",
+     "0x00372"
+    ],
+    [
+     "07CSL01A.SCN",
+     "0x00372"
+    ],
+    [
+     "07CSL01A.SCN",
+     "0x00372"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "07_e7ca|step|4": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 8,
+   "text": []
+  },
+  "07_e7ca|step|2": {
+   "map": "07_e7ca",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "06_62e9|step|0": {
+   "map": "06_62e9",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|5": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|bump|0": {
+   "map": "05_5680",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|2": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|1": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "01_0aaa",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|4": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|bump|1": {
+   "map": "05_5680",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|3": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|npc|1": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|npc|4": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|npc|2": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|npc|3": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x003b8"
+    ]
+   ]
+  },
+  "05_5680|step|0": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "01_0aaa",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_10b6|step|0": {
+   "map": "05_10b6",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "05_10b6|step|1": {
+   "map": "05_10b6",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|1": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x16a, at 0x10f",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|21": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|20": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|4": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|npc|4": {
+   "map": "01_0aaa",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "05_5680",
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|7": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|8": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 8,
+   "leads_to": "05_5680",
+   "outcome": "blocked: x did not converge on 0x20b, at 0x20b",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|10": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 10,
+   "leads_to": "05_5680",
+   "outcome": "blocked: x did not converge on 0x1e9, at 0x11c",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|0": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x12b, at 0x10f",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|6": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: zone 6: interrupted by battles 6 times",
+   "pages": 2,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|5": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|11": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 11,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 11,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x000ac"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x000d7"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x000ec"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x00140"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x00186"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x001e1"
+    ]
+   ]
+  },
+  "01_0aaa|step|13": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|2": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|3": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|9": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|12": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 12,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 14,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x000ac"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x000d7"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x000ec"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x00140"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x00186"
+    ],
+    [
+     "23SOH01I.SCN",
+     "0x001e1"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ]
+   ]
+  },
+  "01_0aaa|step|14": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|15": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|17": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 17,
+   "leads_to": "15_9084",
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|16": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|24": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 4,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|18": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|19": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|22": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "01_0aaa|step|23": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 7,
+   "text": [
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ]
+   ]
+  },
+  "23_4f5d|bump|2": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 9,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|npc|4": {
+   "map": "23_4f5d",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|npc|1": {
+   "map": "23_4f5d",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|bump|3": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ]
+   ]
+  },
+  "23_4f5d|bump|0": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 5,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0073a"
+    ],
+    [
+     "0x0d245",
+     "0x0d245"
+    ],
+    [
+     "0x02e70",
+     "0x02e70"
+    ]
+   ]
+  },
+  "23_4f5d|bump|4": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ]
+   ]
+  },
+  "23_4f5d|npc|2": {
+   "map": "23_4f5d",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|npc|3": {
+   "map": "23_4f5d",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000df"
+    ]
+   ]
+  },
+  "23_4f5d|step|3": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 9,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|step|2": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 9,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|step|1": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 5,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0073a"
+    ],
+    [
+     "0x0d245",
+     "0x0d245"
+    ],
+    [
+     "0x02e70",
+     "0x02e70"
+    ]
+   ]
+  },
+  "23_4f5d|step|4": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ]
+   ]
+  },
+  "23_4f5d|bump|1": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 9,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|step|0": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000df"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ]
+   ]
+  },
+  "23_4f5d|step|5": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ]
+   ]
+  },
+  "23_4f5d|bump|5": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|step|8": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00100"
+    ]
+   ]
+  },
+  "23_4f5d|bump|7": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00100"
+    ]
+   ]
+  },
+  "23_4f5d|bump|6": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ]
+   ]
+  },
+  "23_4f5d|step|6": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 6,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_4f5d|step|7": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ]
+   ]
+  },
+  "23_fce1|npc|1": {
+   "map": "23_fce1",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x00287"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x002dc"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0033b"
+    ]
+   ]
+  },
+  "23_fce1|npc|3": {
+   "map": "23_fce1",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0048b"
+    ]
+   ]
+  },
+  "23_fce1|npc|4": {
+   "map": "23_fce1",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_fce1|npc|2": {
+   "map": "23_fce1",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 13,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00022"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00147"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00199"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00237"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00290"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0031c"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0037d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x003d6"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0044a"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x004b0"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0052a"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0058b"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x005e4"
+    ]
+   ]
+  },
+  "23_fce1|step|2": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_fce1|step|1": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_fce1|step|0": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 5,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0073a"
+    ],
+    [
+     "0x0d245",
+     "0x0d245"
+    ],
+    [
+     "0x02e70",
+     "0x02e70"
+    ]
+   ]
+  },
+  "23_fce1|bump|0": {
+   "map": "23_fce1",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 5,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0073a"
+    ],
+    [
+     "0x0d245",
+     "0x0d245"
+    ],
+    [
+     "0x02e70",
+     "0x02e70"
+    ]
+   ]
+  },
+  "23_fce1|step|3": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_fce1|step|4": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 2,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0063f"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x0063f"
+    ]
+   ]
+  },
+  "23_fce1|step|5": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_fce1|step|6": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: zone 6 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00542"
+    ]
+   ]
+  },
+  "23_fce1|step|7": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_fce1|bump|4": {
+   "map": "23_fce1",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: stuck entering zone 4 at (159, 322)",
+   "pages": 9,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00810"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00863"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x0087d"
+    ]
+   ]
+  },
+  "23_fce1|step|8": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: zone 8 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_fce1|step|9": {
+   "map": "23_fce1",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: battle made no progress for 90 s (no menu, no message) after",
+   "pages": 5,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0073a"
+    ],
+    [
+     "0x0d245",
+     "0x0d245"
+    ],
+    [
+     "0x02e70",
+     "0x02e70"
+    ]
+   ]
+  },
+  "23_fce1|bump|2": {
+   "map": "23_fce1",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_fce1|bump|1": {
+   "map": "23_fce1",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_fce1|bump|3": {
+   "map": "23_fce1",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ],
+    [
+     "23SOH01B.SCN",
+     "0x00637"
+    ]
+   ]
+  },
+  "23_4f5d|bump|8": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_4f5d|bump|9": {
+   "map": "23_4f5d",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_4f5d|step|10": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: zone 10 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_4f5d|step|9": {
+   "map": "23_4f5d",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|bump|7": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|npc|4": {
+   "map": "23_712f",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "23_4f5d",
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|npc|3": {
+   "map": "23_712f",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ]
+   ]
+  },
+  "23_712f|npc|2": {
+   "map": "23_712f",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x000c2"
+    ]
+   ]
+  },
+  "23_712f|bump|4": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|bump|0": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|step|0": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|bump|1": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|bump|2": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|step|1": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|bump|5": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ]
+   ]
+  },
+  "23_712f|step|5": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "23_fce1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|step|8": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 8,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "23_712f|bump|6": {
+   "map": "23_712f",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 3,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x001ce"
+    ]
+   ]
+  },
+  "23_712f|step|2": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|step|3": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|step|6": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 6,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|step|7": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ]
+   ]
+  },
+  "23_712f|step|4": {
+   "map": "23_712f",
+   "kind": "step",
+   "index": 4,
+   "leads_to": "23_4f5d",
+   "outcome": "ok",
+   "pages": 8,
+   "text": [
+    [
+     "23SOH01A.SCN",
+     "0x0011d"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ],
+    [
+     "23SOH01A.SCN",
+     "0x00068"
+    ]
+   ]
+  }
+ },
+ "coverage": {
+  "99CMN.SCN": {
+   "0x007ea": [
+    "07_0bef",
+    "07_e7ca"
+   ],
+   "0x00c6c": [
+    "07_0bef"
+   ],
+   "0x0097b": [
+    "23_fce1"
+   ]
+  },
+  "06BLK01B.SCN": {
+   "0x0021d": [
+    "07_e7ca"
+   ]
+  },
+  "07CSL01A.SCN": {
+   "0x00372": [
+    "07_e7ca"
+   ]
+  },
+  "05SKS01.SCN": {
+   "0x003b8": [
+    "05_5680"
+   ]
+  },
+  "0x09e33": {
+   "0x09e33": [
+    "01_0aaa"
+   ]
+  },
+  "0x09ed5": {
+   "0x09ed5": [
+    "01_0aaa"
+   ]
+  },
+  "23SOH01I.SCN": {
+   "0x000ac": [
+    "01_0aaa"
+   ],
+   "0x000d7": [
+    "01_0aaa"
+   ],
+   "0x000ec": [
+    "01_0aaa"
+   ],
+   "0x00140": [
+    "01_0aaa"
+   ],
+   "0x00186": [
+    "01_0aaa"
+   ],
+   "0x001e1": [
+    "01_0aaa"
+   ]
+  },
+  "0x09f2c": {
+   "0x09f2c": [
+    "01_0aaa"
+   ]
+  },
+  "23SOH01A.SCN": {
+   "0x00068": [
+    "01_0aaa",
+    "23_4f5d",
+    "23_712f"
+   ],
+   "0x0011d": [
+    "23_4f5d",
+    "23_712f"
+   ],
+   "0x001ce": [
+    "23_4f5d",
+    "23_712f"
+   ],
+   "0x00542": [
+    "23_fce1"
+   ],
+   "0x0059c": [
+    "23_fce1",
+    "23_4f5d"
+   ],
+   "0x00573": [
+    "23_fce1"
+   ],
+   "0x006d0": [
+    "23_fce1",
+    "23_4f5d"
+   ],
+   "0x006f5": [
+    "23_fce1"
+   ],
+   "0x00287": [
+    "23_fce1"
+   ],
+   "0x002dc": [
+    "23_fce1"
+   ],
+   "0x0033b": [
+    "23_fce1"
+   ],
+   "0x00447": [
+    "23_fce1"
+   ],
+   "0x0048b": [
+    "23_fce1"
+   ],
+   "0x000df": [
+    "23_4f5d"
+   ],
+   "0x000c2": [
+    "23_4f5d",
+    "23_712f"
+   ],
+   "0x0073a": [
+    "23_fce1",
+    "23_4f5d"
+   ],
+   "0x00100": [
+    "23_4f5d"
+   ],
+   "0x0063f": [
+    "23_fce1"
+   ],
+   "0x0069d": [
+    "23_4f5d"
+   ]
+  },
+  "0x0d245": {
+   "0x0d245": [
+    "23_fce1",
+    "23_4f5d"
+   ]
+  },
+  "0x02d0b": {
+   "0x02d0b": [
+    "23_fce1",
+    "23_4f5d"
+   ]
+  },
+  "0x02c0c": {
+   "0x02c0c": [
+    "23_fce1"
+   ]
+  },
+  "23SOH01B.SCN": {
+   "0x0068f": [
+    "23_fce1"
+   ],
+   "0x00709": [
+    "23_fce1"
+   ],
+   "0x0076a": [
+    "23_fce1"
+   ],
+   "0x007b7": [
+    "23_fce1"
+   ],
+   "0x00810": [
+    "23_fce1",
+    "23_4f5d"
+   ],
+   "0x00863": [
+    "23_fce1",
+    "23_4f5d"
+   ],
+   "0x0087d": [
+    "23_fce1",
+    "23_4f5d"
+   ],
+   "0x00022": [
+    "23_fce1"
+   ],
+   "0x00147": [
+    "23_fce1"
+   ],
+   "0x00199": [
+    "23_fce1"
+   ],
+   "0x00237": [
+    "23_fce1"
+   ],
+   "0x00290": [
+    "23_fce1"
+   ],
+   "0x0031c": [
+    "23_fce1"
+   ],
+   "0x0037d": [
+    "23_fce1"
+   ],
+   "0x003d6": [
+    "23_fce1"
+   ],
+   "0x0044a": [
+    "23_fce1"
+   ],
+   "0x004b0": [
+    "23_fce1"
+   ],
+   "0x0052a": [
+    "23_fce1"
+   ],
+   "0x0058b": [
+    "23_fce1"
+   ],
+   "0x005e4": [
+    "23_fce1"
+   ],
+   "0x00637": [
+    "23_fce1"
+   ]
+  },
+  "0x02e70": {
+   "0x02e70": [
+    "23_fce1",
+    "23_4f5d"
+   ]
+  }
+ },
+ "map_files": {
+  "07_0bef": [
+   "07CSL.SCN",
+   "07CSL01.SCN",
+   "07CSL01A.SCN"
+  ],
+  "07_e7ca": [
+   "07CSL.SCN",
+   "07CSL01.SCN",
+   "07CSL01A.SCN"
+  ],
+  "06_62e9": [
+   "06BLK.SCN",
+   "06BLK01.SCN",
+   "06BLK01B.SCN"
+  ],
+  "05_5680": [
+   "05SKS.SCN",
+   "05SKS01.SCN",
+   "06BLK01B.SCN"
+  ],
+  "05_10b6": [
+   "05SKS.SCN",
+   "05SKS01.SCN",
+   "06BLK01B.SCN"
+  ],
+  "01_0aaa": [
+   "01FLD.SCN",
+   "05SKS01.SCN",
+   "06BLK01B.SCN"
+  ],
+  "23_4f5d": [
+   "23SOH.SCN",
+   "23SOH01.SCN",
+   "23SOH01A.SCN",
+   "23SOH01B.SCN"
+  ],
+  "23_fce1": [
+   "23SOH.SCN",
+   "23SOH01.SCN",
+   "23SOH01A.SCN",
+   "23SOH01B.SCN"
+  ],
+  "23_712f": [
+   "23SOH.SCN",
+   "23SOH01.SCN",
+   "23SOH01A.SCN"
+  ]
+ }
+}

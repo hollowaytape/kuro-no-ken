@@ -1,0 +1,233 @@
+rank (which moment of the story), place (where inside it), script, how the place was found | how the rank was found
+  0.00   -1.589  00IPL      the intro, first thing the game shows | no counter reaches it
+  0.00   -1.579  01FLD      the world map, used throughout | no counter reaches it
+  0.00   -1.488  99CMN      the common script (prompts, shops), used all game long | no counter reaches it
+  0.50   -0.590  02OLB      with its area (02OLB); not placed by the scripts | where 02OLB is in the recorded playthrough
+  0.50   -0.501  02OLB00A   the opening scene (route 01, and its content) | where 02OLB is in the recorded playthrough
+  0.50   -0.500  02OLB01    02OLB loads it at stage 0 (var 0x84) | where 02OLB is in the recorded playthrough
+  0.50   -0.499  02OLB01A   02OLB loads it at stage 0 (var 0x84) | where 02OLB is in the recorded playthrough
+  0.50    0.000  03YSK01A   advances story counter 0x84 to 1 | where 03YSK is in the recorded playthrough
+  0.50    0.499  04OLD      with its area (04OLD); not placed by the scripts | where 04OLD is in the recorded playthrough
+  0.50    0.499  06BLK00A   with its area (06BLK); not placed by the scripts | where 06BLK is in the recorded playthrough
+  0.50    0.499  06BLK00B   with its area (06BLK); not placed by the scripts | where 06BLK is in the recorded playthrough
+  0.50    0.500  04OLD01A   04OLD loads it at stage 0 (var 0x86) | where 04OLD is in the recorded playthrough
+  0.50    0.500  05SKS01    05SKS loads it at stage 0 (var 0x87) | where 05SKS is in the recorded playthrough
+  0.50    0.500  06BLK01    06BLK loads it at stage 0 (var 0x88) | where 06BLK is in the recorded playthrough
+  0.50    0.500  06BLK01A   loaded by 06BLK01 | where 06BLK is in the recorded playthrough
+  0.50    0.500  06BLK01B   loaded by 06BLK01 | where 06BLK is in the recorded playthrough
+  0.50    0.500  06BLK01C   loaded by 06BLK01 | where 06BLK is in the recorded playthrough
+  0.50    0.500  06BLK01D   loaded by 06BLK01 | where 06BLK is in the recorded playthrough
+  0.50    0.503  02OLB01B   02OLB loads it at stage 1 (var 0x84) | where 02OLB is in the recorded playthrough
+  0.50    3.640  07CSL01    07CSL loads it at its stage 1 (var 0x89) | where 07CSL is in the recorded playthrough
+  0.50    3.640  07CSLI00   loaded by 07CSL01 | where 07CSL is in the recorded playthrough
+  0.50    3.640  07CSL01A   loaded by 07CSL01 | where 07CSL is in the recorded playthrough
+  0.50    3.640  07CSL01B   loaded by 07CSL01 | where 07CSL is in the recorded playthrough
+  0.50    3.729  07CSL      with its area (07CSL); not placed by the scripts | where 07CSL is in the recorded playthrough
+  0.50    5.000  05SKS      advances story counter 0x85 to 4 | where 05SKS is in the recorded playthrough
+  0.50   29.000  03YSK      advances story counter 0x85 to 6 | where 03YSK is in the recorded playthrough
+  0.50   32.000  06BLK      advances story counter 0x87 to 7 | where 06BLK is in the recorded playthrough
+  1.00    0.760  11STG01    11STG loads it at its stage 4 (var 0x8d) | it is what advances the story here
+  1.00    0.819  11STG      with its area (11STG); not placed by the scripts | with 11STG01, in its area
+  1.00    1.501  04OLD01B   04OLD loads it at stage 1 (var 0x86) | the 0x86 stage 1 it is loaded at
+  1.00    1.501  05SKS02    05SKS loads it at stage 1 (var 0x87) | the 0x87 stage 1 it is loaded at
+  1.00    1.501  06BLK02    06BLK loads it at stage 1 (var 0x88) | the 0x88 stage 1 it is loaded at
+  1.00    1.501  06BLK02O   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.501  06BLK02I   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.501  06BLK02A   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.501  06BLK02B   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.501  06BLK02C   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.502  06BLK02D   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.502  06BLK02E   loaded by 06BLK02 | it is loaded by 06BLK02
+  1.00    1.504  02OLB02    02OLB loads it at stage 2 (var 0x84) | the 0x84 stage 2 it is loaded at
+  1.00    1.505  02OLB02A   02OLB loads it at stage 2 (var 0x84) | the 0x84 stage 2 it is loaded at
+  2.00    1.501  03YSK01B   03YSK loads it at stage 1 (var 0x85) | it is what advances the story here
+  2.00    1.804  12MRS      seen in the playthrough right after Albein stage 2 sends the player there (part 2, 1:40) | where 12MRS is in the recorded playthrough
+  2.05   22.857  08CKD      with its area (08CKD); not placed by the scripts - first reachable from 07CSL | where 08CKD is in the recorded playthrough
+  2.05   22.857  08CKD01    with its area (08CKD); not placed by the scripts - first reachable from 07CSL | where 08CKD is in the recorded playthrough
+  2.05   22.857  08CKD02    with its area (08CKD); not placed by the scripts - first reachable from 07CSL | where 08CKD is in the recorded playthrough
+  2.05   22.956  08CKD01A   with its stage siblings (08CKD01); not loaded from a stage switch | where 08CKD is in the recorded playthrough
+  2.05   22.956  08CKD02A   with its stage siblings (08CKD02); not loaded from a stage switch | where 08CKD is in the recorded playthrough
+  3.00    3.660  07CSL02    07CSL loads it at its stage 2 (var 0x89) | it is what advances the story here
+  3.00    3.660  07CSLI01   loaded by 07CSL02 | it is loaded by 07CSL02
+  3.00    3.660  07CSL02A   loaded by 07CSL02 | it is loaded by 07CSL02
+  3.00    3.660  07CSL02B   loaded by 07CSL02 | it is loaded by 07CSL02
+  3.00    3.940  10TNI01    10TNI loads it at its stage 1 (var 0x8c) | where 10TNI is in the recorded playthrough
+  3.00    3.940  10TNII00   loaded by 10TNI01 | where 10TNI is in the recorded playthrough
+  3.00    3.940  10TNI01A   loaded by 10TNI01 | where 10TNI is in the recorded playthrough
+  3.00    4.029  10TNI      with its area (10TNI); not placed by the scripts - first reachable from 07CSL01 | where 10TNI is in the recorded playthrough
+  3.00    4.502  04OLD01C   04OLD loads it at stage 2 (var 0x86) | the 0x86 stage 2 it is loaded at
+  3.00    4.502  05SKS03    05SKS loads it at stage 2 (var 0x87) | the 0x87 stage 2 it is loaded at
+  3.00    4.502  06BLK03    06BLK loads it at stage 2 (var 0x88) | the 0x88 stage 2 it is loaded at
+  3.00    4.502  06BLK03O   loaded by 06BLK03 | it is loaded by 06BLK03
+  3.00    4.502  06BLK03I   loaded by 06BLK03 | it is loaded by 06BLK03
+  3.00    4.503  03YSK01C   03YSK loads it at stage 3 (var 0x85) | the 0x85 stage 3 it is loaded at
+  3.00    4.512  06BLK03A   06BLK loads it at stage 2 (var 0x88) | the 0x88 stage 2 it is loaded at
+  3.00    5.500  17DRL      with its area (17DRL); not placed by the scripts | where 17DRL is in the recorded playthrough
+  3.00    5.501  17DRL01    17DRL loads it at stage 0 (var 0x93) | where 17DRL is in the recorded playthrough
+  3.00    5.501  17DRL01A   loaded by 17DRL01 | where 17DRL is in the recorded playthrough
+  3.00    5.501  17DRL01B   loaded by 17DRL01 | where 17DRL is in the recorded playthrough
+  3.00    5.501  17DRL02A   loaded by 17DRL01 | where 17DRL is in the recorded playthrough
+  3.00    6.000  15MKR      advances story counter 0x93 to 1 | where 15MKR is in the recorded playthrough
+  3.00    6.600  15MKR01A   15MKR loads it at its stage 0 (var 0x91) | where 15MKR is in the recorded playthrough
+  3.00    6.620  15MKR01B   15MKR loads it at its stage 2 (var 0x91) | where 15MKR is in the recorded playthrough
+  3.00    6.620  15MKR02A   loaded by 15MKR01B | where 15MKR is in the recorded playthrough
+  3.00    6.620  15MKR02C   loaded by 15MKR01B | where 15MKR is in the recorded playthrough
+  3.00    6.620  15MKR02B   loaded by 15MKR01B | where 15MKR is in the recorded playthrough
+  3.00    6.710  15MKR01C   15MKR loads it at its stage 5 (var 0x91) | where 15MKR is in the recorded playthrough
+  3.00    6.710  15MKR02E   loaded by 15MKR01C | where 15MKR is in the recorded playthrough
+  3.00    6.710  15MKR02F   loaded by 15MKR01C | where 15MKR is in the recorded playthrough
+  3.00    6.711  15MKR02D   loaded by 15MKR01C | where 15MKR is in the recorded playthrough
+  3.00   26.259  16MKI      with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  3.00   26.259  16MKI00    with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  3.00   26.259  16MKI01A   with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  3.00   26.259  16MKI01B   with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  3.00   26.259  16MKI01C   with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  3.00   26.259  16MKI01D   with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  3.00   26.259  16MKI61    with its area (16MKI); not placed by the scripts - first reachable from 15MKR | where 16MKI is in the recorded playthrough
+  4.00   11.000  15MKR02G   advances story counter 0x44 to 5 | it is loaded by 15MKR01D
+  4.00   17.640  27KKI01    27KKI loads it at its stage 1 (var 0x9d) | it is what advances the story here
+  4.00   17.640  27KKII00   loaded by 27KKI01 | it is loaded by 27KKI01
+  4.00   17.640  27KKI01A   loaded by 27KKI01 | it is loaded by 27KKI01
+  4.00   17.729  27KKI      with its area (27KKI); not placed by the scripts | with 27KKI01A, in its area
+  4.00   17.780  07CSL03    07CSL loads it at its stage 3 (var 0x89), which 27KKI01 starts | the 0x89 stage 3 it is loaded at
+  4.00   17.780  15MKR01D   15MKR loads it at its stage 6 (var 0x91), which 27KKI01 starts | the 0x91 stage 6 it is loaded at
+  4.00   17.780  15MKR02H   loaded by 15MKR01D | it is loaded by 15MKR01D
+  4.00   18.503  04OLD01D   04OLD loads it at stage 3 (var 0x86) | the 0x86 stage 3 it is loaded at
+  4.00   18.503  05SKS04    05SKS loads it at stage 3 (var 0x87) | the 0x87 stage 3 it is loaded at
+  4.00   18.503  17DRL03    17DRL loads it at stage 2 (var 0x93) | the 0x93 stage 2 it is loaded at
+  4.00   18.503  17DRL03A   loaded by 17DRL03 | it is loaded by 17DRL03
+  4.00   36.080  26KKR01    26KKR loads it at its stage 1 (var 0x9c) | with 26KKR02A, in its area
+  4.00   36.081  26KKR01A   loaded by 26KKR01 | with 26KKR02A, in its area
+  4.00   36.081  26KKR02    26KKR loads it at its stage 2 (var 0x9c), which 15MKR01C starts | with 26KKR02A, in its area
+  4.00   36.082  26KKR02A   loaded by 26KKR02 | it is loaded by 26KKR03
+  4.00   36.083  26KKR03    26KKR loads it at its stage 3 (var 0x9c), which 27KKI01 starts | the 0x9c stage 3 it is loaded at
+  4.00   36.169  26KKR      with its area (26KKR); not placed by the scripts | with 26KKR06A, in its area, and no later than its visits
+  5.00    2.204  21KTI      the Isle of Forests chain: the cave leads to the seabed (02OLB02A, in-game text) | no counter reaches it, and no later than 22MZI, reached through it
+  5.00    2.404  22MZI      the Isle of Forests chain: the ruins below the seabed (in-game text) | it is what advances the story here
+  5.00   18.503  06BLK04    06BLK loads it at stage 3 (var 0x88) | it is what advances the story here
+  5.00   18.503  06BLK04O   loaded by 06BLK04 | it is loaded by 06BLK04
+  5.00   18.503  06BLK04I   loaded by 06BLK04 | it is loaded by 06BLK04
+  5.00   18.503  06BLK04J   loaded by 06BLK04 | it is loaded by 06BLK04
+  5.00   18.503  06BLK04K   loaded by 06BLK04 | it is loaded by 06BLK04
+  5.00   18.503  06BLK04A   loaded by 06BLK04 | it is loaded by 06BLK04
+  5.00   18.504  06BLK04B   loaded by 06BLK04 | it is loaded by 06BLK04
+  5.00   18.553  07CSL04    07CSL loads it at its stage 4 (var 0x89), which 06BLK04 starts | the 0x89 stage 4 it is loaded at
+  5.00   18.553  07CSLI02   loaded by 07CSL04 | it is loaded by 07CSL04
+  5.00   18.553  07CSLI03   loaded by 07CSL04 | it is loaded by 07CSL04
+  5.00   18.554  07CSL04A   loaded by 07CSL04 | it is loaded by 07CSL04
+  5.00   18.554  07CSL04B   loaded by 07CSL04 | it is loaded by 07CSL04
+  5.00   18.603  07CSL05    07CSL loads it at its stage 5 (var 0x89) | the 0x89 stage 5 it is loaded at
+  5.00   18.604  07CSL05A   loaded by 07CSL05 | it is loaded by 07CSL05
+  5.00   18.604  07CSL05B   loaded by 07CSL05 | it is loaded by 07CSL05
+  5.00   18.604  07CSL05C   loaded by 07CSL05 | it is loaded by 07CSL05
+  5.00   18.604  07CSL05D   loaded by 07CSL05 | it is loaded by 07CSL05
+  5.00   18.604  07CSL05E   loaded by 07CSL05 | it is loaded by 07CSL05
+  5.00   18.654  15MKR01E   15MKR loads it at its stage 7 (var 0x91), which 07CSL05 starts | the 0x91 stage 7 it is loaded at
+  5.00   19.504  05SKS05    05SKS loads it at stage 4 (var 0x87) | the 0x87 stage 4 it is loaded at
+  5.00   19.504  06BLK05    06BLK loads it at stage 4 (var 0x88) | the 0x88 stage 4 it is loaded at
+  5.00   19.504  06BLK05O   loaded by 06BLK05 | it is loaded by 06BLK05
+  5.00   19.504  06BLK05I   loaded by 06BLK05 | it is loaded by 06BLK05
+  5.00   19.504  06BLK05J   loaded by 06BLK05 | it is loaded by 06BLK05
+  5.00   19.504  06BLK05K   loaded by 06BLK05 | it is loaded by 06BLK05
+  5.00   19.505  06BLK06K   loaded by 06BLK05 | it is loaded by 06BLK05
+  5.00   19.510  02OLB03    02OLB loads it at stage 5 (var 0x84) | the 0x84 stage 5 it is loaded at
+  5.00   19.511  02OLB03A   02OLB loads it at stage 5 (var 0x84) | the 0x84 stage 5 it is loaded at
+  5.00   36.123  26KKR04    26KKR loads it at its stage 4 (var 0x9c) | the 0x9c stage 4 it is loaded at
+  5.00   36.123  26KKR04A   loaded by 26KKR04 | it is loaded by 26KKR04
+  6.00   13.000  23SOH02B   advances story counter 0xa1 to 1 | it is loaded by 23SOH02
+  6.00   18.663  07CSL06    07CSL loads it at its stage 6 (var 0x89) | the 0x89 stage 6 it is loaded at
+  6.00   18.664  07CSL06E   loaded by 07CSL06 | it is loaded by 07CSL06
+  6.00   18.734  07CSL07    07CSL loads it at its stage 7 (var 0x89) | the 0x89 stage 7 it is loaded at
+  6.00   18.734  07CSL07A   loaded by 07CSL07 | it is loaded by 07CSL07
+  6.00   18.753  23SOH01    seen in the playthrough after the castle stage 4 (part 3, 5:50) | where 23SOH is in the recorded playthrough, and no later than the counters date its area
+  6.00   18.763  23SOH01A   seen in the playthrough after the castle stage 4 (part 3, 5:50) | where 23SOH is in the recorded playthrough, and no later than the counters date its area
+  6.00   18.773  23SOH01B   seen in the playthrough after the castle stage 4 (part 3, 5:50) | where 23SOH is in the recorded playthrough, and no later than the counters date its area
+  6.00   18.783  23SOH01I   seen in the playthrough after the castle stage 4 (part 3, 5:50) | where 23SOH is in the recorded playthrough, and no later than the counters date its area
+  6.00   18.793  23SOH02A   seen in the playthrough after the castle stage 4 (part 3, 5:50) | it is loaded by 23SOH02
+  6.00   18.852  23SOH      seen in the playthrough after the castle stage 4 (part 3, 5:50) | where 23SOH is in the recorded playthrough, and no later than the counters date its area
+  6.00   23.057  09HIK      reached only from the Walkreuz Underground (08CKD) | with 09HIKI01, in its area
+  6.00   23.057  09HIK01    reached only from the Walkreuz Underground (08CKD) | it is what advances the story here
+  6.00   23.057  09HIKI01   reached only from the Walkreuz Underground (08CKD) | it is loaded by 09HIK01
+  6.00   23.156  09HIK01A   with its stage siblings (09HIK01); not loaded from a stage switch | it is loaded by 09HIK01
+  6.00   25.909  25TOU      with its area (25TOU); not placed by the scripts | where 25TOU is in the recorded playthrough, and no later than the counters date its area
+  6.00   25.909  25TOU00A   with its area (25TOU); not placed by the scripts | where 25TOU is in the recorded playthrough, and no later than the counters date its area
+  6.00   25.909  25TOU00B   with its area (25TOU); not placed by the scripts | where 25TOU is in the recorded playthrough, and no later than the counters date its area
+  6.00   25.909  25TOU00D   with its area (25TOU); not placed by the scripts | where 25TOU is in the recorded playthrough, and no later than the counters date its area
+  6.00   25.909  25TOU00E   with its area (25TOU); not placed by the scripts | where 25TOU is in the recorded playthrough, and no later than the counters date its area
+  6.00   25.910  25TOU00C   25TOU loads it at its own stage 1 (var 0x7f) | it is what advances the story here
+  6.00   25.960  23SOH02    23SOH loads it at its stage 2 (var 0x99), which 25TOU00C starts | the 0x99 stage 2 it is loaded at
+  6.00   25.960  15MKR61    15MKR loads it at its stage 8 (var 0x91), which 25TOU00C starts | the 0x91 stage 8 it is loaded at
+  6.00   26.505  05SKS06    05SKS loads it at stage 5 (var 0x87) | the 0x87 stage 5 it is loaded at
+  6.00   26.512  02OLB04    02OLB loads it at stage 6 (var 0x84) | the 0x84 stage 6 it is loaded at
+  7.00    5.504  03YSK65    03YSK loads it at stage 4 (var 0x85) | the 0x85 stage 4 it is loaded at
+  8.00    3.960  10TNI02    10TNI loads it at its stage 2 (var 0x8c) | it is what advances the story here
+  8.00    3.960  10TNII01   loaded by 10TNI02 | it is loaded by 10TNI02
+  8.00    3.960  10TNI02A   loaded by 10TNI02 | it is loaded by 10TNI02
+  8.00   28.505  03YSK69    03YSK loads it at stage 5 (var 0x85) | the 0x85 stage 5 it is loaded at
+  8.00   28.505  03YSK690   loaded by 03YSK69 | it is loaded by 03YSK69
+  8.00   28.505  03YSK69D   loaded by 03YSK69 | it is loaded by 03YSK69
+  8.00   28.505  03YSK69A   loaded by 03YSK69 | it is loaded by 03YSK69
+  8.00   28.505  03YSK69B   loaded by 03YSK69 | it is loaded by 03YSK69
+  8.00   28.505  03YSK69C   loaded by 03YSK69 | it is loaded by 03YSK69
+  8.00   28.513  02OLB05    02OLB loads it at stage 7 (var 0x84) | the 0x84 stage 7 it is loaded at
+  9.00   29.506  03YSK70    03YSK loads it at stage 6 (var 0x85) | it is what advances the story here
+  9.00   30.506  05SKS07    05SKS loads it at stage 6 (var 0x87) | the 0x87 stage 6 it is loaded at
+  9.00   30.514  02OLB06    02OLB loads it at stage 8 (var 0x84) | the 0x84 stage 8 it is loaded at
+ 10.00   22.506  06BLK07    06BLK loads it at stage 6 (var 0x88) | the 0x88 stage 6 it is loaded at
+ 10.00   22.506  06BLK07O   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.506  06BLK07I   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.506  06BLK07J   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.506  06BLK07K   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.506  06BLK07L   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.507  06BLK08I   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.507  06BLK09I   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.507  06BLK10I   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.507  06BLK11I   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   22.507  06BLK12I   loaded by 06BLK07 | it is loaded by 06BLK07
+ 10.00   31.507  03YSK00    03YSK loads it at stage 7 (var 0x85) | the 0x85 stage 7 it is loaded at
+ 12.00   33.000  18KSK      advances story counter 0x83 to 3 | it is what advances the story here
+ 13.00    2.004  13SLP      the Isle of Forests chain: 12MRS wakes the Sleeping Princess to open the cave (in-game text) | where 13SLP is in the recorded playthrough
+ 13.00   16.999  24UMB00    with its area (24UMB); not placed by the scripts | where 24UMB is in the recorded playthrough
+ 13.00   16.999  24UMB54    with its area (24UMB); not placed by the scripts | where 24UMB is in the recorded playthrough
+ 13.00   16.999  24UMB56    with its area (24UMB); not placed by the scripts | where 24UMB is in the recorded playthrough
+ 13.00   16.999  24UMB57    with its area (24UMB); not placed by the scripts | where 24UMB is in the recorded playthrough
+ 13.00   17.000  24UMB      advances story counter 0x9a to 2 | where 24UMB is in the recorded playthrough
+ 13.00   22.857  14YMM      with its area (14YMM); not placed by the scripts - first reachable from 07CSL | where 14YMM is in the recorded playthrough
+ 13.00   22.857  14YMM53    with its area (14YMM); not placed by the scripts - first reachable from 07CSL | where 14YMM is in the recorded playthrough
+ 13.00   23.504  17DRL04A   loaded by 17DRL04 | it is what advances the story here
+ 13.00   25.299  19IRE      with its area (19IRE); not placed by the scripts - first reachable from 20NNP | where 19IRE is in the recorded playthrough
+ 13.00   25.299  19IRE27    with its area (19IRE); not placed by the scripts - first reachable from 20NNP | where 19IRE is in the recorded playthrough
+ 13.00   25.299  19IRE36    with its area (19IRE); not placed by the scripts - first reachable from 20NNP | where 19IRE is in the recorded playthrough
+ 13.00   25.299  19IRE92    with its area (19IRE); not placed by the scripts - first reachable from 20NNP | where 19IRE is in the recorded playthrough
+ 14.00   22.558  07CSL08    07CSL loads it at its stage 8 (var 0x89), which 06BLK10I starts | it is what advances the story here
+ 14.00   22.558  07CSLI04   loaded by 07CSL08 | it is loaded by 07CSL08
+ 14.00   22.558  07CSL08A   loaded by 07CSL08 | it is loaded by 07CSL08
+ 14.00   36.124  26KKR05    26KKR loads it at its stage 5 (var 0x9c), which 07CSL08 starts | the 0x9c stage 5 it is loaded at
+ 14.00   36.124  26KKR05A   loaded by 26KKR05 | it is loaded by 26KKR05
+ 15.00   23.504  17DRL04    17DRL loads it at stage 3 (var 0x93) | it is what advances the story here
+ 15.00   23.504  17DRL08A   loaded by 17DRL04 | it is loaded by 17DRL04
+ 15.00   23.554  27KKI02    27KKI loads it at its stage 2 (var 0x9d), which 17DRL04 starts | the 0x9d stage 2 it is loaded at
+ 15.00   23.554  27KKII01   loaded by 27KKI02 | it is loaded by 27KKI02
+ 15.00   23.554  27KKI02A   loaded by 27KKI02 | it is loaded by 27KKI02
+ 15.00   36.125  26KKR06    26KKR loads it at its stage 6 (var 0x9c), which 17DRL04 starts | the 0x9c stage 6 it is loaded at
+ 15.00   36.125  26KKRI00   loaded by 26KKR06 | it is loaded by 26KKR06
+ 15.00   36.125  26KKR06A   loaded by 26KKR06 | it is loaded by 26KKR06
+ 16.00   20.000  06BLK12E   advances story counter 0x95 to 3 | it is what advances the story here
+ 16.00   23.604  10TNI03    10TNI loads it at its stage 3 (var 0x8c), which 27KKI02 starts | it is what advances the story here
+ 16.00   23.604  10TNII02   loaded by 10TNI03 | it is loaded by 10TNI03
+ 16.00   23.605  10TNI03A   loaded by 10TNI03 | it is loaded by 10TNI03
+ 16.00   23.605  10TNI04    10TNI loads it at its stage 4 (var 0x8c), which 06BLK12E starts | the 0x8c stage 4 it is loaded at
+ 16.00   23.606  10TNI04A   loaded by 10TNI04 | it is loaded by 10TNI04
+ 16.00   23.655  27KKI03    27KKI loads it at its stage 3 (var 0x9d), which 10TNI03 starts | the 0x9d stage 3 it is loaded at
+ 16.00   23.655  27KKI03A   loaded by 27KKI03 | it is loaded by 27KKI03
+ 16.00   37.508  05SKS08    05SKS loads it at stage 8 (var 0x87) | the 0x87 stage 8 it is loaded at
+ 17.00   24.999  20NNP      with its area (20NNP); not placed by the scripts | where 20NNP is in the recorded playthrough
+ 17.00   25.000  20NNP93    advances story counter 0x95 to 4 | it is what advances the story here
+ 17.00   36.000  19IRE94    advances story counter 0x93 to 8 | it is what advances the story here
+ 17.00   36.050  27KKI04    27KKI loads it at its stage 4 (var 0x9d), which 19IRE94 starts | the 0x9d stage 4 it is loaded at
+ 17.00   36.050  27KKI04A   loaded by 27KKI04 | it is loaded by 27KKI04
+ 17.00   36.349  28KDI      with its area (28KDI); not placed by the scripts - first reachable from 27KKI04 | where 28KDI is in the recorded playthrough
+ 17.50   38.508  30IZM      the Fountain of Sacred Waters, just before the last dungeon (its own text, and it leads to 29KNT) | the Fountain of Sacred Waters, just before the last dungeon (its own text, and it leads to 29KNT)
+ 18.00   39.508  29KNT      the final dungeon, seen in the playthrough (part 4, 8:03-8:57) | the final dungeon, seen in the playthrough (part 4, 8:03-8:57)
+ 18.00   39.518  29KNT99B   the final dungeon, seen in the playthrough (part 4, 8:03-8:57) | the final dungeon, seen in the playthrough (part 4, 8:03-8:57)
+ 19.00   40.018  31END      the ending - the END screen at part 4, 9:00 | the ending - the END screen at part 4, 9:00

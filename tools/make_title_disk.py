@@ -21,11 +21,18 @@ at all; this subtitle costs more than that, so the archive does grow, which is
 fine because NDC writes it through the filesystem. (A byte-patch in the image
 would not be: `A.FA1` is stored **non-contiguously**.)
 
+The artwork is the whole title stencil: `--template` writes the stock one
+(the Japanese in white), the artist adds to it, and `--mask` builds from their
+file. White pixels the kanji's own sprites don't cover get new sprites, fitted
+automatically by `ipl_sprites.fit` (192/112px wide, on an 8px grid, joins
+steered into the gaps between strokes).
+
 Usage:
-    python tools/make_title_disk.py                       # build patched/test_title.hdi
-    python tools/make_title_disk.py --template            # write the artist's canvas
-    python tools/make_title_disk.py --subtitle art.png    # build from the artist's file
-    python tools/make_title_disk.py ... --shot            # ...and screenshot it in-game
+    python tools/make_title_disk.py                    # default English line
+    python tools/make_title_disk.py --template         # write img/title/artist/title_mask.png
+    python tools/make_title_disk.py --mask art.png     # build from the artist's file
+    python tools/make_title_disk.py --mask art.png --plan   # just show the sprite plan
+    python tools/make_title_disk.py ... --shot         # ...and screenshot it in-game
 """
 import os
 import shutil
@@ -53,22 +60,18 @@ OUT_DISK = os.path.join(HERE, 'patched', 'test_title.hdi')
 ARCHIVE_DIR_IN_DISK = 'B-DRKNS'
 
 ASSETS = os.path.join(HERE, 'img', 'title')
+ARTIST = os.path.join(ASSETS, 'artist')
+TEMPLATE = os.path.join(ARTIST, 'title_mask.png')
 SUBTITLE = 'BLADE OF DARKNESS'
 FONT = (r'C:\Windows\Fonts\GOUDOSB.TTF', 50)
-TOP = 330          # first row of the subtitle
-PAD = 8            # rows of ground-glow cleared above and below it
-FIRE_ROW = 230     # which rows of the flame texture light the letters
-
-# Where the subtitle may go. Fire only exists inside the three 192px sprite
-# columns (x 48..623), and the zone starts below the lowest kanji stroke
-# (剣's sprite ends at row 314). 84 rows keeps the texture sampling in range.
-ZONE_X = (48, 624)
-ZONE_Y = (316, 400)
-ARTIST = os.path.join(ASSETS, 'artist')
+TOP = 330          # the default subtitle's first row
+PAD = 8            # rows of ground glow cleared above and below new artwork
+FIRE_ROW = 230     # texture row that lights the top of artwork below the kanji
 
 
 # ---------------------------------------------------------------- artwork
 def subtitle_mask(text=SUBTITLE, font=FONT, top=TOP):
+    """The default English line, used when no artwork file is given."""
     f = ImageFont.truetype(font[0], font[1])
     img = Image.new('L', (640, 140), 0)
     d = ImageDraw.Draw(img)
@@ -82,71 +85,77 @@ def subtitle_mask(text=SUBTITLE, font=FONT, top=TOP):
     crop = a[ys.min():ys.max() + 1]
     out = np.zeros((400, 640), bool)
     out[top:top + crop.shape[0]] = crop
-    return out, (top, top + crop.shape[0] - 1)
+    return out
 
 
-def subtitle_from_png(path):
-    """Read an artist's edit of the template: white (>= 50% grey) = letters."""
+def stock_layers(base_stream, rects):
+    """Split DS_T1's stencil into the Japanese (inside the kanji rectangles)
+    and the ground glow (the dithered band along the bottom, everything else)."""
+    I = np.unpackbits(as2.stream_to_planes(base_stream)[3], axis=1)
+    hole = I == 0
+    inside = ipl_sprites.rect_mask(rects)
+    return hole & inside, hole & ~inside
+
+
+def write_template(jp, path=TEMPLATE):
+    """The artist's canvas: the Japanese in white, everything else black."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    Image.fromarray((jp * 255).astype(np.uint8), 'L').save(path)
+
+
+def load_mask(path, jp):
     img = Image.open(path)
     if img.size != (640, 400):
-        raise SystemExit('%s is %dx%d; the template is 640x400 and must stay that size'
+        raise SystemExit('%s is %dx%d; the mask must stay 640x400'
                          % (path, img.size[0], img.size[1]))
-    a = np.array(img.convert('L')) >= 128
-    zone = np.zeros_like(a)
-    zone[ZONE_Y[0]:ZONE_Y[1], ZONE_X[0]:ZONE_X[1]] = True
-    stray = a & ~zone
-    if stray.any():
-        ys, xs = np.where(stray)
-        raise SystemExit('%d white pixels are outside the subtitle zone (x %d-%d, '
-                         'y %d-%d), around x %d-%d y %d-%d; there is no fire there, '
-                         'so they would be invisible'
-                         % (stray.sum(), ZONE_X[0], ZONE_X[1] - 1, ZONE_Y[0],
-                            ZONE_Y[1] - 1, xs.min(), xs.max(), ys.min(), ys.max()))
-    if not a.any():
-        raise SystemExit('%s has no white pixels in the subtitle zone' % path)
-    ys, _ = np.where(a)
-    return a, (int(ys.min()), int(ys.max()))
+    m = np.array(img.convert('L')) >= 128
+    kept = (m & jp).sum() / jp.sum()
+    if kept < 0.5:
+        raise SystemExit('%s keeps only %d%% of the Japanese logo. The artwork '
+                         'file is the whole title stencil - the Japanese stays in '
+                         'it. (Wrong file? Older templates had only the English.)'
+                         % (path, round(100 * kept)))
+    if kept < 0.98:
+        print('  note: %d%% of the original Japanese pixels changed'
+              % round(100 * (1 - kept)))
+    return m
 
 
-def write_template(base_stream, path):
-    """A 640x400 canvas for the artist: the zone, the calligraphy for scale,
-    and the current subtitle in white as a starting point."""
-    planes = as2.stream_to_planes(base_stream)
-    I = np.unpackbits(planes[3], axis=1)
-    rgb = np.zeros((400, 640, 3), np.uint8)
-    kanji = (I == 0)
-    kanji[ZONE_Y[0]:, :] = False
-    rgb[kanji] = (70, 70, 70)                               # reference only
-    x0, x1 = ZONE_X
-    y0, y1 = ZONE_Y
-    rgb[y0:y1, x0:x1] = (20, 20, 60)                        # the editable zone
-    rgb[y0, x0:x1] = rgb[y1 - 1, x0:x1] = (90, 90, 120)
-    rgb[y0:y1, x0] = rgb[y0:y1, x1 - 1] = (90, 90, 120)
-    text, _ = subtitle_mask()
-    rgb[text] = (255, 255, 255)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    Image.fromarray(rgb).save(path)
-
-
-def build_image(base_stream, text=None):
-    """Original stencil, plus holes for the English letters.
-
-    The letters' fire is not baked in: ipl_sprites draws it every frame from
-    the same animated textures as the kanji.
-    """
+def build_image(base_stream, mask, plan, glow):
+    """DS_T1 with `mask` as the stencil. Fire is not baked in anywhere: the
+    kanji sprites and the planned new sprites draw it every frame."""
     planes = as2.stream_to_planes(base_stream)
     B, R, G, I = [np.unpackbits(p, axis=1) for p in planes]
-    if text is None:
-        text, (y0, y1) = subtitle_mask()
-    else:
-        text, (y0, y1) = text
-    band = slice(max(ZONE_Y[0], y0 - PAD), min(ZONE_Y[1], y1 + PAD + 1))
-    R[band, :] = 0                           # drop the ground glow behind the line
-    I[band, :] = 1                           # hide that band ...
-    B[text] = R[text] = G[text] = 0          # colour 0 = invisible until the
-    I[text] = 0                              # sprites fill it, like the kanji
-    stream = as2.planes_to_stream([np.packbits(v, axis=1) for v in (B, R, G, I)])
-    return stream, I, (y0, y1)
+    keep_glow = glow.copy()
+    for b in plan:                                  # clear the glow behind new art
+        keep_glow[max(0, b['top'] - PAD):b['bottom'] + PAD, :] = False
+    I[:] = 1
+    I[mask | keep_glow] = 0
+    art = mask & ~keep_glow
+    B[art] = R[art] = G[art] = 0                    # colour 0 until a sprite fills it
+    R[glow & ~keep_glow] = 0
+    return as2.planes_to_stream([np.packbits(v, axis=1) for v in (B, R, G, I)]), I
+
+
+# Measured with tools/title_timing.py: the title card's loop runs once every
+# 2 frames, and keeps that pace until the new sprites add roughly this much
+# blitting per frame (the kanji themselves draw ~106,000 px). Beyond it the
+# flames slow down - 0.39 passes/frame at +165,000 px - but nothing breaks.
+SPRITE_BUDGET = 125000
+
+
+def describe(plan):
+    area = sum(w * (b['bottom'] - b['top']) for b in plan for _, w in b['rects'])
+    print('  new sprite area %d px of a ~%d px budget%s'
+          % (area, SPRITE_BUDGET,
+             '' if area <= SPRITE_BUDGET else
+             '  <-- OVER: the flames will animate more slowly'))
+    for b in plan:
+        print('  rows %d-%d: %d sprite(s) at x %s, texture row %d'
+              % (b['top'], b['bottom'] - 1, len(b['rects']),
+                 ', '.join('%d+%d' % r for r in b['rects']), b['texture_row']))
+        for x, n in b['joins']:
+            print('    join at x=%d cuts through strokes on %d row(s)' % (x, n))
 
 
 # ---------------------------------------------------------------- disk
@@ -211,57 +220,73 @@ def shoot(out_dir=os.path.join(ASSETS, 'review')):
     print('review images in %s' % out_dir)
 
 
-def main(shot=False, subtitle=None):
-    orig = open(os.path.join(ASSETS, 'DS_T1.AS2'), 'rb').read()
-    base = open(os.path.join(ASSETS, 'ds_t1_image.bin'), 'rb').read()
-    text = subtitle_from_png(subtitle) if subtitle else None
-    stream, I, rows = build_image(base, text)
-    np.save(os.path.join(ASSETS, 'stencil_subtitle.npy'), I)
+def stock_scn():
+    raw = open(os.path.join(HERE, 'original', 'A.FA1'), 'rb').read()
+    _, ents, _ = fa1_patch.parse(raw)
+    e = next(x for x in ents if x['filename'] == '00IPL.SCN')
+    return raw, decompress(raw[e['offset']:e['offset'] + e['clen']], e['dlen'])
 
-    print('authoring subtitle rows %s ...' % (rows,))
+
+def plan_for(mask_path=None):
+    """-> (raw A.FA1, stock SCN, mask, plan, glow)"""
+    base = open(os.path.join(ASSETS, 'ds_t1_image.bin'), 'rb').read()
+    raw, scn = stock_scn()
+    rects = ipl_sprites.kanji_rects(scn)
+    jp, glow = stock_layers(base, rects)
+    mask = load_mask(mask_path, jp) if mask_path else jp | subtitle_mask()
+    new = mask & ~ipl_sprites.rect_mask(rects)       # what the kanji don't cover
+    plan = ipl_sprites.fit(new, FIRE_ROW)
+    print('artwork: %d white pixels, %d need new sprites' % (mask.sum(), new.sum()))
+    describe(plan)
+    return raw, scn, base, mask, plan, glow
+
+
+def main(shot=False, mask_path=None):
+    orig = open(os.path.join(ASSETS, 'DS_T1.AS2'), 'rb').read()
+    raw, scn, base, mask, plan, glow = plan_for(mask_path)
+
+    stream, I = build_image(base, mask, plan, glow)
+    np.save(os.path.join(ASSETS, 'stencil_subtitle.npy'), I)
     action_path, lit_leaves, enc = as2_author.author(stream)
-    new = as2_author.assemble(orig, action_path, lit_leaves, enc)
-    if not as2_author.verify(new, stream):
+    new_as2 = as2_author.assemble(orig, action_path, lit_leaves, enc)
+    if not as2_author.verify(new_as2, stream):
         raise SystemExit('the authored file does not decode back to the artwork')
     print('DS_T1.AS2 %d -> %d (+%d), self-parse verified'
-          % (len(orig), len(new), len(new) - len(orig)))
+          % (len(orig), len(new_as2), len(new_as2) - len(orig)))
     with open(os.path.join(ASSETS, 'DS_T1_subtitle.AS2'), 'wb') as f:
-        f.write(new)
+        f.write(new_as2)
+    archive = fa1_patch.replace(raw, 'DS_T1.AS2', new_as2)
 
-    raw = open(os.path.join(HERE, 'original', 'A.FA1'), 'rb').read()
-    archive = fa1_patch.replace(raw, 'DS_T1.AS2', new)
-
-    # the opening's code: three more flame sprites behind the subtitle
-    _, ents, _ = fa1_patch.parse(archive)
-    e = next(x for x in ents if x['filename'] == '00IPL.SCN')
-    scn = decompress(archive[e['offset']:e['offset'] + e['clen']], e['dlen'])
-    entries = ipl_sprites.sprite_entries(rows[0], rows[1] - rows[0] + 1, FIRE_ROW)
+    entries = ipl_sprites.entries_for(plan)
     scn2 = ipl_sprites.patch_ipl(scn, entries)
     packed = compress(scn2)
     assert decompress(packed, len(scn2)) == scn2
-    print('00IPL.SCN %d -> %d bytes (%d stored), sprite entries %s'
-          % (len(scn), len(scn2), len(packed), entries))
+    print('00IPL.SCN %d -> %d bytes (%d stored), %d new sprite(s)'
+          % (len(scn), len(scn2), len(packed), len(entries)))
     archive = fa1_patch.replace(archive, '00IPL.SCN', packed,
                                 compressed=True, dlen=len(scn2))
-    grew = len(new) - len(orig)
-    print('A.FA1 %d -> %d (member grew %d, table pad was %d)'
-          % (len(raw), len(archive), grew, fa1_patch.headroom(raw)))
+    print('A.FA1 %d -> %d' % (len(raw), len(archive)))
 
     n = write_disk(archive)
     print('wrote %s (archive %d bytes, verified by read-back)' % (OUT_DISK, n))
-
     if shot:
         shoot()
 
 
 if __name__ == '__main__':
     args = sys.argv[1:]
+    if '--subtitle' in args:
+        raise SystemExit('--subtitle is gone: the artwork file is now the whole '
+                         'title mask. Use --template, then --mask <file>.')
     if '--template' in args:
         base = open(os.path.join(ASSETS, 'ds_t1_image.bin'), 'rb').read()
-        write_template(base, os.path.join(ARTIST, 'subtitle_template.png'))
-        print('wrote', os.path.join(ARTIST, 'subtitle_template.png'))
+        _, scn = stock_scn()
+        jp, _ = stock_layers(base, ipl_sprites.kanji_rects(scn))
+        write_template(jp)
+        print('wrote', TEMPLATE)
         sys.exit(0)
-    png = None
-    if '--subtitle' in args:
-        png = args[args.index('--subtitle') + 1]
-    main(shot='--shot' in args, subtitle=png)
+    png = args[args.index('--mask') + 1] if '--mask' in args else None
+    if '--plan' in args:                             # fit only, no build
+        plan_for(png)
+        sys.exit(0)
+    main(shot='--shot' in args, mask_path=png)

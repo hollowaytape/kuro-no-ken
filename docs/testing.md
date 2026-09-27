@@ -15,6 +15,21 @@ it did in the original. This catches the crash class that has cost the most time
 English of a different length shifts a file, and any address not in the pointer sheet
 stays behind. See "The entry table is a pointer table too" in `engine_notes.md`.
 
+```
+python tools/fix_pointers.py         # every decoded pointer, not just the entry table
+python tools/stale_report.py         # the same, per script
+```
+
+These use `patched/<script>.edits.json`, reinsert's own record of what it changed, so the
+original->patched offsets are exact. Without it they fall back to a difflib alignment,
+which can slip a few bytes (it called two correct pointers in 05SKS03 stale). `build.py`
+runs `check_pointers` and `fix_pointers` after every build.
+
+Two things that used to fail silently now fail loudly: a dump row that is really script
+code (06BLK05J 0x1ad) refuses English, and a script too long for its RAM slot or its
+length-sensitive block is left in Japanese with the number of bytes over. Row order in
+the workbook does not matter: a shuffled copy builds byte-identical.
+
 ## 2. Does every line fit the text box?
 
 ```

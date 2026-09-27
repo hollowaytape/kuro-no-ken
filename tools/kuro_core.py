@@ -53,7 +53,9 @@ class CoreEmu(Emu):
     nudge = 3 / FRAMES_PER_SECOND      # a 1-frame press doesn't always register as a step
 
     def __init__(self, hdd=None, boot_frames=0):
-        self.hdd = hdd or patched_disk()
+        #  KURO_HDD picks the disk for every tool at once (a state is only good with the
+        #  disk it was saved on - docs/sprites.md); the original disk is the durable one
+        self.hdd = hdd or os.environ.get('KURO_HDD') or patched_disk()
         # Kuro no Ken's boot disk loads VEM486 (386-only EMS driver); the GUI setup
         # it's known to run on uses 13 MB of extended memory.
         self.m = Machine(self.hdd, cpu='386', extmem_mb=13)

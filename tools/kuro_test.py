@@ -73,8 +73,18 @@ class Script:
         self.ends = {}       # filename -> char indexes where a page may end
         self.japanese = []   # (normalized JP, filename, offset, has_english)
         for sheet in wb.sheetnames:
-            for row in wb[sheet].iter_rows(min_row=2, values_only=True):
-                fn, off, jp, en = row[0], row[1], row[2], row[4]
+            rows = wb[sheet].iter_rows(values_only=True)
+            header = [str(h) if h else '' for h in next(rows, ())]
+            #  by name: the main workbook's columns moved when the context columns
+            #  (Area, Scene, Who...) went in front of the text (2026-09-24), and by
+            #  position this read Area/Who as file/Japanese and matched nothing
+            col = {h: i for i, h in enumerate(header)}
+            fi, oi, ji, ei = (col.get('Filename', 0), col.get('Offset', 1),
+                              col.get('Japanese', 2), col.get('English', 4))
+            for row in rows:
+                if len(row) <= max(fi, oi, ji, ei):
+                    continue
+                fn, off, jp, en = row[fi], row[oi], row[ji], row[ei]
                 if isinstance(jp, str) and jp.strip():
                     has_en = isinstance(en, str) and bool(en.strip()) and not en.startswith('=')
                     self.japanese.append((_jp_norm(jp), fn, off, has_en))
@@ -367,6 +377,16 @@ class Tester:
             if not m:
                 self.emu.wait(0.2)
                 continue
+            #  by row when the item is a number, or when the texts are blank - the
+            #  original game's battle commands are kanji-ROM cells the reader returns
+            #  as '' - so a battle on the Japanese disk can still be fought by position
+            if isinstance(item, int) or item == '':
+                want = item if isinstance(item, int) else m['row']
+                if m['row'] == want:
+                    self.emu.press('SPACE', gap=0.3)
+                    return True
+                self.emu.press('UP' if want < m['row'] else 'DOWN', gap=0.25)
+                continue
             if m['item'] == item:
                 self.emu.press('SPACE', gap=0.3)
                 return True
@@ -378,7 +398,10 @@ class Tester:
 
     # Command rotation for fights that plain attacks don't end: the Mercenary's fight
     # (D010_X10) only moves on when you cast a spell; Run gives a line and returns.
-    FIGHT_PLAN = ['attack'] * 4 + ['magic'] * 2 + ['run']
+    # The second command (a spell for Shinobu, a sword skill for Kaies) leads: the
+    # dungeon's prison monster (500 HP, regenerating) takes 4 from a sword blow and
+    # 30-45 from a skill, so a plan of mostly attacks never ends that fight.
+    FIGHT_PLAN = ['magic', 'magic', 'attack', 'magic', 'magic', 'attack', 'run']
 
     def _is_title(self, m):
         names = {x for _, x in m['items']} if m else set()
@@ -408,17 +431,33 @@ class Tester:
                 quiet_since = None
                 if self.god:
                     self.emu.heal()
+                #  a shop reads as a battle (its panel shows HP and MP too): its item list
+                #  says PAGE n/n. Leave it - buying is not what the text test is after.
+                d0 = self.emu.dialogue()
+                if d0 and any('PAGE' in l for l in d0['lines']):
+                    self.log('  (a shop, not a battle; leaving it)')
+                    for _ in range(4):
+                        self.emu.press('ESC', gap=0.4)
+                        if self.emu.state() == 'field':
+                            break
+                    return rounds
                 m = self.emu.menu()
                 if m and self._is_title(m):
                     self.issue('gameover', 'title menu during a battle')
                     raise GameOver()
                 if m and m['items'] and m['col'] >= 70:        # the command menu
-                    items = [x for _, x in m['items']]
+                    #  the character's name line above the commands can read as a blank
+                    #  item on row 1, which the cursor can never reach: only rows with
+                    #  text are commands (unless none read at all - the kanji-ROM cells
+                    #  of the original disk - in which case every row is)
+                    entries = [(r, x) for r, x in m['items'] if x] or m['items']
+                    items = [x for _, x in entries]
                     plan = command or self.FIGHT_PLAN[rounds % len(self.FIGHT_PLAN)]
                     pick = {'attack': 0, 'magic': 1, 'run': len(items) - 1}.get(plan)
                     if pick is None:
                         pick = items.index(plan) if plan in items else 0
-                    self.select(items[min(pick, len(items) - 1)])
+                    pick = min(pick, len(items) - 1)
+                    self.select(entries[pick][0])                 # by row: the texts may not read
                     self.emu.wait(0.4)
                     for _ in range(3):   # spell/item list, then target: first choice
                         m2 = self.emu.menu()

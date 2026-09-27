@@ -33,6 +33,28 @@ import os
 LIT, OFF, RLE = 0, 1, 2
 ROW = 0x190
 WINDOW = 0x1900        # the decoder's ring buffer
+RING = 0x1900
+
+# Output goes into a 0x1900-byte ring (cs:0x25c0..0x3ec0) that restarts every
+# four columns. Only the large-offset copy handler (0x14630) wraps its source
+# pointer back into the ring (`cmp si,0x25c0 / jb -> add si,0x1900`), and it
+# wraps exactly once. The short copies (0x14636) and RLE (0x14660, which reads
+# [di-1]) never do - near the start of a ring cycle they read whatever sits
+# below the ring, which is code (0x90 bytes, as it happens).
+NO_WRAP = frozenset({1, 2, 3, 4, 8, 16})     # 1 = RLE
+
+
+def ring_limit(p, o):
+    """How long a copy from `o` back may be at output position `p`:
+    None = unrestricted, 0 = not allowed at all, n = at most n bytes."""
+    if o > p:
+        return 0                     # before the image: stale ring contents
+    q = p % RING
+    if q >= o:
+        return None
+    if o in NO_WRAP:
+        return 0
+    return o - q                     # wrapped source must not run off the ring's end
 
 
 # --------------------------------------------------------------- bitstream
@@ -115,12 +137,17 @@ def decode(data, start, total, tree, prefix=b'', row=ROW):
                 remaining -= 1
             else:
                 n = read_length(br)
+                at = len(out) - base
+                lim = ring_limit(at, 1 if kind == RLE else arg)
+                if lim == 0 or (lim is not None and n > lim):
+                    raise ValueError('%s at output %d reads outside the decoder ring '
+                                     '(offset %d, length %d)'
+                                     % ('RLE' if kind == RLE else 'copy', at,
+                                        1 if kind == RLE else arg, n))
                 if kind == RLE:
                     out.extend([out[-1]] * n)
                 else:
                     src = len(out) - arg
-                    if src < 0:
-                        raise ValueError('offset before start')
                     for i in range(n):
                         out.append(out[src + i])
                 remaining -= n
@@ -177,9 +204,10 @@ def encode_row(data, pos, lit, off, rle, row=ROW):
             c = len(cb) + cost[i + 1]
             if c < best:
                 best, bestc = c, ('L', b, 1)
-        if lb_rle is not None and p > 0 and data[p - 1] == b:
+        rl = ring_limit(p, 1)
+        if lb_rle is not None and rl != 0 and data[p - 1] == b:
             n = 0
-            lim = min(maxlen, row - i)
+            lim = min(maxlen, row - i, rl or maxlen)
             while n < lim and data[p + n] == b:
                 n += 1
             for L in _cand_lengths(n):
@@ -190,10 +218,11 @@ def encode_row(data, pos, lit, off, rle, row=ROW):
                 if c < best:
                     best, bestc = c, ('R', 0, L)
         for o, lo in offs:
-            if o > p:
+            rl = ring_limit(p, o)
+            if rl == 0:
                 continue
             n = 0
-            lim = min(maxlen, row - i)
+            lim = min(maxlen, row - i, rl or maxlen)
             q = p - o
             while n < lim and data[p + n] == data[q + n]:
                 n += 1

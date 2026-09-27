@@ -1,0 +1,2453 @@
+{
+ "graph": {
+  "csl2|npc|1": {
+   "map": "csl2",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|npc|3": {
+   "map": "csl2",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|npc|4": {
+   "map": "csl2",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|bump|5": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|6": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|2": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "csl2_e7ca",
+   "outcome": "blocked: y did not converge on 0x1f1, at 0x184",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|bump|4": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|8": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|0": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: stuck entering zone 0 at (484, 497)",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|bump|1": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|bump|11": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|9": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|3": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|bump|12": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|10": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|13": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|5": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "csl2_e7ca",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|bump|7": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|bump|14": {
+   "map": "csl2",
+   "kind": "bump",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|3": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|1": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|0": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|2": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: stuck entering zone 2 at (484, 497)",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|4": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|6": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 6,
+   "leads_to": "csl2_e7ca",
+   "outcome": "blocked: y did not converge on 0x1f0, at 0x184",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|8": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: zone 8 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|7": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: zone 7 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|9": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: zone 9 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|10": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: zone 10 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|12": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: zone 12 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|11": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x113, at 0x109",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|13": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|16": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: zone 16 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|19": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 2,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|20": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|15": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: zone 15 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|18": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: zone 18 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|14": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: zone 14 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|17": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: zone 17 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|22": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|23": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|21": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|24": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|27": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|26": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|28": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|29": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "CRASH",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|30": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "blocked: zone 30 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|25": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "blocked: zone 25 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|32": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 32,
+   "leads_to": null,
+   "outcome": "blocked: zone 32 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|35": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 35,
+   "leads_to": null,
+   "outcome": "blocked: zone 35 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|34": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 34,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|36": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 36,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|31": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 31,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x6b, at 0x9c",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|38": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 38,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|37": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 37,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0xb9 (target 0xa5) - no movement (wall, NPC, or a",
+   "pages": 4,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|33": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 33,
+   "leads_to": null,
+   "outcome": "blocked: zone 33 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "csl2|step|39": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 39,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x1c2, at 0x176",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|40": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 40,
+   "leads_to": null,
+   "outcome": "blocked: zone 40 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2|step|41": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 41,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x222, at 0x176",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|42": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 42,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x20f, at 0x174",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|43": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 43,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x22e, at 0x176",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|44": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 44,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x1ff, at 0x110",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|45": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 45,
+   "leads_to": null,
+   "outcome": "blocked: zone 45 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|46": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 46,
+   "leads_to": null,
+   "outcome": "blocked: zone 46 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2|step|47": {
+   "map": "csl2",
+   "kind": "step",
+   "index": 47,
+   "leads_to": null,
+   "outcome": "blocked: zone 47 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|npc|3": {
+   "map": "csl2_e7ca",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|npc|5": {
+   "map": "csl2_e7ca",
+   "kind": "npc",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 5",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|npc|2": {
+   "map": "csl2_e7ca",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 2",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|npc|1": {
+   "map": "csl2_e7ca",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|npc|4": {
+   "map": "csl2_e7ca",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|step|0": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "dog",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|bump|1": {
+   "map": "csl2_e7ca",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x8e (target 0x76) - no movement (wall, NPC, or a",
+   "pages": 2,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2_e7ca|bump|0": {
+   "map": "csl2_e7ca",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x8e (target 0x76) - no movement (wall, NPC, or a",
+   "pages": 2,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2_e7ca|step|1": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x8e (target 0x76) - no movement (wall, NPC, or a",
+   "pages": 2,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2_e7ca|step|3": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "csl2",
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "07CSL01A.SCN",
+     "0x00359"
+    ]
+   ]
+  },
+  "csl2_e7ca|step|5": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x5, at 0x3d",
+   "pages": 0,
+   "text": []
+  },
+  "csl2_e7ca|step|6": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": []
+  },
+  "csl2_e7ca|bump|3": {
+   "map": "csl2_e7ca",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": "yoroi",
+   "outcome": "ok",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2_e7ca|bump|2": {
+   "map": "csl2_e7ca",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2_e7ca|bump|5": {
+   "map": "csl2_e7ca",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "pages": 8,
+   "text": []
+  },
+  "csl2_e7ca|step|2": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 8,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ],
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl2_e7ca|step|4": {
+   "map": "csl2_e7ca",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "pages": 8,
+   "text": []
+  },
+  "csl4|npc|1": {
+   "map": "csl4",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "csl4|npc|4": {
+   "map": "csl4",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "csl4|npc|3": {
+   "map": "csl4",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "csl4|step|0": {
+   "map": "csl4",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|npc|4": {
+   "map": "csl3",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|npc|3": {
+   "map": "csl3",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|bump|3": {
+   "map": "csl3",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl3|bump|5": {
+   "map": "csl3",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: x stuck at 0x152 (target 0x157) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|bump|0": {
+   "map": "csl3",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x2e (target 0xed) - no movement (wall, NPC, or a",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|bump|1": {
+   "map": "csl3",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x2e (target 0xed) - no movement (wall, NPC, or a",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|1": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x2e (target 0xec) - no movement (wall, NPC, or a",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|bump|4": {
+   "map": "csl3",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": "10tni01a",
+   "outcome": "ok",
+   "pages": 28,
+   "text": [
+    [
+     "07CSLI00.SCN",
+     "0x00044"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x000ed"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x0010c"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x00137"
+    ],
+    [
+     "02OLB00A.SCN",
+     "0x000de"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x0019f"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x001e2"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x00217"
+    ],
+    [
+     "07CSLI00.SCN",
+     "0x00267"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x00037"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x000d6"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x00110"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x0017c"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x001f7"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x002c7"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x00350"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x00381"
+    ],
+    [
+     "10TNII00.SCN",
+     "0x003ba"
+    ],
+    [
+     "10TNI01A.SCN",
+     "0x000c5"
+    ],
+    [
+     "10TNI01A.SCN",
+     "0x00191"
+    ],
+    [
+     "10TNI01A.SCN",
+     "0x00202"
+    ],
+    [
+     "10TNI01A.SCN",
+     "0x0026c"
+    ],
+    [
+     "10TNI01A.SCN",
+     "0x002a7"
+    ],
+    [
+     "10TNI01A.SCN",
+     "0x00044"
+    ]
+   ]
+  },
+  "csl3|bump|2": {
+   "map": "csl3",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|4": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|0": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|2": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x2e (target 0xec) - no movement (wall, NPC, or a",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|7": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl3|step|3": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: zone 3 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|6": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: zone 6 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|8": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x12c, at 0x13e",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|10": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: zone 10 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|11": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: zone 11 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|12": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: zone 12 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|9": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 9,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x12c, at 0x13e",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|5": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "pages": 1,
+   "text": [
+    [
+     "99CMN.SCN",
+     "0x007ea"
+    ]
+   ]
+  },
+  "csl3|step|13": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: zone 13 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|14": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x6c, at 0xce",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|15": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x6c, at 0xce",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|19": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "blocked: zone 19 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|18": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: zone 18 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|16": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x6c, at 0xce",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|20": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: zone 20 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|17": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: x did not converge on 0x6c, at 0xce",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|21": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: zone 21 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|22": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: zone 22 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|25": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 25,
+   "leads_to": null,
+   "outcome": "blocked: zone 25 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|23": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "blocked: zone 23 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|24": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 24,
+   "leads_to": null,
+   "outcome": "blocked: zone 24 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|26": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 26,
+   "leads_to": null,
+   "outcome": "blocked: zone 26 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|27": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 27,
+   "leads_to": null,
+   "outcome": "blocked: zone 27 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|28": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 28,
+   "leads_to": null,
+   "outcome": "blocked: zone 28 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|29": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 29,
+   "leads_to": null,
+   "outcome": "blocked: zone 29 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|30": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 30,
+   "leads_to": null,
+   "outcome": "blocked: zone 30 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|32": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 32,
+   "leads_to": "csl2_e7ca",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "csl3|step|31": {
+   "map": "csl3",
+   "kind": "step",
+   "index": 31,
+   "leads_to": null,
+   "outcome": "blocked: zone 31 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|step|1": {
+   "map": "csl3_1c26",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "tni1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|npc|3": {
+   "map": "csl3_1c26",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|step|3": {
+   "map": "csl3_1c26",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1ea (target 0x1ca) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|step|0": {
+   "map": "csl3_1c26",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1ea (target 0x1e7) - no movement (wall, NPC, or",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|npc|4": {
+   "map": "csl3_1c26",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|step|2": {
+   "map": "csl3_1c26",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: zone 2 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  },
+  "csl3_1c26|npc|1": {
+   "map": "csl3_1c26",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "tni1|step|1": {
+   "map": "tni1",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "tni1|step|0": {
+   "map": "tni1",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "fld1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "tni1|npc|3": {
+   "map": "tni1",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "tni1|npc|4": {
+   "map": "tni1",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|4": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|0": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|npc|4": {
+   "map": "fld1",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|npc|3": {
+   "map": "fld1",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|1": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "stg",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|9": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 9,
+   "leads_to": "tni1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|5": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|7": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 7,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|2": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|3": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|8": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 8,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|6": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 6,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0xfe, at 0x98",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|14": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 14,
+   "leads_to": null,
+   "outcome": "blocked: y stuck at 0x1ea (target 0xf) - no movement (wall, NPC, or a",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|12": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 12,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|10": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 10,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|11": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 11,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0xaf, at 0x98",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|13": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 13,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0x9f, at 0x98",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|24": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 24,
+   "leads_to": "tni1",
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|20": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|21": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|15": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 15,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0xaf, at 0x98",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|18": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 18,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|16": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 16,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0xcf, at 0x98",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|17": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 17,
+   "leads_to": null,
+   "outcome": "blocked: y did not converge on 0xf2, at 0x98",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|19": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 19,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|22": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 22,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "fld1|step|23": {
+   "map": "fld1",
+   "kind": "step",
+   "index": 23,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|step|1": {
+   "map": "stg",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|step|0": {
+   "map": "stg",
+   "kind": "step",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "pages": 0,
+   "text": []
+  },
+  "stg|npc|4": {
+   "map": "stg",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "pages": 0,
+   "text": []
+  },
+  "stg|npc|1": {
+   "map": "stg",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|npc|3": {
+   "map": "stg",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "pages": 0,
+   "text": []
+  },
+  "stg|bump|3": {
+   "map": "stg",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|bump|5": {
+   "map": "stg",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|bump|2": {
+   "map": "stg",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|bump|0": {
+   "map": "stg",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|bump|4": {
+   "map": "stg",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|bump|1": {
+   "map": "stg",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "stg|step|2": {
+   "map": "stg",
+   "kind": "step",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "blocked: could not select 1",
+   "pages": 0,
+   "text": []
+  },
+  "tni1|bump|0": {
+   "map": "tni1",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "blocked: zone 0 did nothing within 20s",
+   "pages": 0,
+   "text": []
+  }
+ },
+ "coverage": {
+  "99CMN.SCN": {
+   "0x007ea": [
+    "csl2",
+    "csl2_e7ca",
+    "csl3"
+   ],
+   "0x00c6c": [
+    "csl2"
+   ]
+  },
+  "07CSL01A.SCN": {
+   "0x00359": [
+    "csl2_e7ca"
+   ],
+   "0x00372": [
+    "csl2_e7ca"
+   ]
+  },
+  "07CSLI00.SCN": {
+   "0x00044": [
+    "csl3"
+   ],
+   "0x000ed": [
+    "csl3"
+   ],
+   "0x0010c": [
+    "csl3"
+   ],
+   "0x00137": [
+    "csl3"
+   ],
+   "0x0019f": [
+    "csl3"
+   ],
+   "0x001e2": [
+    "csl3"
+   ],
+   "0x00217": [
+    "csl3"
+   ],
+   "0x00267": [
+    "csl3"
+   ]
+  },
+  "02OLB00A.SCN": {
+   "0x000de": [
+    "csl3"
+   ]
+  },
+  "10TNII00.SCN": {
+   "0x00037": [
+    "csl3"
+   ],
+   "0x000d6": [
+    "csl3"
+   ],
+   "0x00110": [
+    "csl3"
+   ],
+   "0x0017c": [
+    "csl3"
+   ],
+   "0x001f7": [
+    "csl3"
+   ],
+   "0x002c7": [
+    "csl3"
+   ],
+   "0x00350": [
+    "csl3"
+   ],
+   "0x00381": [
+    "csl3"
+   ],
+   "0x003ba": [
+    "csl3"
+   ]
+  },
+  "10TNI01A.SCN": {
+   "0x000c5": [
+    "csl3"
+   ],
+   "0x00191": [
+    "csl3"
+   ],
+   "0x00202": [
+    "csl3"
+   ],
+   "0x0026c": [
+    "csl3"
+   ],
+   "0x002a7": [
+    "csl3"
+   ],
+   "0x00044": [
+    "csl3"
+   ]
+  }
+ },
+ "map_files": {
+  "csl2": [
+   "07CSL.SCN",
+   "07CSL01.SCN",
+   "07CSL01A.SCN"
+  ],
+  "csl2_e7ca": [
+   "07CSL.SCN",
+   "07CSL01.SCN",
+   "07CSL01A.SCN"
+  ],
+  "csl4": [
+   "07CSL.SCN",
+   "07CSL01.SCN",
+   "07CSL01A.SCN"
+  ],
+  "csl3": [
+   "07CSL.SCN",
+   "07CSL01.SCN",
+   "07CSL01A.SCN"
+  ],
+  "csl3_1c26": [
+   "10TNI.SCN",
+   "10TNI01.SCN",
+   "10TNI01A.SCN"
+  ],
+  "tni1": [
+   "10TNI.SCN",
+   "10TNI01.SCN",
+   "10TNI01A.SCN"
+  ],
+  "fld1": [
+   "01FLD.SCN",
+   "10TNI01.SCN",
+   "10TNI01A.SCN"
+  ],
+  "stg": [
+   "11STG.SCN",
+   "11STG01.SCN",
+   "10TNI01A.SCN"
+  ]
+ }
+}

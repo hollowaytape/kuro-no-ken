@@ -122,10 +122,10 @@ def author(stream, iters=2, log=print):
 
 def assemble(header, action_path, lit_leaves, enc):
     """header (the file's first 0x28 bytes) + tables + image -> a new AS2 file."""
+    # One continuous bitstream: the image picks up wherever the tables end,
+    # mid-word if need be (DS_T2's does). `enc` is the image's own bits packed
+    # into words by BitWriter, so unpack them and concatenate at bit level.
     bits = T.emit_table(action_path) + T.emit_literals(lit_leaves)
-    if len(bits) % 16:
-        raise ValueError('tables must end on a word boundary (got %d bits)'
-                         % len(bits))
     for i in range(0, len(enc), 2):
         w = int.from_bytes(enc[i:i + 2], 'little')
         bits.extend((w >> k) & 1 for k in range(15, -1, -1))
@@ -173,6 +173,11 @@ def verify(data, expect_stream):
                 rem -= 1
             else:
                 n = rlen()
+                at = len(out) - base
+                o = 1 if kind == as2.RLE else arg
+                lim = as2.ring_limit(at, o)
+                if lim == 0 or (lim is not None and n > lim):
+                    return False            # the game would read outside its ring
                 if kind == as2.RLE:
                     out.extend([out[-1]] * n)
                 else:

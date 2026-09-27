@@ -38,7 +38,11 @@ def stale(fn):
     r = sd.analyse(fn)
     if not r:
         return None
-    amap = offset_map(o, p)
+    # reinsert records exactly what it changed; difflib is only a fallback (it can slip a
+    # few bytes and call a correct pointer stale - 05SKS03 0x26b).
+    from fix_pointers import ExactMap, load_edits
+    edits = load_edits(pp)
+    amap = ExactMap(edits) if edits is not None else offset_map(o, p)
     base = r['base']
     # difflib happily slides a repetitive run (an entry table is 31 copies of
     # `09 xx 18`), and then the "patched" word read back is a neighbour's, which looks

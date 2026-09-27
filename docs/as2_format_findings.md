@@ -55,6 +55,25 @@ Back-references run against a **0x1900-byte ring buffer** (`cmp si,0x25c0 / jb
 `rep movsw` + `rep movsb`, which for any offset >= 2 behaves exactly like a
 byte-wise copy; offset 1 is what `RLE` is for.
 
+**The ring only half-wraps.** Output goes into a 0x1900-byte ring
+(cs:0x25c0..0x3ec0) that restarts every four columns, but only the
+large-offset copy handler (`0x14630`) wraps its source pointer, and only once.
+The short copies (`0x14636`: offsets 2, 3, 4, 8, 16) and RLE (`0x14660`, which
+reads `[di-1]`) never wrap. So, at output position `p` with `q = p % 0x1900`:
+
+* RLE and short copies are only legal if `q >= offset`;
+* a wrapped large copy (`q < offset`) must not be longer than `offset - q`,
+  or its source runs off the ring's end;
+* nothing may reach back before the image's first byte (the ring still holds
+  the previous picture).
+
+A flat-buffer decoder can't see any of this. `as2.ring_limit` encodes the
+rules; the encoder obeys them and both decoders (`as2.decode`,
+`as2_author.verify`) reject a stream that breaks them. Both original title
+files obey them exactly. Breaking them is not subtle in-game: an RLE at
+position 0x1900 picked up 0x90 (a NOP from the code below the ring) and
+filled whole columns with garbage, while the flat verifier reported success.
+
 ## Output layout: column-major, bit-interleaved
 
 The decoder emits, per "block", 4 arrays of `stride` bytes at `+0, +0x190,

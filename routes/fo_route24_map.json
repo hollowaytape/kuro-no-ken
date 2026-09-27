@@ -1,0 +1,757 @@
+{
+ "graph": {
+  "06_62e9|step|0": {
+   "map": "06_62e9",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|1": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "01_0aaa",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|0": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "01_0aaa",
+   "outcome": "blocked: x stuck at 0x52 (target 0x2b) - no movement (wall, NPC, or a",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x00290"
+    ]
+   ]
+  },
+  "01_0aaa|step|4": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 4,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|18": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 18,
+   "leads_to": "11_0345",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|1": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "11_0345",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|5": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "04_a276",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|21": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 21,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "dialogue",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|20": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 20,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "dialogue",
+   "pages": 0,
+   "text": []
+  },
+  "11_0345|step|0": {
+   "map": "11_0345",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "12_5984",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "12MRS.SCN",
+     "0x004b1"
+    ],
+    [
+     "12MRS.SCN",
+     "0x00558"
+    ],
+    [
+     "12MRS.SCN",
+     "0x005bf"
+    ],
+    [
+     "12MRS.SCN",
+     "0x0061e"
+    ],
+    [
+     "12MRS.SCN",
+     "0x006a6"
+    ]
+   ]
+  },
+  "11_0345|step|2": {
+   "map": "11_0345",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "01_0aaa",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "11_0345|npc|1": {
+   "map": "11_0345",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 1",
+   "state": "battle",
+   "pages": 0,
+   "text": []
+  },
+  "11_0345|npc|4": {
+   "map": "11_0345",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "state": "battle",
+   "pages": 0,
+   "text": []
+  },
+  "11_0345|bump|0": {
+   "map": "11_0345",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 6,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "11_0345|bump|1": {
+   "map": "11_0345",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 6,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "99CMN.SCN",
+     "0x00c6c"
+    ]
+   ]
+  },
+  "11_0345|bump|5": {
+   "map": "11_0345",
+   "kind": "bump",
+   "index": 5,
+   "leads_to": null,
+   "outcome": "blocked: zone 5 did nothing within 20s",
+   "state": "field",
+   "pages": 5,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "11_0345|step|1": {
+   "map": "11_0345",
+   "kind": "step",
+   "index": 1,
+   "leads_to": "02_ece5",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 12,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f2c",
+     "0x09f2c"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "11_0345|bump|3": {
+   "map": "11_0345",
+   "kind": "bump",
+   "index": 3,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 14,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "11_0345|bump|2": {
+   "map": "11_0345",
+   "kind": "bump",
+   "index": 2,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 14,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "11_0345|bump|4": {
+   "map": "11_0345",
+   "kind": "bump",
+   "index": 4,
+   "leads_to": "01_0aaa",
+   "outcome": "RESET",
+   "state": "field",
+   "pages": 14,
+   "text": [
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ],
+    [
+     "0x09f6b",
+     "0x09f6b"
+    ],
+    [
+     "0x0e6f0",
+     "0x0e6f0"
+    ],
+    [
+     "0x0e710",
+     "0x0e710"
+    ],
+    [
+     "0x09e33",
+     "0x09e33"
+    ],
+    [
+     "0x09ed5",
+     "0x09ed5"
+    ]
+   ]
+  },
+  "01_0aaa|step|7": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 7,
+   "leads_to": "18_a942",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|10": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 10,
+   "leads_to": "26_f59d",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|13": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 13,
+   "leads_to": "14_6ee6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|npc|4": {
+   "map": "01_0aaa",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": "12_5984",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|8": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 8,
+   "leads_to": "19_f6c6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "01_0aaa|step|14": {
+   "map": "01_0aaa",
+   "kind": "step",
+   "index": 14,
+   "leads_to": "24_9202",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|2": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 2,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|bump|0": {
+   "map": "05_5680",
+   "kind": "bump",
+   "index": 0,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|5": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 5,
+   "leads_to": "06_62e9",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|step|4": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: zone 4 did nothing within 20s",
+   "state": "field",
+   "pages": 8,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ],
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ]
+   ]
+  },
+  "05_5680|npc|2": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 2,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ]
+   ]
+  },
+  "05_5680|npc|3": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 3,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 3",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_5680|npc|1": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x00290"
+    ]
+   ]
+  },
+  "05_5680|npc|4": {
+   "map": "05_5680",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ]
+   ]
+  },
+  "05_5680|step|3": {
+   "map": "05_5680",
+   "kind": "step",
+   "index": 3,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ]
+   ]
+  },
+  "05_5680|bump|1": {
+   "map": "05_5680",
+   "kind": "bump",
+   "index": 1,
+   "leads_to": "05_10b6",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x002e6"
+    ]
+   ]
+  },
+  "05_10b6|step|0": {
+   "map": "05_10b6",
+   "kind": "step",
+   "index": 0,
+   "leads_to": "05_5680",
+   "outcome": "ok",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_10b6|npc|1": {
+   "map": "05_10b6",
+   "kind": "npc",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "ok",
+   "state": "field",
+   "pages": 1,
+   "text": [
+    [
+     "05SKS01.SCN",
+     "0x00409"
+    ]
+   ]
+  },
+  "05_10b6|npc|4": {
+   "map": "05_10b6",
+   "kind": "npc",
+   "index": 4,
+   "leads_to": null,
+   "outcome": "blocked: could not reach slot 4",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  },
+  "05_10b6|step|1": {
+   "map": "05_10b6",
+   "kind": "step",
+   "index": 1,
+   "leads_to": null,
+   "outcome": "blocked: zone 1 did nothing within 20s",
+   "state": "field",
+   "pages": 0,
+   "text": []
+  }
+ },
+ "coverage": {
+  "12MRS.SCN": {
+   "0x004b1": [
+    "11_0345"
+   ],
+   "0x00558": [
+    "11_0345"
+   ],
+   "0x005bf": [
+    "11_0345"
+   ],
+   "0x0061e": [
+    "11_0345"
+   ],
+   "0x006a6": [
+    "11_0345"
+   ]
+  },
+  "0x09ed5": {
+   "0x09ed5": [
+    "11_0345"
+   ]
+  },
+  "99CMN.SCN": {
+   "0x00c6c": [
+    "11_0345"
+   ]
+  },
+  "0x09f2c": {
+   "0x09f2c": [
+    "11_0345"
+   ]
+  },
+  "0x09f6b": {
+   "0x09f6b": [
+    "11_0345"
+   ]
+  },
+  "0x0e6f0": {
+   "0x0e6f0": [
+    "11_0345"
+   ]
+  },
+  "0x0e710": {
+   "0x0e710": [
+    "11_0345"
+   ]
+  },
+  "0x09e33": {
+   "0x09e33": [
+    "11_0345"
+   ]
+  },
+  "05SKS01.SCN": {
+   "0x002e6": [
+    "05_5680"
+   ],
+   "0x00409": [
+    "05_10b6"
+   ],
+   "0x00290": [
+    "05_5680"
+   ]
+  }
+ },
+ "map_files": {
+  "06_62e9": [
+   "06BLK.SCN",
+   "06BLK01.SCN",
+   "02OLB01B.SCN"
+  ],
+  "05_5680": [
+   "05SKS.SCN",
+   "05SKS01.SCN",
+   "02OLB01B.SCN"
+  ],
+  "01_0aaa": [
+   "01FLD.SCN",
+   "05SKS01.SCN",
+   "02OLB01B.SCN",
+   "11STG01.SCN"
+  ],
+  "11_0345": [
+   "11STG.SCN",
+   "11STG01.SCN",
+   "02OLB01B.SCN"
+  ],
+  "05_10b6": [
+   "05SKS.SCN",
+   "05SKS01.SCN",
+   "02OLB01B.SCN"
+  ]
+ }
+}
